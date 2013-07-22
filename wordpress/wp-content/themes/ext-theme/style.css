@@ -1,0 +1,445 @@
+/*
+Theme Name: Mastering Ext JS 2
+Theme URI: http://packtpub.com
+Description: Wordpress theme example for Mastering Ext JS Book - http://packtpub.com
+
+Author: Loiane Groner
+Version: 1.0
+Tags: minimalistic, simple, extjs, sidebar, elegant, masteringextjs
+*/
+
+#top-bar-tile {
+    width: 100%;
+    height: 76px;
+    background: rgb(1, 54, 90); /*url(images/top-bar-bg.png) repeat-x;*/
+}
+
+#top-bar-content {
+    width: 940px;
+    margin: 0px auto;
+    padding-top: 22px;
+}
+
+#search-box {
+    float: right;
+    width: 200px;
+}
+
+#search-box input[type=text] {
+    width: 150px;
+    height: 16px;
+    background: #ffffff url(images/search-icon.png) no-repeat;
+    padding-left: 22px;
+    border: 1px solid #ccc;
+    color: #444444;
+    
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+/*****************
+    Main Boxes
+*****************/
+
+#wrapper {
+    width: 940px;
+    margin: 0px auto;
+    margin-top: 40px;
+}
+
+#content {
+    width: 620px;
+    float: left;
+    background: #ffffff;
+    border: 1px solid #d1d1c5;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#sidebar {
+    width: 265px;
+    float: left;
+    margin: 20px 0px 0px 20px;
+}
+
+#older-posts {
+    float: left;
+}
+
+#newer-posts {
+    float: right;
+}
+
+#footer {
+    text-align: center;
+}
+
+/*************
+    Tables
+*************/
+
+#content table {
+    width: 600px;
+}
+
+#content td {
+    padding: 6px 10px;
+    background: #e5e6d9;
+    border-bottom: 1px solid #ffffff;
+}
+
+/***********
+    Post
+***********/
+
+.post {
+    margin-bottom: 10px;  
+    padding: 5px;  
+}
+
+.post-details {
+    height: 16px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.post-details-left {
+    float: left;
+}
+
+.post-details-right {
+    padding: 5px;
+}
+
+.comment-count {
+    float: right;
+}
+
+/***********
+    Misc
+************/
+
+/*.dots {
+    height: 1px;
+    width: 100%;
+    background: url(images/dots.png) repeat-x;
+    margin: 10px 0px;
+}*/
+
+.spacer {
+    clear: both;
+    display: block;
+}
+
+/*************
+    Images
+*************/
+
+#content img.floatleft {
+    float: left;
+    margin: 10px 15px 10px 10px;
+    border: 10px solid #e5e6d9;
+}
+
+#content img.floatright {
+    float: right;
+    margin: 10px 10px 10px 15px;
+    border: 10px solid #e5e6d9;
+}
+
+/***************
+    Comments
+***************/
+
+#content input[type=text] {
+    background: #e3e4d7;
+    border: 1px solid #aaa;
+    height: 20px;
+    width: 200px;
+    margin: 0px 0px 10px 2px;
+    padding: 2px 5px;
+}
+
+#content textarea {
+    background: #e3e4d7;
+    border: 1px solid #aaa;
+}
+
+.comment-right {
+    float: right;
+    width: 550px;
+}
+
+.comment {
+    margin-bottom: 15px;
+}
+
+.comment img.avatar {
+    background: url(images/gravatarframe.png) no-repeat;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    float: left;
+}
+
+/****************
+    Typography
+****************/
+
+#top-bar-content h1,
+#top-bar-content h1 a,
+#top-bar-content h1 a:visited,
+#top-bar-content h1 a:active {
+    font-family: Helvetica;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 2px;
+    float: left;
+    text-decoration: none;
+}
+
+#top-bar-content h1 a:hover {
+    text-decoration: underline;
+}
+
+.slogan {
+    font-family: "Helvetica";
+    color: rgb(132, 211, 255);
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+    float: left;
+    padding: 7px 0px 0px 25px;
+}
+
+.post-details {
+    font-family: "Helvetica";
+    color: #3a3535;
+    font-size: 11px;
+    font-weight: lighter;
+}
+
+.comment-count,
+.comment-count a,
+.comment-count a:visited,
+.comment-count a:active
+ {
+    color: #0084ed;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.comment-count a:hover {
+    text-decoration: underline;
+}
+
+.author,
+.author a,
+.author a:visited,
+.author a:active {
+    color: #0084ed;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.author a:hover {
+    text-decoration: underline;
+}
+
+#content p {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #252222;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: lighter;
+}
+
+#content p a,
+#content p a:visited,
+#content p a:active {
+    color: #0084ed;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+#content p a:hover {
+    text-decoration: underline;
+}
+
+.dropcap {
+    display:block;
+    float:left;
+    font-size:40px;
+    line-height:34px;
+    margin:5px 7px 0px 0px;
+}
+
+.sidebar-title {
+    font-family: "Helvetica";
+    font-size: 16px;
+    color: #852653;
+    font-weight: lighter;
+}
+
+#sidebar p,
+#sidebar a,
+#sidebar a:active,
+#sidebar a:visited
+
+ {
+    font-family: "Helvetica";
+    font-size: 10px;
+    font-style: italic;
+    color: #0084ed;
+    font-weight: lighter;
+    line-height: 14px;
+    letter-spacing: 1px;
+    text-shadow: #ffffff 0px 1px 1px; 
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+#sidebar a:hover {
+    text-decoration: underline;
+}
+
+#older-posts a,
+#older-posts a:active,
+#older-posts a:visited {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #000000;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+#older-posts a:hover {
+    color: #852653;
+    text-decoration: underline;
+}
+
+#newer-posts a,
+#newer-posts a:active,
+#newer-posts a:visited {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #000000;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+#newer-posts a:hover {
+    color: #852653;
+    text-decoration: underline;
+}
+
+#only-page {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #000000;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: lighter;
+    text-decoration: none;
+    text-align: center;
+}
+
+#content li {
+    font-family: "Helvetica";
+    font-size: 12px;
+    color: #444444;
+    padding: 0px 0px 10px 5px;
+    list-style-image:  url(images/list-icon.png);
+    margin-left: 30px;
+}
+
+#content th {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #000000;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: lighter;
+    text-decoration: none;
+    padding-bottom: 10px;
+}
+
+#content td {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #000000;
+    line-height: 15px;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: lighter;
+    text-decoration: none;
+}
+
+
+#content tfoot td {
+    background: #ffffff;
+}
+
+#content input[type=text],
+#content textarea {
+    font-family: Helvetica;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #555;
+}
+
+#content label {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #333;
+    padding-left: 10px;
+}
+
+.comment-author {
+    font-family: "Helvetica";
+    font-size: 12px;
+    color: #333;
+    font-weight: bold;
+}
+
+.comment-date {
+    font-family: "Helvetica";
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+.comment-author a,
+.comment-author a:visited,
+.comment-author a:active {
+    color: #862753;
+    text-decoration: none;
+}
+
+.comment-author a:hover {
+    text-decoration: underline;
+}
+
+.comment-right p {
+    margin-top: 3px;
+}
+
+#footer {
+    padding-top: 3px;
+    font-family: "Helvetica";
+    color: #3a3535;
+    font-size: 11px;
+    font-weight: lighter;
+    line-height: 14px;
+}

@@ -1,0 +1,354 @@
+/** loading screen */
+.x-mask.splashscreen {
+    background-color: white;
+    opacity: 1;
+}
+
+.x-mask-msg.splashscreen,
+.x-mask-msg.splashscreen div {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 30px 5px 5px 5px;
+    border: none;
+    background-color: transparent;
+    background-position: top center;
+}
+
+.x-message-box .x-window-body .x-box-inner {
+    min-height: 110px !important;
+}
+
+.x-splash-icon {
+    background-image: url('../images/packt-logo.png') !important;
+    margin-top: -30px;
+    margin-bottom: 15px;
+    height: 100px;
+}
+
+/** message box */
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:35%;
+    top:10px;
+    width:300px;
+    z-index:20000;
+}
+#msg-div .msg {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    background: #d4eeca;
+    border: 2px solid #ccc;
+    margin-top: 2px;
+    padding: 10px 15px;
+    color: #555;
+}
+#msg-div .msg h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+#msg-div .msg p {
+    margin: 0;
+}
+
+/** Header */
+#titleHeader {
+    color:#000;
+    font-size:20px;
+    font-weight:bold;
+    font-family:'Lucida Grande', Arial, Sans;
+}
+
+.capslock{
+    background:url('../icons/bullet_error.png') no-repeat center left;
+    padding:2px;
+    padding-left:20px;
+    font-weight:700
+}
+
+/**iconCls Action Column */
+.x-action-col-cell img {
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}
+
+/** flags */
+.pt_BR {
+  background-image:url('../flags/br.png') !important;
+}
+
+.en {
+  background-image:url('../flags/us.png') !important;
+}
+
+.es {
+  background-image:url('../flags/es.png') !important;
+}
+
+/** Icons */
+.key {
+  background-image:url('../icons/key.png') !important;
+}
+
+.key-go {
+  background-image:url('../icons/key_go.png') !important;
+}
+
+.cancel {
+  background-image:url('../icons/cancel.png') !important;
+}
+
+.save {
+  background-image:url('../icons/disk.png') !important;
+}
+
+.add {
+  background-image:url('../icons/add.png') !important;
+}
+
+.edit {
+  background-image:url('../icons/pencil.png') !important;
+}
+
+.delete {
+  background-image:url('../icons/delete.png') !important;
+}
+
+.logout {
+  background-image:url('../icons/door_in.png') !important;
+}
+
+.sitemap {
+  background-image:url('../icons/sitemap_color.png') !important;
+}
+
+.home {
+  background-image:url('../icons/house.png') !important;
+}
+
+.menu_admin {
+  background-image:url('../icons/folder_user.png') !important;
+}
+
+.menu_groups {
+  background-image:url('../icons/group_key.png') !important;
+}
+
+.menu_profile {
+  background-image:url('../icons/user_edit.png') !important;
+}
+
+.menu_users {
+  background-image:url('../icons/group_edit.png') !important;
+}
+
+/** chapter 06 icons */
+.menu_staticdata {
+  background-image:url('../icons/database_table.png') !important;
+}
+
+.menu_actor {
+  background-image:url('../icons/vcard.png') !important;
+}
+
+.menu_category {
+  background-image:url('../icons/tag_green.png') !important;
+}
+
+.menu_language {
+  background-image:url('../icons/flag_yellow.png') !important;
+}
+
+.menu_city {
+  background-image:url('../icons/briefcase.png') !important;
+}
+
+.menu_country {
+  background-image:url('../icons/world.png') !important;
+}
+
+.save_all {
+  background-image:url('../icons/disk_multiple.png') !important;
+}
+
+.clear_filter {
+  background-image:url('../icons/filter_del.gif') !important;
+}
+
+.grouping {
+  background-image:url('../icons/application_view_tile.png') !important;
+}
+
+/** chapter 07 icons */
+.menu_cms {
+  background-image:url('../icons/book_open.png') !important;
+}
+
+.menu_films {
+  background-image:url('../icons/film.png') !important;
+}
+
+.find {
+  background-image:url('../icons/find.png') !important;
+}
+
+.clear {
+  background-image:url('../icons/page_white_delete.png') !important;
+}
+
+.film_add {
+  background-image:url('../icons/film_add.png') !important;
+}
+
+.film_edit {
+  background-image:url('../icons/film_edit.png') !important;
+}
+
+/** chapter 08 icons */
+.menu_reports {
+  background-image:url('../icons/chart_line.png') !important;
+}
+
+.menu_salesfilmc {
+  background-image:url('../icons/money.png') !important;
+}
+
+.print {
+  background-image:url('../icons/icoPrint.gif') !important;
+}
+
+.pdf {
+  background-image:url('../icons/pdf_icon.gif') !important;
+}
+
+.excel {
+  background-image:url('../icons/ms-excel.gif') !important;
+}
+
+.image {
+  background-image:url('../icons/picture.png') !important;
+}
+
+.svg {
+  background-image:url('../icons/photo.png') !important;
+}
+
+.chart_pie {
+  background-image:url('../icons/chart_pie.png') !important;
+}
+
+.chart_bar {
+  background-image:url('../icons/chart_bar.png') !important;
+}
+
+.chart_column {
+  background-image:url('../icons/chart_column.png') !important;
+}
+
+.download {
+  background-image:url('../icons/download.png') !important;
+}
+
+/** chapter 09 icons */
+.attach { 
+  background:transparent url('../icons/mail/i_attach.gif') no-repeat 3px 3px !important; 
+    text-indent:-250px; 
+}
+
+.flagged { 
+  background:transparent url('../icons/mail/flagged.png') no-repeat 3px 3px !important; 
+    text-indent:-250px; 
+}
+
+.flag-email { 
+  background:transparent url('../icons/mail/flag.png') no-repeat 3px 3px !important; 
+    text-indent:-250px; 
+}
+
+.importance { 
+  background:transparent url('../icons/mail/priority_high.gif') no-repeat 3px 3px !important; 
+    text-indent:-250px; 
+}
+
+.icon-msg { 
+  background:transparent url('../icons/mail/page.png') no-repeat 3px 3px  !important; 
+    text-indent:-250px; 
+}
+
+.preview-right { 
+  background-image:url('../icons/mail/preview-right.gif') !important;
+}
+
+.preview-bottom { 
+  background-image:url('../icons/mail/preview-bottom.gif') !important;
+}
+
+.preview-hide { 
+  background-image:url('../icons/mail/preview-hide.gif') !important;
+}
+
+.unread {
+  background:transparent url('../icons/mail/mailclose.gif') no-repeat 3px 3px !important;
+}
+
+.read {
+  background:transparent url('../icons/mail/mailopen.gif') no-repeat 3px 3px !important;
+}
+
+.reply {
+  background:transparent url('../icons/mail/reply.gif') no-repeat 3px 3px !important;
+}
+
+.replyall {
+  background:transparent url('../icons/mail/replyall.gif') no-repeat 3px 3px !important;
+}
+
+.fwd {
+  background:transparent url('../icons/mail/mail_forward.png') no-repeat 3px 3px !important;
+}
+
+.menu_mailclient {
+  background-image:url('../icons/mail/email.png') !important;
+}
+
+.menu_mail {
+  background-image:url('../icons/mail/email_open.png') !important;
+}
+
+.folder-inbox {
+  background:transparent url('../icons/mail/folder-inbox.png') no-repeat !important;
+}
+
+.folder-drafts {
+  background:transparent url('../icons/mail/folder-drafts.png') no-repeat !important;
+}
+
+.folder-trash {
+  background:transparent url('../icons/mail/folder-trash.png') no-repeat !important;
+}
+
+.folder-sent {
+  background:transparent url('../icons/mail/folder-sent.png') no-repeat !important;
+}
+
+.selected-node .x-grid-row-selected .x-grid-cell {
+    font-weight: bold;
+}
+
+.new-mail {
+  background-image:url('../icons/mail/mail_write.png') !important;
+}
+
+.send-mail {
+  background-image:url('../icons/mail/email_go.png') !important;
+}
+
+.bcc {
+  background-image:url('../icons/mail/mail_preferences.png') !important;
+}
+
+.boldFont .x-grid-cell { font-weight:bold; !important; }

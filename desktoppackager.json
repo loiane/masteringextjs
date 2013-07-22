@@ -1,0 +1,12 @@
+{
+    "applicationName"      : "Mastering Ext JS",
+    "applicationIconPaths" : ["HelloWorld.ico", "HelloWorld.icns"],
+    "versionString"        : "1.0",
+    "outputPath"           : "build/Packt/package/",
+    "webAppPath"           : "build/Packt/production/",
+    "settings"             : {
+        "mainWindow" : {
+            "autoShow" : true
+        }
+    }
+}

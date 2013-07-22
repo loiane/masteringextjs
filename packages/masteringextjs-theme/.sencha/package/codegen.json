@@ -1,0 +1,20 @@
+{
+  "sources": {
+    "theme.html.tpl.merge": {
+      "ab63b8f1f365981aa45b584ce3b17bfee26773f4": "eJytVMGO0zAQvfcrZn2Cg5PsLgfUTXopiwAhWNFy4Og609i7ThzsabdV1X9fOwmlXSqBVlhW5PjNvDdvZDu/ePd1Ov9xdwuKajMZ5RecjwBgatut05UieCVfw1V2ecXD5zqBGTZSCfjYyGTEeUgY8hSKchIzISdNBie3G4JPM5grrBE+CNeg93naY31cjSSCLLUcf670umBT2xA2xOfbFhnI/q9ghBtKo8wNBGnnkYrv8/f8LZuMeqKhZvhsRQnCGHCR0GEJRjcPHkRTgpdOt+S7uFh3lxjhEGwK5mlr0CtEYkBBflCV3jNQDpcFS5LUobcrJ9Gnu/ah+iJq3PMgxx0ZXuJiVSVdfDqw95LHdPdiLfpdBt7JjjTMXcC+obkTpPZpWHekPeG9Z5M87XPO2iWFMDNaogsNc3je5z9U4rAp0f1dL7a3Fo1eoqehs8o6kqsXaPbuw4yeKR4UvhAeUy+8D3uibg2mv8SelfZfNQ4WXigiV55sfbZ53cHqmeJIYhkVNugEWQe7AxDHoy5JjeE6y7J2c3OA9qPf6SGkQuLxbggdWJ4x1MJVuhnD5QnBEfeb7A+ktV6TtiEr3ARBeo2nuF2jWxr7OIa19nph8LiyzmM6mMzTo1dgYcstSBPaXLAT07FHEeziu8fjCTfPYAs\u003d"
+    }
+  },
+  "targets": {
+    "sass/example/theme.html": {
+      "source": "theme.html.tpl.merge",
+      "version": "ab63b8f1f365981aa45b584ce3b17bfee26773f4",
+      "parameters": {
+        "pkgName": "masteringextjs-theme",
+        "senchadir": ".sencha",
+        "touchRelPath": "../../build/${touch.dir}",
+        "extRelPath": "../../ext",
+        "pkgType": "theme"
+      }
+    }
+  }
+}

@@ -65,7 +65,7 @@ Ext.define('Packt.controller.Login', {
             Ext.get(login.getEl()).mask("Authenticating... Please wait...", 'loading');
 
             Ext.Ajax.request({
-                url: 'http://localhost/masteringextjs/php/login.php',
+                url: 'php/login.php',
                 params: {
                     user: user,
                     password: pass

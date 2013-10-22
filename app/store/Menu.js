@@ -9,7 +9,7 @@ Ext.define('Packt.store.Menu', {
     
     proxy: {
         type: 'ajax',
-        url: 'http://localhost/masteringextjs/php/menu.php',
+        url: 'php/menu.php',
         
         reader: {
             type: 'json',

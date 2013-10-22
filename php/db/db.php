@@ -2,7 +2,7 @@
 //$server = "192.168.0.11";
 $server = "127.0.0.1";
 $user = "root";
-$pass = "dgrdfgdfgs";
+$pass = "";
 $dbName = "sakila";
 
 $mysqli = new mysqli($server, $user, $pass, $dbName);

@@ -12,6 +12,6 @@ Ext.define('Packt.view.security.GroupPermissions', {
 	    markDirty: false
 	},
 
-    store: null//'security.Permissions'//Ext.create('Packt.store.security.Permissions')
+    store: Ext.create('Packt.store.security.Permissions')
 
 });

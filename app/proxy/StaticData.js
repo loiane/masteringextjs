@@ -28,10 +28,10 @@ Ext.define('Packt.proxy.StaticData', {
     //baseUrl: 'php/staticData/',
 
     api: {
-        read    : 'http://localhost/masteringextjs/php/staticData/list.php',
-        create  : 'http://localhost/masteringextjs/php/staticData/actor/create.php',
-        update  : 'http://localhost/masteringextjs/php/staticData/update.php',
-        destroy : 'http://localhost/masteringextjs/php/staticData/delete.php'
+        read    : 'php/staticData/list.php',
+        create  : 'php/staticData/actor/create.php',
+        update  : 'php/staticData/update.php',
+        destroy : 'php/staticData/delete.php'
     },
 
     // constructor: function(cfg) {

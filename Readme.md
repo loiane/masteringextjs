@@ -1,36 +1,14 @@
-# Packt/app
+# Installation
 
-This folder contains the javascript files for the application.
+1 - Install the Sakila database as described in the book
+2 - Run the scripts inside the db-scripts folder in the following order:
+2.1 - user-group-tables.sql
+2.2 - menu.sql
+2.3 - menu_ch06.sql
+2.4 - menu_ch07.sql
+3 - Edit db.php with the database information accordingly
 
-# Packt/resources
+# Known Issues
 
-This folder contains static resources (typically an `"images"` folder as well).
-
-# Packt/overrides
-
-This folder contains override classes. All overrides in this folder will be 
-automatically included in application builds if the target class of the override
-is loaded.
-
-# Packt/sass/etc
-
-This folder contains misc. support code for sass builds (global functions, 
-mixins, etc.)
-
-# Packt/sass/src
-
-This folder contains sass files defining css rules corresponding to classes
-included in the application's javascript code build.  By default, files in this 
-folder are mapped to the application's root namespace, 'Packt'. The
-namespace to which files in this directory are matched is controlled by the
-app.sass.namespace property in Packt/.sencha/app/sencha.cfg. 
-
-# Packt/sass/var
-
-This folder contains sass files defining sass variables corresponding to classes
-included in the application's javascript code build.  By default, files in this 
-folder are mapped to the application's root namespace, 'Packt'. The
-namespace to which files in this directory are matched is controlled by the
-app.sass.namespace property in Packt/.sencha/app/sencha.cfg. 
-
-export PATH=$PATH:/Users/loiane/bin/Sencha/SenchaDesktopPackager
+1 - Needs to be tested on Windows and Linux (table names in php code are case sensitive)
+2 - Code is crashing in Ext JS 2.3 - will update the code soon

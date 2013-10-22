@@ -20,7 +20,7 @@ Ext.define('Packt.view.mail.MailContainer', {
             autoScroll: true
         };
 
-        items : [
+        me.items = [
             {
                 xtype: 'container',
                 region: 'center',
@@ -40,7 +40,7 @@ Ext.define('Packt.view.mail.MailContainer', {
                 region: 'west',
                 
             }
-        ]
+        ];
 
         me.callParent(arguments);
     }

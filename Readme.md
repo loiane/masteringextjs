@@ -4,8 +4,8 @@
 2 - Run the scripts inside the db-scripts folder in the following order:
 2.1 - user-group-tables.sql
 2.2 - menu.sql
-2.3 - menu_ch06.sql
-2.4 - menu_ch07.sql
+2.3 - menu_data.sql
+2.4 - permissions_data.sql
 3 - Edit db.php with the database information accordingly
 
 # Known Issues

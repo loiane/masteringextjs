@@ -12,3 +12,5 @@
 
 1 - Needs to be tested on Windows and Linux (table names in php code are case sensitive)
 2 - Code is crashing in Ext JS 2.3 - will update the code soon
+
+# Updated to Ext JS 4.2.1.883 GPL

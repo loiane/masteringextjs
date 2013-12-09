@@ -1,3 +1,8 @@
 {
-    "name": "Packt"
+    "name": "Packt",
+
+    "requires": [
+    ],
+
+    "id": "1e50bb58-0a6c-4e50-b569-f77df95ab9ca"
 }

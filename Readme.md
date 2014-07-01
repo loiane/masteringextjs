@@ -14,3 +14,8 @@
 2 - Code is crashing in Ext JS 2.3 - will update the code soon
 
 # Updated to Ext JS 4.2.1.883 GPL
+
+#Example using ExtDirectSpring on server side
+
+Example uses Java and [ExtDirectSpring](https://github.com/ralscha/extdirectspring) as the server backend.
+Link: https://github.com/ralscha/packtmasteringextjs

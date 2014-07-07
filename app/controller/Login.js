@@ -143,7 +143,7 @@ Ext.define('Packt.controller.Login', {
                     window.location.reload();
                 } else {
 
-                    Packt.util.Util.showErrorMsg(conn.responseText);
+                    Pack.util.Util.showErrorMsg(result.msg); 
                 }
             },
             failure: function(conn, response, options, eOpts) {

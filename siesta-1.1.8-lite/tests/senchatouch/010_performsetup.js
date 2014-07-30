@@ -1,2 +1,0 @@
-StartTest(function (t) {
-});

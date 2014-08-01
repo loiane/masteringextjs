@@ -39,15 +39,10 @@ Ext.define('Packt.Application', {
                 remove:true,
                 listeners: {
                     afteranimate: function(el, startTime, eOpts ){
-                        //Ext.widget('login');
+                        console.log('launch');
                     }
                 }
             });
-
-            // Ext.widget('mainviewport');
-            //Ext.widget('login');
-
-            //console.log('launch');
         });
 
         task.delay(2000);

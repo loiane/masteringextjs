@@ -19,3 +19,7 @@
 
 Example uses Java and [ExtDirectSpring](https://github.com/ralscha/extdirectspring) as the server backend.
 Link: https://github.com/ralscha/packtmasteringextjs
+
+#Ext JS 5.x
+Code is being updated to Ext JS 5.0 (including the new MVVM)
+For updates, please check the ext 5 branch.

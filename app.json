@@ -32,7 +32,9 @@
      *      ]
      */
     "requires": [
+
     ],
+
 
     /**
      * Sass configuration properties.
@@ -110,6 +112,10 @@
         {
             "path": "app.js",
             "bundle": true
+        },
+        {
+            "path": "app/CustomVTypes.js",
+            "includeInBundle": true
         }
     ],
 

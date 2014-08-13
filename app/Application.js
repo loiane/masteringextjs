@@ -8,6 +8,8 @@ Ext.define('Packt.Application', {
     
     name: 'Packt',
 
+    enableQuickTips: true,
+
     views: [
         // TODO: add views here
         'login.Login'

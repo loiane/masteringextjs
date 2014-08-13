@@ -4,14 +4,11 @@ Ext.define('Packt.view.login.Login', {
     xtype: 'login',
 
     requires: [
-        'Packt.view.login.LoginController'
+        'Packt.view.login.LoginController',
+        'Packt.view.locale.Translation'
     ],
 
     controller: 'login',
-
-//    requires: [
-//        'Packt.view.Translation'
-//    ],
 
     autoShow: true,
     height: 170,
@@ -30,7 +27,6 @@ Ext.define('Packt.view.login.Login', {
         {
             xtype: 'form',
             reference: 'form',
-            //frame: false,
             bodyPadding: 15,
             defaults: {
                 xtype: 'textfield',
@@ -59,7 +55,7 @@ Ext.define('Packt.view.login.Login', {
                     id: 'password',
                     maxLength: 15,
                     value: '123456',
-                    //vtype: 'customPass',
+                    vtype: 'customPass',
                     msgTarget: 'side',
                     listeners: {
                         keypress: 'onTextFieldKeyPress'
@@ -79,8 +75,7 @@ Ext.define('Packt.view.login.Login', {
                         },
                         {
                             xtype: 'button',
-                            itemId: 'cancel',
-                            iconCls: 'fa fa-times',
+                            iconCls: 'fa fa-times fa-lg',
                             text: 'Cancel',
                             listeners: {
                                 click: 'onButtonClickCancel'
@@ -88,7 +83,6 @@ Ext.define('Packt.view.login.Login', {
                         },
                         {
                             xtype: 'button',
-                            itemId: 'submit',
                             formBind: true,
                             iconCls: 'fa fa-sign-in fa-lg',
                             text: 'Submit',

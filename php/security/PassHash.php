@@ -1,6 +1,6 @@
+<?php
 //From http://code.tutsplus.com/tutorials/understanding-hash-functions-and-keeping-passwords-safe--net-17577
 //http://www.sitepoint.com/password-hashing-in-php/
-<?php
 class PassHash {
 
     // blowfish

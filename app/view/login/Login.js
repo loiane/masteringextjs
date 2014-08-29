@@ -36,7 +36,6 @@ Ext.define('Packt.view.login.Login', {
                 vtype: 'alphanum',
                 minLength: 3,
                 msgTarget: 'under',
-                enableKeyEvents: true,
                 listeners: {
                     specialKey: 'onTextFieldSpecialKey'
                 }
@@ -52,11 +51,12 @@ Ext.define('Packt.view.login.Login', {
                     inputType: 'password',
                     name: 'password',
                     fieldLabel: 'Password',
-                    id: 'password',
                     maxLength: 15,
-                    value: '123456',
+                    value: 'Packt123@',
                     vtype: 'customPass',
                     msgTarget: 'side',
+                    id: 'password',
+                    enableKeyEvents: true,
                     listeners: {
                         keypress: 'onTextFieldKeyPress'
                     }

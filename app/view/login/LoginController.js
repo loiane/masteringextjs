@@ -41,11 +41,10 @@ Ext.define('Packt.view.login.LoginController', {
     },
 
     onButtonClickSubmit: function(button, e, options){
-
         var me = this;
 
         if (me.lookupReference('form').isValid()){
-            me.doLogin();
+           me.doLogin();
         }
     },
 
@@ -54,7 +53,7 @@ Ext.define('Packt.view.login.LoginController', {
         var me = this,
             form = me.lookupReference('form');
 
-        Ext.getBody().mask('Authenticating... Please wait...');
+        me.getView().mask('Authenticating... Please wait...');
 
         form.submit({
             clientValidation: true,
@@ -67,7 +66,7 @@ Ext.define('Packt.view.login.LoginController', {
 
     onLoginFailure: function(form, action) {
 
-        Ext.getBody().unmask();
+        this.getView().unmask();
 
         var result = Packt.util.Util.decodeJSON(action.response.responseText);
 
@@ -79,17 +78,14 @@ Ext.define('Packt.view.login.LoginController', {
                 Packt.util.Util.showErrorMsg(action.response.responseText);
                 break;
             case Ext.form.action.Action.SERVER_INVALID:
-                if (result.msg) {
-                    Packt.util.Util.showErrorMsg(result.msg);
-                } else {
-                    Packt.util.Util.showErrorMsg(action.response.responseText);
-                }
+                Packt.util.Util.showErrorMsg(result.msg);
         }
     },
 
     onLoginSuccess: function(form, action) {
-        Ext.getBody().unmask();
-        this.getView().close();
+        var view = this.getView();
+        view.unmask();
+        view.close();
         Ext.create('Packt.view.main.Main');
         Packt.util.SessionMonitor.start();
     }

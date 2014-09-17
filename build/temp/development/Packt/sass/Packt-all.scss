@@ -727,8 +727,9 @@ $include-packt-view-locale-translationcontroller: true;
 $include-packt-view-login-capslocktooltip: true;
 $include-packt-view-login-login: true;
 $include-packt-view-login-logincontroller: true;
+$include-packt-view-main-header: true;
 $include-packt-view-main-main: true;
-$include-packt-view-main-maincontroller: false;
+$include-packt-view-main-maincontroller: true;
 $include-packt-view-main-mainmodel: false;
 /* including package ext-theme-base */
 @import '../../../../../ext/packages/ext-theme-base/sass/etc/all';

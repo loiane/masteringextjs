@@ -49,7 +49,7 @@ Ext.define('Packt.Application', {
 //            });
 //        });
 
-        Ext.widget('login');
+        Ext.widget('app-main');
 
         //task.delay(2000);
     },

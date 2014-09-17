@@ -8,6 +8,8 @@
 Ext.define('Packt.view.main.Main', {
     extend: 'Ext.container.Container',
 
+    plugins: 'viewport',
+
     xtype: 'app-main',
     
     controller: 'main',

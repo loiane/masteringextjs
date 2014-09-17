@@ -54,7 +54,7 @@ Ext.define('Packt.view.login.Login', {
                     fieldLabel: 'Password',
                     id: 'password',
                     maxLength: 15,
-                    value: '123456',
+                    value: 'Packt123@',
                     vtype: 'customPass',
                     msgTarget: 'side',
                     listeners: {

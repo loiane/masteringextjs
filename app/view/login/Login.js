@@ -17,7 +17,7 @@ Ext.define('Packt.view.login.Login', {
         type: 'fit'
     },
     iconCls: 'fa fa-key fa-lg',
-    title: 'Login',
+    title: translations.login,
     closeAction: 'hide',
     closable: false,
     draggable: false,
@@ -31,11 +31,11 @@ Ext.define('Packt.view.login.Login', {
             defaults: {
                 xtype: 'textfield',
                 anchor: '100%',
-                labelWidth: 60,
+                labelWidth: 70,
                 allowBlank: false,
                 vtype: 'alphanum',
                 minLength: 3,
-                msgTarget: 'under',
+                msgTarget: 'side',
                 enableKeyEvents: true,
                 listeners: {
                     specialKey: 'onTextFieldSpecialKey'
@@ -44,19 +44,19 @@ Ext.define('Packt.view.login.Login', {
             items: [
                 {
                     name: 'user',
-                    fieldLabel: 'User',
+                    fieldLabel: translations.user,
                     maxLength: 25,
                     value: 'loiane'
                 },
                 {
                     inputType: 'password',
                     name: 'password',
-                    fieldLabel: 'Password',
+                    fieldLabel: translations.password,
                     id: 'password',
                     maxLength: 15,
                     value: 'Packt123@',
                     vtype: 'customPass',
-                    msgTarget: 'side',
+                    //msgTarget: 'side',
                     listeners: {
                         keypress: 'onTextFieldKeyPress'
                     }
@@ -67,16 +67,16 @@ Ext.define('Packt.view.login.Login', {
                     xtype: 'toolbar',
                     dock: 'bottom',
                     items: [
-//                        {
-//                            xtype: 'translation'
-//                        },
+                        {
+                            xtype: 'translation'
+                        },
                         {
                             xtype: 'tbfill'
                         },
                         {
                             xtype: 'button',
                             iconCls: 'fa fa-times fa-lg',
-                            text: 'Cancel',
+                            text: translations.cancel,
                             listeners: {
                                 click: 'onButtonClickCancel'
                             }
@@ -85,7 +85,7 @@ Ext.define('Packt.view.login.Login', {
                             xtype: 'button',
                             formBind: true,
                             iconCls: 'fa fa-sign-in fa-lg',
-                            text: 'Submit',
+                            text: translations.submit,
                             listeners: {
                                 click: 'onButtonClickSubmit'
                             }

@@ -3,7 +3,6 @@
  * "autoCreateViewport" property. That setting automatically applies the "viewport"
  * plugin to promote that instance of this class to the body element.
  *
- * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('Packt.view.main.Main', {
     extend: 'Ext.container.Container',
@@ -11,6 +10,14 @@ Ext.define('Packt.view.main.Main', {
     plugins: 'viewport',
 
     xtype: 'app-main',
+
+    requires: [
+        'Packt.view.main.Header',
+        'Packt.view.main.Footer',
+        'Packt.view.main.Panel',
+        'Packt.view.main.MainController',
+        'Packt.view.main.MainModel'
+    ],
     
     controller: 'main',
     viewModel: {
@@ -22,24 +29,18 @@ Ext.define('Packt.view.main.Main', {
     },
 
     items: [{
-        xtype: 'panel',
-        bind: {
-            title: '{name}'
-        },
-        region: 'west',
-        html: '<ul><li>This area is commonly used for navigation, for example, using a "tree" component.</li></ul>',
-        width: 250,
-        split: true,
-        tbar: [{
-            text: 'Button',
-            handler: 'onClickButton'
-        }]
-    },{
         region: 'center',
-        xtype: 'tabpanel',
-        items:[{
-            title: 'Tab 1',
-            html: '<h2>Content appropriate for the current navigation.</h2>'
-        }]
+        xtype: 'mainpanel'
+    },{
+        xtype: 'appheader',
+        region: 'north'
+    },{
+        xtype: 'appfooter',
+        region: 'south'
+    },{
+        xtype: 'container',
+        region: 'west',
+        width: 200,
+        split: true
     }]
 });

@@ -1,0 +1,12 @@
+$packt-header-text-color: #2a3f5d;
+
+.app-header-logo {
+  color: $packt-header-text-color;
+}
+
+.app-header-title {
+  padding: 5px 0 5px 3px;
+  color: $packt-header-text-color;
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -83,22 +83,21 @@ this file in most cases.
         <x-bootstrap file="${base.path}/../bootstrap.js"
                      basedir="${base.path}"
                      coreFilesFile="${base.path}/../bootstrap-files.js"
-                     classMetadataFile="${base.path}/../bootstrap-data.js"
-                     overridesFile="${base.path}/../bootstrap-data.js"
                      includeBoot="true"
                      includeManifest="true"
                      includeCoreFiles="true"
                      appendCoreFiles="false"
                      includeMetadata="false"
                      appendClassMetadata="false"
-                     appendOverrides="true"
+                     includeOverrides="false"
                      overrideExcludeTags="">
 <![CDATA[
 Ext.Boot.loadSync([
-    "../bootstrap-files.js",
-    "../bootstrap-data.js"
+    "../bootstrap-files.js"
 ]);
-Ext.Boot.load("../bootstrap-launch.js");
+Ext.Boot.load([
+    "../bootstrap-launch.js"
+]);
 ]]>
          </x-bootstrap>
 

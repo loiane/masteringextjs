@@ -657,7 +657,7 @@ jasmine.hashString = function (s, hash) {
     }
     
     if (jasmine.hashes[hash]) {
-        console.log("Identical hash detected: " + s);
+        jasmine.getEnv().reporter.log("Identical hash detected: " + s);
     }
     
     jasmine.hashes[hash] = true;
@@ -868,7 +868,6 @@ jasmine.util.extend = function(destination, source) {
   for (var property in source) destination[property] = source[property];
   return destination;
 };
-
 jasmine.util.getOrigin = function() {
     var port = window.location.port;
     var origin;
@@ -1233,6 +1232,8 @@ jasmine.browser.isSafari3 = /safari/.test(navigator.userAgent.toLowerCase()) && 
 jasmine.browser.isOpera = !!window.opera;
 jasmine.browser.isOpera11 = jasmine.browser.isOpera && parseInt(window.opera.version(), 10) > 10;
 
+var itFiresMouseEvents = Ext.isIE ? xit : it;
+if (isCommonJS) exports.itFiresMouseEvents = itFiresMouseEvents;
 jasmine.array = {};
 
   /**
@@ -1657,11 +1658,11 @@ jasmine.Matchers.prototype.toBeNull = function() {
  * Matcher that compares the actual to NaN.
  */
 jasmine.Matchers.prototype.toBeNaN = function() {
-	this.message = function() {
-		return [ "Expected " + jasmine.pp(this.actual) + " to be NaN." ];
-	};
+  this.message = function() {
+    return [ "Expected " + jasmine.pp(this.actual) + " to be NaN." ];
+  };
 
-	return (this.actual !== this.actual);
+  return (this.actual !== this.actual);
 };
 
 /**
@@ -1914,6 +1915,27 @@ jasmine.Matchers.prototype.toThrow = function(expected) {
   if (typeof this.actual != 'function') {
     throw new Error('Actual is not a function');
   }
+  
+    // mock the console to avoid logging to the real console during the tests
+    var global = Ext.global;
+    
+    Ext.global = {
+        console: {
+            dir: function(s) {
+                return s;
+            },
+            log: function(s) {
+                return s;
+            },
+            error: function(s) {
+                return s;
+            },
+            warn: function(s) {
+                return s;
+            }
+        }
+    };
+  
   try {
     this.actual();
   } catch (e) {
@@ -1922,6 +1944,8 @@ jasmine.Matchers.prototype.toThrow = function(expected) {
   if (exception) {
     result = (expected === jasmine.undefined || this.env.contains_(exception.message || exception, expected.message || expected));
   }
+  
+    Ext.global = global;
 
   var not = this.isNot ? "not " : "";
 
@@ -2168,6 +2192,10 @@ jasmine.Matchers.prototype.toBePositionedAt = function(x, y) {
         return this.actual >= expected;
     };
 
+    jasmine.Matchers.prototype.toBeGE = jasmine.Matchers.prototype.toBeAtLeast = jasmine.Matchers.prototype.toBeGreaterThanOrEqual;
+    jasmine.Matchers.prototype.toBeLE = jasmine.Matchers.prototype.toBeLessThanOrEqual;
+    jasmine.Matchers.prototype.toBeLT = jasmine.Matchers.prototype.toBeLessThan;
+    jasmine.Matchers.prototype.toBeGT = jasmine.Matchers.prototype.toBeGreaterThan;
 })();
 
 
@@ -2203,7 +2231,8 @@ jasmine.Matchers.prototype.toBePositionedAt = function(x, y) {
         return "Expected events flow to be (" + expectedEvents.length + " events): \n" + expectedEvents.join('\n') + "\nBut it was (" + actualEvents.length + " events): \n"+ actualEvents.join('\n');
     };
     return ret;
- };/**
+ };
+/**
  * @constructor
  */
 jasmine.MultiReporter = function() {
@@ -2633,7 +2662,7 @@ jasmine.Runner.prototype.specs = function () {
   var suites = this.suites();
   var specs = [];
   for (var i = 0; i < suites.length; i++) {
-    specs = specs.concat(suites[i].specs());
+    specs.push.apply(specs, suites[i].specs());
   }
   return specs;
 };
@@ -3081,7 +3110,9 @@ function waitsForAnimation() {
     var done = false;
     runs(function() {
         Ext.Function.requestAnimationFrame(function() {
-            done = true;
+            setTimeout(function() {
+                done = true;
+            }, 1);
         });
     });
     waitsFor(function() {
@@ -3688,7 +3719,7 @@ jasmine.fireTouchEvent = function(target, type, touches, changedTouches, targetT
 /**
  * Utility function to fire a fake key event to a given target element
  */
-jasmine.fireKeyEvent = function(target, type, key) {
+jasmine.fireKeyEvent = function(target, type, key, shiftKey, ctrlKey, altKey) {
     var e,
         doc;
     target = Ext.getDom(target);
@@ -3698,13 +3729,21 @@ jasmine.fireKeyEvent = function(target, type, key) {
         Ext.apply(e, {
             bubbles: true,
             cancelable: true,
-            keyCode: key
+            keyCode: key,
+            shiftKey: !!shiftKey,
+            ctrlKey: !!ctrlKey,
+            altKey: !!altKey
         });
         return target.fireEvent('on' + type, e);
     } else {
         e = doc.createEvent("Events");
         e.initEvent(type, true, true);
-        e.keyCode = key;
+        Ext.apply(e, {
+            keyCode: key,
+            shiftKey: !!shiftKey,
+            ctrlKey: !!ctrlKey,
+            altKey: !!altKey
+        });
         return target.dispatchEvent(e);
     }
 };
@@ -4246,7 +4285,7 @@ SenchaTestRunner.Reporter.prototype = {
             }
         }
 
-        length = blocks.length;
+        length = blocks.length,
         i = 0;
         for (; i < length; i++) {
             block = blocks[i];

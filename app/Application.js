@@ -3,6 +3,20 @@
  * Ext.application(). This is the ideal place to handle application launch and initialization
  * details.
  */
+function loadLocale(){
+
+    var lang = localStorage ? (localStorage.getItem('user-lang') || 'en') : 'en',
+        file = Ext.util.Format.format("resources/locale/{0}.js", lang),
+        extJsFile = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", lang);
+
+    Ext.Loader.loadScript({url: file, onError: function(){
+        alert('Error loading locale file. Please contact system administrator.');
+    }});
+    Ext.Loader.loadScript({url: extJsFile});
+}
+
+loadLocale();
+
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',
     
@@ -10,15 +24,9 @@ Ext.define('Packt.Application', {
 
     enableQuickTips: true,
 
-    requires: [
-        'Ext.layout.container.Border',
-        'Ext.tab.Panel'
-    ],
-
     views: [
         // TODO: add views here
-        'login.Login',
-        'main.Main'
+        //'login.Login'
     ],
 
     controllers: [
@@ -32,8 +40,8 @@ Ext.define('Packt.Application', {
     
     launch: function () {
 
-        var me = this;
-
+//        var me = this;
+//
 //        var task = new Ext.util.DelayedTask(function() {
 //
 //            //Fade out the body mask
@@ -55,7 +63,7 @@ Ext.define('Packt.Application', {
 //            });
 //        });
 
-        Ext.widget('app-main');
+        Ext.widget('login');
 
         //task.delay(2000);
     },

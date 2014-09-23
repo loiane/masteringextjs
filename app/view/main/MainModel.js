@@ -7,8 +7,9 @@ Ext.define('Packt.view.main.MainModel', {
     alias: 'viewmodel.main',
 
     data: {
-        name: 'Packt'
+        name: 'Packt',
+        appName: 'DVD Rental Store',
+        appHeaderIcon: '<span class="fa fa-desktop fa-lg app-header-logo">',
+        footer: 'Mastering ExtJS book - Loiane Groner - http://packtpub.com'
     }
-
-    //TODO - add data, formulas and/or methods to support your view
 });

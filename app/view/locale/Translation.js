@@ -3,7 +3,6 @@ Ext.define('Packt.view.locale.Translation', {
     xtype: 'translation',
 
     requires: [
-        'Ext.menu.Menu',
         'Packt.view.locale.TranslationController'
     ],
 

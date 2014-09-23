@@ -1,4 +1,4 @@
-//<feature amf>
+// @tag enterprise
 /**
  * @class Ext.data.amf.Encoder
  * This class serializes data in the Action Message Format (AMF) format.
@@ -10,12 +10,12 @@
  *       format: 3
  *     });
  *
- * Then use the writer methods to output data:
+ * Then use the writer methods to out data to the :
  *
  *     encoder.writeObject(1);
  *
  * And access the data through the #bytes property:
- *     encoder.getBytes();
+ *     encoder.bytes;
  *
  * You can also reset the class to start a new byte array:
  *
@@ -54,16 +54,15 @@ Ext.define('Ext.data.amf.Encoder', {
     alias: 'data.amf.Encoder',
 
     config: {
-        format: 3,
-        
-        /**
+        format: 3
+    },
+
+    /**
      * @property {Array} bytes
      * @readonly
      * The constructed byte array.
      */
-        bytes: []
-    },
-
+    bytes: [],
 
     /**
      * Creates new Encoder.
@@ -80,7 +79,7 @@ Ext.define('Ext.data.amf.Encoder', {
      * reference to the old one.
      */
     clear: function() {
-        this.setBytes([]);
+        this.bytes = [];
     },
 
     /**
@@ -119,6 +118,7 @@ Ext.define('Ext.data.amf.Encoder', {
             Ext.apply(this, funcs);
             return protocol_version;
         } else {
+            Ext.Error.raise("Unsupported AMF format: " + protocol_version + ". Only '3' (AMF3) is supported at this point.");
             return; // return nothing
         }
     },
@@ -160,6 +160,7 @@ Ext.define('Ext.data.amf.Encoder', {
                 this.writeGenericObject(item);
             }
         } else {
+            Ext.log.warn("AMF Encoder: Unknown item type " + t + " can't be written to stream: " + item);
         }
     },
 
@@ -201,6 +202,9 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     write3Boolean: function(item) {
+        if (typeof(item) !== "boolean") {
+            Ext.log.warn("Encoder: writeBoolean argument is not a boolean. Coercing.");
+        }
         if (item) {
             this.writeByte(0x03); // AMF3 true
         } else {
@@ -214,6 +218,9 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     write0Boolean: function(item) {
+        if (typeof(item) !== "boolean") {
+            Ext.log.warn("Encoder: writeBoolean argument is not a boolean. Coercing.");
+        }
         this.writeByte(0x01); // AMF0 boolean marker
         if (item) {
             this.writeByte(0x01); // AMF0 true
@@ -265,6 +272,9 @@ Ext.define('Ext.data.amf.Encoder', {
         var data;
         var maxInt = 0x1fffffff,
             minSignedInt = -0xfffffff;
+        if (typeof(item) !== "number" && !(item instanceof Number)) {
+            Ext.log.warn("Encoder: writeNumber argument is not numeric. Can't coerce.");
+        }
 
         // switch to the primitive value for handling:
         if (item instanceof Number) {
@@ -295,6 +305,9 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write0Number: function(item) {
         var data;
+        if (typeof(item) !== "number" && !(item instanceof Number)) {
+            Ext.log.warn("Encoder: writeNumber argument is not numeric. Can't coerce.");
+        }
 
         // switch to the primitive value for handling:
         if (item instanceof Number) {
@@ -315,6 +328,9 @@ Ext.define('Ext.data.amf.Encoder', {
         var data = [],
             val, b, i,
             marker;
+        if (c > 0x10FFFF) {
+            Ext.Error.raise("UTF 8 char out of bounds");
+        }
         if (c <= 0x7F) {
             // One byte UTF8
             data.push(c);
@@ -353,7 +369,7 @@ Ext.define('Ext.data.amf.Encoder', {
             utf8Data = [];
         for (i = 0; i < str.length; i++) {
             var data = this.encodeUtf8Char(str.charCodeAt(i));
-            utf8Data.push.apply(utf8Data, data);
+            Ext.Array.push(utf8Data, data);
         }
         return utf8Data;
 
@@ -382,6 +398,7 @@ Ext.define('Ext.data.amf.Encoder', {
             // push length value to the array
             data =this.encode29Int(len);
         } else {
+            Ext.Error.raise("UTF8 encoded string too long to serialize to AMF: " + len);
         }
         return data;
     },
@@ -392,6 +409,9 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     write3String: function(item) {
+        if (!Ext.isString(item)) {
+            Ext.log.warn("Encoder: writString argument is not a string.");
+        }
         if (item == "") { // special case for the empty string
             this.writeByte(0x06); // AMF3 string marker
             this.writeByte(0x01); // zero length string
@@ -428,6 +448,9 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     write0String: function(item) {
+        if (!Ext.isString(item)) {
+            Ext.log.warn("Encoder: writString argument is not a string.");
+        }
         if (item == "") { // special case for the empty string
             this.writeByte(0x02); // AMF0 short string marker
             this.writeBytes([0x00, 0x00]); // zero length string
@@ -458,6 +481,13 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     write3XmlWithType: function(xml, amfType) {
+        // We accept XML Documents, or strings
+        if (amfType !== 0x07 && amfType !== 0x0B) {
+            Ext.Error.raise("write XML with unknown AMF3 code: " + amfType);
+        }
+        if (!this.isXmlDocument(xml)) {
+            Ext.log.warn("Encoder: write3XmlWithType argument is not an xml document.");
+        }
         var xmlStr = this.convertXmlToString(xml);
         if (xmlStr == "") { // special case for the empty string
             this.writeByte(amfType); // AMF3 XML marker
@@ -498,6 +528,10 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     write0Xml: function(xml) {
+        // We accept XML Documents, or strings
+        if (!this.isXmlDocument(xml)) {
+            Ext.log.warn("Encoder: write0Xml argument is not an xml document.");
+        }
         var xmlStr = this.convertXmlToString(xml);
         this.writeByte(0x0F); // AMF0 XML marker
 
@@ -516,6 +550,9 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write3Date: function(date) {
 
+        if (!(date instanceof Date)) {
+            Ext.Error.raise("Serializing a non-date object as date: " + date);
+        }
         // For now, we don't use object references to just encode the date.
         this.writeByte(0x08); // AMF3 date marker
         this.writeBytes(this.encode29Int(0x1)); // mark this as a date value - we don't support references yet
@@ -529,6 +566,9 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write0Date: function(date) {
 
+        if (!(date instanceof Date)) {
+            Ext.Error.raise("Serializing a non-date object as date: " + date);
+        }
         // For now, we don't use object references to just encode the date.
         this.writeByte(0x0B); // AMF0 date marker
         this.writeBytes(this.encodeDouble(new Number(date)));
@@ -543,6 +583,12 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write3Array: function(arr) {
 
+        if (!Ext.isArray(arr)) {
+            Ext.Error.raise("Serializing a non-array object as array: " + arr);
+        }
+        if (arr.length > 0xFFFFFFF) {
+            Ext.Error.raise("Array size too long to encode in AMF3: " + arr.length);
+        }
         // For now, we don't use object references to just encode the array.
         this.writeByte(0x09); // AMF3 array marker
 
@@ -586,6 +632,9 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write0Array: function(arr) {
         var key;
+        if (!Ext.isArray(arr)) {
+            Ext.Error.raise("Serializing a non-array object as array: " + arr);
+        }
 
         /* This writes a strict array, but it seems Flex always writes out associative arrays, so mimic behavior
 
@@ -611,7 +660,7 @@ Ext.define('Ext.data.amf.Encoder', {
         this.writeBytes(this.encodeXInt(total, 4));
         // then write out the data
         for (key in arr) {
-            this.write0ObjectProperty(key, arr[key]);
+            Ext.Array.push(this.write0ObjectProperty(key, arr[key]));
         }
         // And finally the object end marker
         this.writeBytes([0x00, 0x00, 0x09]);
@@ -625,6 +674,9 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write0StrictArray: function(arr) {
 
+        if (!Ext.isArray(arr)) {
+            Ext.Error.raise("Serializing a non-array object as array: " + arr);
+        }
 
         // For now, we don't use object references to just encode the array.
         this.writeByte(0x0A); // AMF0 strict array marker
@@ -646,6 +698,12 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write3ByteArray: function(arr) {
 
+        if (!Ext.isArray(arr)) {
+            Ext.Error.raise("Serializing a non-array object as array: " + arr);
+        }
+        if (arr.length > 0xFFFFFFF) {
+            Ext.Error.raise("Array size too long to encode in AMF3: " + arr.length);
+        }
         this.writeByte(0x0c); // Byte array marker
 
         // for now no support for references, so just dump the length and data
@@ -669,6 +727,9 @@ Ext.define('Ext.data.amf.Encoder', {
     write3GenericObject: function(obj) {
         var name;
 
+        if (!Ext.isObject(obj)) {
+            Ext.Error.raise("Serializing a non-object object: " + obj);
+        }
         // For now, we don't use object references so just encode the object.
         this.writeByte(0x0A); // AMF3 object marker
         // The following 29-int is marked as follows (LSb to MSb) to signify a
@@ -694,6 +755,7 @@ Ext.define('Ext.data.amf.Encoder', {
             // Ensure that name is actually a string
             var newName = new String(name).valueOf();
             if (newName == "") {
+                Ext.Error.raise("Can't encode non-string field name: " + name);
             }
             var nameData = (this.encodeUtf8String(name));
             this.writeBytes(this.encode3Utf8StringLen(name));
@@ -713,6 +775,9 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     write0GenericObject: function(obj) {
         var typed, amfType, key;
+        if (!Ext.isObject(obj)) {
+            Ext.Error.raise("Serializing a non-object object: " + obj);
+        }
         // For now, we don't use object references so just encode the object.
         // if the object is typed, the ID changes and we need to send the type ahead of the data
         typed = !!obj.$flexType;
@@ -725,7 +790,7 @@ Ext.define('Ext.data.amf.Encoder', {
         // then write out the data. There's no counter, but other than that it's the same as an ECMA array
         for (key in obj) {
             if (key != "$flexType") {
-                this.write0ObjectProperty(key, obj[key]);
+                Ext.Array.push(this.write0ObjectProperty(key, obj[key]));
             }
         }
         // And finally the object end marker
@@ -739,7 +804,10 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     writeByte: function(b) {
 
-        this.getBytes().push(b);
+        if (b < 0 || b > 255) {
+            Ex.Error.raise('ERROR: Value being written outside byte range: ' + b);
+        }
+        Ext.Array.push(this.bytes, b);
     },
 
     /**
@@ -749,7 +817,15 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     writeBytes: function(b) {
         var i;
-        this.getBytes().push.apply(this.getBytes(), b);
+        if (!Ext.isArray(b)) {
+            Ext.Error.raise("Decoder: writeBytes parameter is not an array: " + b);
+        }
+        for (i = 0; i < b.length; i++) {
+            if (b[i] < 0 || b[i] > 255 || !Ext.isNumber(b[i])) {
+                Ext.Error.raise("ERROR: Value " + i + " being written outside byte range: " + b[i]);
+            }
+        }
+        Ext.Array.push(this.bytes, b);
     },
 
     /**
@@ -904,6 +980,15 @@ Ext.define('Ext.data.amf.Encoder', {
      */
     writeAmfPacket: function(headers, messages) {
         var i;
+        if (this.config.format != 0) {
+            Ext.Error.raise ("Trying to write a packet on an AMF3 Encoder. Only AMF0 is supported!");
+        }
+        if (!Ext.isArray(headers)) {
+            Ext.Error.raise("headers is not an array: " + headers);
+        }
+        if (!Ext.isArray(messages)) {
+            Ext.Error.raise("messages is not an array: " + messages);
+        }
         // Write Packet marker
         this.writeBytes([0x00, 0x00]); // AMF 0 version for this packet.
         // Write header count
@@ -928,6 +1013,15 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     writeAmfHeader: function(headerName, mustUnderstand, value) {
+        if (this.config.format != 0) {
+            Ext.Error.raise ("Trying to write a header on an AMF3 Encoder. Only AMF0 is supported!");
+        }
+        if (!Ext.isString(headerName)) {
+            Ext.Error.raise("targetURI is not a string: " + targetUri);
+        }
+        if ((typeof(mustUnderstand) !== "boolean") && !Ext.isBoolean(mustUnderstand)) {
+            Ext.Error.raise("mustUnderstand is not a boolean value: " + mustUnderstand);
+        }
         // write header name
         this.write0ShortUtf8String(headerName);
         // write must understand byte
@@ -947,6 +1041,18 @@ Ext.define('Ext.data.amf.Encoder', {
      * @private
      */
     writeAmfMessage: function(targetUri, responseUri, body) {
+        if (this.config.format != 0) {
+            Ext.Error.raise ("Trying to write a message on an AMF3 Encoder. Only AMF0 is supported!");
+        }
+        if (!Ext.isString(targetUri)) {
+            Ext.Error.raise("targetURI is not a string: " + targetUri);
+        }
+        if (!Ext.isString(responseUri)) {
+            Ext.Error.raise("targetURI is not a string: " + responseUri);
+        }
+        if (!Ext.isArray(body)) {
+            Ext.Error.raise("body is not an array: " + typeof(body));
+        }
         // write target URI
         this.write0ShortUtf8String(targetUri);
         // write response URI
@@ -958,9 +1064,8 @@ Ext.define('Ext.data.amf.Encoder', {
     }
 
 });
-//</feature>
 
-//<feature amf>
+// @tag enterprise
 /**
  * @class Ext.data.amf.Packet
  * This class represents an Action Message Format (AMF) Packet.  It contains all
@@ -978,16 +1083,18 @@ Ext.define('Ext.data.amf.Encoder', {
  *
  * To access the decoded data use the #version, #headers, and #messages properties:
  *
- *     console.log(packet.getVersion(), packet.getHeaders(), packet.getMessages());
+ *     console.log(packet.version, packet.headers, packet.messages);
  *
  * For more information on working with AMF data please refer to the
  * [AMF Guide](#/guide/amf).
  */
-Ext.define('Ext.data.amf.Packet', {
+Ext.define('Ext.data.amf.Packet', function() {
+    var twoPowN52 = Math.pow(2, -52),
+        twoPow8 = Math.pow(2, 8),
+        pos = 0,
+        bytes, strings, objects, traits;
 
-    
-    config: {
-        
+    return {
         /**
          * @property {Array} headers
          * @readonly
@@ -1005,8 +1112,7 @@ Ext.define('Ext.data.amf.Packet', {
          * - `value`: Mixed
          * The header value
          */
-        headers: [],
-        
+
         /**
          * @property {Array} messages
          * @readonly
@@ -1022,18 +1128,13 @@ Ext.define('Ext.data.amf.Packet', {
          * - `body`: Mixed
          * The message body
          */
-        messages:[],
-        
+
         /**
          * @property {Number} version
          * @readonly
          * The AMF version number (0 or 3)
          */
-        version: 0
-        
 
-    },
-    
         /**
          * Mapping of AMF data types to the names of the methods responsible for
          * reading them.
@@ -1083,29 +1184,19 @@ Ext.define('Ext.data.amf.Packet', {
          */
         decode: function(byteArray) {
             var me = this,
-                headers = [],
-                messages =  [],
+                headers = me.headers = [],
+                messages = me.messages = [],
                 headerCount, messageCount;
-            
-            me.twoPowN52 = Math.pow(2, -52);
-            me.twoPow8 = Math.pow(2, 8);
 
-            
-            me.setHeaders(headers);
-            me.setMessages(messages);
-            me.pos = 0;
-            
-            if (byteArray instanceof ArrayBuffer) {
-                // convert to byte array form so that we can read the data
-                byteArray = new Uint8Array(byteArray);
-            }
-            me.bytes = byteArray;
+            pos = 0;
+
+            bytes = me.bytes = byteArray;
 
             // The strings array holds references to all of the deserialized
             // AMF3 strings for a given header value or message body so that
             // repeat instances of the same string can be deserialized by
             // reference
-            me.strings = [];
+            strings = me.strings = [];
 
             // The objects array holds references to deserialized objects so
             // that repeat occurrences of the same object instance in the byte
@@ -1114,49 +1205,51 @@ Ext.define('Ext.data.amf.Packet', {
             // objects, arrays, and ecma-arrays.
             // If version is AMF3 this array holds instances of Object, Array, XML,
             // XMLDocument, ByteArray, Date, and instances of user defined Classes
-            me.objects = [];
+            objects = me.objects = [];
 
             // The traits array holds references to the "traits" (the
             // characteristics of objects that define a strong type such as the
             // class name and public member names) of deserialized AMF3 objects
             // so that if they are repeated they can be deserialized by reference.
-            me.traits = [];
+            traits = me.traits = [];
+
             // The first two bytes of an AMF packet contain the AMF version
             // as an unsigned 16 bit integer.
-            me.setVersion(me.readUInt(2));
+            me.version = me.readUInt(2);
 
             // the next 2 bytes contain the header count
             for (headerCount = me.readUInt(2); headerCount--;) {
-                me.getHeaders().push({
+                headers.push({
                     name: me.readAmf0String(),
                     mustUnderstand: me.readBoolean(),
                     byteLength: me.readUInt(4),
                     value: me.readValue()
                 });
                 // reset references (reference indices are local to each header)
-                me.strings = [];
-                me.objects = [];
-                me.traits = [];
+                strings = me.strings = [];
+                objects = me.objects = [];
+                traits = me.traits = [];
             }
 
             // The 2 bytes immediately after the header contain the message count.
             for (messageCount = me.readUInt(2); messageCount--;) {
-                me.getMessages().push({
+                messages.push({
                     targetURI: me.readAmf0String(),
                     responseURI: me.readAmf0String(),
                     byteLength: me.readUInt(4),
                     body: me.readValue()
                 });
                 // reset references (reference indices are local to each message)
-                me.strings = [];
-                me.objects = [];
-                me.traits = [];
+                strings = me.strings = [];
+                objects = me.objects = [];
+                traits = me.traits = [];
             }
 
             // reset the pointer
-            me.pos = 0;
+            pos = 0;
             // null the bytes array and reference arrays to free up memory.
-            me.bytes = me.strings = me.objects = me.traits = null;
+            bytes = strings = objects = traits =
+                me.bytes = me.strings = me.objects = me.traits = null;
 
             return me;
         },
@@ -1171,20 +1264,20 @@ Ext.define('Ext.data.amf.Packet', {
         decodeValue: function(byteArray) {
             var me = this;
 
-            me.bytes = byteArray;
+            bytes = me.bytes = byteArray;
 
             // reset the pointer
-            me.pos = 0;
+            pos = 0;
 
             // The first two bytes of an AMF packet contain the AMF version
             // as an unsigned 16 bit integer.
-            me.setVersion(3);
+            me.version = 3;
 
             // The strings array holds references to all of the deserialized
             // AMF3 strings for a given header value or message body so that
             // repeat instances of the same string can be deserialized by
             // reference
-            me.strings = [];
+            strings = me.strings = [];
 
             // The objects array holds references to deserialized objects so
             // that repeat occurrences of the same object instance in the byte
@@ -1193,13 +1286,13 @@ Ext.define('Ext.data.amf.Packet', {
             // objects, arrays, and ecma-arrays.
             // If version is AMF3 this array holds instances of Object, Array, XML,
             // XMLDocument, ByteArray, Date, and instances of user defined Classes
-            me.objects = [];
+            objects = me.objects = [];
 
             // The traits array holds references to the "traits" (the
             // characteristics of objects that define a strong type such as the
             // class name and public member names) of deserialized AMF3 objects
             // so that if they are repeated they can be deserialized by reference.
-            me.traits = [];
+            traits = me.traits = [];
 
             // read one value and return it
             return me.readValue();
@@ -1234,7 +1327,7 @@ Ext.define('Ext.data.amf.Packet', {
             // An AMF0 date type ends with a 16 bit integer time-zone, but
             // according to the spec time-zone is "reserved, not supported,
             // should be set to 0x000".
-            this.pos += 2; // discard the time zone
+            pos += 2; // discard the time zone
             return date;
         },
 
@@ -1250,17 +1343,17 @@ Ext.define('Ext.data.amf.Packet', {
 
             // add the object to the objects array so that the AMF0 reference
             // type decoder can refer to it by index if needed.
-            me.objects.push(obj);
+            objects.push(obj);
 
             // An AMF0 object consists of a series of string keys and variable-
             // type values.  The end of the series is marked by an empty string
             // followed by the object-end marker (9).
-            while ((key = me.readAmf0String()) || me.bytes[me.pos] !== 9) {
+            while ((key = me.readAmf0String()) || bytes[pos] !== 9) {
                 obj[key] = me.readValue();
             }
 
             // move the pointer past the object-end marker
-            me.pos++;
+            pos++;
 
             return obj;
         },
@@ -1303,7 +1396,7 @@ Ext.define('Ext.data.amf.Packet', {
                     // array.  Read keys and values from the byte array until
                     // we get to an empty string key
                     array = {};
-                    me.objects.push(array);
+                    objects.push(array);
                     do {
                         array[key] = me.readValue();
                     } while((key = me.readAmf3String()));
@@ -1316,7 +1409,7 @@ Ext.define('Ext.data.amf.Packet', {
                     // First key is an empty string - this is an array with
                     // ordinal indices.
                     array = [];
-                    me.objects.push(array);
+                    objects.push(array);
                     for (i = 0; i < count; i++) {
                         array.push(me.readValue());
                     }
@@ -1324,7 +1417,7 @@ Ext.define('Ext.data.amf.Packet', {
             } else {
                 // If the first (low) bit is a 0 read an array reference. The
                 // remaining 1-28 bits are used to encode the reference index
-                array = me.objects[header >> 1];
+                array = objects[header >> 1];
             }
 
             return array;
@@ -1342,11 +1435,11 @@ Ext.define('Ext.data.amf.Packet', {
             if (header & 1) {
                 // If the first (low) bit is a 1, this is a date instance.
                 date = new Date(me.readDouble());
-                me.objects.push(date);
+                objects.push(date);
             } else {
                 // If the first (low) bit is a 0, this is a date reference.
                 // The remaining 1-28 bits encode the reference index
-                date = me.objects[header >> 1];
+                date = objects[header >> 1];
             }
 
             return date;
@@ -1398,12 +1491,12 @@ Ext.define('Ext.data.amf.Packet', {
                     // An objects traits are cached in the traits array enabling
                     // the traits for a given class to only be encoded once for
                     // a series of instances.
-                    me.traits.push(objectTraits);
+                    traits.push(objectTraits);
                 } else if ((header & 0x03) === 1) {
                     // If the 2 least significant bits are "01", then a traits
                     // reference follows.  The remaining 1-27 bits are used
                     // to encode the trait reference index.
-                    objectTraits = me.traits[header >> 2];
+                    objectTraits = traits[header >> 2];
                     className = objectTraits.className;
                     dynamic = objectTraits.dynamic;
                     members = objectTraits.members;
@@ -1421,7 +1514,7 @@ Ext.define('Ext.data.amf.Packet', {
                 } else {
                     obj = {};
                 }
-                me.objects.push(obj);
+                objects.push(obj);
 
                 // read the sealed member values
                 for (i = 0; i < memberCount; i++) {
@@ -1447,7 +1540,7 @@ Ext.define('Ext.data.amf.Packet', {
                 // If the first (low) bit of the header is a 0, this is an
                 // object reference. The remaining 1-28 significant bits are
                 // used to encode an object reference index.
-                obj = me.objects[header >> 1];
+                obj = objects[header >> 1];
             }
 
             return obj;
@@ -1469,7 +1562,7 @@ Ext.define('Ext.data.amf.Packet', {
                 value = me.readUtf8(header >> 1);
                 if (value) {
                     // the emtpy string is never encoded by reference
-                    me.strings.push(value);
+                    strings.push(value);
                 }
                 return value;
             } else {
@@ -1477,7 +1570,7 @@ Ext.define('Ext.data.amf.Packet', {
                 // Discard the low bit, then look up and return the reference
                 // from the strings array using the remaining 1-28 bits as the
                 // index.
-                return me.strings[header >> 1];
+                return strings[header >> 1];
             }
         },
 
@@ -1494,11 +1587,11 @@ Ext.define('Ext.data.amf.Packet', {
                 // If the first (low) bit is a 1, this is an xml instance. The
                 // remaining 1-28 bits encode the byte-length of the xml string.
                 doc = me.parseXml(me.readUtf8(header >> 1));
-                me.objects.push(doc);
+                objects.push(doc);
             } else {
                 // if the first (low) bit is a 1, this is an xml reference. The
                 // remaining 1-28 bits encode the reference index.
-                doc = me.objects[header >> 1];
+                doc = objects[header >> 1];
             }
 
             return doc;
@@ -1509,7 +1602,7 @@ Ext.define('Ext.data.amf.Packet', {
          * @private
          */
         readBoolean: function() {
-            return !!this.bytes[this.pos++];
+            return !!bytes[pos++];
         },
 
         /**
@@ -1523,19 +1616,19 @@ Ext.define('Ext.data.amf.Packet', {
             if (header & 1) {
                 // If the first (low) bit is a 1, this is a ByteArray instance.
                 // The remaining 1-28 bits encode the ByteArray's byte-length.
-                end = this.pos + (header >> 1);
+                end = pos + (header >> 1);
                 // Depending on the browser, "bytes" may be either a Uint8Array
                 // or an Array.  Uint8Arrays don't have Array methods, so
                 // we have to use Array.prototype.slice to get the byteArray
-                byteArray = Array.prototype.slice.call(this.bytes, this.pos, end);
-                this.objects.push(byteArray);
+                byteArray = Array.prototype.slice.call(bytes, pos, end);
+                objects.push(byteArray);
                 // move the pointer to the first byte after the byteArray that
                 // was just read
-                this.pos = end;
+                pos = end;
             } else {
                 // if the first (low) bit is a 1, this is a ByteArray reference.
                 // The remaining 1-28 bits encode the reference index.
-                byteArray = this.objects[header >> 1];
+                byteArray = objects[header >> 1];
             }
 
             return byteArray;
@@ -1546,8 +1639,8 @@ Ext.define('Ext.data.amf.Packet', {
          * @private
          */
         readDouble: function() {
-            var byte1 = this.bytes[this.pos++],
-                byte2 = this.bytes[this.pos++],
+            var byte1 = bytes[pos++],
+                byte2 = bytes[pos++],
                 // the first bit of byte1 is the sign (0 = positive, 1 = negative.
                 // We read this bit by shifting the 7 least significant bits of
                 // byte1 off to the right.
@@ -1581,7 +1674,7 @@ Ext.define('Ext.data.amf.Packet', {
             // produces the same result as (significand << 8), then we add the
             // next byte, which has the same result as a bitwise OR.
             while (i--) {
-                significand = (significand * this.twoPow8) + this.bytes[this.pos++];
+                significand = (significand * twoPow8) + bytes[pos++];
             }
 
             if (!exponent) {
@@ -1609,7 +1702,7 @@ Ext.define('Ext.data.amf.Packet', {
                 Math.pow(2, exponent - 0x3FF) *
                 // convert the significand to its decimal value by multiplying
                 // it by 2^52 and then add the hidden bit
-                (hiddenBit + this.twoPowN52 * significand);
+                (hiddenBit + twoPowN52 * significand);
         },
 
         /**
@@ -1621,7 +1714,7 @@ Ext.define('Ext.data.amf.Packet', {
             // with the exception that it has a 32 bit "count" at the beginning.
             // We handle emca arrays by just throwing away the count and then
             // letting the object decoder handle the rest.
-            this.pos += 4;
+            pos += 4;
             return this.readAmf0Object();
         },
 
@@ -1660,7 +1753,7 @@ Ext.define('Ext.data.amf.Packet', {
         readReference: function() {
             // a reference type contains a single 16 bit integer that represents
             // the index of an already deserialized object in the objects array
-            return this.objects[this.readUInt(2)];
+            return objects[this.readUInt(2)];
         },
 
         /**
@@ -1672,7 +1765,7 @@ Ext.define('Ext.data.amf.Packet', {
                 len = me.readUInt(4),
                 arr = [];
 
-            me.objects.push(arr);
+            objects.push(arr);
 
             while (len--) {
                 arr.push(me.readValue());
@@ -1685,9 +1778,7 @@ Ext.define('Ext.data.amf.Packet', {
          * Returns true.  Used for reading the true type
          * @private
          */
-        readTrue: function() {
-            return true;
-        },
+        readTrue: Ext.returnTrue,
 
         /**
          * Reads an AMF0 typed object from the byte array
@@ -1722,11 +1813,11 @@ Ext.define('Ext.data.amf.Packet', {
                 result;
 
             // read the first byte
-            result = this.bytes[this.pos++];
+            result = bytes[pos++];
             // if this is a multi-byte int, loop over the remaining bytes
             for (; i < byteCount; ++i) {
                 // shift the result 8 bits to the left and add the next byte.
-                result = (result << 8) | this.bytes[this.pos++];
+                result = (result << 8) | bytes[pos++];
             }
 
             return result;
@@ -1752,25 +1843,25 @@ Ext.define('Ext.data.amf.Packet', {
          * @return {Number}
          */
         readUInt29: function() {
-            var value = this.bytes[this.pos++],
+            var value = bytes[pos++],
                 nextByte;
 
             if (value & 0x80) {
                 // if the high order bit of the first byte is a 1, the next byte
                 // is also part of this integer.
-                nextByte = this.bytes[this.pos++];
+                nextByte = bytes[pos++];
                 // remove the high order bit from both bytes before combining them
                 value = ((value & 0x7F) << 7) | (nextByte & 0x7F);
                 if (nextByte & 0x80) {
                     // if the high order byte of the 2nd byte is a 1, then
                     // there is a 3rd byte
-                    nextByte = this.bytes[this.pos++];
+                    nextByte = bytes[pos++];
                     // remove the high order bit from the 3rd byte before
                     // adding it to the value
                     value = (value << 7) | (nextByte & 0x7F);
                     if (nextByte & 0x80) {
                         // 4th byte is also part of the integer
-                        nextByte = this.bytes[this.pos++];
+                        nextByte = bytes[pos++];
                         // use all 8 bits of the 4th byte
                         value = (value << 8) | nextByte;
                     }
@@ -1800,7 +1891,7 @@ Ext.define('Ext.data.amf.Packet', {
          * @return {String}
          */
         readUtf8: function(byteLength) {
-            var end = this.pos + byteLength, // the string's end position
+            var end = pos + byteLength, // the string's end position
                 chars = [],
                 charCount = 0,
                 maxCharCount = 65535,
@@ -1835,10 +1926,10 @@ Ext.define('Ext.data.amf.Packet', {
             // 11       110xxxxx    10xxxxxx
             // 16       1110xxxx    10xxxxxx    10xxxxxx
             // 21       11110xxx    10xxxxxx    10xxxxxx    10xxxxxx
-            while (this.pos < end) {
+            while (pos < end) {
                 // read a byte from the byte array - if the byte's value is less
                 // than 128 we are dealing with a single byte character
-                charCode = this.bytes[this.pos++];
+                charCode = bytes[pos++];
                 if (charCode > 127) {
                     // if the byte's value is greater than 127 we are dealing
                     // with a multi-byte character.
@@ -1889,7 +1980,7 @@ Ext.define('Ext.data.amf.Packet', {
                         // AND 00111111 (the mask)
                         // That leaves 6 remaining bits on the continuation byte
                         // which are concatenated onto the character's bits
-                        charCode = ((charCode << 6) | (this.bytes[this.pos++] & 0x3F));
+                        charCode = ((charCode << 6) | (bytes[pos++] & 0x3F));
                     }
                 }
 
@@ -1924,7 +2015,7 @@ Ext.define('Ext.data.amf.Packet', {
          */
         readValue: function() {
             var me = this,
-                marker = me.bytes[me.pos++];
+                marker = bytes[pos++];
 
             // With the introduction of AMF3, a special type marker was added to
             // AMF0 to signal a switch to AMF3 serialization. This allows a packet
@@ -1932,11 +2023,11 @@ Ext.define('Ext.data.amf.Packet', {
             // to take advantage of the more the efficient encoding of AMF 3.
             if (marker === 17) {
                 // change the version to AMF3 when we see a 17 marker
-                me.setVersion(3);
-                marker = me.bytes[me.pos++];
+                me.version = 3;
+                marker = bytes[pos++];
             }
 
-            return me[me.typeMap[me.getVersion()][marker]]();
+            return me[me.typeMap[me.version][marker]]();
         },
 
         /**
@@ -1950,11 +2041,117 @@ Ext.define('Ext.data.amf.Packet', {
             }
         }
 
-    }
-          );
-//</feature>
+    };
+});
 
-//<feature amf>
+// @tag enterprise
+/**
+ * The AMF Reader is used by an {@link Ext.data.amf.Proxy AMF Proxy} to read 
+ * records from a server response that contains binary data in either AMF0 or
+ * AMF3 format. AMF Reader constructs an {@link Ext.data.amf.Packet AMF Packet}
+ * and uses it to decode the binary data into javascript objects, then simply
+ * allows its superclass ({@link Ext.data.reader.Json}) to handle converting the
+ * raw javascript objects into {@link Ext.data.Model} instances.
+ * 
+ * For a more detailed tutorial see the [AMF Guide](#/guide/amf).
+ */
+Ext.define('Ext.data.amf.Reader', {
+
+    extend: 'Ext.data.reader.Json',
+
+    alias : 'reader.amf',
+
+    requires: [
+        'Ext.data.amf.Packet'
+    ],
+
+    /**
+     * @cfg {Number} messageIndex
+     * AMF Packets can contain multiple messages. This config specifies the
+     * 0-based index of the message that contains the record data.
+     */
+    messageIndex: 0,
+
+    /**
+     * Reads records from a XMLHttpRequest response object containing a binary
+     * AMF Packet and returns a ResultSet.
+     * @param {Object} response The XMLHttpRequest response object
+     * @return {Ext.data.ResultSet}
+     */
+    read: function(response) {
+        var me = this,
+            bytes = response.responseBytes,
+            packet, messages, resultSet;
+
+        if (!bytes) {
+            throw "AMF Reader cannot process the response because it does not contain binary data. Make sure the Proxy's 'binary' config is true.";
+        }
+            
+        packet = new Ext.data.amf.Packet();
+        packet.decode(bytes);
+        messages = packet.messages;
+
+        if (messages.length) {
+            resultSet = me.readRecords(messages[me.messageIndex].body);
+        } else {
+            // no messages, return null result set
+            resultSet = me.nullResultSet;
+            if (packet.invalid) {
+                // packet contains invalid data
+                resultSet.success = false;
+            }
+        }
+
+        return resultSet;
+    }
+});
+
+
+// @tag enterprise
+/**
+ * The AMF Proxy is an {@link Ext.data.proxy.Ajax Ajax Proxy} that requests
+ * binary data from a remote server and parses it into records using an
+ * {@link Ext.data.amf.Reader AMF Reader} for use in a
+ * {@link Ext.data.Store Store}.
+ *
+ *     Ext.create('Ext.data.Store', {
+ *         model: 'Foo',
+ *         proxy: {
+ *             type: 'amf',
+ *             url: 'some/url'
+ *         }
+ *     });
+ *     
+ * For a detailed tutorial on using AMF data see the [AMF Guide](#/guide/amf).
+ *
+ * **Note: **  _This functionality is only available with the purchase of 
+ * Sencha Complete.  For more information about using this class, please visit 
+ * our [Sencha Complete](https://www.sencha.com/products/complete/) product page._
+ *
+ */
+Ext.define('Ext.data.amf.Proxy', {
+    extend: 'Ext.data.proxy.Ajax',
+
+    alias: 'proxy.amf',
+
+    requires: [
+        'Ext.data.amf.Reader'
+    ],
+
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    binary: true,
+
+    /**
+     * @cfg
+     * @inheritdoc
+     */
+    reader: 'amf'
+});
+
+// @tag enterprise
 /**
  * @class Ext.data.amf.RemotingMessage
  * Represents a remote call to be sent to the server.
@@ -2034,15 +2231,14 @@ Ext.define('Ext.data.amf.RemotingMessage', {
     encodeMessage: function() {
         var encoder = Ext.create('Ext.data.amf.XmlEncoder'),
             cleanObj;
-        cleanObj = Ext.copyTo({}, this.getCurrentConfig(), "$flexType,body,clientId,destination,headers,messageId,operation,source,timestamp,timeToLive", true);
+        cleanObj = Ext.copyTo({}, this, "$flexType,body,clientId,destination,headers,messageId,operation,source,timestamp,timeToLive", true);
         encoder.writeObject(cleanObj);
-        return encoder.getBody();
+        return encoder.body;
     }
 
 });
-//</feature>
 
-//<feature amf>
+// @tag enterprise
 /**
  * @class Ext.data.amf.XmlDecoder
  * This class parses an XML-based AMFX message and returns the deserialized
@@ -2153,6 +2349,12 @@ Ext.define('Ext.data.amf.XmlDecoder', {
         this.clear(); // reset counters
         doc = Ext.data.amf.XmlDecoder.readXml(xml);
         amfx = doc.getElementsByTagName('amfx')[0];
+        if (!amfx) {
+            Ext.warn.log("No AMFX tag in message");
+        }
+        if (amfx.getAttribute('ver') != "3") {
+            Ext.Error.raise("Unsupported AMFX version: " + amfx.getAttribute('ver'));
+        }
         body = amfx.getElementsByTagName('body')[0];
         resp.targetURI = body.getAttribute('targetURI');
         resp.responseURI = body.getAttribute('responseURI'); // most likely empty string
@@ -2210,6 +2412,7 @@ Ext.define('Ext.data.amf.XmlDecoder', {
             // a byte array is usually an AMF stream. Parse it to a byte array, then pass through the AMF decoder to get the objects inside
             return Ext.data.amf.XmlDecoder.readAMF3Value(Ext.data.amf.XmlDecoder.readByteArray(node));
         }
+        Ext.Error.raise("Unknown tag type: " + node.tagName);
         return null;
     },
 
@@ -2307,6 +2510,9 @@ Ext.define('Ext.data.amf.XmlDecoder', {
 
         traitsNode = node.getElementsByTagName('traits')[0];
         traits = this.readTraits(traitsNode);
+        if (traits === null) {
+            Ext.Error.raise("No support for externalizable object: " + className);
+        }
         // Register object if ref table, in case there's a cyclical reference coming
         this.objectReferences.push(obj);
 
@@ -2327,6 +2533,9 @@ Ext.define('Ext.data.amf.XmlDecoder', {
             val = this.readValue(n);
             j = j + 1;
             obj[key] = val;
+            if (j > traits.length) {
+                Ext.Error.raise("Too many items for object, not enough traits: " + className);
+            }
         }
         return obj;
     },
@@ -2370,7 +2579,13 @@ Ext.define('Ext.data.amf.XmlDecoder', {
                 // ordinal node
                 arr[i] = this.readValue(n);
                 i++;
+                if (i > len) {
+                    Ext.Error.raise("Array has more items than declared length: " + i + " > " + len);
+                }
             }
+        }
+        if (i < len) {
+            Ext.Error.raise("Array has less items than declared length: " + i + " < " + len);
         }
         return arr;
     },
@@ -2411,6 +2626,9 @@ Ext.define('Ext.data.amf.XmlDecoder', {
             key = null;
             val = null;
         }
+        if (j != len) {
+            Ext.Error.raise("Incorrect number of dictionary values: " + j + " != " + len);
+        }
         return dict;
     },
 
@@ -2449,9 +2667,8 @@ Ext.define('Ext.data.amf.XmlDecoder', {
         }
     }
 });
-//</feature>
 
-//<feature amf>
+// @tag enterprise
 /**
  * @class Ext.data.amf.XmlEncoder
  * This class serializes data in the Action Message Format XML (AMFX) format.
@@ -2467,7 +2684,7 @@ Ext.define('Ext.data.amf.XmlDecoder', {
  *     encoder.writeObject({a: "b"});
  *
  * And access the data through the #bytes property:
- *     encoder.getBody();
+ *     encoder.body;
  *
  * You can also reset the class to start a new body:
  *
@@ -2493,13 +2710,11 @@ Ext.define('Ext.data.amf.XmlDecoder', {
 Ext.define('Ext.data.amf.XmlEncoder', {
 
     alias: 'data.amf.xmlencoder',
-    
-    config: {
-        /**
-         * @property {String} body - The output string
-         */
-        body: ""
-    },
+
+    /**
+     * @property {String} body - The output string
+     */
+    body: "",
 
     statics: {
         /**
@@ -2511,7 +2726,7 @@ Ext.define('Ext.data.amf.XmlEncoder', {
             var uid = "",
                 i, j, t;
             if (id === undefined) {
-                id = this.randomInt(0, 0xffffffff);
+                id = Ext.Number.randomInt(0, 0xffffffff);
             }
             // The format of a UID is XXXXXXXX-XXXX-XXXX-XXXX-YYYYYYYYXXXX
             // where each X is a random hex digit and each Y is a hex digit from the least significant part of a time stamp.
@@ -2522,7 +2737,7 @@ Ext.define('Ext.data.amf.XmlEncoder', {
                 // 3 -XXXX segments
                 uid += "-";
                 for (i = 0; i < 4; i++) {
-                    uid += this.randomInt(0, 15).toString(16).toUpperCase();
+                    uid += Ext.Number.randomInt(0, 15).toString(16).toUpperCase();
                 }
             }
             uid += "-";
@@ -2539,18 +2754,9 @@ Ext.define('Ext.data.amf.XmlEncoder', {
             uid += t.substr(-(8-j)); // last few chars
             // and last 4 random digits
             for (i = 0; i < 4; i++) {
-                uid += this.randomInt(0, 15).toString(16).toUpperCase();
+                uid += Ext.Number.randomInt(0, 15).toString(16).toUpperCase();
             }
             return uid;
-        },
-        /**
-         * Returns a random integer between the specified range (inclusive)
-         * @param {Number} from Lowest value to return.
-         * @param {Number} to Highst value to return.
-         * @return {Number} A random integer within the specified range.
-         */
-        randomInt: function (from, to) {
-           return Math.floor(Math.random() * (to - from + 1) + from);
         }
     },
 
@@ -2567,7 +2773,7 @@ Ext.define('Ext.data.amf.XmlEncoder', {
      * Clears the accumulated data, starting with an empty string
      */
     clear: function() {
-        this.setBody("");
+        this.body = "";
     },
 
     /**
@@ -2682,6 +2888,9 @@ Ext.define('Ext.data.amf.XmlEncoder', {
     encodeNumber: function(num) {
         var maxInt = 0x1fffffff,
             minSignedInt = -0xfffffff;
+        if (typeof(num) !== "number" && !(num instanceof Number)) {
+            Ext.log.warn("Encoder: writeNumber argument is not numeric. Can't coerce.");
+        }
 
         // switch to the primitive value for handling:
         if (num instanceof Number) {
@@ -2866,6 +3075,12 @@ Ext.define('Ext.data.amf.XmlEncoder', {
         if (array.length > 0) {
             str = "<bytearray>";
             for (i = 0; i < array.length; i++) {
+                if (!Ext.isNumber(array[i])) {
+                    Ext.Error.raise("Byte array contains a non-number: " + array[i]  + " in index: " + i);
+                }
+                if (array[i] < 0 || array[i] > 255) {
+                    Ext.Error.raise("Byte array value out of bounds: " + array[i]);
+                }
                 h = array[i].toString(16).toUpperCase();
                 if (array[i] < 0x10) {
                     h = "0" + h;
@@ -2928,6 +3143,7 @@ Ext.define('Ext.data.amf.XmlEncoder', {
                 return this.encodeGenericObject(item);
             }
         } else {
+            Ext.log.warn("AMFX Encoder: Unknown item type " + t + " can't be written to stream: " + item);
         }
         return null; // if we reached here, return null
     },
@@ -3014,12 +3230,11 @@ Ext.define('Ext.data.amf.XmlEncoder', {
      * @private
      */
     write: function(str) {
-        this.setBody(this.getBody() + str);
+        this.body += str;
     }
 });
-//</feature>
 
-//<feature amf>
+// @tag enterprise
 /**
  * @class Ext.direct.AmfRemotingProvider
  * 
@@ -3066,13 +3281,10 @@ Ext.define('Ext.data.amf.XmlEncoder', {
  * </code></pre>
  * <p>You can now call the service as follows:</p>
  <pre><code>
- product.getProducts(function(result, e, success) {
-   if (e.getStatus()) {
-     alert("getProducts: " + result.length + " objects");
-   } else {
-     alert("getProducts: " + e.getMessage()); // failure message
-   }
- });
+product.getProducts((function(provider, response) {
+    // do something with the response
+    console.log("Got " + response.data.length + " objects");
+});
 </code></pre>
  * 
  * Note that in case server methods require parameters of a specific class (e.g. flex.samples.product.Product), you should make sure the passed parameter has a field called $flexType set to the class name (in this case flex.Samples.product.Product). This is similar to the remote class alias definition in ActionScript.
@@ -3101,197 +3313,165 @@ Ext.define('Ext.data.amf.XmlEncoder', {
 
  * </code></pre>
  * <p>Calling the server is done the same way as for the AMFX-based definition.</p>
+
  */
-
 Ext.define('Ext.direct.AmfRemotingProvider', {
+    
+    /* Begin Definitions */
+   
     alias: 'direct.amfremotingprovider',
-
-    extend:  Ext.direct.JsonProvider ,
-
-               
-                                  
-                                   
-                               
-                                 
-                                    
-                                  
-                                  
-                               
-                              
-                                       
-                                    
-                  
-      
-
-    config: {
-        /**
-         * @cfg {String/Object} namespace
-         * Namespace for the Remoting Provider (defaults to the browser global scope of _window_).
-         * Explicitly specify the namespace Object, or specify a String to have a
-         * {@link Ext#namespace namespace created} implicitly.
-         */
-        namespace: undefined,
-
-        /**
-         * @cfg {String} url (required) The url to connect to the {@link Ext.direct.Manager} server-side router.
-         */
-        url: null,
-        
-        /**
-         * @cfg {String} endpoint
-         * <b>Requred</b>. This is the channel id defined in services-config.xml on the server (e.g. my-amf or my-http).
-         */
-        endpoint: null,
-        
-        /**
-         * @cfg {String} enableUrlEncode
-         * Specify which param will hold the arguments for the method.
-         */
-        enableUrlEncode: null,
-
-        /**
-         * @cfg {String} binary
-         * If true, use AMF binary encoding instead of AMFX XML-based encoding. Note that on some browsers, this will load a flash plugin to handle binary communication with the server.
-         */
-        binary: false,
-        
-        /**
-         * @cfg {Number/Boolean} enableBuffer
-         *
-         * `true` or `false` to enable or disable combining of method
-         * calls. If a number is specified this is the amount of time in milliseconds
-         * to wait before sending a batched request.
-         *
-         * Calls which are received within the specified timeframe will be
-         * concatenated together and sent in a single request, optimizing the
-         * application by reducing the amount of round trips that have to be made
-         * to the server.
-         */
-        enableBuffer: 10,
-
-        /**
-         * @cfg {Number} maxRetries
-         * Number of times to re-attempt delivery on failure of a call.
-         */
-        maxRetries: 1,
-
-        /**
-         * @cfg {Number} timeout
-         * The timeout to use for each request.
-         */
-        timeout: undefined,
-
-        /**
-         * @cfg {Object} actions
-         * Object literal defining the server side actions and methods. For example, if
-         * the Provider is configured with:
-         *
-         *     actions: { // each property within the 'actions' object represents a server side Class
-         *         // array of methods within each server side Class to be stubbed out on client
-         *         TestAction: [{
-         *             name: "doEcho",
-         *             len: 1
-         *         }, {
-         *             "name": "multiply", // name of method
-         *             "len": 2            // The number of parameters that will be used to create an
-         *                                 // array of data to send to the server side function.
-         *                                 // Ensure the server sends back a Number, not a String.
-         *         }, {
-         *             name: "doForm",
-         *             formHandler: true, // direct the client to use specialized form handling method
-         *             len: 1
-         *         }]
-         *     }
-         *
-         * __Note:__ A Store is not required, a server method can be called at any time.
-         * In the following example a **client side** handler is used to call the
-         * server side method "multiply" in the server-side "TestAction" Class:
-         *
-         *     TestAction.multiply(
-         *         2, 4, // pass two arguments to server, so specify len=2
-         *         // callback function after the server is called
-         *         //     result: the result returned by the server
-         *         //     e: Ext.direct.RemotingEvent object
-         *         function(result, e) {
-         *             var t = e.getTransaction();
-         *             var action = t.action; // server side Class called
-         *             var method = t.method; // server side method called
-         *             if (e.getStatus()) {
-         *                 var answer = Ext.encode(result); // 8
-         *             } else {
-         *                 var msg = e.getMessage(); // failure message
-         *             }
-         *         }
-         *     );
-         *
-         * In the example above, the server side "multiply" function will be passed two
-         * arguments (2 and 4).  The "multiply" method should return the value 8 which will be
-         * available as the `result` in the example above.
-         */
-        actions: {},
-        
-        /**
-         * @cfg {String} clientId
-         * Client ID to use with the server.
-         * @private
-         */
-        clientId: null,
-        
-        /**
-         * @cfg {String} DSId
-         * Session ID to use with the server.
-         * @private
-         */
-        DSId: null
-    },
-
-    /**
-     * @event beforecall
-     * Fires immediately before the client-side sends off the RPC call.
-     * By returning `false` from an event handler you can prevent the call from
-     * executing.
-     * @param {Ext.direct.RemotingProvider} provider
-     * @param {Ext.direct.Transaction} transaction
-     * @param {Object} meta The meta data.
-     */
-
-    /**
-     * @event call
-     * Fires immediately after the request to the server-side is sent. This does
-     * NOT fire after the response has come back from the call.
-     * @param {Ext.direct.RemotingProvider} provider
-     * @param {Ext.direct.Transaction} transaction
-     * @param {Object} meta The meta data.
-     */
-
-    constructor : function(config) {
-        var me = this;
-
-        me.callParent(arguments);
-
-        me.transactions = Ext.create('Ext.util.Collection', function(item) {
-            return item.getId();
-        });
-        me.callBuffer = [];
-    },
-
-    applyNamespace: function(namespace) {
-        if (Ext.isString(namespace)) {
-            return Ext.ns(namespace);
+    
+    extend: 'Ext.direct.Provider', 
+    
+    requires: [
+        'Ext.util.MixedCollection', 
+        'Ext.util.DelayedTask', 
+        'Ext.direct.Transaction',
+        'Ext.direct.RemotingMethod',
+        'Ext.data.amf.XmlEncoder',
+        'Ext.data.amf.XmlDecoder',
+        'Ext.data.amf.Encoder',
+        'Ext.data.amf.Packet',
+        'Ext.data.amf.RemotingMessage',
+        'Ext.direct.ExceptionEvent'
+    ],
+   
+    /* End Definitions */
+   
+   /**
+     * @cfg {Object} actions
+     * Object literal defining the server side actions and methods. For example, if
+     * the Provider is configured with:
+     * <pre><code>
+"actions":{ // each property within the 'actions' object represents a server side Class 
+    "TestAction":[ // array of methods within each server side Class to be   
+    {              // stubbed out on client
+        "name":"doEcho", 
+        "len":1            
+    },{
+        "name":"multiply",// name of method
+        "len":2           // The number of parameters that will be used to create an
+                          // array of data to send to the server side function.
+                          // Ensure the server sends back a Number, not a String. 
+    },{
+        "name":"doForm",
+        "formHandler":true, // direct the client to use specialized form handling method 
+        "len":1
+    }]
+}
+     * </code></pre>
+     * <p>Note that a Store is not required, a server method can be called at any time.
+     * In the following example a <b>client side</b> handler is used to call the
+     * server side method "multiply" in the server-side "TestAction" Class:</p>
+     * <pre><code>
+TestAction.multiply(
+    2, 4, // pass two arguments to server, so specify len=2
+    // callback function after the server is called
+    // result: the result returned by the server
+    //      e: Ext.direct.RemotingEvent object
+    function(result, e) {
+        var t = e.getTransaction();
+        var action = t.action; // server side Class called
+        var method = t.method; // server side method called
+        if(e.status) {
+            var answer = Ext.encode(result); // 8
+    
+        } else {
+            var msg = e.message; // failure message
         }
-        return namespace || window;
+    }
+);
+     * </code></pre>
+     * In the example above, the server side "multiply" function will be passed two
+     * arguments (2 and 4).  The "multiply" method should return the value 8 which will be
+     * available as the <tt>result</tt> in the example above. 
+     */
+    
+    /**
+     * @cfg {String/Object} namespace
+     * Namespace for the Remoting Provider (defaults to the browser global scope of <i>window</i>).
+     * Explicitly specify the namespace Object, or specify a String to have a
+     * {@link Ext#namespace namespace created} implicitly.
+     */
+    
+    /**
+     * @cfg {String} url
+     * <b>Required</b>. The URL to connect to the Flex remoting server (LCDS, BlazeDS, etc).
+     * This should include the /messagebroker/amf suffix as defined in the services-config.xml and remoting-config.xml files.
+     */
+    
+    /**
+     * @cfg {String} endpoint
+     * <b>Requred</b>. This is the channel id defined in services-config.xml on the server (e.g. my-amf or my-http).
+     */
+
+    /**
+     * @cfg {String} enableUrlEncode
+     * Specify which param will hold the arguments for the method.
+     * Defaults to <tt>'data'</tt>.
+     */
+    
+    /**
+     * @cfg {String} binary
+     * If true, use AMF binary encoding instead of AMFX XML-based encoding. Note that on some browsers, this will load a flash plugin to handle binary communication with the server. Important: If using binary encoding with older browsers, see notes in {@link Ext.data.flash.BinaryXhr BinaryXhr} regarding packaging the Flash plugin for use in older browsers.
+     */
+    binary: false,
+    
+    /**
+     * @cfg {Number} maxRetries
+     * Number of times to re-attempt delivery on failure of a call.
+     */
+    maxRetries: 1,
+    
+    /**
+     * @cfg {Number} timeout
+     * The timeout to use for each request.
+     */
+    timeout: undefined,
+    
+    constructor : function(config){
+        var me = this;
+        me.callParent(arguments);
+        me.addEvents(
+            /**
+             * @event beforecall
+             * Fires immediately before the client-side sends off the RPC call.
+             * By returning false from an event handler you can prevent the call from
+             * executing.
+             * @param {Ext.direct.AmfRemotingProvider} provider
+             * @param {Ext.direct.Transaction} transaction
+             * @param {Object} meta The meta data
+             */            
+            'beforecall',            
+            /**
+             * @event call
+             * Fires immediately after the request to the server-side is sent. This does
+             * NOT fire after the response has come back from the call.
+             * @param {Ext.direct.AmfRemotingProvider} provider
+             * @param {Ext.direct.Transaction} transaction
+             * @param {Object} meta The meta data
+             */            
+            'call'
+        );
+        me.namespace = (Ext.isString(me.namespace)) ? Ext.ns(me.namespace) : me.namespace || window;
+        me.transactions = new Ext.util.MixedCollection();
+        me.callBuffer = [];
     },
 
     /**
      * Initialize the API
      * @private
      */
-    initAPI : function() {
-        var actions = this.getActions(),
-            namespace = this.getNamespace(),
-            action, cls, methods,
-            i, ln, method;
-
+    initAPI : function(){
+        var actions = this.actions,
+            namespace = this.namespace,
+            action,
+            cls,
+            methods,
+            i,
+            len,
+            method;
+        
         for (action in actions) {
             if (actions.hasOwnProperty(action)) {
                 cls = namespace[action];
@@ -3299,32 +3479,32 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
                     cls = namespace[action] = {};
                 }
                 methods = actions[action];
-
-                for (i = 0, ln = methods.length; i < ln; ++i) {
-                    method = Ext.create('Ext.direct.RemotingMethod', methods[i]);
-                    cls[method.getName()] = this.createHandler(action, method);
+                
+                for (i = 0, len = methods.length; i < len; ++i) {
+                    method = new Ext.direct.RemotingMethod(methods[i]);
+                    cls[method.name] = this.createHandler(action, method);
                 }
             }
         }
     },
-
+    
     /**
      * Create a handler function for a direct call.
      * @private
-     * @param {String} action The action the call is for.
-     * @param {Object} method The details of the method.
-     * @return {Function} A JavaScript function that will kick off the call.
+     * @param {String} action The action the call is for
+     * @param {Object} method The details of the method
+     * @return {Function} A JS function that will kick off the call
      */
-    createHandler : function(action, method) {
+    createHandler : function(action, method){
         var me = this,
             handler;
-
-        if (!method.getFormHandler()) {
-            handler = function() {
+        
+        if (!method.formHandler) {
+            handler = function(){
                 me.configureRequest(action, method, Array.prototype.slice.call(arguments, 0));
             };
         } else {
-            handler = function(form, callback, scope) {
+            handler = function(form, callback, scope){
                 me.configureFormRequest(action, method, form, callback, scope);
             };
         }
@@ -3334,72 +3514,78 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
         };
         return handler;
     },
-
-    // @inheritdoc
-    isConnected: function() {
+    
+    // inherit docs
+    isConnected: function(){
         return !!this.connected;
     },
 
-    // @inheritdoc
-    connect: function() {
+    // inherit docs
+    connect: function(){
         var me = this;
-
-        if (me.getUrl()) {
-            me.setClientId(Ext.data.amf.XmlEncoder.generateFlexUID());
+        
+        if (me.url) {
+            // Generate a unique ID for this client
+            me.clientId = Ext.data.amf.XmlEncoder.generateFlexUID();
             me.initAPI();
             me.connected = true;
             me.fireEvent('connect', me);
-            me.setDSId(null); // clear id
-        } else {
+            me.DSId = null;
+        } else if(!me.url) {
+            Ext.Error.raise('Error initializing RemotingProvider, no url configured.');
         }
     },
 
-    // @inheritdoc
-    disconnect: function() {
+    // inherit docs
+    disconnect: function(){
         var me = this;
-
+        
         if (me.connected) {
             me.connected = false;
             me.fireEvent('disconnect', me);
         }
     },
-
+    
     /**
      * Run any callbacks related to the transaction.
      * @private
      * @param {Ext.direct.Transaction} transaction The transaction
      * @param {Ext.direct.Event} event The event
      */
-    runCallback: function(transaction, event) {
-        var success = !!event.getStatus(),
-            functionName = success ? 'success' : 'failure',
-            callback = transaction && transaction.getCallback(),
+    runCallback: function(transaction, event){
+        var success = !!event.status,
+            funcName = success ? 'success' : 'failure',
+            callback,
             result;
-        if (callback) {
-            // this doesnt make any sense. why do we have both result and data?
-            // result = Ext.isDefined(event.getResult()) ? event.result : event.data;
-            result = event.getResult();
+        if (transaction && transaction.callback) {
+            callback = transaction.callback;
+            result = Ext.isDefined(event.result) ? event.result : event.data;
+            
             if (Ext.isFunction(callback)) {
                 callback(result, event, success);
             } else {
-                Ext.callback(callback[functionName], callback.scope, [result, event, success]);
+                Ext.callback(callback[funcName], callback.scope, [result, event, success]);
                 Ext.callback(callback.callback, callback.scope, [result, event, success]);
             }
         }
     },
-
+    
     /**
-     * React to the AJAX request being completed.
+     * React to the ajax request being completed
      * @private
      */
-    onData: function(options, success, response) {
+    onData: function(options, success, response){
         var me = this,
             i = 0,
-            ln, events, event,
-            transaction, transactions;
+            len,
+            events,
+            event,
+            transaction,
+            transactions;
+        
         if (success) {
             events = me.createEvents(response);
-            for (ln = events.length; i < ln; ++i) {
+            for (len = events.length; i < len; ++i) {
                 event = events[i];
                 transaction = me.getTransaction(event);
                 me.fireEvent('data', me, event);
@@ -3410,19 +3596,18 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             }
         } else {
             transactions = [].concat(options.transaction);
-            for (ln = transactions.length; i < ln; ++i) {
+            for (len = transactions.length; i < len; ++i) {
                 transaction = me.getTransaction(transactions[i]);
-                if (transaction && transaction.getRetryCount() < me.getMaxRetries()) {
+                if (transaction && transaction.retryCount < me.maxRetries) {
                     transaction.retry();
                 } else {
-                    event = Ext.create('Ext.direct.ExceptionEvent', {
+                    event = new Ext.direct.ExceptionEvent({
                         data: null,
                         transaction: transaction,
                         code: Ext.direct.Manager.exceptions.TRANSPORT,
                         message: 'Unable to connect to the server.',
                         xhr: response
                     });
-
                     me.fireEvent('data', me, event);
                     if (transaction) {
                         me.runCallback(transaction, event, false);
@@ -3432,37 +3617,36 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             }
         }
     },
-
+    
     /**
-     * Get transaction from XHR options.
+     * Get transaction from XHR options
      * @private
-     * @param {Object} options The options sent to the AJAX request.
-     * @return {Ext.direct.Transaction/null} The transaction, `null` if not found.
+     * @param {Object} options The options sent to the Ajax request
+     * @return {Ext.direct.Transaction} The transaction, null if not found
      */
-    getTransaction: function(options) {
-        return options && options.getTid ? Ext.direct.Manager.getTransaction(options.getTid()) : null;
+    getTransaction: function(options){
+        return options && options.tid ? Ext.direct.Manager.getTransaction(options.tid) : null;
     },
-
+    
     /**
-     * Configure a direct request.
+     * Configure a direct request
      * @private
-     * @param {String} action The action being executed.
-     * @param {Object} method The method being executed.
-     * @param {Array} args
+     * @param {String} action The action being executed
+     * @param {Object} method The method being executed
      */
-    configureRequest: function(action, method, args) {
+    configureRequest: function(action, method, args){
         var me = this,
             callData = method.getCallData(args),
-            data = callData.data,
-            callback = callData.callback,
+            data = callData.data, 
+            callback = callData.callback, 
             scope = callData.scope,
             transaction;
 
-        transaction = Ext.create('Ext.direct.Transaction', {
+        transaction = new Ext.direct.Transaction({
             provider: me,
             args: args,
             action: action,
-            method: method.getName(),
+            method: method.name,
             data: data,
             callback: scope && Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback
         });
@@ -3473,137 +3657,209 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             me.fireEvent('call', me, transaction, method);
         }
     },
-
+    
     /**
-     * Gets the AJAX call info for a transaction.
+     * Gets the Flex remoting message info for a transaction
      * @private
-     * @param {Ext.direct.Transaction} transaction The transaction.
-     * @return {Object} 
-     * The Flex remoting message structure ready to encode in an AMFX RemoteMessage
+     * @param {Ext.direct.Transaction} transaction The transaction
+     * @return {Object} The Flex remoting message structure ready to encode in an AMFX RemoteMessage
      */
     getCallData: function(transaction){
-        if (this.getBinary()) {
+        if (this.binary) {
             return {
-                targetUri: transaction.getAction() + "." + transaction.getMethod(),
-                responseUri: '/' + transaction.getId(),
-                body: transaction.getData() || []
+                targetUri: transaction.action + "." + transaction.method,
+                responseUri: '/' + transaction.id,
+                body: transaction.data || []
             };
         } else {
             return new Ext.data.amf.RemotingMessage( 
                               {
                                   body: transaction.data || [],
-                                  clientId: this.getClientId(),
-                                  destination: transaction.getAction(),
+                                  clientId: this.clientId,
+                                  destination: transaction.action,
                                   headers: {
-                                      DSEndpoint: this.getEndpoint(),
-                                      DSId: this.getDSId() || "nil" // if unknown yet, use "nil"
+                                      DSEndpoint: this.endpoint,
+                                      DSId: this.DSId || "nil" // if unknown yet, use "nil"
                                   },
-                                  messageId: Ext.data.amf.XmlEncoder.generateFlexUID(transaction.getId()), // encode as first 4 bytes of UID
-                                  operation: transaction.getMethod(),
+                                  messageId: Ext.data.amf.XmlEncoder.generateFlexUID(transaction.id), // encode as first 4 bytes of UID
+                                  operation: transaction.method,
                                   timestamp: 0,
                                   timeToLive: 0
                               });
         }
         /*
-        return {
-            action: transaction.getAction(),
-            method: transaction.getMethod(),
-            data: transaction.getData(),
-            type: 'rpc',
-            tid: transaction.getId()
-        };
+         return {
+         action: transaction.action,
+         method: transaction.method,
+         data: transaction.data,
+         type: 'rpc',
+         tid: transaction.id
+         };
          */
     },
-
+    
     /**
-     * Sends a request to the server.
+     * Sends a request to the server
      * @private
-     * @param {Object/Array} data The data to send.
+     * @param {Object/Array} data The data to send
      */
-    sendRequest : function(data) {
+    sendRequest : function(data){
         var me = this,
             request = {
-                url: me.getUrl(),
+                url: me.url,
                 callback: me.onData,
                 scope: me,
                 transaction: data,
-                timeout: me.getTimeout()
+                timeout: me.timeout
             }, callData,
-            enableUrlEncode = me.getEnableUrlEncode(),
             i = 0,
-            ln, params,
+            len,
+            params,
             encoder,
             amfMessages = [],
             amfHeaders = [];
-
-
         
+
         // prepare AMFX messages
         if (Ext.isArray(data)) {
-            for (i = 0, ln = data.length; i < ln; ++i) {
+            if (!me.binary) {
+                Ext.Error.raise("Mutltiple messages in the same call are not supported in AMFX");
+            }
+            for (len = data.length; i < len; ++i) {
                 amfMessages.push(me.getCallData(data[i]));
             }
         } else {
             amfMessages.push(me.getCallData(data));
         }
-
-        if (me.getBinary()) {
+        
+        if (me.binary) {
             encoder = new Ext.data.amf.Encoder( {format: 0}); // AMF message sending always uses AMF0
             // encode packet
             encoder.writeAmfPacket(amfHeaders, amfMessages);
-            request.binaryData = encoder.getBytes();
+            request.binaryData = encoder.bytes;
             request.binary = true; // Binary response
             request.headers = {'Content-Type': 'application/x-amf'};
         } else {
             encoder = new Ext.data.amf.XmlEncoder();
             // encode packet
             encoder.writeAmfxRemotingPacket(amfMessages[0]);
-            request.xmlData = encoder.getBody();
+            request.xmlData = encoder.body;
         }
         
+        
+        // prepare Ajax request
         Ext.Ajax.request(request);
-    },
 
+    },
+    
     /**
-     * Add a new transaction to the queue.
+     * Add a new transaction to the queue
      * @private
-     * @param {Ext.direct.Transaction} transaction The transaction.
+     * @param {Ext.direct.Transaction} transaction The transaction
      */
-    queueTransaction: function(transaction) {
+    queueTransaction: function(transaction){
         var me = this,
             enableBuffer = false; // no queueing for AMFX
-
-        if (transaction.getForm()) {
+        
+        if (transaction.form) {
             me.sendFormRequest(transaction);
             return;
         }
-
+        
         me.callBuffer.push(transaction);
         if (enableBuffer) {
             if (!me.callTask) {
-                me.callTask = Ext.create('Ext.util.DelayedTask', me.combineAndSend, me);
+                me.callTask = new Ext.util.DelayedTask(me.combineAndSend, me);
             }
             me.callTask.delay(Ext.isNumber(enableBuffer) ? enableBuffer : 10);
         } else {
             me.combineAndSend();
         }
     },
-
+    
     /**
-     * Combine any buffered requests and send them off.
+     * Combine any buffered requests and send them off
      * @private
      */
-    combineAndSend : function() {
+    combineAndSend : function(){
         var buffer = this.callBuffer,
-            ln = buffer.length;
-
-        if (ln > 0) {
-            this.sendRequest(ln == 1 ? buffer[0] : buffer);
+            len = buffer.length;
+        
+        if (len > 0) {
+            this.sendRequest(len == 1 ? buffer[0] : buffer);
             this.callBuffer = [];
         }
     },
-
     
+    /**
+     * Configure a form submission request
+     * @private
+     * @param {String} action The action being executed
+     * @param {Object} method The method being executed
+     * @param {HTMLElement} form The form being submitted
+     * @param {Function} callback (optional) A callback to run after the form submits
+     * @param {Object} scope (optional) A scope to execute the callback in
+     */
+    configureFormRequest : function(action, method, form, callback, scope){
+        Ext.Error.raise("Form requests are not supported for AmfRemoting");
+        /*
+         var me = this,
+         transaction = new Ext.direct.Transaction({
+         provider: me,
+         action: action,
+         method: method.name,
+         args: [form, callback, scope],
+         callback: scope && Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback,
+         isForm: true
+         }),
+         isUpload,
+         params;
+
+         if (me.fireEvent('beforecall', me, transaction, method) !== false) {
+         Ext.direct.Manager.addTransaction(transaction);
+         isUpload = String(form.getAttribute("enctype")).toLowerCase() == 'multipart/form-data';
+         
+         params = {
+         extTID: transaction.id,
+         extAction: action,
+         extMethod: method.name,
+         extType: 'rpc',
+         extUpload: String(isUpload)
+         };
+         
+         // change made from typeof callback check to callback.params
+         // to support addl param passing in DirectSubmit EAC 6/2
+         Ext.apply(transaction, {
+         form: Ext.getDom(form),
+         isUpload: isUpload,
+         params: callback && Ext.isObject(callback.params) ? Ext.apply(params, callback.params) : params
+         });
+         me.fireEvent('call', me, transaction, method);
+         me.sendFormRequest(transaction);
+         }
+         */
+    },
+    
+    /**
+     * Sends a form request
+     * @private
+     * @param {Ext.direct.Transaction} transaction The transaction to send
+     */
+    sendFormRequest: function(transaction){
+        Ext.Error.raise("Form requests are not supported for AmfRemoting");
+        /*
+         Ext.Ajax.request({
+         url: this.url,
+         params: transaction.params,
+         callback: this.onData,
+         scope: this,
+         form: transaction.form,
+         isUpload: transaction.isUpload,
+         transaction: transaction
+         });
+         */
+    },
+
     /**
      * Creates a set of events based on the XHR response
      * @private
@@ -3619,7 +3875,7 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             len,
             decoder;
         try {
-            if (this.getBinary()) {
+            if (this.binary) {
                 decoder = new Ext.data.amf.Packet();
                 data = decoder.decode(response.responseBytes);
             } else {
@@ -3635,7 +3891,7 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
              }
              }
              */
-      } catch(e) {
+        } catch(e) {
 
             event = new Ext.direct.ExceptionEvent({
                 data: e,
@@ -3646,9 +3902,9 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             return [event];
         }
 
-        if (this.getBinary()) {
-            for (i=0; i < data.getMessages().length; i++) {
-                events.push(this.createEvent(data.getMessages()[i]));
+        if (this.binary) {
+            for (i=0; i < data.messages.length; i++) {
+                events.push(this.createEvent(data.messages[i]));
             }
         } else {
             // AMFX messages have one response per message
@@ -3658,8 +3914,8 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
     },
 
     /**
-     * Create an event from an AMF / AMFX response object
-     * @param {Object} response The AMF/AMFX response object
+     * Create an event from an AMFX response object
+     * @param {Object} response The AMFX response object
      * @return {Ext.direct.Event} The event
      */
     createEvent: function(response){
@@ -3669,7 +3925,7 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             event,
             data, statusIndex,
             me = this;
-        if (me.getBinary()) {
+        if (me.binary) {
             tid = status[1];
             statusIndex = 2;
         } else {
@@ -3681,27 +3937,23 @@ Ext.define('Ext.direct.AmfRemotingProvider', {
             // The call failed
             data = {
                 tid: tid,
-                data: (me.getBinary() ? response.body : response.message),
-                code: (me.getBinary() ? response.body.code : response.message.faultCode),
-                message: (me.getBinary() ? response.body.message : response.message.faultString)
+                data: (me.binary ? response.body : response.message)
             };
             event = Ext.create('direct.exception', data);
         } else if(status[statusIndex] == "onResult") {
             // Call succeeded
             data = {
                 tid: tid,
-                data: (me.getBinary() ? response.body : response.message),
-                result: (me.getBinary() ? response.body : response.message.body)
+                data: (me.binary ? response.body : response.message.body)
             };
             event = Ext.create('direct.rpc', data);
         } else {
+            Ext.Error.raise("Unknown AMF return status: " + status[statusIndex]);
         }
         
         return event;
     }
 
-
     
 });
-//</feature>
 

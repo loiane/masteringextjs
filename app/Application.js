@@ -10,9 +10,15 @@ Ext.define('Packt.Application', {
 
     enableQuickTips: true,
 
+    requires: [
+        'Ext.layout.container.Border',
+        'Ext.tab.Panel'
+    ],
+
     views: [
         // TODO: add views here
-        'login.Login'
+        'login.Login',
+        'main.Main'
     ],
 
     controllers: [
@@ -49,7 +55,7 @@ Ext.define('Packt.Application', {
 //            });
 //        });
 
-        Ext.widget('login');
+        Ext.widget('app-main');
 
         //task.delay(2000);
     },

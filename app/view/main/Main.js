@@ -6,7 +6,9 @@
  * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('Packt.view.main.Main', {
-    extend: 'Ext.container.Container',
+    extend: 'Ext.container.Viewport',
+
+    //plugins: 'viewport',
 
     xtype: 'app-main',
     
@@ -36,6 +38,9 @@ Ext.define('Packt.view.main.Main', {
         region: 'center',
         xtype: 'tabpanel',
         items:[{
+            title: 'Tab 1',
+            html: '<h2>Content appropriate for the current navigation.</h2>'
+        },{
             title: 'Tab 1',
             html: '<h2>Content appropriate for the current navigation.</h2>'
         }]

@@ -8,7 +8,7 @@ Ext.define('Packt.util.SessionMonitor', {
 
   interval: 1000 * 10,  // run every 10 seconds.
   lastActive: null,
-  maxInactive: 1000 * 60 * 1,  // 15 minutes of inactivity allowed; set it to 1 for testing.
+  maxInactive: 1000 * 60 * 15,  // 15 minutes of inactivity allowed; set it to 1 for testing.
   remaining: 0,
   ui: Ext.getBody(),
   

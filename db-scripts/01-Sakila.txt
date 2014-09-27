@@ -1,0 +1,3 @@
+1 - Install sakila database as described at http://dev.mysql.com/doc/sakila/en/sakila-installation.html
+2 - Run other scripts in order (first 02-xxxxxx, 03-xxxxxx, 04-xxxxxx, and on)
+3 - Open php/db/db.php and edit user/pass according to your db credentials.

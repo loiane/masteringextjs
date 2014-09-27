@@ -1,0 +1,15 @@
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (1,'menu1','menu_admin',NULL,NULL);
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (2,'menu11','menu_groups',1,'groups');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (3,'menu12','menu_users',1,'users');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (4,'staticData','menu_staticdata',NULL,NULL);
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (5,'actors','menu_actor',4,'actorsgrid');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (6,'categories','menu_category',4,'categoriesgrid');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (7,'languages','menu_language',4,'languagesgrid');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (8,'cities','menu_city',4,'citiesgrid');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (9,'countries','menu_country',4,'countriesgrid');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (10,'cms','menu_cms',NULL,NULL);
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (11,'films','menu_films',10,'filmsgrid');
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (12,'customer','menu_customer',10,NULL);
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (13,'business','menu_business',10,NULL);
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (14,'reports','menu_reports',NULL,NULL);
+INSERT INTO `menu` (`id`,`text`,`iconCls`,`menu_id`,`className`) VALUES (15,'salesfilmcategory','menu_salesfilmc',14,'salesfilmcategory');

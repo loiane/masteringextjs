@@ -22,15 +22,22 @@ Ext.define('Packt.Application', {
     
     name: 'Packt',
 
+    glyphFontFamily: 'FontAwesome',
+
+    requires: [
+        'Packt.overrides.tree.ColumnOverride'
+    ],
+
     enableQuickTips: true,
 
     views: [
         // TODO: add views here
-        //'login.Login'
     ],
 
     controllers: [
-        'Root'
+        'Root',
+        'Menu',
+        'Test'
         // TODO: add controllers here
     ],
 

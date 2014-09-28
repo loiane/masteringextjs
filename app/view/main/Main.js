@@ -16,7 +16,8 @@ Ext.define('Packt.view.main.Main', {
         'Packt.view.main.Footer',
         'Packt.view.main.Panel',
         'Packt.view.main.MainController',
-        'Packt.view.main.MainModel'
+        'Packt.view.main.MainModel',
+        'Packt.view.menu.Accordion'
     ],
     
     controller: 'main',
@@ -38,9 +39,7 @@ Ext.define('Packt.view.main.Main', {
         xtype: 'appfooter',
         region: 'south'
     },{
-        xtype: 'container',
-        region: 'west',
-        width: 200,
-        split: true
+        xtype: 'mainmenu',
+        region: 'west'
     }]
 });

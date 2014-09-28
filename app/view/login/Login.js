@@ -83,6 +83,7 @@ Ext.define('Packt.view.login.Login', {
                         },
                         {
                             xtype: 'button',
+                            itemId: 'submit',
                             formBind: true,
                             iconCls: 'fa fa-sign-in fa-lg',
                             text: translations.submit,

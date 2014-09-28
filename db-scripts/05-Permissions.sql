@@ -9,5 +9,5 @@ INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (8,1);
 INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (9,1);
 INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (10,1);
 INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (11,1);
-INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (14,1);
-INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (15,1);
+INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (12,1);
+INSERT INTO `permissions` (`menu_id`,`groups_id`) VALUES (13,1);

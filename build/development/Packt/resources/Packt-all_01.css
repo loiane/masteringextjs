@@ -2799,14 +2799,91 @@
   color: white;
 }
 
+/* line 1, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 2, ../../../../sass/etc/fix.scss */
+.x-accordion-layout-ct {
+  background-color: white;
+  padding: 5px 5px 0;
+}
+
+/* line 6, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 8, ../../../../sass/etc/fix.scss */
+.x-accordion-hd .x-panel-header-title {
+  color: #666666;
+  font-weight: bold;
+  font-family: helvetica, arial, verdana, sans-serif;
+  text-transform: none;
+}
+
+/* line 13, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 16, ../../../../sass/etc/fix.scss */
+.x-accordion-item {
+  margin: 0 0 5px;
+}
+
+/* line 16, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 20, ../../../../sass/etc/fix.scss */
+.x-accordion-item .x-accordion-hd {
+  background: #dfeaf2;
+  border-width: 0;
+  border-color: #157fcc;
+  padding: 8px 10px;
+}
+
+/* line 24, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 27, ../../../../sass/etc/fix.scss */
+.x-accordion-item .x-accordion-hd-over {
+  background-color: #e6f1f9;
+}
+
+/* line 29, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 31, ../../../../sass/etc/fix.scss */
+.x-accordion-item .x-accordion-hd-sibling-expanded {
+  border-top-color: #157fcc;
+  border-top-width: 0;
+}
+
+/* line 34, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 36, ../../../../sass/etc/fix.scss */
+.x-accordion-item .x-accordion-hd-last-collapsed {
+  border-bottom-color: #dfeaf2;
+}
+
+/* line 38, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 40, ../../../../sass/etc/fix.scss */
+.x-accordion-item .x-accordion-body {
+  border-width: 0;
+}
+
+/* line 45, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 46, ../../../../sass/etc/fix.scss */
+.x-accordion-hd .x-tool-collapse-top,
+.x-accordion-hd .x-tool-collapse-bottom {
+  background-position: 0 -272px;
+}
+
+/* line 50, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 51, ../../../../sass/etc/fix.scss */
+.x-accordion-hd .x-tool-expand-top,
+.x-accordion-hd .x-tool-expand-bottom {
+  background-position: 0 -256px;
+}
+
+/* line 69, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+/* line 55, ../../../../sass/etc/fix.scss */
+.x-accordion-hd .x-tool-img {
+  background-image: url(images/tools/tool-sprites-dark.png);
+  background-color: #dfeaf2;
+}
+
 /** loading screen */
-/* line 6, ../../../../sass/etc/all.scss */
+/* line 7, ../../../../sass/etc/all.scss */
 .x-mask.splashscreen {
   background-color: white;
   opacity: 1;
 }
 
-/* line 12, ../../../../sass/etc/all.scss */
+/* line 13, ../../../../sass/etc/all.scss */
 .x-mask-msg.splashscreen,
 .x-mask-msg.splashscreen div {
   font-size: 16px;
@@ -2817,12 +2894,12 @@
   background-position: top center;
 }
 
-/* line 23, ../../../../sass/etc/all.scss */
+/* line 24, ../../../../sass/etc/all.scss */
 .x-message-box .x-window-body .x-box-inner {
   min-height: 110px !important;
 }
 
-/* line 27, ../../../../sass/etc/all.scss */
+/* line 28, ../../../../sass/etc/all.scss */
 .x-splash-icon {
   background-image: url("images/app/packt-logo.png") !important;
   margin-top: -30px;
@@ -20500,6 +20577,11 @@ div.x-form-text-grow .x-form-textarea {
   background-color: #f5f5f5;
 }
 
+/* line 14, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/header/Container.scss */
+.x-accordion-item .x-grid-header-ct {
+  border-width: 0 0 1px !important;
+}
+
 /* line 20, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/header/Container.scss */
 .x-grid-header-ct-hidden {
   border: 0 !important;
@@ -25310,6 +25392,65 @@ div.x-form-text-grow .x-form-textarea {
   background-image: url(images/grid/hmenu-unlock.png);
 }
 
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-layout-ct {
+  background-color: white;
+  padding: 5px 5px 0;
+}
+
+/* line 6, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-panel-header-title {
+  color: #666666;
+  font-weight: bold;
+  font-family: helvetica, arial, verdana, sans-serif;
+  text-transform: none;
+}
+
+/* line 13, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item {
+  margin: 0 0 5px;
+}
+/* line 16, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd {
+  background: #dfeaf2;
+  border-width: 0;
+  border-color: #157fcc;
+  padding: 8px 10px;
+}
+/* line 24, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd-over {
+  background-color: #e6f1f9;
+}
+/* line 29, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd-sibling-expanded {
+  border-top-color: #157fcc;
+  border-top-width: 0;
+}
+/* line 34, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd-last-collapsed {
+  border-bottom-color: #dfeaf2;
+}
+/* line 38, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-body {
+  border-width: 0;
+}
+
+/* line 45, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-tool-collapse-top,
+.x-accordion-hd .x-tool-collapse-bottom {
+  background-position: 0 -272px;
+}
+/* line 50, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-tool-expand-top,
+.x-accordion-hd .x-tool-expand-bottom {
+  background-position: 0 -256px;
+}
+/* line 69, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-tool-img {
+  background-image: url(images/tools/tool-sprites-dark.png);
+  background-color: #dfeaf2;
+}
+
 /* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/resizer/Resizer.scss */
 .x-resizable-handle {
   position: absolute;
@@ -28069,119 +28210,4 @@ div.x-form-text-grow .x-form-textarea {
 /* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-bc {
   height: 5px;
-}
-
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tl,
-.x-panel-header-light-framed-collapsed-top-bl,
-.x-panel-header-light-framed-collapsed-top-tr,
-.x-panel-header-light-framed-collapsed-top-br,
-.x-panel-header-light-framed-collapsed-top-tc,
-.x-panel-header-light-framed-collapsed-top-bc,
-.x-panel-header-light-framed-collapsed-top-ml,
-.x-panel-header-light-framed-collapsed-top-mr {
-  background-image: url(images/panel-header/panel-header-light-framed-collapsed-top-corners.gif);
-}
-
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-ml,
-.x-panel-header-light-framed-collapsed-top-mr {
-  background-image: url(images/panel-header/panel-header-light-framed-collapsed-top-sides.gif);
-  background-repeat: repeat-y;
-}
-
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-mc {
-  padding: 5px 5px 5px 5px;
-}
-
-/* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right {
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topright: 4px;
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  padding: 5px 5px 5px 5px;
-  border-width: 5px;
-  border-style: solid;
-  background-color: #dfeaf2;
-}
-
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-mc {
-  background-color: #dfeaf2;
-}
-
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-nbr .x-panel-header-light-framed-collapsed-right {
-  padding: 0 !important;
-  border-width: 0 !important;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-frameInfo {
-  font-family: dh-5-5-5-5-5-5-5-5-5-5-5-5;
-}
-
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-tl {
-  background-position: 0 -10px;
-}
-
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-tr {
-  background-position: right -15px;
-}
-
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-bl {
-  background-position: 0 -20px;
-}
-
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-br {
-  background-position: right -25px;
-}
-
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-ml {
-  background-position: right 0;
-}
-
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-mr {
-  background-position: right 0;
-}
-
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-tc {
-  background-position: 0 0;
-}
-
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-bc {
-  background-position: 0 -5px;
-}
-
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-right-tr,
-.x-panel-header-light-framed-collapsed-right-br,
-.x-panel-header-light-framed-collapsed-right-mr {
-  padding-right: 5px;
 }

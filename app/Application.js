@@ -25,7 +25,8 @@ Ext.define('Packt.Application', {
     glyphFontFamily: 'FontAwesome',
 
     requires: [
-        'Packt.overrides.tree.ColumnOverride'
+        'Packt.overrides.tree.ColumnOverride',
+        'Ext.layout.container.Accordion'
     ],
 
     enableQuickTips: true,

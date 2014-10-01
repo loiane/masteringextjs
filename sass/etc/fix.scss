@@ -1,0 +1,58 @@
+/* line 1, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-layout-ct {
+  background-color: white;
+  padding: 5px 5px 0;
+}
+
+/* line 6, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-panel-header-title {
+  color: #666666;
+  font-weight: bold;
+  font-family: helvetica, arial, verdana, sans-serif;
+  text-transform: none;
+}
+
+/* line 13, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item {
+  margin: 0 0 5px;
+}
+/* line 16, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd {
+  background: #dfeaf2;
+  border-width: 0;
+  border-color: #157fcc;
+  padding: 8px 10px;
+}
+/* line 24, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd-over {
+  background-color: #e6f1f9;
+}
+/* line 29, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd-sibling-expanded {
+  border-top-color: #157fcc;
+  border-top-width: 0;
+}
+/* line 34, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-hd-last-collapsed {
+  border-bottom-color: #dfeaf2;
+}
+/* line 38, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-item .x-accordion-body {
+  border-width: 0;
+}
+
+/* line 45, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-tool-collapse-top,
+.x-accordion-hd .x-tool-collapse-bottom {
+  background-position: 0 -272px;
+}
+/* line 50, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-tool-expand-top,
+.x-accordion-hd .x-tool-expand-bottom {
+  background-position: 0 -256px;
+}
+/* line 69, ../../../ext-theme-neutral/sass/src/layout/container/Accordion.scss */
+.x-accordion-hd .x-tool-img {
+  background-image: url(images/tools/tool-sprites-dark.png);
+  background-color: #dfeaf2;
+}

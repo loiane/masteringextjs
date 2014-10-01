@@ -4,8 +4,8 @@ Ext.define('Packt.view.menu.Accordion', {
 
     width: 250,
     layout: {
-        type: 'accordion',
-        multi: true
+        type: 'accordion'//,
+        //multi: true
     },
     collapsible: false,
     hideCollapseTool: false,

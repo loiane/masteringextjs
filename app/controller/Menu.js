@@ -1,6 +1,10 @@
 Ext.define('Packt.controller.Menu', {
     extend: 'Ext.app.Controller',
 
+    requires: [
+        //'Packt.view.security.Users'
+    ],
+
     stores: [
         'Menu'
     ],

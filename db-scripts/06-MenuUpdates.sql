@@ -1,0 +1,1 @@
+UPDATE `sakila`.`menu` SET `className`='users' WHERE `id`='3';

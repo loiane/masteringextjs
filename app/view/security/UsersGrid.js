@@ -1,10 +1,8 @@
 Ext.define('Packt.view.security.UsersGrid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.usersgrid',
+    alias: 'widget.users-grid',
 
-    bind : {
-        store: '{users}'
-    },
+    bind : '{users}',
 
     reference: 'usersGrid',
 

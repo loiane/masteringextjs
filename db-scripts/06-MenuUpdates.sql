@@ -1,1 +1,1 @@
-UPDATE `sakila`.`menu` SET `className`='users' WHERE `id`='3';
+UPDATE `sakila`.`menu` SET `className`='user' WHERE `id`='3';

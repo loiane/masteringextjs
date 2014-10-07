@@ -8,7 +8,7 @@ Ext.define('Packt.view.login.LoginController', {
         'Packt.util.SessionMonitor'
     ],
 
-   onTextFieldSpecialKey: function(field, e, options){
+    onTextFieldSpecialKey: function(field, e, options){
         if (e.getKey() === e.ENTER) {
             this.doLogin();
         }
@@ -68,7 +68,7 @@ Ext.define('Packt.view.login.LoginController', {
 
         this.getView().unmask();
 
-        var result = Packt.util.Util.decodeJSON(action.response.responseText);
+        /*var result = Packt.util.Util.decodeJSON(action.response.responseText);
 
         switch (action.failureType) {
             case Ext.form.action.Action.CLIENT_INVALID:
@@ -79,7 +79,10 @@ Ext.define('Packt.view.login.LoginController', {
                 break;
             case Ext.form.action.Action.SERVER_INVALID:
                 Packt.util.Util.showErrorMsg(result.msg);
-        }
+        }*/
+
+        //alternative to code above - reuse code
+        Packt.util.Util.handleFormFailure(action);
     },
 
     onLoginSuccess: function(form, action) {

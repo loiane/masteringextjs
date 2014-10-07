@@ -11385,6 +11385,51 @@ td.x-frame-mc {
   outline-offset: -1px;
 }
 
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb-wrap {
+  vertical-align: top;
+}
+
+/* line 5, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb-wrap-inner {
+  position: relative;
+}
+
+/* line 9, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb {
+  position: absolute;
+  left: 0;
+  right: auto;
+  vertical-align: top;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+}
+/* line 17, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+/* allow for the component to be positioned after the label */
+/* line 31, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb-after {
+  left: auto;
+  right: 0;
+}
+
+/* some browsers like IE 10 need a block element to be able to measure
+the height of a multi-line element */
+/* line 45, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb-label {
+  display: inline-block;
+}
+
+/* line 53, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Checkbox.scss */
+.x-form-cb-wrap-inner-no-box-label > .x-form-cb {
+  position: static;
+}
+
 /* line 2, ../../../../ext/packages/ext-theme-base/sass/src/grid/header/DropZone.scss */
 .x-col-move-top,
 .x-col-move-bottom {
@@ -11559,6 +11604,26 @@ td.x-frame-mc {
 /* line 92, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Text.scss */
 .x-gecko .x-form-trigger {
   display: block;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/layout/container/Border.scss */
+.x-border-layout-ct {
+  overflow: hidden;
+}
+
+/* line 5, ../../../../ext/packages/ext-theme-base/sass/src/layout/container/Border.scss */
+.x-border-layout-ct {
+  position: relative;
+}
+
+/* line 9, ../../../../ext/packages/ext-theme-base/sass/src/layout/container/Border.scss */
+.x-border-region-slide-in {
+  z-index: 5;
+}
+
+/* line 13, ../../../../ext/packages/ext-theme-base/sass/src/layout/container/Border.scss */
+.x-region-collapsed-placeholder {
+  z-index: 4;
 }
 
 /* line 16, ../../../../ext/packages/ext-theme-base/sass/src/button/Button.scss */
@@ -11813,6 +11878,95 @@ div.x-form-text-grow .x-form-textarea {
 /* line 2, ../../../../ext/packages/ext-theme-base/sass/src/window/MessageBox.scss */
 .x-message-box .x-form-display-field {
   height: auto;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset {
+  display: block;
+  /* preserve margins in IE */
+  position: relative;
+  overflow: hidden;
+}
+
+/* line 7, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-header {
+  overflow: hidden;
+}
+/* line 11, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-header .x-form-item,
+.x-fieldset-header .x-tool {
+  float: left;
+}
+/* line 15, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-header .x-fieldset-header-text {
+  float: left;
+}
+/* line 19, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-header .x-form-cb-wrap {
+  font-size: 0;
+  line-height: 0;
+  height: auto;
+}
+/* line 25, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-header .x-form-cb {
+  margin: 0;
+  position: static;
+}
+
+/* line 31, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-body {
+  overflow: hidden;
+}
+
+/* line 35, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-collapsed {
+  padding-bottom: 0 !important;
+}
+/* line 38, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-collapsed > .x-fieldset-body {
+  display: none;
+}
+
+/* line 43, ../../../../ext/packages/ext-theme-base/sass/src/form/FieldSet.scss */
+.x-fieldset-header-text-collapsible {
+  cursor: pointer;
+}
+
+/* line 8, ../../../../ext/packages/ext-theme-base/sass/src/view/BoundList.scss */
+.x-ie9 .x-boundlist-list-ct {
+  min-height: 0\%;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/form/field/File.scss */
+.x-form-file-btn {
+  overflow: hidden;
+  position: relative;
+}
+
+/* line 6, ../../../../ext/packages/ext-theme-base/sass/src/form/field/File.scss */
+.x-form-file-input {
+  border: 0;
+  position: absolute;
+  cursor: pointer;
+  top: -2px;
+  right: -2px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  /* Yes, there's actually a good reason for this...
+   * If the configured buttonText is set to something longer than the default,
+   * then it will quickly exceed the width of the hidden file input's "Browse..."
+   * button, so part of the custom button's clickable area will be covered by
+   * the hidden file input's text box instead. This results in a text-selection
+   * mouse cursor over that part of the button, at least in Firefox, which is
+   * confusing to a user. Giving the hidden file input a huge font-size makes
+   * the native button part very large so it will cover the whole clickable area.
+   */
+  font-size: 1000px;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Hidden.scss */
+.x-form-item-hidden {
+  margin: 0;
 }
 
 /* line 1, ../../../../ext/packages/ext-theme-base/sass/src/menu/Menu.scss */
@@ -20428,6 +20582,107 @@ div.x-form-text-grow .x-form-textarea {
   background-color: #0f0f0f;
 }
 
+/**
+ * Creates a visual theme for checkboxes and radio buttons.  Note this mixin only provides
+ * styling for the checkbox/radio button and its {@link #boxLabel}, The {@link #fieldLabel}
+ * and error icon/message are styled by {@link #extjs-label-ui}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-field-height=$form-field-height]
+ * The height of the field body that the checkbox must fit within.  This does not set the
+ * height of the field, only allows the checkbox to be centered inside the field body.
+ * (The height of the field body is determined by {@link #extjs-label-ui}).
+ *
+ * @param {number} [$ui-checkbox-size=$form-checkbox-size]
+ * The size of the checkbox
+ *
+ * @param {string} [$ui-checkbox-background-image=$form-checkbox-background-image]
+ * The background-image of the checkbox
+ *
+ * @param {string} [$ui-radio-background-image=$form-radio-background-image]
+ * The background-image of the radio button
+ *
+ * @param {color} [$ui-label-color=$form-checkbox-label-color]
+ * The color of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-font-weight=$form-checkbox-label-font-weight]
+ * The font-weight of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-font-size=$form-checkbox-label-font-size]
+ * The font-size of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-font-family=$form-checkbox-label-font-family]
+ * The font-family of the checkbox's {@link #boxLabel}
+ *
+ * @param {string} [$ui-label-line-height=$form-checkbox-label-line-height]
+ * The line-height of the checkbox's {@link #boxLabel}
+ *
+ * @param {number} [$ui-label-spacing=$form-checkbox-label-spacing]
+ * The space between the boxLabel and the checkbox.
+ *
+ * @member Ext.form.field.Checkbox
+ */
+/* line 57, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-wrap-default {
+  height: 24px;
+}
+
+/* line 61, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-default {
+  margin-top: 5px;
+}
+
+/* line 67, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-checkbox-default,
+.x-form-radio-default {
+  width: 15px;
+  height: 15px;
+}
+
+/* line 72, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-radio-default {
+  background: url(images/form/radio.png) no-repeat;
+}
+/* line 75, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-checked .x-form-radio-default {
+  background-position: 0 -15px;
+}
+
+/* line 80, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-checkbox-default {
+  background: url(images/form/checkbox.png) no-repeat;
+}
+/* line 83, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-checked .x-form-checkbox-default {
+  background-position: 0 -15px;
+}
+
+/* line 88, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-field-default-form-checkbox-focus {
+  background-position: -15px 0;
+}
+/* line 92, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-checked .x-field-default-form-checkbox-focus {
+  background-position: -15px -15px;
+}
+
+/* line 97, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-label-default {
+  margin-top: 4px;
+  font: normal helvetica, arial, verdana, sans-serif/17px helvetica, arial, verdana, sans-serif;
+}
+/* line 101, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-label-default.x-form-cb-label-before {
+  padding-right: 19px;
+}
+/* line 112, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Checkbox.scss */
+.x-form-cb-label-default.x-form-cb-label-after {
+  padding-left: 19px;
+}
+
 /* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/tree/View.scss */
 .x-tree-expander {
   cursor: pointer;
@@ -20907,6 +21162,12 @@ div.x-form-text-grow .x-form-textarea {
 /* line 415, ../../../../ext/packages/ext-theme-neutral/sass/src/form/field/Text.scss */
 .x-form-search-trigger {
   background-image: url(images/form/search-trigger.png);
+}
+
+/* line 6, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Border.scss */
+body.x-border-layout-ct,
+div.x-border-layout-ct {
+  background-color: #3892d3;
 }
 
 /**
@@ -24971,6 +25232,332 @@ div.x-form-text-grow .x-form-textarea {
   background-image: url(images/shared/icon-error.png);
 }
 
+/**
+ * Creates a visual theme for text fields.  Note this mixin only provides styling
+ * For the form field body, The label and error are styled by {@link #extjs-label}.
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {number} [$ui-header-font-size=$fieldset-header-font-size]
+ * The font-size of the FieldSet header
+ *
+ * @param {string} [$ui-header-font-weight=$fieldset-header-font-weight]
+ * The font-weight of the FieldSet header
+ *
+ * @param {string} [$ui-header-font-family=$fieldset-header-font-family]
+ * The font-family of the FieldSet header
+ *
+ * @param {number/string} [$ui-header-line-height=$fieldset-header-line-height]
+ * The line-height of the FieldSet header
+ *
+ * @param {color} [$ui-header-color=$fieldset-header-color]
+ * The text color of the FieldSet header
+ *
+ * @param {number} [$ui-border-width=$fieldset-border-width]
+ * The border-width of the FieldSet
+ *
+ * @param {string} [$ui-border-style=$fieldset-border-style]
+ * The border-style of the FieldSet
+ *
+ * @param {color} [$ui-border-color=$fieldset=border-color]
+ * The border-color of the FieldSet
+ *
+ * @param {number} [$ui-border-radius=$fieldset=border-radius]
+ * The border radius of FieldSet elements.
+ *
+ * @param {number/list} [$ui-padding=$fieldset-padding]
+ * The FieldSet's padding
+ *
+ * @param {number/list} [$ui-margin=$fieldset-margin]
+ * The FieldSet's margin
+ *
+ * @param {number/list} [$ui-header-padding=$fieldset-header-padding]
+ * The padding to apply to the FieldSet's header
+ *
+ * @param {number} [$ui-collapse-tool-size=$fieldset-collapse-tool-size]
+ * The size of the FieldSet's collapse tool
+ *
+ * @param {number/list} [$ui-collapse-tool-margin=$fieldset-collapse-tool-margin]
+ * The margin to apply to the FieldSet's collapse tool
+ *
+ * @param {number/list} [$ui-collapse-tool-padding=$fieldset-collapse-tool-padding]
+ * The padding to apply to the FieldSet's collapse tool
+ *
+ * @param {string} [$ui-collapse-tool-background-image=$fieldset-collapse-tool-background-image]
+ * The background-image to use for the collapse tool. If 'none' the default tool
+ * sprite will be used.  Defaults to 'none'.
+ *
+ * @param {number} [$ui-collapse-tool-opacity=$fieldset-collapse-tool-opacity]
+ * The opacity of the FieldSet's collapse tool
+ *
+ * @param {number} [$ui-collapse-tool-opacity-over=$fieldset-collapse-tool-opacity-over]
+ * The opacity of the FieldSet's collapse tool when hovered
+ *
+ * @param {number} [$ui-collapse-tool-opacity-pressed=$fieldset-collapse-tool-opacity-pressed]
+ * The opacity of the FieldSet's collapse tool when pressed
+ *
+ * @param {number/list} [$ui-checkbox-margin=$fieldset-checkbox-margin]
+ * The margin to apply to the FieldSet's checkbox (for FieldSets that use
+ * {@link #checkboxToggle})
+ *
+ * @member Ext.form.FieldSet
+ */
+/* line 109, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-default {
+  border: 1px solid #afafaf;
+  padding: 0 10px;
+  margin: 0 0 10px;
+}
+
+/* line 122, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-ie8 .x-fieldset-default {
+  padding-top: 0;
+}
+/* line 125, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-ie8 .x-fieldset-body-default {
+  padding-top: 0;
+}
+
+/* line 131, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-default {
+  padding: 0 3px 1px;
+  line-height: 16px;
+}
+/* line 135, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-default > .x-fieldset-header-text {
+  font: normal 12px/16px helvetica, arial, verdana, sans-serif;
+  color: black;
+  padding: 1px 0;
+}
+
+/* line 142, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-checkbox-default {
+  margin: 2px 4px 0 0;
+  line-height: 16px;
+}
+
+/* line 152, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-tool-default {
+  margin: 2px 4px 0 0;
+  padding: 0;
+}
+/* line 161, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-tool-default > .x-tool-img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+  height: 15px;
+  width: 15px;
+}
+/* line 168, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-tool-default.x-tool-over > .x-tool-img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+  opacity: 0.9;
+}
+/* line 174, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-tool-default.x-tool-pressed > .x-tool-img {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+}
+/* line 179, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-tool-default > .x-tool-toggle {
+  background-image: url(images/fieldset/collapse-tool.png);
+  background-position: 0 0;
+}
+/* line 186, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-header-tool-default.x-tool-over > .x-tool-toggle {
+  background-position: 0 -15px;
+}
+
+/* line 193, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-default.x-fieldset-collapsed {
+  border-width: 1px 1px 0 1px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+/* line 201, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-default.x-fieldset-collapsed .x-tool-toggle {
+  background-position: -15px 0;
+}
+/* line 205, ../../../../ext/packages/ext-theme-neutral/sass/src/form/FieldSet.scss */
+.x-fieldset-default.x-fieldset-collapsed .x-tool-over > .x-tool-toggle {
+  background-position: -15px -15px;
+}
+
+/**
+ * Creates a visual theme for spinner field triggers.  Note this mixin only provides
+ * styling for the spinner trigger buttons. The text field portion of the styling must be
+ * created using {@link #extjs-text-field-ui}
+ *
+ * @param {string} $ui
+ * The name of the UI being created. Can not included spaces or special punctuation
+ * (used in CSS class names).
+ *
+ * @param {boolean} [$ui-trigger-vertical=$spinner-trigger-vertical]
+ * `true` to align the up/down triggers vertically.
+ *
+ * @param {number} [$ui-trigger-width=$form-trigger-width]
+ * The width of the triggers.
+ *
+ * @param {number} [$ui-field-height=$form-text-field-height]
+ * The height of the text field that the trigger must fit within.  This does not set the
+ * height of the field, only the height of the triggers.  When {@link #$ui-trigger-vertical}
+ * is true, the available height within the field borders is divided evenly between the
+ * two triggers.
+ *
+ * @param {number/list} [$ui-field-border-width=$form-text-field-border-width]
+ * The border width of the text field that the trigger must fit within.  This does not set
+ * the border of the field, it is only needed so that the border-width of the field can
+ * be subtracted from the trigger height.
+ *
+ * @param {string} [$ui-trigger-vertical-background-image=$spinner-trigger-vertical-background-image]
+ * The background image sprite for vertically aligned spinner triggers
+ *
+ * @param {string} [$ui-trigger-up-background-image='form/spinner-up']
+ * The background image for the "up" trigger when triggers are horizontally aligned
+ *
+ * @param {string} [$ui-trigger-down-background-image='form/spinner-down']
+ * The background image for the "down" trigger when triggers are horizontally aligned
+ *
+ * @param {color} [$ui-trigger-background-color=$form-text-field-background-color]
+ * The background color of the spinner triggers
+ *
+ * @param {boolean} [$ui-classic-border=$form-text-field-classic-border]
+ * `true` to use classic-theme styled border.
+ *
+ * @member Ext.form.trigger.Spinner
+ */
+/* line 59, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-trigger-spinner-default {
+  width: 22px;
+}
+
+/* line 66, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-default {
+  background-image: url(images/form/spinner.png);
+  background-color: white;
+  width: 22px;
+  height: 11px;
+}
+
+/* line 102, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-up-default {
+  background-position: 0 0;
+}
+/* line 105, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-up-default.x-form-spinner-over {
+  background-position: -22px 0;
+}
+/* line 107, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-up-default.x-form-spinner-over.x-form-spinner-focus {
+  background-position: -88px 0;
+}
+/* line 112, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-up-default.x-form-spinner-focus {
+  background-position: -66px 0;
+}
+/* line 117, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-up-default.x-form-spinner.x-form-spinner-click {
+  background-position: -44px 0;
+}
+
+/* line 122, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-down-default {
+  background-position: 0 -11px;
+}
+/* line 125, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-down-default.x-form-spinner-over {
+  background-position: -22px -11px;
+}
+/* line 127, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-down-default.x-form-spinner-over.x-form-spinner-focus {
+  background-position: -88px -11px;
+}
+/* line 132, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-down-default.x-form-spinner-focus {
+  background-position: -66px -11px;
+}
+/* line 137, ../../../../ext/packages/ext-theme-neutral/sass/src/form/trigger/Spinner.scss */
+.x-form-spinner-down-default.x-form-spinner.x-form-spinner-click {
+  background-position: -44px -11px;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/toolbar/Paging.scss */
+.x-tbar-page-number {
+  width: 30px;
+}
+
+/* line 5, ../../../../ext/packages/ext-theme-neutral/sass/src/toolbar/Paging.scss */
+.x-tbar-page-first {
+  background-image: url(images/grid/page-first.png);
+}
+
+/* line 9, ../../../../ext/packages/ext-theme-neutral/sass/src/toolbar/Paging.scss */
+.x-tbar-page-prev {
+  background-image: url(images/grid/page-prev.png);
+}
+
+/* line 13, ../../../../ext/packages/ext-theme-neutral/sass/src/toolbar/Paging.scss */
+.x-tbar-page-next {
+  background-image: url(images/grid/page-next.png);
+}
+
+/* line 17, ../../../../ext/packages/ext-theme-neutral/sass/src/toolbar/Paging.scss */
+.x-tbar-page-last {
+  background-image: url(images/grid/page-last.png);
+}
+
+/* line 21, ../../../../ext/packages/ext-theme-neutral/sass/src/toolbar/Paging.scss */
+.x-tbar-loading {
+  background-image: url(images/grid/refresh.png);
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/view/BoundList.scss */
+.x-boundlist {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e1e1e1;
+  background: white;
+}
+
+/* line 8, ../../../../ext/packages/ext-theme-neutral/sass/src/view/BoundList.scss */
+.x-boundlist-item {
+  padding: 0 6px;
+  font: normal 13px helvetica, arial, verdana, sans-serif;
+  line-height: 22px;
+  cursor: pointer;
+  cursor: hand;
+  position: relative;
+  /*allow hover in IE on empty items*/
+  border-width: 1px;
+  border-style: dotted;
+  border-color: white;
+}
+
+/* line 24, ../../../../ext/packages/ext-theme-neutral/sass/src/view/BoundList.scss */
+.x-boundlist-selected {
+  background: #c1ddf1;
+  border-color: #c1ddf1;
+}
+
+/* line 29, ../../../../ext/packages/ext-theme-neutral/sass/src/view/BoundList.scss */
+.x-boundlist-item-over {
+  background: #d6e8f6;
+  border-color: #d6e8f6;
+}
+
+/* line 34, ../../../../ext/packages/ext-theme-neutral/sass/src/view/BoundList.scss */
+.x-boundlist-floating {
+  border-top-width: 0;
+}
+
+/* line 38, ../../../../ext/packages/ext-theme-neutral/sass/src/view/BoundList.scss */
+.x-boundlist-above {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
 /*
  * Creates a visual theme for a Menu.
  *
@@ -25724,6 +26311,45 @@ div.x-form-text-grow .x-form-textarea {
 .x-grid-item-selected .x-grid-row-checker,
 .x-grid-item-selected .x-grid-row-checker {
   background-position: 0 -15px;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-icon-information {
+  background-image: url(images/window/toast/icon16_info.png);
+}
+
+/* line 5, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-icon-error {
+  background-image: url(images/window/toast/icon16_error.png);
+}
+
+/* Using standard theme */
+/* line 11, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-window .x-window-body {
+  padding: 15px 5px 15px 5px;
+}
+
+/* Custom styling */
+/* line 17, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-light .x-window-header {
+  background-color: #3892d3;
+}
+
+/* line 21, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-light .x-tool-img {
+  background-color: #3892d3;
+}
+
+/* line 25, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-light {
+  background-image: url(images/window/toast/fader.png);
+}
+
+/* line 29, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
+.x-toast-light .x-window-body {
+  padding: 15px 5px 20px 5px;
+  background-color: transparent;
+  border: 0px solid white;
 }
 
 /* including package ext-theme-neptune */
@@ -27838,376 +28464,4 @@ div.x-form-text-grow .x-form-textarea {
 /* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-mc {
   padding: 5px 5px 5px 5px;
-}
-
-/* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom {
-  -moz-border-radius-topleft: 0;
-  -webkit-border-top-left-radius: 0;
-  border-top-left-radius: 0;
-  -moz-border-radius-topright: 0;
-  -webkit-border-top-right-radius: 0;
-  border-top-right-radius: 0;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  padding: 5px 5px 5px 5px;
-  border-width: 0 5px 5px 5px;
-  border-style: solid;
-  background-color: #dfeaf2;
-}
-
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-mc {
-  background-color: #dfeaf2;
-}
-
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-nbr .x-panel-header-light-framed-bottom {
-  padding: 0 !important;
-  border-width: 0 !important;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-frameInfo {
-  font-family: dh-0-5-5-5-0-5-5-5-5-5-5-5;
-}
-
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tl {
-  background-position: 0 -10px;
-}
-
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tr {
-  background-position: right -15px;
-}
-
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-bl {
-  background-position: 0 -20px;
-}
-
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-br {
-  background-position: right -25px;
-}
-
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-ml {
-  background-position: 0 bottom;
-}
-
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-mr {
-  background-position: right bottom;
-}
-
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tc {
-  background-position: 0 0;
-}
-
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-bc {
-  background-position: 0 -5px;
-}
-
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tr,
-.x-panel-header-light-framed-bottom-br,
-.x-panel-header-light-framed-bottom-mr {
-  padding-right: 5px;
-}
-
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tl,
-.x-panel-header-light-framed-bottom-bl,
-.x-panel-header-light-framed-bottom-ml {
-  padding-left: 5px;
-}
-
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tc {
-  height: 0;
-}
-
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-bc {
-  height: 5px;
-}
-
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-tl,
-.x-panel-header-light-framed-bottom-bl,
-.x-panel-header-light-framed-bottom-tr,
-.x-panel-header-light-framed-bottom-br,
-.x-panel-header-light-framed-bottom-tc,
-.x-panel-header-light-framed-bottom-bc,
-.x-panel-header-light-framed-bottom-ml,
-.x-panel-header-light-framed-bottom-mr {
-  background-image: url(images/panel-header/panel-header-light-framed-bottom-corners.gif);
-}
-
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-ml,
-.x-panel-header-light-framed-bottom-mr {
-  background-image: url(images/panel-header/panel-header-light-framed-bottom-sides.gif);
-  background-repeat: repeat-y;
-}
-
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-bottom-mc {
-  padding: 5px 5px 5px 5px;
-}
-
-/* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left {
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topright: 0;
-  -webkit-border-top-right-radius: 0;
-  border-top-right-radius: 0;
-  -moz-border-radius-bottomright: 0;
-  -webkit-border-bottom-right-radius: 0;
-  border-bottom-right-radius: 0;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  padding: 5px 5px 5px 5px;
-  border-width: 5px 0 5px 5px;
-  border-style: solid;
-  background-color: #dfeaf2;
-}
-
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-mc {
-  background-color: #dfeaf2;
-}
-
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-nbr .x-panel-header-light-framed-left {
-  padding: 0 !important;
-  border-width: 0 !important;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-frameInfo {
-  font-family: dh-5-0-5-5-5-0-5-5-5-5-5-5;
-}
-
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tl {
-  background-position: 0 -10px;
-}
-
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tr {
-  background-position: right -15px;
-}
-
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-bl {
-  background-position: 0 -20px;
-}
-
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-br {
-  background-position: right -25px;
-}
-
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-ml {
-  background-position: left 0;
-}
-
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-mr {
-  background-position: left 0;
-}
-
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tc {
-  background-position: 0 0;
-}
-
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-bc {
-  background-position: 0 -5px;
-}
-
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tr,
-.x-panel-header-light-framed-left-br,
-.x-panel-header-light-framed-left-mr {
-  padding-right: 0;
-}
-
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tl,
-.x-panel-header-light-framed-left-bl,
-.x-panel-header-light-framed-left-ml {
-  padding-left: 5px;
-}
-
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tc {
-  height: 5px;
-}
-
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-bc {
-  height: 5px;
-}
-
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-tl,
-.x-panel-header-light-framed-left-bl,
-.x-panel-header-light-framed-left-tr,
-.x-panel-header-light-framed-left-br,
-.x-panel-header-light-framed-left-tc,
-.x-panel-header-light-framed-left-bc,
-.x-panel-header-light-framed-left-ml,
-.x-panel-header-light-framed-left-mr {
-  background-image: url(images/panel-header/panel-header-light-framed-left-corners.gif);
-}
-
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-ml,
-.x-panel-header-light-framed-left-mr {
-  background-image: url(images/panel-header/panel-header-light-framed-left-sides.gif);
-  background-repeat: repeat-y;
-}
-
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-left-mc {
-  padding: 5px 5px 5px 5px;
-}
-
-/* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top {
-  -moz-border-radius-topleft: 4px;
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -moz-border-radius-topright: 4px;
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -moz-border-radius-bottomright: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  -moz-border-radius-bottomleft: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  padding: 5px 5px 5px 5px;
-  border-width: 5px;
-  border-style: solid;
-  background-color: #dfeaf2;
-}
-
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-mc {
-  background-color: #dfeaf2;
-}
-
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-nbr .x-panel-header-light-framed-collapsed-top {
-  padding: 0 !important;
-  border-width: 0 !important;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-frameInfo {
-  font-family: dh-5-5-5-5-5-5-5-5-5-5-5-5;
-}
-
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tl {
-  background-position: 0 -10px;
-}
-
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tr {
-  background-position: right -15px;
-}
-
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-bl {
-  background-position: 0 -20px;
-}
-
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-br {
-  background-position: right -25px;
-}
-
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-ml {
-  background-position: 0 top;
-}
-
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-mr {
-  background-position: right top;
-}
-
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tc {
-  background-position: 0 0;
-}
-
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-bc {
-  background-position: 0 -5px;
-}
-
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tr,
-.x-panel-header-light-framed-collapsed-top-br,
-.x-panel-header-light-framed-collapsed-top-mr {
-  padding-right: 5px;
-}
-
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tl,
-.x-panel-header-light-framed-collapsed-top-bl,
-.x-panel-header-light-framed-collapsed-top-ml {
-  padding-left: 5px;
-}
-
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-tc {
-  height: 5px;
-}
-
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-panel-header-light-framed-collapsed-top-bc {
-  height: 5px;
 }

@@ -66,7 +66,6 @@ Ext.define('Packt.controller.Menu', {
             });
 
         if (!newTab){
-            console.log(record);
             newTab = mainPanel.add({
                 xtype: record.get('className'),
                 glyph: record.get('glyph') + '@FontAwesome',

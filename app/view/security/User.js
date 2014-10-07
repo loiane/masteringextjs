@@ -5,36 +5,39 @@ Ext.define('Packt.view.security.User', {
     requires: [
         'Packt.view.security.UsersGrid',
         'Packt.view.security.UserModel',
-        'Packt.view.security.UserController'
+        'Packt.view.security.UserController',
+        'Packt.view.security.UserForm',
+        'Packt.util.Glyphs'
     ],
 
     controller: 'user',
     viewModel: {
         type: 'user'
     },
+    session: true,
 
     frame: true,
 
     layout: {
-        type: 'fit'
+        type: 'vbox',
+        align: 'stretch'
     },
 
     items: [
         {
-            xtype: 'usersgrid'
+            xtype: 'users-grid',
+            flex: 1
         }
     ],
     dockedItems: [
         {
             xtype: 'toolbar',
-            flex: 1,
             dock: 'top',
             items: [
                 {
                     xtype: 'button',
                     text: 'Add',
-                    itemId: 'add',
-                    iconCls: 'add',
+                    glyph: Packt.util.Glyphs.getGlyph('add'),
                     listeners: {
                         click: 'onAdd'
                     }
@@ -42,19 +45,23 @@ Ext.define('Packt.view.security.User', {
                 {
                     xtype: 'button',
                     text: 'Edit',
-                    itemId: 'edit',
-                    iconCls: 'edit',
+                    glyph: Packt.util.Glyphs.getGlyph('edit'),
                     listeners: {
                         click: 'onEdit'
+                    },
+                    bind: {
+                        disabled: '{!usersGrid.selection}'
                     }
                 },
                 {
                     xtype: 'button',
                     text: 'Delete',
-                    itemId: 'delete',
-                    iconCls: 'delete',
+                    glyph: Packt.util.Glyphs.getGlyph('destroy'),
                     listeners: {
                         click: 'onDelete'
+                    },
+                    bind: {
+                        disabled: '{!usersGrid.selection}'
                     }
                 }
             ]

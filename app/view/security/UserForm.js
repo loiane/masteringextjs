@@ -1,26 +1,32 @@
 Ext.define('Packt.view.security.UserForm', {
     extend: 'Ext.window.Window',
-    alias: 'widget.userform',
+    alias: 'widget.user-form',
 
-    height: 280,
-    width: 550,
+    height: 270,
+    width: 600,
 
-    requires: ['Packt.util.Util'],
+    requires: [
+        'Packt.util.Util',
+        'Packt.util.Glyphs'
+    ],
 
     layout: {
-        align: 'stretch',
-        type: 'vbox'
+        type: 'fit'
     },
-    title: 'User',
-    closeAction: 'hide',
-    modal: true,
 
-    reference: 'userForm',
+    bind: {
+        title: '{title}'
+    },
+
+    closable: false,
+    modal: true,
 
     items: [
         {
             xtype: 'form',
+            reference: 'form',
             bodyPadding: 5,
+            modelValidation: true,
             layout: {
                 type: 'hbox',
                 align: 'stretch'
@@ -28,20 +34,22 @@ Ext.define('Packt.view.security.UserForm', {
             items: [
                 {
                     xtype: 'fieldset',
-                    flex: 2,
+                    flex: 1,
                     title: 'User Information',
+                    layout: 'anchor',
                     defaults: {
-                        //afterLabelTextTpl: Packt.util.Util.required,
+                        afterLabelTextTpl: Packt.util.Util.required,
                         anchor: '100%',
                         xtype: 'textfield',
-                        allowBlank: false,
-                        labelWidth: 60
+                        msgTarget: 'side',
+                        labelWidth: 75
                     },
                     items: [
                         {
                             xtype: 'hiddenfield',
+                            name: 'id',
                             fieldLabel: 'Label',
-                            name: 'id'
+                            bind : '{currentUser.id}'
                         },
                         {
                             fieldLabel: 'Username',
@@ -50,28 +58,55 @@ Ext.define('Packt.view.security.UserForm', {
                         },
                         {
                             fieldLabel: 'Name',
-                            maxLength: 100,
                             name: 'name',
                             bind : '{currentUser.name}'
                         },
                         {
                             fieldLabel: 'Email',
-                            maxLength: 100,
                             name: 'email',
                             bind : '{currentUser.email}'
+                        },
+                        {
+                            xtype: 'combo',
+                            fieldLabel: 'Group',
+                            displayField: 'name',
+                            valueField: 'id',
+                            queryMode: 'local',
+                            forceSelection: true,
+                            editable: false,
+                            name: 'groups_id',
+                            bind: {
+                                value: '{currentUser.groups_id}',
+                                store: '{groups}',
+                                selection: '{currentUser.group}'
+                            }
+                        },
+                        {
+                            xtype: 'filefield',
+                            fieldLabel: 'Photo',
+                            anchor: '100%',
+                            name: 'picture',
+                            buttonText: 'Select Photo...',
+                            afterLabelTextTpl: '',
+                            listeners: {
+                                change: 'onFileFieldChange'
+                            }
                         }
                     ]
                 },
                 {
                     xtype: 'fieldset',
-                    title: 'Picture',
+                    title: 'Photo',
                     width: 170,
                     items: [
                         {
                             xtype: 'image',
+                            reference: 'userPicture',
                             height: 150,
                             width: 150,
-                            src: ''
+                            bind:{
+                                src: 'resources/profileImages/{currentUser.picture}'
+                            }
                         }
                     ]
                 }
@@ -81,7 +116,6 @@ Ext.define('Packt.view.security.UserForm', {
     dockedItems: [
         {
             xtype: 'toolbar',
-            flex: 1,
             dock: 'bottom',
             ui: 'footer',
             layout: {
@@ -91,15 +125,19 @@ Ext.define('Packt.view.security.UserForm', {
             items: [
                 {
                     xtype: 'button',
-                    text: 'Cancel',
-                    itemId: 'cancel',
-                    iconCls: 'cancel'
+                    text: 'Save',
+                    glyph: Packt.util.Glyphs.getGlyph('save'),
+                    listeners: {
+                        click: 'onSave'
+                    }
                 },
                 {
                     xtype: 'button',
-                    text: 'Save',
-                    itemId: 'save',
-                    iconCls: 'save'
+                    text: 'Cancel',
+                    glyph: Packt.util.Glyphs.getGlyph('cancel'),
+                    listeners: {
+                        click: 'onCancel'
+                    }
                 }
             ]
         }

@@ -1,8 +1,12 @@
 <?php
 
-require("../../db/db.php");
+require("../db/db.php");
 
 session_start();
+if(empty($_SESSION["username"])) {
+    header("HTTP/1.0 403 Forbidden");
+    exit;
+}
 
 $groupId = isset($_REQUEST['group']);
 
@@ -23,7 +27,7 @@ if ($resultdb = $mysqli->query($sql)) {
 
         if ($resultDb1 = $mysqli->query($sqlQuery)) {
             while ($item = $resultDb1->fetch_assoc()) {
-                $profile['menu'] = $item;
+                $profile['group'] = $item;
             }
         }
 

@@ -17,6 +17,16 @@ function loadLocale(){
 
 loadLocale();
 
+Ext.require('Ext.layout.container.Fit');
+Ext.require('Ext.form.Panel');
+Ext.require('Ext.layout.container.Border');
+Ext.require('Ext.layout.container.Center');
+Ext.require('Ext.form.FieldSet');
+Ext.require('Ext.form.field.Hidden');
+Ext.require('Ext.form.field.File');
+Ext.require('Ext.Img');
+Ext.require('Ext.form.field.ComboBox');
+
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',
     
@@ -26,7 +36,8 @@ Ext.define('Packt.Application', {
 
     requires: [
         'Packt.overrides.tree.ColumnOverride',
-        'Ext.layout.container.Accordion'
+        'Ext.layout.container.Accordion'//,
+        //'Packt.overrides.patch.data.ModelWithId' //ExtJS 5 bug fix - remove this once Sencha fixes it
     ],
 
     enableQuickTips: true,

@@ -36,8 +36,8 @@ Ext.define('Packt.Application', {
 
     requires: [
         'Packt.overrides.tree.ColumnOverride',
-        'Ext.layout.container.Accordion'//,
-        //'Packt.overrides.patch.data.ModelWithId' //ExtJS 5 bug fix - remove this once Sencha fixes it
+        'Ext.layout.container.Accordion',
+        'Packt.overrides.patch.data.ModelWithId' //ExtJS 5 bug fix - remove this once Sencha fixes it
     ],
 
     enableQuickTips: true,

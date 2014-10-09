@@ -726,7 +726,7 @@ $include-packt-model-menu-treenode: true;
 $include-packt-model-security-base: false;
 $include-packt-model-security-group: false;
 $include-packt-model-security-user: false;
-$include-packt-overrides-patch-data-modelwithid: false;
+$include-packt-overrides-patch-data-modelwithid: true;
 $include-packt-overrides-tree-columnoverride: true;
 $include-packt-proxy-base: false;
 $include-packt-store-menu: true;

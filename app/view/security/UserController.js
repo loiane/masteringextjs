@@ -26,6 +26,8 @@ Ext.define('Packt.view.security.UserController', {
         var me = this,
             view = me.getView();
 
+        console.log(record);
+
         me.dialog = view.add({
             xtype: 'user-form',
             viewModel: {
@@ -46,7 +48,7 @@ Ext.define('Packt.view.security.UserController', {
 
     getRecordsSelected: function(){
         var grid = this.lookupReference('usersGrid');
-        return grid.getSelectionModel().getSelection();
+        return grid.getSelection();
     },
 
     onDelete: function(button, e, options){

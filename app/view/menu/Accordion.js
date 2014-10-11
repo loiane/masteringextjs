@@ -9,7 +9,7 @@ Ext.define('Packt.view.menu.Accordion', {
     },
     collapsible: false,
     hideCollapseTool: false,
-    //split: true,
+    split: true,
     iconCls: 'fa fa-sitemap fa-lg',
     title: translations.menu
 });

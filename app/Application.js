@@ -49,8 +49,8 @@ Ext.define('Packt.Application', {
     controllers: [
         'Root',
         'Menu',
+        'StaticData',
         'Test'
-        // TODO: add controllers here
     ],
 
     stores: [

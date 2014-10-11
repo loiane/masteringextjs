@@ -10,7 +10,7 @@ if(empty($_SESSION["username"])) {
 
 $groupId = isset($_REQUEST['group']);
 
-$sql = "SELECT * FROM user";
+$sql = "SELECT id, name, userName, email, picture, groups_id FROM user";
 
 if ($groupId) {
     $sql .= " WHERE group_id = '$groupId'";

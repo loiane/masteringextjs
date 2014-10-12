@@ -7,7 +7,12 @@ Ext.define('Packt.model.staticData.Actor', {
 
     fields: [
         { name: 'actor_id' },
-        { name: 'first_name', defaultValue: 'First Name*'},
-        { name: 'last_name' , defaultValue: 'Last Name*'}
-    ]
+        { name: 'first_name'},//, defaultValue: 'First Name*'},
+        { name: 'last_name'}// , defaultValue: 'Last Name*'}
+    ],
+
+    validators: {
+        first_name: 'presence',
+        last_name: { type: 'length', min: 2 }
+    }
 });

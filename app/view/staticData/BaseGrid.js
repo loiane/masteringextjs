@@ -85,7 +85,12 @@ Ext.define('Packt.view.staticData.BaseGrid', {
                 menuDisabled: true,
                 widget: {
                     xtype: 'button',
-                    glyph: Packt.util.Glyphs.getGlyph('destroy')
+                    itemId: 'delete',
+                    glyph: Packt.util.Glyphs.getGlyph('destroy'),
+                    handler: function(btn) {
+                        console.log(btn);
+                        btn.fireEvent('click', btn);
+                    }
                 }
             }]
         );

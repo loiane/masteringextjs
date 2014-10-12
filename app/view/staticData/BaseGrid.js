@@ -3,7 +3,8 @@ Ext.define('Packt.view.staticData.BaseGrid', {
     xtype: 'staticdatagrid',
 
     requires: [
-        'Packt.util.Glyphs'
+        'Packt.util.Glyphs',
+        'Packt.overrides.grid.column.Action'
     ],
 
     columnLines: true,
@@ -69,7 +70,8 @@ Ext.define('Packt.view.staticData.BaseGrid', {
             }
         ];
 
-        me.columns = Ext.Array.merge(me.columns,
+        me.columns = Ext.Array.merge(
+            me.columns,
             [{
                 xtype    : 'datecolumn',
                 text     : 'Last Update',
@@ -78,22 +80,92 @@ Ext.define('Packt.view.staticData.BaseGrid', {
                 format: 'Y-m-j H:i:s',
                 filter: true
             },
-            {
-                xtype: 'widgetcolumn',
-                width: 45,
-                sortable: false,
-                menuDisabled: true,
-                widget: {
-                    xtype: 'button',
-                    itemId: 'delete',
-                    glyph: Packt.util.Glyphs.getGlyph('destroy'),
-                    handler: function(btn) {
-                        console.log(btn);
-                        btn.fireEvent('click', btn);
+                {
+                    xtype: 'widgetcolumn',
+                    width: 50,
+                    sortable: false,
+                    menuDisabled: true,
+                    widget: {
+                        xtype: 'button',
+                        glyph: Packt.util.Glyphs.getGlyph('destroy'),
+                        tooltip: 'Delete',
+                        scope: me,
+                        handler: function(btn) {
+                            me.fireEvent('widgetclick', me, btn);
+                        }
                     }
-                }
             }]
         );
+
+        me.getColumnIndexes = function() {
+            var me = this,
+                columnIndexes = [];
+
+            Ext.Array.each(me.columns, function (column) {
+                // only validate column with editor
+                if (Ext.isDefined(column.getEditor())) {
+                    columnIndexes.push(column.dataIndex);
+                } else {
+                    columnIndexes.push(undefined);
+                }
+            });
+
+            return columnIndexes;
+        };
+
+        me.validateRow = function(record, index, node, options){
+
+            var me = this,
+                view = me.getView(),
+                errors = record.validate();
+
+            if (errors.isValid()) {
+                return true;
+            }
+
+            var columnIndexes = me.getColumnIndexes();
+
+            Ext.each(columnIndexes, function (columnIndex, x) {
+                var cellErrors, cell, messages;
+
+                cellErrors = errors.getByField(columnIndex);
+                if (!Ext.isEmpty(cellErrors)) {
+                    cell = view.getCellByPosition({row: index, column: x});
+                    messages = [];
+                    Ext.each(cellErrors, function (cellError) {
+                        messages.push(cellError.message);
+                    });
+
+                    cell.addCls('x-form-error-msg x-form-invalid-icon x-form-invalid-icon-default');
+                    // set error tooltip attribute
+                    cell.set({
+                        'data-errorqtip': Ext.String.format('<ul><li class="last">{0}</li></ul>',
+                            messages.join('<br/>'))
+                    });
+                }
+            });
+
+            return false;
+        };
+
+        me.validate = function(){
+
+            var me = this,
+                isValid = true,
+                view = me.getView(),
+                error,
+                record;
+
+            Ext.each(view.getNodes(), function (row, y) {
+                record = view.getRecord(row);
+
+                isValid = (me.validateRow(record, y) && isValid);
+            });
+
+            error = isValid ? undefined : {title: "Invalid Records", message: "Please fix errors before saving."};
+
+            return error;
+        };
 
         me.callParent(arguments);
     }

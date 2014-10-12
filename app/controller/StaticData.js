@@ -31,7 +31,8 @@ Ext.define('Packt.controller.StaticData', {
             'staticdatagrid': {
                 render: me.render,
                 edit: me.onEdit,
-                afterrender: me.onAfterRender
+                afterrender: me.onAfterRender,
+                widgetclick: me.onWidgetClick
             },
             'staticdatagrid button#add': {
                 click: me.onButtonClickAdd
@@ -44,9 +45,6 @@ Ext.define('Packt.controller.StaticData', {
             },
             'staticdatagrid button#clearFilter': {
                 click: me.onButtonClickClearFilter
-            },
-            'staticdatagrid button#delete': {
-                click: me.onButtonClickDelete
             },
             'citiesgrid button#clearGrouping': {
                 toggle: me.onButtonToggleClearGrouping
@@ -70,7 +68,7 @@ Ext.define('Packt.controller.StaticData', {
     },
 
     render: function(component, options) {
-        component.getStore().load();
+        //component.getStore().load();
 
         if (component.xtype === 'citiesgrid' && component.features.length > 0){
             if (component.features[0].ftype === 'grouping'){
@@ -109,7 +107,15 @@ Ext.define('Packt.controller.StaticData', {
     },
 
     onButtonClickSave: function (button, e, options) {
-        button.up('staticdatagrid').getStore().sync();
+        var grid = button.up('staticdatagrid'),
+            store = grid.getStore(),
+            errors = grid.validate();
+
+        if (errors === 'undefined'){
+            store.sync();
+        } else {
+            Ext.Msg.alert(errors);
+        }
     },
 
     onButtonClickCancel: function (button, e, options) {
@@ -120,17 +126,14 @@ Ext.define('Packt.controller.StaticData', {
         button.up('staticdatagrid').filters.clearFilters();
     },
 
-    onButtonClickDelete: function(button) {
 
-        console.log(button);
+    onWidgetClick: function(grid, button){
 
-       /* var store = view.up('staticdatagrid').getStore(),
-            rec = store.getAt(rowIndex);
+        var store = grid.getStore(),
+            rec = button.getWidgetRecord();
 
-        if (action == 'delete'){
-            store.remove(rec);
-            Ext.Msg.alert('Delete', 'Save the changes to persist the removed record.');
-        }*/
+        store.remove(rec);
+        Ext.Msg.alert('Delete', 'Save the changes to persist the removed record.');
     },
 
     onButtonToggleClearGrouping: function (button, pressed, options) {
@@ -147,68 +150,9 @@ Ext.define('Packt.controller.StaticData', {
     },
 
     onAfterRender: function(grid, options){
-
         var view = grid.getView();
-        var me = this;
         view.on('itemupdate', function (record, index, node, options) {
-            me.validateRow(grid, record, index, node, options);
+            grid.validateRow(record, index, node, options);
         });
-    },
-
-    validateRow: function(grid, record, index, node, options){
-
-        var me, view, errors, columns;
-
-        me = this;
-        view = grid.getView();
-
-        errors = record.validate();
-        if (errors.isValid()) {
-            console.log('true');
-            return true;
-        }
-
-        var columnIndexes = me.getColumnIndexes(grid.columns);
-
-        Ext.each(columnIndexes, function (columnIndex, x) {
-            var cellErrors, cell, messages;
-
-            cellErrors = errors.getByField(columnIndex);
-            if (!Ext.isEmpty(cellErrors)) {
-                cell = view.getCellByPosition({row: index, column: x});
-                messages = [];
-                Ext.each(cellErrors, function (cellError) {
-                    messages.push(cellError.message);
-                });
-
-                cell.addCls("invalidCell");
-                // set error tooltip attribute
-                cell.set({'data-errorqtip': Ext.String.format('<ul><li class="last">{0}</li></ul>', messages.join('<br/>'))});
-            }
-        });
-
-        console.log('false');
-
-        return false;
-    },
-
-    getColumnIndexes: function (columns) {
-        var me, columnIndexes;
-
-        me = this;
-        columnIndexes = [];
-
-        Ext.Array.each(columns, function (column) {
-
-            // only validate column with editor
-            if (Ext.isDefined(column.getEditor())) {
-                columnIndexes.push(column.dataIndex);
-            } else {
-                columnIndexes.push(undefined);
-            }
-        });
-
-
-        return columnIndexes;
     }
 });

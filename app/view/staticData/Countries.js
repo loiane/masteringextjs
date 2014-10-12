@@ -1,6 +1,6 @@
 Ext.define('Packt.view.staticData.Countries', {
     extend: 'Packt.view.staticData.BaseGrid',
-    alias: 'widget.countriesgrid',
+    xtype: 'countriesgrid',
 
     store: 'staticData.Countries',
 

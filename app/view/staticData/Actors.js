@@ -1,6 +1,6 @@
 Ext.define('Packt.view.staticData.Actors', {
     extend: 'Packt.view.staticData.BaseGrid',
-    alias: 'widget.actorsgrid',
+    xtype: 'actorsgrid',
 
     store: 'staticData.Actors',
 

@@ -1,6 +1,6 @@
 Ext.define('Packt.view.staticData.Categories', {
     extend: 'Packt.view.staticData.BaseGrid',
-    alias: 'widget.categoriesgrid',
+    xtype: 'categoriesgrid',
 
     store: 'staticData.Categories',
 

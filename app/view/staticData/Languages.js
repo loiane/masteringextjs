@@ -1,6 +1,6 @@
 Ext.define('Packt.view.staticData.Languages', {
     extend: 'Packt.view.staticData.BaseGrid',
-    alias: 'widget.languagesgrid',
+    xtype: 'languagesgrid',
 
     store: 'staticData.Languages',
 

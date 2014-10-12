@@ -1,6 +1,6 @@
 Ext.define('Packt.view.staticData.Cities', {
     extend: 'Packt.view.staticData.BaseGrid',
-    alias: 'widget.citiesgrid',
+    xtype: 'citiesgrid',
 
     store: 'staticData.Cities',
 

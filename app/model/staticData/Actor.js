@@ -20,5 +20,17 @@ Ext.define('Packt.model.staticData.Actor', {
             { type: 'presence', message: 'This field is mandatory'},
             { type: 'length', min: 2, max: 45}
         ]
+    },
+
+    manyToMany: {
+        ActorFilms: {
+            type: 'Film',
+            role: 'films',
+            field: 'film_id',
+            right: {
+                field: 'actor_id',
+                role: 'actors'
+            }
+        }
     }
 });

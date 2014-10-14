@@ -72,14 +72,15 @@ Ext.define('Packt.view.staticData.BaseGrid', {
 
         me.columns = Ext.Array.merge(
             me.columns,
-            [{
-                xtype    : 'datecolumn',
-                text     : 'Last Update',
-                width    : 150,
-                dataIndex: 'last_update',
-                format: 'Y-m-j H:i:s',
-                filter: true
-            },
+            [
+                {
+                    xtype: 'datecolumn',
+                    text: 'Last Update',
+                    width: 150,
+                    dataIndex: 'last_update',
+                    format: 'Y-m-j H:i:s',
+                    filter: true
+                },
                 {
                     xtype: 'widgetcolumn',
                     width: 50,
@@ -90,11 +91,12 @@ Ext.define('Packt.view.staticData.BaseGrid', {
                         glyph: Packt.util.Glyphs.getGlyph('destroy'),
                         tooltip: 'Delete',
                         scope: me,
-                        handler: function(btn) {
+                        handler: function (btn) {
                             me.fireEvent('widgetclick', me, btn);
                         }
                     }
-            }]
+                }
+            ]
         );
 
         me.getColumnIndexes = function() {

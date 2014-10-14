@@ -28,6 +28,8 @@ Ext.require('Ext.Img');
 Ext.require('Ext.form.field.ComboBox');
 Ext.require('Ext.layout.container.Accordion');
 Ext.require('Ext.ux.LiveSearchGridPanel');
+Ext.require('Ext.grid.column.Date');
+Ext.require('Ext.grid.column.Widget');
 
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',
@@ -41,6 +43,9 @@ Ext.define('Packt.Application', {
         'Packt.overrides.grid.column.Action',
 
         'Packt.overrides.patch.data.ModelWithId' //ExtJS 5 bug fix - remove this once Sencha fixes it
+
+        ,'Packt.view.film.Films'
+        ,'Packt.view.base.Grid'
     ],
 
     enableQuickTips: true,

@@ -12077,6 +12077,134 @@ div.x-form-text-grow .x-form-textarea {
   margin: 0;
 }
 
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield {
+  height: auto!important;
+  /* The wrap has to accommodate the list, so override the .x-form-text height rule */
+  padding: 0!important;
+  /* Override .x-form-text padding rule */
+  cursor: text;
+  min-height: 24px;
+  overflow-y: auto;
+}
+
+/* line 9, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield ul.x-tagfield-list {
+  padding: 1px 3px;
+  margin: 0;
+}
+
+/* line 14, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+ul.x-tagfield-list.x-tagfield-singleselect {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* line 19, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-input, .x-tagfield-item {
+  vertical-align: top;
+  display: inline-block;
+  position: relative;
+}
+
+/* line 25, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-input input, .x-tagfield-input div {
+  border: 0 none;
+  margin: 0;
+  background: none;
+  width: 100%;
+}
+
+/* line 32, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-input-field {
+  line-height: 20px;
+}
+
+/* line 36, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-emptyinput {
+  display: none;
+}
+
+/* line 40, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-stacked .x-tagfield-item {
+  display: block;
+}
+
+/* line 44, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-item {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #e2e2e2;
+  border: 1px solid #e2e2e2;
+  padding: 0px 1px 0px 5px !important;
+  margin: 1px 4px 1px 0;
+  cursor: default;
+}
+
+/* line 53, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item:hover {
+  background: #c9c9c9;
+  border: 1px solid #c9c9c9;
+}
+
+/* line 58, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item.selected {
+  border: 1px solid #3892d3 !important;
+  background: #3892d3 !important;
+  color: white !important;
+}
+
+/* line 64, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-item-text {
+  line-height: 18px;
+  padding-right: 20px;
+}
+
+/* line 69, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-tagfield-item-close {
+  cursor: pointer;
+  position: absolute;
+  background-image: url(images/form/tag-field-item-close.png);
+  width: 12px;
+  height: 12px;
+  top: 2px;
+  right: 2px;
+}
+
+/* line 79, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item.selected .x-tagfield-item-close {
+  background-position: 0px 12px;
+}
+
+/* line 83, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item-close:hover {
+  background-position: 24px 0px;
+}
+
+/* line 87, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item.selected .x-tagfield-item-close:hover {
+  background-position: 24px 12px;
+}
+
+/* line 91, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item-close:active {
+  background-position: 12px 0px;
+}
+
+/* line 95, ../../../../ext/packages/ext-theme-base/sass/src/form/field/Tag.scss */
+.x-field:not(.x-item-disabled) .x-tagfield-item.selected .x-tagfield-item-close:active {
+  background-position: 12px 12px;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/grid/column/Check.scss */
+.x-grid-cell-inner-checkcolumn {
+  line-height: 0;
+  font-size: 0;
+}
+
 /* line 1, ../../../../ext/packages/ext-theme-base/sass/src/grid/feature/Grouping.scss */
 .x-group-hd-container {
   overflow: hidden;
@@ -12090,6 +12218,11 @@ div.x-form-text-grow .x-form-textarea {
 
 /* line 10, ../../../../ext/packages/ext-theme-base/sass/src/grid/feature/Grouping.scss */
 .x-grid-row-body-hidden, .x-grid-group-collapsed {
+  display: none;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/grid/feature/RowBody.scss */
+.x-grid-row-body-hidden {
   display: none;
 }
 
@@ -12176,6 +12309,12 @@ div.x-form-text-grow .x-form-textarea {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/grid/plugin/RowExpander.scss */
+.x-grid-row-expander {
+  font-size: 0;
+  line-height: 0;
 }
 
 /* line 2, ../../../../ext/packages/ext-theme-base/sass/src/resizer/Resizer.scss */
@@ -26066,6 +26205,28 @@ a.x-monthpicker-yearnav-button:hover {
 
 /* */
 /* */
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Check.scss */
+.x-grid-cell-inner-checkcolumn {
+  padding: 5px 10px 4px 10px;
+}
+
+/* line 12, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Check.scss */
+.x-grid-checkcolumn {
+  width: 15px;
+  height: 15px;
+  background: url(images/form/checkbox.png) 0 0 no-repeat;
+}
+/* line 17, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Check.scss */
+.x-item-disabled .x-grid-checkcolumn {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+}
+
+/* line 22, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Check.scss */
+.x-grid-checkcolumn-checked {
+  background-position: 0 -15px;
+}
+
 /*
  * Define UI for fields which are rendered to fit inside grid cells.
  * This includes cell and row editor fields and fields in widget columns.
@@ -26579,6 +26740,12 @@ a.x-monthpicker-yearnav-button:hover {
   background-image: url(images/grid/group-by.png);
 }
 
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/feature/RowBody.scss */
+.x-grid-rowbody {
+  font: normal 13px/15px helvetica, arial, verdana, sans-serif;
+  padding: 5px 10px 5px 10px;
+}
+
 /*
  * Creates a visual theme for a Menu.
  *
@@ -27046,6 +27213,23 @@ a.x-monthpicker-yearnav-button:hover {
 .x-tree-cell-editor .x-form-text {
   padding-left: 3px;
   padding-right: 3px;
+}
+
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/plugin/RowExpander.scss */
+.x-grid-cell-inner-row-expander {
+  padding: 7px 6px 6px 6px;
+}
+
+/* line 14, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/plugin/RowExpander.scss */
+.x-grid-row-expander {
+  width: 11px;
+  height: 11px;
+  cursor: pointer;
+  background-image: url(images/grid/group-collapse.png);
+}
+/* line 20, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/plugin/RowExpander.scss */
+.x-grid-row-collapsed .x-grid-row-expander {
+  background-image: url(images/grid/group-expand.png);
 }
 
 /* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/layout/container/Accordion.scss */
@@ -28384,123 +28568,4 @@ a.x-monthpicker-yearnav-button:hover {
 /* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-bc {
   background-position: 0 -3px;
-}
-
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-tr,
-.x-btn-plain-toolbar-large-br,
-.x-btn-plain-toolbar-large-mr {
-  padding-right: 3px;
-}
-
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-tl,
-.x-btn-plain-toolbar-large-bl,
-.x-btn-plain-toolbar-large-ml {
-  padding-left: 3px;
-}
-
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-tc {
-  height: 3px;
-}
-
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-bc {
-  height: 3px;
-}
-
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-mc {
-  padding: 1px 1px 1px 1px;
-}
-
-/* */
-/* line 423, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-plain-toolbar-large {
-  border-color: transparent;
-}
-
-/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-button-plain-toolbar-large {
-  height: 32px;
-}
-
-/* line 435, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-inner-plain-toolbar-large {
-  font: bold 16px/20px helvetica, arial, verdana, sans-serif;
-  color: #666666;
-  padding: 0 10px;
-  max-width: 100%;
-}
-/* line 446, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-icon-right > .x-btn-inner-plain-toolbar-large, .x-btn-icon-left > .x-btn-inner-plain-toolbar-large {
-  max-width: calc(100% - 32px);
-}
-
-/* line 453, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-icon-el-plain-toolbar-large {
-  height: 32px;
-}
-/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-icon-left > .x-btn-icon-el-plain-toolbar-large, .x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
-  width: 32px;
-}
-/* line 462, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-icon-top > .x-btn-icon-el-plain-toolbar-large, .x-btn-icon-bottom > .x-btn-icon-el-plain-toolbar-large {
-  min-width: 32px;
-}
-/* line 466, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-icon-el-plain-toolbar-large.x-btn-glyph {
-  font-size: 32px;
-  line-height: 32px;
-  color: #666666;
-  opacity: 0.5;
-}
-/* line 486, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-ie8 .x-btn-icon-el-plain-toolbar-large.x-btn-glyph {
-  color: #b2b2b2;
-}
-/* line 493, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-text.x-btn-icon-left > .x-btn-icon-el-plain-toolbar-large {
-  margin-right: 0;
-}
-/* line 504, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
-  margin-left: 0;
-}
-/* line 515, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-text.x-btn-icon-top > .x-btn-icon-el-plain-toolbar-large {
-  margin-bottom: 5px;
-}
-/* line 519, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-text.x-btn-icon-bottom > .x-btn-icon-el-plain-toolbar-large {
-  margin-top: 5px;
-}
-
-/* line 525, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-arrow-right > .x-btn-icon.x-btn-no-text.x-btn-button-plain-toolbar-large {
-  padding-right: 10px;
-}
-/* line 528, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-arrow-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
-  margin-right: 10px;
-}
-
-/* line 535, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-arrow-bottom > .x-btn-button-plain-toolbar-large,
-.x-btn-split-bottom > .x-btn-button-plain-toolbar-large {
-  padding-bottom: 3px;
-}
-
-/* line 541, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-wrap-plain-toolbar-large.x-btn-arrow-right:after {
-  width: 28px;
-  padding-right: 28px;
-  background-image: url(images/button/plain-toolbar-large-arrow.png);
-}
-/* line 563, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-wrap-plain-toolbar-large.x-btn-arrow-bottom:after {
-  height: 20px;
-  background-image: url(images/button/plain-toolbar-large-arrow.png);
 }

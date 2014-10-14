@@ -1,3 +1,122 @@
+/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-plain-toolbar-large-tr,
+.x-btn-plain-toolbar-large-br,
+.x-btn-plain-toolbar-large-mr {
+  padding-right: 3px;
+}
+
+/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-plain-toolbar-large-tl,
+.x-btn-plain-toolbar-large-bl,
+.x-btn-plain-toolbar-large-ml {
+  padding-left: 3px;
+}
+
+/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-plain-toolbar-large-tc {
+  height: 3px;
+}
+
+/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-plain-toolbar-large-bc {
+  height: 3px;
+}
+
+/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-plain-toolbar-large-mc {
+  padding: 1px 1px 1px 1px;
+}
+
+/* */
+/* line 423, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-plain-toolbar-large {
+  border-color: transparent;
+}
+
+/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-button-plain-toolbar-large {
+  height: 32px;
+}
+
+/* line 435, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-inner-plain-toolbar-large {
+  font: bold 16px/20px helvetica, arial, verdana, sans-serif;
+  color: #666666;
+  padding: 0 10px;
+  max-width: 100%;
+}
+/* line 446, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-right > .x-btn-inner-plain-toolbar-large, .x-btn-icon-left > .x-btn-inner-plain-toolbar-large {
+  max-width: calc(100% - 32px);
+}
+
+/* line 453, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-el-plain-toolbar-large {
+  height: 32px;
+}
+/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-left > .x-btn-icon-el-plain-toolbar-large, .x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
+  width: 32px;
+}
+/* line 462, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-top > .x-btn-icon-el-plain-toolbar-large, .x-btn-icon-bottom > .x-btn-icon-el-plain-toolbar-large {
+  min-width: 32px;
+}
+/* line 466, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-el-plain-toolbar-large.x-btn-glyph {
+  font-size: 32px;
+  line-height: 32px;
+  color: #666666;
+  opacity: 0.5;
+}
+/* line 486, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-ie8 .x-btn-icon-el-plain-toolbar-large.x-btn-glyph {
+  color: #b2b2b2;
+}
+/* line 493, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-left > .x-btn-icon-el-plain-toolbar-large {
+  margin-right: 0;
+}
+/* line 504, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
+  margin-left: 0;
+}
+/* line 515, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-top > .x-btn-icon-el-plain-toolbar-large {
+  margin-bottom: 5px;
+}
+/* line 519, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-bottom > .x-btn-icon-el-plain-toolbar-large {
+  margin-top: 5px;
+}
+
+/* line 525, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-right > .x-btn-icon.x-btn-no-text.x-btn-button-plain-toolbar-large {
+  padding-right: 10px;
+}
+/* line 528, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
+  margin-right: 10px;
+}
+
+/* line 535, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-bottom > .x-btn-button-plain-toolbar-large,
+.x-btn-split-bottom > .x-btn-button-plain-toolbar-large {
+  padding-bottom: 3px;
+}
+
+/* line 541, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-plain-toolbar-large.x-btn-arrow-right:after {
+  width: 28px;
+  padding-right: 28px;
+  background-image: url(images/button/plain-toolbar-large-arrow.png);
+}
+/* line 563, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-plain-toolbar-large.x-btn-arrow-bottom:after {
+  height: 20px;
+  background-image: url(images/button/plain-toolbar-large-arrow.png);
+}
+
 /* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-plain-toolbar-large.x-btn-split-right:after {
   width: 35px;

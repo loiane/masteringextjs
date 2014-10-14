@@ -7,7 +7,6 @@ Ext.define('Packt.controller.StaticData', {
     ],
 
     stores: [
-        'staticData.Base',
         'staticData.Actors',
         'staticData.Categories',
         'staticData.Cities',

@@ -27,6 +27,7 @@ Ext.require('Ext.form.field.File');
 Ext.require('Ext.Img');
 Ext.require('Ext.form.field.ComboBox');
 Ext.require('Ext.layout.container.Accordion');
+Ext.require('Ext.ux.LiveSearchGridPanel');
 
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',

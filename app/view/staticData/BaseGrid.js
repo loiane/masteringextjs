@@ -113,7 +113,7 @@ Ext.define('Packt.view.staticData.BaseGrid', {
             return columnIndexes;
         };
 
-        me.validateRow = function(record, index, node, options){
+        me.validateRow = function(record, rowIndex){
 
             var me = this,
                 view = me.getView(),
@@ -125,12 +125,12 @@ Ext.define('Packt.view.staticData.BaseGrid', {
 
             var columnIndexes = me.getColumnIndexes();
 
-            Ext.each(columnIndexes, function (columnIndex, x) {
+            Ext.each(columnIndexes, function (columnIndex, col) {
                 var cellErrors, cell, messages;
 
                 cellErrors = errors.getByField(columnIndex);
                 if (!Ext.isEmpty(cellErrors)) {
-                    cell = view.getCellByPosition({row: index, column: x});
+                    cell = view.getCellByPosition({row: rowIndex, column: col});
                     messages = [];
                     Ext.each(cellErrors, function (cellError) {
                         messages.push(cellError.message);
@@ -156,13 +156,16 @@ Ext.define('Packt.view.staticData.BaseGrid', {
                 error,
                 record;
 
-            Ext.each(view.getNodes(), function (row, y) {
+            Ext.each(view.getNodes(), function (row, col) {
                 record = view.getRecord(row);
 
-                isValid = (me.validateRow(record, y) && isValid);
+                isValid = (me.validateRow(record, col) && isValid);
             });
 
-            error = isValid ? undefined : {title: "Invalid Records", message: "Please fix errors before saving."};
+            error = isValid ? undefined : {
+                title: "Invalid Records",
+                message: "Please fix errors before saving."
+            };
 
             return error;
         };

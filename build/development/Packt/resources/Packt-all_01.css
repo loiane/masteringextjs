@@ -2906,6 +2906,11 @@
   height: 70px;
 }
 
+/* line 34, ../../../../sass/etc/all.scss */
+.invalidCell {
+  background-color: red;
+}
+
 /* including package ext-theme-neptune */
 /** @class Global_CSS */
 /** @class Ext.LoadMask */
@@ -12072,12 +12077,6 @@ div.x-form-text-grow .x-form-textarea {
   margin: 0;
 }
 
-/* line 1, ../../../../ext/packages/ext-theme-base/sass/src/grid/column/Action.scss */
-.x-grid-cell-inner-action-col {
-  line-height: 0;
-  font-size: 0;
-}
-
 /* line 1, ../../../../ext/packages/ext-theme-base/sass/src/grid/feature/Grouping.scss */
 .x-group-hd-container {
   overflow: hidden;
@@ -12177,10 +12176,6 @@ div.x-form-text-grow .x-form-textarea {
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-}
-/* line 27, ../../../../ext/packages/ext-theme-base/sass/src/grid/plugin/Editing.scss */
-.x-grid-editor div.x-form-action-col-field {
-  line-height: 0;
 }
 
 /* line 2, ../../../../ext/packages/ext-theme-base/sass/src/resizer/Resizer.scss */
@@ -15043,6 +15038,16 @@ div.x-form-text-grow .x-form-textarea {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-small-cell > .x-grid-cell-inner {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-small-cell > .x-grid-cell-inner > .x-btn-default-small {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-default-medium {
   -webkit-border-radius: 3px;
@@ -15511,6 +15516,16 @@ div.x-form-text-grow .x-form-textarea {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-medium-cell > .x-grid-cell-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-medium-cell > .x-grid-cell-inner > .x-btn-default-medium {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-default-large {
   -webkit-border-radius: 3px;
@@ -15979,6 +15994,16 @@ div.x-form-text-grow .x-form-textarea {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-large-cell > .x-grid-cell-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-large-cell > .x-grid-cell-inner > .x-btn-default-large {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-default-toolbar-small {
   -webkit-border-radius: 3px;
@@ -16447,6 +16472,16 @@ div.x-form-text-grow .x-form-textarea {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-toolbar-small-cell > .x-grid-cell-inner {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-toolbar-small-cell > .x-grid-cell-inner > .x-btn-default-toolbar-small {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-default-toolbar-medium {
   -webkit-border-radius: 3px;
@@ -16915,6 +16950,16 @@ div.x-form-text-grow .x-form-textarea {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-toolbar-medium-cell > .x-grid-cell-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-toolbar-medium-cell > .x-grid-cell-inner > .x-btn-default-toolbar-medium {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-default-toolbar-large {
   -webkit-border-radius: 3px;
@@ -17383,6 +17428,16 @@ div.x-form-text-grow .x-form-textarea {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-toolbar-large-cell > .x-grid-cell-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-default-toolbar-large-cell > .x-grid-cell-inner > .x-btn-default-toolbar-large {
+  vertical-align: top;
+}
+
 /* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/resizer/Splitter.scss */
 .x-collapse-el {
   cursor: pointer;
@@ -26011,22 +26066,468 @@ a.x-monthpicker-yearnav-button:hover {
 
 /* */
 /* */
-/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Action.scss */
-.x-grid-cell-inner-action-col {
-  padding: 4px 4px 4px 4px;
+/*
+ * Define UI for fields which are rendered to fit inside grid cells.
+ * This includes cell and row editor fields and fields in widget columns.
+ */
+/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  padding: 3px 3px 3px 3px;
+  border-width: 1px;
+  border-style: solid;
+  background-image: none;
+  background-color: #3892d3;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4b9cd7), color-stop(50%, #3892d3), color-stop(51%, #358ac8), color-stop(100%, #3892d3));
+  background-image: -webkit-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -moz-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -o-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -ms-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
 }
 
-/* line 12, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Action.scss */
-.x-action-col-cell .x-item-disabled {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
-  opacity: 0.3;
+/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-mc {
+  background-image: url(images/btn/btn-grid-cell-small-fbg.gif);
+  background-position: 0 top;
+  background-color: #3892d3;
 }
 
-/* line 16, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/column/Action.scss */
-.x-action-col-icon {
+/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-nbr .x-btn-grid-cell-small {
+  padding: 0 !important;
+  border-width: 0 !important;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+  background-color: transparent !important;
+  background-image: none;
+  box-shadow: none !important;
+}
+
+/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-frameInfo {
+  font-family: th-3-3-3-3-1-1-1-1-3-3-3-3;
+}
+
+/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tl {
+  background-position: 0 -6px;
+}
+
+/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tr {
+  background-position: right -9px;
+}
+
+/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-bl {
+  background-position: 0 -12px;
+}
+
+/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-br {
+  background-position: right -15px;
+}
+
+/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-ml {
+  background-position: 0 top;
+}
+
+/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-mr {
+  background-position: right top;
+}
+
+/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tc {
+  background-position: 0 0;
+}
+
+/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-bc {
+  background-position: 0 -3px;
+}
+
+/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tr,
+.x-btn-grid-cell-small-br,
+.x-btn-grid-cell-small-mr {
+  padding-right: 3px;
+}
+
+/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tl,
+.x-btn-grid-cell-small-bl,
+.x-btn-grid-cell-small-ml {
+  padding-left: 3px;
+}
+
+/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tc {
+  height: 3px;
+}
+
+/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-bc {
+  height: 3px;
+}
+
+/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-tl,
+.x-btn-grid-cell-small-bl,
+.x-btn-grid-cell-small-tr,
+.x-btn-grid-cell-small-br,
+.x-btn-grid-cell-small-tc,
+.x-btn-grid-cell-small-bc,
+.x-btn-grid-cell-small-ml,
+.x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-corners.gif);
+}
+
+/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-ml,
+.x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-sides.gif);
+}
+
+/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+.x-btn-grid-cell-small-mc {
+  padding: 1px 1px 1px 1px;
+}
+
+/* */
+/* line 423, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-grid-cell-small {
+  border-color: #126daf;
+}
+
+/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-button-grid-cell-small {
   height: 16px;
+}
+
+/* line 435, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-inner-grid-cell-small {
+  font: bold 12px/16px helvetica, arial, verdana, sans-serif;
+  color: white;
+  padding: 0 5px;
+  max-width: 100%;
+}
+/* line 446, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-right > .x-btn-inner-grid-cell-small, .x-btn-icon-left > .x-btn-inner-grid-cell-small {
+  max-width: calc(100% - 16px);
+}
+
+/* line 453, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-el-grid-cell-small {
+  height: 16px;
+}
+/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-left > .x-btn-icon-el-grid-cell-small, .x-btn-icon-right > .x-btn-icon-el-grid-cell-small {
   width: 16px;
-  cursor: pointer;
+}
+/* line 462, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-top > .x-btn-icon-el-grid-cell-small, .x-btn-icon-bottom > .x-btn-icon-el-grid-cell-small {
+  min-width: 16px;
+}
+/* line 466, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-icon-el-grid-cell-small.x-btn-glyph {
+  font-size: 16px;
+  line-height: 16px;
+  color: white;
+  opacity: 0.5;
+}
+/* line 486, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-ie8 .x-btn-icon-el-grid-cell-small.x-btn-glyph {
+  color: #9bc8e9;
+}
+/* line 493, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-left > .x-btn-icon-el-grid-cell-small {
+  margin-right: 0px;
+}
+/* line 504, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-right > .x-btn-icon-el-grid-cell-small {
+  margin-left: 0px;
+}
+/* line 515, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-top > .x-btn-icon-el-grid-cell-small {
+  margin-bottom: 5px;
+}
+/* line 519, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-text.x-btn-icon-bottom > .x-btn-icon-el-grid-cell-small {
+  margin-top: 5px;
+}
+
+/* line 525, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-right > .x-btn-icon.x-btn-no-text.x-btn-button-grid-cell-small {
+  padding-right: 5px;
+}
+/* line 528, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-grid-cell-small {
+  margin-right: 5px;
+}
+
+/* line 535, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-arrow-bottom > .x-btn-button-grid-cell-small,
+.x-btn-split-bottom > .x-btn-button-grid-cell-small {
+  padding-bottom: 3px;
+}
+
+/* line 541, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-grid-cell-small.x-btn-arrow-right:after {
+  width: 8px;
+  padding-right: 8px;
+  background-image: url(images/button/grid-cell-small-arrow.png);
+}
+/* line 563, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-grid-cell-small.x-btn-arrow-bottom:after {
+  height: 8px;
+  background-image: url(images/button/grid-cell-small-arrow.png);
+}
+
+/* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-grid-cell-small.x-btn-split-right:after {
+  width: 14px;
+  padding-right: 14px;
+  background-image: url(images/button/grid-cell-small-s-arrow.png);
+}
+/* line 597, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-grid-cell-small.x-btn-split-bottom:after {
+  height: 14px;
+  background-image: url(images/button/grid-cell-small-s-arrow-b.png);
+}
+
+/* line 624, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-split-right > .x-btn-icon.x-btn-no-text.x-btn-button-grid-cell-small {
+  padding-right: 5px;
+}
+/* line 627, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-split-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-grid-cell-small {
+  margin-right: 5px;
+}
+
+/* line 632, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-grid-cell-small {
+  background-image: none;
+  background-color: #3892d3;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4b9cd7), color-stop(50%, #3892d3), color-stop(51%, #358ac8), color-stop(100%, #3892d3));
+  background-image: -webkit-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -moz-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -o-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -ms-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+}
+
+/* line 667, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over.x-btn-grid-cell-small {
+  border-color: #1064a1;
+  background-image: none;
+  background-color: #3386c2;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4792c8), color-stop(50%, #3386c2), color-stop(51%, #307fb8), color-stop(100%, #3386c2));
+  background-image: -webkit-linear-gradient(top, #4792c8, #3386c2 50%, #307fb8 51%, #3386c2);
+  background-image: -moz-linear-gradient(top, #4792c8, #3386c2 50%, #307fb8 51%, #3386c2);
+  background-image: -o-linear-gradient(top, #4792c8, #3386c2 50%, #307fb8 51%, #3386c2);
+  background-image: -ms-linear-gradient(top, #4792c8, #3386c2 50%, #307fb8 51%, #3386c2);
+  background-image: linear-gradient(top, #4792c8, #3386c2 50%, #307fb8 51%, #3386c2);
+}
+
+/* line 723, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active.x-btn-grid-cell-small,
+.x-btn.x-btn-pressed.x-btn-grid-cell-small {
+  border-color: #0d5183;
+  background-image: none;
+  background-color: #2a6d9e;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2a6d9e), color-stop(50%, #276796), color-stop(51%, #2a6d9e), color-stop(100%, #3f7ba7));
+  background-image: -webkit-linear-gradient(top, #2a6d9e, #276796 50%, #2a6d9e 51%, #3f7ba7);
+  background-image: -moz-linear-gradient(top, #2a6d9e, #276796 50%, #2a6d9e 51%, #3f7ba7);
+  background-image: -o-linear-gradient(top, #2a6d9e, #276796 50%, #2a6d9e 51%, #3f7ba7);
+  background-image: -ms-linear-gradient(top, #2a6d9e, #276796 50%, #2a6d9e 51%, #3f7ba7);
+  background-image: linear-gradient(top, #2a6d9e, #276796 50%, #2a6d9e 51%, #3f7ba7);
+}
+
+/* line 779, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled.x-btn-grid-cell-small {
+  background-image: none;
+  background-color: #3892d3;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4b9cd7), color-stop(50%, #3892d3), color-stop(51%, #358ac8), color-stop(100%, #3892d3));
+  background-image: -webkit-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -moz-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -o-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: -ms-linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+  background-image: linear-gradient(top, #4b9cd7, #3892d3 50%, #358ac8 51%, #3892d3);
+}
+
+/* line 816, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-grid-cell-small-tl,
+.x-btn-focus .x-btn-grid-cell-small-bl,
+.x-btn-focus .x-btn-grid-cell-small-tr,
+.x-btn-focus .x-btn-grid-cell-small-br,
+.x-btn-focus .x-btn-grid-cell-small-tc,
+.x-btn-focus .x-btn-grid-cell-small-bc {
+  background-image: url(images/btn/btn-grid-cell-small-focus-corners.gif);
+}
+/* line 820, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-grid-cell-small-ml,
+.x-btn-focus .x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-focus-sides.gif);
+}
+/* line 823, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-grid-cell-small-mc {
+  background-color: #3892d3;
+  background-image: url(images/btn/btn-grid-cell-small-focus-fbg.gif);
+}
+
+/* line 840, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-grid-cell-small-tl,
+.x-btn-over .x-btn-grid-cell-small-bl,
+.x-btn-over .x-btn-grid-cell-small-tr,
+.x-btn-over .x-btn-grid-cell-small-br,
+.x-btn-over .x-btn-grid-cell-small-tc,
+.x-btn-over .x-btn-grid-cell-small-bc {
+  background-image: url(images/btn/btn-grid-cell-small-over-corners.gif);
+}
+/* line 844, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-grid-cell-small-ml,
+.x-btn-over .x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-over-sides.gif);
+}
+/* line 847, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-grid-cell-small-mc {
+  background-color: #3386c2;
+  background-image: url(images/btn/btn-grid-cell-small-over-fbg.gif);
+}
+
+/* line 864, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-tl,
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-bl,
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-tr,
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-br,
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-tc,
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-bc {
+  background-image: url(images/btn/btn-grid-cell-small-focus-over-corners.gif);
+}
+/* line 868, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-ml,
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-focus-over-sides.gif);
+}
+/* line 871, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-grid-cell-small-mc {
+  background-color: #3386c2;
+  background-image: url(images/btn/btn-grid-cell-small-focus-over-fbg.gif);
+}
+
+/* line 890, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-tl,
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-bl,
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-tr,
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-br,
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-tc,
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-bc,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-tl,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-bl,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-tr,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-br,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-tc,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-bc {
+  background-image: url(images/btn/btn-grid-cell-small-pressed-corners.gif);
+}
+/* line 894, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-ml,
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-mr,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-ml,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-pressed-sides.gif);
+}
+/* line 897, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-grid-cell-small-mc,
+.x-btn.x-btn-pressed .x-btn-grid-cell-small-mc {
+  background-color: #2a6d9e;
+  background-image: url(images/btn/btn-grid-cell-small-pressed-fbg.gif);
+}
+
+/* line 915, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-tl,
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-bl,
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-tr,
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-br,
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-tc,
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-bc,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-tl,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-bl,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-tr,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-br,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-tc,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-bc {
+  background-image: url(images/btn/btn-grid-cell-small-focus-pressed-corners.gif);
+}
+/* line 919, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-ml,
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-mr,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-ml,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-focus-pressed-sides.gif);
+}
+/* line 922, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-grid-cell-small-mc,
+.x-btn-focus.x-btn-pressed .x-btn-grid-cell-small-mc {
+  background-color: #2a6d9e;
+  background-image: url(images/btn/btn-grid-cell-small-focus-pressed-fbg.gif);
+}
+
+/* line 940, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-tl,
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-bl,
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-tr,
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-br,
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-tc,
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-bc {
+  background-image: url(images/btn/btn-grid-cell-small-disabled-corners.gif);
+}
+/* line 944, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-ml,
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-mr {
+  background-image: url(images/btn/btn-grid-cell-small-disabled-sides.gif);
+}
+/* line 947, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-grid-cell-small-mc {
+  background-color: #3892d3;
+  background-image: url(images/btn/btn-grid-cell-small-disabled-fbg.gif);
+}
+
+/* line 957, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-btn-grid-cell-small {
+  background-image: none;
+}
+
+/* line 963, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-disabled.x-btn-grid-cell-small {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-grid-cell-small-cell > .x-grid-cell-inner {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-grid-cell-small-cell > .x-grid-cell-inner > .x-btn-grid-cell-small {
+  vertical-align: top;
 }
 
 /* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/feature/Grouping.scss */
@@ -26539,10 +27040,6 @@ a.x-monthpicker-yearnav-button:hover {
 /* line 17, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/plugin/Editing.scss */
 .x-grid-editor .x-form-display-field {
   text-overflow: ellipsis;
-}
-/* line 23, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/plugin/Editing.scss */
-.x-grid-editor .x-form-action-col-field {
-  padding: 4px 4px 4px 4px;
 }
 
 /* line 3, ../../../../ext/packages/ext-theme-neutral/sass/src/grid/plugin/CellEditing.scss */
@@ -27357,6 +27854,16 @@ a.x-monthpicker-yearnav-button:hover {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-plain-toolbar-small-cell > .x-grid-cell-inner {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-plain-toolbar-small-cell > .x-grid-cell-inner > .x-btn-plain-toolbar-small {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-medium {
   -webkit-border-radius: 3px;
@@ -27789,6 +28296,16 @@ a.x-monthpicker-yearnav-button:hover {
 /* */
 /* */
 /* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-plain-toolbar-medium-cell > .x-grid-cell-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-plain-toolbar-medium-cell > .x-grid-cell-inner > .x-btn-plain-toolbar-medium {
+  vertical-align: top;
+}
+
 /* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large {
   -webkit-border-radius: 3px;
@@ -27986,583 +28503,4 @@ a.x-monthpicker-yearnav-button:hover {
 .x-btn-wrap-plain-toolbar-large.x-btn-arrow-bottom:after {
   height: 20px;
   background-image: url(images/button/plain-toolbar-large-arrow.png);
-}
-
-/* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-wrap-plain-toolbar-large.x-btn-split-right:after {
-  width: 35px;
-  padding-right: 35px;
-  background-image: url(images/button/plain-toolbar-large-s-arrow.png);
-}
-/* line 597, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-wrap-plain-toolbar-large.x-btn-split-bottom:after {
-  height: 29px;
-  background-image: url(images/button/plain-toolbar-large-s-arrow-b.png);
-}
-
-/* line 624, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-split-right > .x-btn-icon.x-btn-no-text.x-btn-button-plain-toolbar-large {
-  padding-right: 10px;
-}
-/* line 627, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-split-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
-  margin-right: 10px;
-}
-
-/* line 632, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-plain-toolbar-large {
-  background-image: none;
-  background-color: transparent;
-  -webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-  -moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-  box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-}
-
-/* line 667, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-over.x-btn-plain-toolbar-large {
-  border-color: #d8d8d8;
-  background-image: none;
-  background-color: #ebebeb;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ededed), color-stop(50%, #ebebeb), color-stop(51%, #dfdfdf), color-stop(100%, #ebebeb));
-  background-image: -webkit-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
-  background-image: -moz-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
-  background-image: -o-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
-  background-image: -ms-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
-  background-image: linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
-}
-
-/* line 694, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-over.x-btn-plain-toolbar-large {
-  -webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-  -moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-  box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-}
-
-/* line 723, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-menu-active.x-btn-plain-toolbar-large,
-.x-btn.x-btn-pressed.x-btn-plain-toolbar-large {
-  border-color: #cecece;
-  background-image: none;
-  background-color: #e1e1e1;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(50%, #d5d5d5), color-stop(51%, #e1e1e1), color-stop(100%, #e4e4e4));
-  background-image: -webkit-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
-  background-image: -moz-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
-  background-image: -o-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
-  background-image: -ms-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
-  background-image: linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
-}
-
-/* line 751, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-menu-active.x-btn-plain-toolbar-large,
-.x-btn-focus.x-btn-pressed.x-btn-plain-toolbar-large {
-  -webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-  -moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-  box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-}
-
-/* line 779, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-disabled.x-btn-plain-toolbar-large {
-  background-image: none;
-  background-color: transparent;
-}
-
-/* line 816, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus .x-btn-plain-toolbar-large-tl,
-.x-btn-focus .x-btn-plain-toolbar-large-bl,
-.x-btn-focus .x-btn-plain-toolbar-large-tr,
-.x-btn-focus .x-btn-plain-toolbar-large-br,
-.x-btn-focus .x-btn-plain-toolbar-large-tc,
-.x-btn-focus .x-btn-plain-toolbar-large-bc {
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-corners.gif);
-}
-/* line 820, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus .x-btn-plain-toolbar-large-ml,
-.x-btn-focus .x-btn-plain-toolbar-large-mr {
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-sides.gif);
-}
-/* line 823, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus .x-btn-plain-toolbar-large-mc {
-  background-color: transparent;
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-fbg.gif);
-}
-
-/* line 840, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-over .x-btn-plain-toolbar-large-tl,
-.x-btn-over .x-btn-plain-toolbar-large-bl,
-.x-btn-over .x-btn-plain-toolbar-large-tr,
-.x-btn-over .x-btn-plain-toolbar-large-br,
-.x-btn-over .x-btn-plain-toolbar-large-tc,
-.x-btn-over .x-btn-plain-toolbar-large-bc {
-  background-image: url(images/btn/btn-plain-toolbar-large-over-corners.gif);
-}
-/* line 844, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-over .x-btn-plain-toolbar-large-ml,
-.x-btn-over .x-btn-plain-toolbar-large-mr {
-  background-image: url(images/btn/btn-plain-toolbar-large-over-sides.gif);
-}
-/* line 847, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-over .x-btn-plain-toolbar-large-mc {
-  background-color: #ebebeb;
-  background-image: url(images/btn/btn-plain-toolbar-large-over-fbg.gif);
-}
-
-/* line 864, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tl,
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-bl,
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tr,
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-br,
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tc,
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-bc {
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-over-corners.gif);
-}
-/* line 868, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-ml,
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-mr {
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-over-sides.gif);
-}
-/* line 871, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-mc {
-  background-color: #ebebeb;
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-over-fbg.gif);
-}
-
-/* line 890, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tl,
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-bl,
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tr,
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-br,
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tc,
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-bc,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-tl,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-bl,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-tr,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-br,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-tc,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-bc {
-  background-image: url(images/btn/btn-plain-toolbar-large-pressed-corners.gif);
-}
-/* line 894, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-ml,
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-mr,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-ml,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-mr {
-  background-image: url(images/btn/btn-plain-toolbar-large-pressed-sides.gif);
-}
-/* line 897, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-mc,
-.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-mc {
-  background-color: #e1e1e1;
-  background-image: url(images/btn/btn-plain-toolbar-large-pressed-fbg.gif);
-}
-
-/* line 915, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tl,
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-bl,
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tr,
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-br,
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tc,
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-bc,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-tl,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-bl,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-tr,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-br,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-tc,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-bc {
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-corners.gif);
-}
-/* line 919, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-ml,
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-mr,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-ml,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-mr {
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-sides.gif);
-}
-/* line 922, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-mc,
-.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-mc {
-  background-color: #e1e1e1;
-  background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-fbg.gif);
-}
-
-/* line 940, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tl,
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-bl,
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tr,
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-br,
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tc,
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-bc {
-  background-image: url(images/btn/btn-plain-toolbar-large-disabled-corners.gif);
-}
-/* line 944, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-ml,
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-mr {
-  background-image: url(images/btn/btn-plain-toolbar-large-disabled-sides.gif);
-}
-/* line 947, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-mc {
-  background-color: transparent;
-  background-image: url(images/btn/btn-plain-toolbar-large-disabled-fbg.gif);
-}
-
-/* line 957, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-nbr .x-btn-plain-toolbar-large {
-  background-image: none;
-}
-
-/* line 963, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
-.x-btn-disabled.x-btn-plain-toolbar-large {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-  opacity: 0.5;
-}
-
-/* */
-/* */
-/* */
-/* */
-/* */
-/* */
-/* line 220, ../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
-.x-btn-plain-toolbar-small-disabled .x-btn-icon-el,
-.x-btn-plain-toolbar-medium-disabled .x-btn-icon-el,
-.x-btn-plain-toolbar-large-disabled .x-btn-icon-el {
-  background-color: white;
-}
-/* line 223, ../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
-.x-ie8 .x-btn-plain-toolbar-small-disabled .x-btn-icon-el, .x-ie8
-.x-btn-plain-toolbar-medium-disabled .x-btn-icon-el, .x-ie8
-.x-btn-plain-toolbar-large-disabled .x-btn-icon-el {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-  opacity: 0.5;
-}
-
-/* line 252, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-light {
-  border-color: #dfeaf2;
-  padding: 0;
-}
-
-/* line 258, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light {
-  font-size: 13px;
-  border: 1px solid #dfeaf2;
-}
-/* line 265, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light .x-tool-img {
-  background-image: url(images/tools/tool-sprites-dark.png);
-  background-color: #dfeaf2;
-}
-
-/* line 278, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-horizontal {
-  padding: 9px 9px 10px 9px;
-}
-/* line 282, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-horizontal .x-panel-header-light-tab-bar {
-  margin-top: -9px;
-  margin-bottom: -10px;
-}
-
-/* line 290, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-horizontal.x-header-noborder {
-  padding: 10px 10px 10px 10px;
-}
-/* line 294, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-horizontal.x-header-noborder .x-panel-header-light-tab-bar {
-  margin-top: -10px;
-  margin-bottom: -10px;
-}
-
-/* line 302, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical {
-  padding: 9px 9px 9px 10px;
-}
-/* line 306, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical .x-panel-header-light-tab-bar {
-  margin-right: -9px;
-  margin-left: -10px;
-}
-
-/* line 314, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical.x-header-noborder {
-  padding: 10px 10px 10px 10px;
-}
-/* line 318, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical.x-header-noborder .x-panel-header-light-tab-bar {
-  margin-right: -10px;
-  margin-left: -10px;
-}
-
-/* line 352, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light {
-  color: #666666;
-  font-size: 13px;
-  font-weight: bold;
-  font-family: helvetica, arial, verdana, sans-serif;
-  line-height: 16px;
-}
-/* line 365, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-text-light {
-  text-transform: none;
-  padding: 0;
-}
-/* line 390, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-top {
-  height: 22px;
-  padding-bottom: 6px;
-}
-/* line 395, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-right {
-  width: 22px;
-  padding-left: 6px;
-}
-/* line 407, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-bottom {
-  height: 22px;
-  padding-top: 6px;
-}
-/* line 412, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-left {
-  width: 22px;
-  padding-right: 6px;
-}
-/* line 424, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-icon-light {
-  width: 16px;
-  height: 16px;
-  background-position: center center;
-}
-/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-glyph {
-  color: white;
-  font-size: 16px;
-  line-height: 16px;
-  opacity: 0.5;
-}
-/* line 447, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-ie8 .x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-glyph {
-  color: #eff4f8;
-}
-
-/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-body-light {
-  background: white;
-  border-color: #dfeaf2;
-  color: black;
-  font-size: 13px;
-  font-weight: normal;
-  font-family: helvetica, arial, verdana, sans-serif;
-  border-width: 1px;
-  border-style: solid;
-}
-
-/* line 621, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light {
-  background-image: none;
-  background-color: #dfeaf2;
-}
-
-/* line 625, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical {
-  background-image: none;
-  background-color: #dfeaf2;
-}
-
-/* line 683, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-light-collapsed-border-top {
-  border-bottom-width: 1px !important;
-}
-/* line 687, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-light-collapsed-border-right {
-  border-left-width: 1px !important;
-}
-/* line 691, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-light-collapsed-border-bottom {
-  border-top-width: 1px !important;
-}
-/* line 695, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel .x-panel-header-light-collapsed-border-left {
-  border-right-width: 1px !important;
-}
-
-/* */
-/* */
-/* */
-/* */
-/* line 731, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-horizontal .x-tool-after-title {
-  margin: 0 0 0 6px;
-}
-/* line 741, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-horizontal .x-tool-before-title {
-  margin: 0 6px 0 0;
-}
-
-/* line 753, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical .x-tool-after-title {
-  margin: 6px 0 0 0;
-}
-/* line 763, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-vertical .x-tool-before-title {
-  margin: 0 0 6px 0;
-}
-
-/* line 793, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-light-resizable .x-panel-handle {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-  opacity: 0;
-}
-
-/* line 2, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-l {
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 6, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-b {
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-}
-
-/* line 10, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-bl {
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 16, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-r {
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-}
-
-/* line 20, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-rl {
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 26, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-rb {
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-}
-
-/* line 32, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-rbl {
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 40, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-t {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-}
-
-/* line 44, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-tl {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 50, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-tb {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-}
-
-/* line 56, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-tbl {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 64, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-tr {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-}
-
-/* line 70, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-trl {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-  border-left-color: #dfeaf2 !important;
-  border-left-width: 1px !important;
-}
-
-/* line 78, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-trb {
-  border-top-color: #dfeaf2 !important;
-  border-top-width: 1px !important;
-  border-right-color: #dfeaf2 !important;
-  border-right-width: 1px !important;
-  border-bottom-color: #dfeaf2 !important;
-  border-bottom-width: 1px !important;
-}
-
-/* line 86, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
-.x-panel-light-outer-border-trbl {
-  border-color: #dfeaf2 !important;
-  border-width: 1px !important;
-}
-
-/* line 252, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-light-framed {
-  border-color: #dfeaf2;
-  padding: 0;
-}
-
-/* line 258, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-framed {
-  font-size: 13px;
-  border: 5px solid #dfeaf2;
-}
-/* line 265, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-framed .x-tool-img {
-  background-image: url(images/tools/tool-sprites-dark.png);
-  background-color: #dfeaf2;
-}
-
-/* line 278, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-framed-horizontal {
-  padding: 5px 5px 5px 5px;
-}
-/* line 282, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-framed-horizontal .x-panel-header-light-framed-tab-bar {
-  margin-top: -5px;
-  margin-bottom: -5px;
-}
-
-/* line 290, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-framed-horizontal.x-header-noborder {
-  padding: 10px 10px 5px 10px;
-}
-/* line 294, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
-.x-panel-header-light-framed-horizontal.x-header-noborder .x-panel-header-light-framed-tab-bar {
-  margin-top: -10px;
-  margin-bottom: -5px;
 }

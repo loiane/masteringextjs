@@ -12,7 +12,13 @@ Ext.define('Packt.model.staticData.Actor', {
     ],
 
     validators: {
-        first_name: 'presence',
-        last_name: { type: 'length', min: 2 }
+        first_name: [
+            { type: 'presence', message: 'This field is mandatory'},
+            { type: 'length', min: 2, max: 45}
+        ],
+        last_name: [
+            { type: 'presence', message: 'This field is mandatory'},
+            { type: 'length', min: 2, max: 45}
+        ]
     }
 });

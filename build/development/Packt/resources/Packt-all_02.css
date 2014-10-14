@@ -1,3 +1,592 @@
+/* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-plain-toolbar-large.x-btn-split-right:after {
+  width: 35px;
+  padding-right: 35px;
+  background-image: url(images/button/plain-toolbar-large-s-arrow.png);
+}
+/* line 597, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-wrap-plain-toolbar-large.x-btn-split-bottom:after {
+  height: 29px;
+  background-image: url(images/button/plain-toolbar-large-s-arrow-b.png);
+}
+
+/* line 624, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-split-right > .x-btn-icon.x-btn-no-text.x-btn-button-plain-toolbar-large {
+  padding-right: 10px;
+}
+/* line 627, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-split-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
+  margin-right: 10px;
+}
+
+/* line 632, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-plain-toolbar-large {
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+  -moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+  box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+}
+
+/* line 667, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over.x-btn-plain-toolbar-large {
+  border-color: #d8d8d8;
+  background-image: none;
+  background-color: #ebebeb;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ededed), color-stop(50%, #ebebeb), color-stop(51%, #dfdfdf), color-stop(100%, #ebebeb));
+  background-image: -webkit-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
+  background-image: -moz-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
+  background-image: -o-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
+  background-image: -ms-linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
+  background-image: linear-gradient(top, #ededed, #ebebeb 50%, #dfdfdf 51%, #ebebeb);
+}
+
+/* line 694, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over.x-btn-plain-toolbar-large {
+  -webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+  -moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+  box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+}
+
+/* line 723, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active.x-btn-plain-toolbar-large,
+.x-btn.x-btn-pressed.x-btn-plain-toolbar-large {
+  border-color: #cecece;
+  background-image: none;
+  background-color: #e1e1e1;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e1e1e1), color-stop(50%, #d5d5d5), color-stop(51%, #e1e1e1), color-stop(100%, #e4e4e4));
+  background-image: -webkit-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
+  background-image: -moz-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
+  background-image: -o-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
+  background-image: -ms-linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
+  background-image: linear-gradient(top, #e1e1e1, #d5d5d5 50%, #e1e1e1 51%, #e4e4e4);
+}
+
+/* line 751, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active.x-btn-plain-toolbar-large,
+.x-btn-focus.x-btn-pressed.x-btn-plain-toolbar-large {
+  -webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+  -moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+  box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+}
+
+/* line 779, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled.x-btn-plain-toolbar-large {
+  background-image: none;
+  background-color: transparent;
+}
+
+/* line 816, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-plain-toolbar-large-tl,
+.x-btn-focus .x-btn-plain-toolbar-large-bl,
+.x-btn-focus .x-btn-plain-toolbar-large-tr,
+.x-btn-focus .x-btn-plain-toolbar-large-br,
+.x-btn-focus .x-btn-plain-toolbar-large-tc,
+.x-btn-focus .x-btn-plain-toolbar-large-bc {
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-corners.gif);
+}
+/* line 820, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-plain-toolbar-large-ml,
+.x-btn-focus .x-btn-plain-toolbar-large-mr {
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-sides.gif);
+}
+/* line 823, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus .x-btn-plain-toolbar-large-mc {
+  background-color: transparent;
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-fbg.gif);
+}
+
+/* line 840, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-plain-toolbar-large-tl,
+.x-btn-over .x-btn-plain-toolbar-large-bl,
+.x-btn-over .x-btn-plain-toolbar-large-tr,
+.x-btn-over .x-btn-plain-toolbar-large-br,
+.x-btn-over .x-btn-plain-toolbar-large-tc,
+.x-btn-over .x-btn-plain-toolbar-large-bc {
+  background-image: url(images/btn/btn-plain-toolbar-large-over-corners.gif);
+}
+/* line 844, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-plain-toolbar-large-ml,
+.x-btn-over .x-btn-plain-toolbar-large-mr {
+  background-image: url(images/btn/btn-plain-toolbar-large-over-sides.gif);
+}
+/* line 847, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-over .x-btn-plain-toolbar-large-mc {
+  background-color: #ebebeb;
+  background-image: url(images/btn/btn-plain-toolbar-large-over-fbg.gif);
+}
+
+/* line 864, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tl,
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-bl,
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tr,
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-br,
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tc,
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-bc {
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-over-corners.gif);
+}
+/* line 868, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-ml,
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-mr {
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-over-sides.gif);
+}
+/* line 871, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-mc {
+  background-color: #ebebeb;
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-over-fbg.gif);
+}
+
+/* line 890, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tl,
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-bl,
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tr,
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-br,
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tc,
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-bc,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-tl,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-bl,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-tr,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-br,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-tc,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-bc {
+  background-image: url(images/btn/btn-plain-toolbar-large-pressed-corners.gif);
+}
+/* line 894, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-ml,
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-mr,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-ml,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-mr {
+  background-image: url(images/btn/btn-plain-toolbar-large-pressed-sides.gif);
+}
+/* line 897, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-mc,
+.x-btn.x-btn-pressed .x-btn-plain-toolbar-large-mc {
+  background-color: #e1e1e1;
+  background-image: url(images/btn/btn-plain-toolbar-large-pressed-fbg.gif);
+}
+
+/* line 915, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tl,
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-bl,
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tr,
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-br,
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tc,
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-bc,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-tl,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-bl,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-tr,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-br,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-tc,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-bc {
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-corners.gif);
+}
+/* line 919, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-ml,
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-mr,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-ml,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-mr {
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-sides.gif);
+}
+/* line 922, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-mc,
+.x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-mc {
+  background-color: #e1e1e1;
+  background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-fbg.gif);
+}
+
+/* line 940, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tl,
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-bl,
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tr,
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-br,
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tc,
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-bc {
+  background-image: url(images/btn/btn-plain-toolbar-large-disabled-corners.gif);
+}
+/* line 944, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-ml,
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-mr {
+  background-image: url(images/btn/btn-plain-toolbar-large-disabled-sides.gif);
+}
+/* line 947, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn.x-btn-disabled .x-btn-plain-toolbar-large-mc {
+  background-color: transparent;
+  background-image: url(images/btn/btn-plain-toolbar-large-disabled-fbg.gif);
+}
+
+/* line 957, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-nbr .x-btn-plain-toolbar-large {
+  background-image: none;
+}
+
+/* line 963, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-btn-disabled.x-btn-plain-toolbar-large {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+/* */
+/* */
+/* */
+/* */
+/* */
+/* */
+/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-plain-toolbar-large-cell > .x-grid-cell-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+.x-button-plain-toolbar-large-cell > .x-grid-cell-inner > .x-btn-plain-toolbar-large {
+  vertical-align: top;
+}
+
+/* line 220, ../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
+.x-btn-plain-toolbar-small-disabled .x-btn-icon-el,
+.x-btn-plain-toolbar-medium-disabled .x-btn-icon-el,
+.x-btn-plain-toolbar-large-disabled .x-btn-icon-el {
+  background-color: white;
+}
+/* line 223, ../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
+.x-ie8 .x-btn-plain-toolbar-small-disabled .x-btn-icon-el, .x-ie8
+.x-btn-plain-toolbar-medium-disabled .x-btn-icon-el, .x-ie8
+.x-btn-plain-toolbar-large-disabled .x-btn-icon-el {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+
+/* line 252, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-light {
+  border-color: #dfeaf2;
+  padding: 0;
+}
+
+/* line 258, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light {
+  font-size: 13px;
+  border: 1px solid #dfeaf2;
+}
+/* line 265, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light .x-tool-img {
+  background-image: url(images/tools/tool-sprites-dark.png);
+  background-color: #dfeaf2;
+}
+
+/* line 278, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-horizontal {
+  padding: 9px 9px 10px 9px;
+}
+/* line 282, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-horizontal .x-panel-header-light-tab-bar {
+  margin-top: -9px;
+  margin-bottom: -10px;
+}
+
+/* line 290, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-horizontal.x-header-noborder {
+  padding: 10px 10px 10px 10px;
+}
+/* line 294, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-horizontal.x-header-noborder .x-panel-header-light-tab-bar {
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+/* line 302, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical {
+  padding: 9px 9px 9px 10px;
+}
+/* line 306, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical .x-panel-header-light-tab-bar {
+  margin-right: -9px;
+  margin-left: -10px;
+}
+
+/* line 314, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical.x-header-noborder {
+  padding: 10px 10px 10px 10px;
+}
+/* line 318, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical.x-header-noborder .x-panel-header-light-tab-bar {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+/* line 352, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light {
+  color: #666666;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: helvetica, arial, verdana, sans-serif;
+  line-height: 16px;
+}
+/* line 365, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-text-light {
+  text-transform: none;
+  padding: 0;
+}
+/* line 390, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-top {
+  height: 22px;
+  padding-bottom: 6px;
+}
+/* line 395, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-right {
+  width: 22px;
+  padding-left: 6px;
+}
+/* line 407, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-bottom {
+  height: 22px;
+  padding-top: 6px;
+}
+/* line 412, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-left {
+  width: 22px;
+  padding-right: 6px;
+}
+/* line 424, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-icon-light {
+  width: 16px;
+  height: 16px;
+  background-position: center center;
+}
+/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-glyph {
+  color: white;
+  font-size: 16px;
+  line-height: 16px;
+  opacity: 0.5;
+}
+/* line 447, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-ie8 .x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-glyph {
+  color: #eff4f8;
+}
+
+/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-body-light {
+  background: white;
+  border-color: #dfeaf2;
+  color: black;
+  font-size: 13px;
+  font-weight: normal;
+  font-family: helvetica, arial, verdana, sans-serif;
+  border-width: 1px;
+  border-style: solid;
+}
+
+/* line 621, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light {
+  background-image: none;
+  background-color: #dfeaf2;
+}
+
+/* line 625, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical {
+  background-image: none;
+  background-color: #dfeaf2;
+}
+
+/* line 683, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel .x-panel-header-light-collapsed-border-top {
+  border-bottom-width: 1px !important;
+}
+/* line 687, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel .x-panel-header-light-collapsed-border-right {
+  border-left-width: 1px !important;
+}
+/* line 691, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel .x-panel-header-light-collapsed-border-bottom {
+  border-top-width: 1px !important;
+}
+/* line 695, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel .x-panel-header-light-collapsed-border-left {
+  border-right-width: 1px !important;
+}
+
+/* */
+/* */
+/* */
+/* */
+/* line 731, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-horizontal .x-tool-after-title {
+  margin: 0 0 0 6px;
+}
+/* line 741, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-horizontal .x-tool-before-title {
+  margin: 0 6px 0 0;
+}
+
+/* line 753, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical .x-tool-after-title {
+  margin: 6px 0 0 0;
+}
+/* line 763, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-vertical .x-tool-before-title {
+  margin: 0 0 6px 0;
+}
+
+/* line 793, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-light-resizable .x-panel-handle {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+
+/* line 2, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-l {
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 6, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-b {
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+}
+
+/* line 10, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-bl {
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 16, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-r {
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+}
+
+/* line 20, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-rl {
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 26, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-rb {
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+}
+
+/* line 32, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-rbl {
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 40, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-t {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+}
+
+/* line 44, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-tl {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 50, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-tb {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+}
+
+/* line 56, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-tbl {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 64, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-tr {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+}
+
+/* line 70, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-trl {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+  border-left-color: #dfeaf2 !important;
+  border-left-width: 1px !important;
+}
+
+/* line 78, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-trb {
+  border-top-color: #dfeaf2 !important;
+  border-top-width: 1px !important;
+  border-right-color: #dfeaf2 !important;
+  border-right-width: 1px !important;
+  border-bottom-color: #dfeaf2 !important;
+  border-bottom-width: 1px !important;
+}
+
+/* line 86, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+.x-panel-light-outer-border-trbl {
+  border-color: #dfeaf2 !important;
+  border-width: 1px !important;
+}
+
+/* line 252, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-light-framed {
+  border-color: #dfeaf2;
+  padding: 0;
+}
+
+/* line 258, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-framed {
+  font-size: 13px;
+  border: 5px solid #dfeaf2;
+}
+/* line 265, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-framed .x-tool-img {
+  background-image: url(images/tools/tool-sprites-dark.png);
+  background-color: #dfeaf2;
+}
+
+/* line 278, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-framed-horizontal {
+  padding: 5px 5px 5px 5px;
+}
+/* line 282, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-framed-horizontal .x-panel-header-light-framed-tab-bar {
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+
+/* line 290, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-framed-horizontal.x-header-noborder {
+  padding: 10px 10px 5px 10px;
+}
+/* line 294, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+.x-panel-header-light-framed-horizontal.x-header-noborder .x-panel-header-light-framed-tab-bar {
+  margin-top: -10px;
+  margin-bottom: -5px;
+}
+
 /* line 302, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical {
   padding: 5px 5px 5px 5px;

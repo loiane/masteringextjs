@@ -7,6 +7,7 @@ Ext.define('Packt.controller.StaticData', {
     ],
 
     stores: [
+        'staticData.Base',
         'staticData.Actors',
         'staticData.Categories',
         'staticData.Cities',
@@ -53,7 +54,7 @@ Ext.define('Packt.controller.StaticData', {
 
         me.listen({
             store: {
-                '#staticDataAbstract': {
+                '#staticData.Base': {
                     write: me.onStoreSync
                 }
             }
@@ -61,10 +62,7 @@ Ext.define('Packt.controller.StaticData', {
     },
 
     onStoreSync: function(store, operation, options){
-        Packt.util.Alert.msg('Success!', 'Your changes have been saved.');
-        console.log(store);
-        console.log(operation);
-        console.log(options);
+        Packt.util.Util.showToast('Success! Your changes have been saved.');
     },
 
     render: function(component, options) {
@@ -111,7 +109,7 @@ Ext.define('Packt.controller.StaticData', {
             store = grid.getStore(),
             errors = grid.validate();
 
-        if (errors === 'undefined'){
+        if (errors === undefined){
             store.sync();
         } else {
             Ext.Msg.alert(errors);

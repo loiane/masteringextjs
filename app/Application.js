@@ -30,6 +30,7 @@ Ext.require('Ext.layout.container.Accordion');
 Ext.require('Ext.ux.LiveSearchGridPanel');
 Ext.require('Ext.grid.column.Date');
 Ext.require('Ext.grid.column.Widget');
+Ext.require('Ext.form.field.Tag');
 
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',

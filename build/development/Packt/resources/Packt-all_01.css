@@ -27566,6 +27566,22 @@ a.x-monthpicker-yearnav-button:hover {
   background-position: 0 -15px;
 }
 
+/* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/view/MultiSelector.scss */
+.x-multiselector-remove {
+  font-size: 100%;
+  color: #e1e1e1;
+  cursor: pointer;
+}
+/* line 6, ../../../../ext/packages/ext-theme-neutral/sass/src/view/MultiSelector.scss */
+.x-multiselector-remove .x-grid-cell-inner {
+  padding: 5px 10px 4px 10px;
+}
+
+/* line 11, ../../../../ext/packages/ext-theme-neutral/sass/src/view/MultiSelector.scss */
+.x-grid-item-over .x-multiselector-remove {
+  color: red;
+}
+
 /* line 1, ../../../../ext/packages/ext-theme-neutral/sass/src/window/Toast.scss */
 .x-toast-icon-information {
   background-image: url(images/window/toast/icon16_info.png);
@@ -28558,14 +28574,4 @@ a.x-monthpicker-yearnav-button:hover {
 /* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-mr {
   background-position: right top;
-}
-
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-tc {
-  background-position: 0 0;
-}
-
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-bc {
-  background-position: 0 -3px;
 }

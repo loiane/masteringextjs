@@ -33,9 +33,12 @@ Ext.define('Packt.view.film.FilmsGrid', {
             dataIndex: 'release_year'
         },
         {
-            text: 'Lenght',
-            width: 80,
-            dataIndex: 'length'
+            text: 'Length',
+            width: 100,
+            dataIndex: 'length',
+            renderer: function(value, metaData, record ){
+                return value + ' min';
+            }
         },
         {
             text: 'Rating',

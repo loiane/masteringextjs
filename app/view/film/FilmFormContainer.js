@@ -28,8 +28,6 @@ Ext.define('Packt.view.film.FilmFormContainer', {
         {
             xtype: 'numberfield',
             fieldLabel: 'Release Year',
-            maxValue: (new Date().getFullYear()) + 1,
-            minValue: 1950,
             allowDecimals: false,
             bind : '{currentFilm.release_year}'
         },
@@ -55,8 +53,6 @@ Ext.define('Packt.view.film.FilmFormContainer', {
         {
             xtype: 'numberfield',
             fieldLabel: 'Rental Duration',
-            maxValue: 10,
-            minValue: 1,
             allowDecimals: false,
             afterLabelTextTpl: Packt.util.Util.required,
             bind : '{currentFilm.rental_duration}'
@@ -64,8 +60,6 @@ Ext.define('Packt.view.film.FilmFormContainer', {
         {
             xtype: 'numberfield',
             fieldLabel: 'Rental Rate',
-            maxValue: 5,
-            minValue: 0,
             step: 0.1,
             afterLabelTextTpl: Packt.util.Util.required,
             bind : '{currentFilm.rental_rate}'
@@ -75,16 +69,12 @@ Ext.define('Packt.view.film.FilmFormContainer', {
             fieldLabel: 'Length (min)',
             allowDecimals: false,
             bind : '{currentFilm.length}'
-            // maxValue: 999,
-            // minValue: 1//,
 
         },
         {
             xtype: 'numberfield',
             name: 'replacement_cost',
             fieldLabel: 'Replacement Cost',
-            maxValue: 100,
-            minValue: 0,
             step: 0.1,
             afterLabelTextTpl: Packt.util.Util.required,
             bind : '{currentFilm.replacement_cost}'
@@ -103,12 +93,16 @@ Ext.define('Packt.view.film.FilmFormContainer', {
         {
             xtype: 'tagfield',
             fieldLabel: 'Special Features',
-            displayField: 'state',
-            valueField: 'abbr',
+            displayField: 'text',
+            valueField: 'text',
             filterPickList: true,
             queryMode: 'local',
             publishes: 'value',
-            bind : '{currentFilm.special_features}'
+            stacked: true,
+            bind: {
+                value: '{specialFeatures}',
+                store: '{special_features}'
+            }
         },
         {
             xtype: 'textareafield',

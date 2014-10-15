@@ -38,7 +38,8 @@ Ext.define('Packt.view.base.Grid', {
                 widget: {
                     xtype: 'button',
                     glyph: Packt.util.Glyphs.getGlyph('edit'),
-                    tooltip: 'Edit'
+                    tooltip: 'Edit',
+                    handler: 'onEdit'
                 }
             },{
                 xtype: 'widgetcolumn',
@@ -48,7 +49,8 @@ Ext.define('Packt.view.base.Grid', {
                 widget: {
                     xtype: 'button',
                     glyph: Packt.util.Glyphs.getGlyph('destroy'),
-                    tooltip: 'Delete'
+                    tooltip: 'Delete',
+                    handler: 'onDelete'
                 }
             }]
         );

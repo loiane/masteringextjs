@@ -41,7 +41,9 @@ Ext.define('Packt.view.film.FilmFormCategories', {
         search: {
             field: 'name',
             store: {
-                type: 'categories'
+                //source: Ext.getStore('staticData.Categories'),
+                type: 'categories',
+                autoLoad: true
             }
         }
     }]

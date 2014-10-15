@@ -12,7 +12,15 @@ Ext.define('Packt.view.film.FilmsController', {
         this.createDialog(null);
     },
 
+    onEdit: function(button){
+        this.createDialog(button.getWidgetRecord());
+    },
+
     createDialog: function(record){
+
+        //console.log(Ext.getStore('staticData.Categories').data.items);
+        //console.log(this.getStore('categories').data.items);
+        //console.log(this.getStore('films').data.items[0]);
 
         var me = this,
             view = me.getView();

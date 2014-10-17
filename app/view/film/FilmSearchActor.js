@@ -1,6 +1,10 @@
 Ext.define('Packt.view.film.FilmSearchActor', {
     extend: 'Ext.window.Window',
-    alias: 'widget.searchactor',
+    xtype: 'search-actor',
+
+    requires: [
+        'Packt.store.film.SearchActors'
+    ],
 
     width: 600,
     bodyPadding: 10,
@@ -8,11 +12,15 @@ Ext.define('Packt.view.film.FilmSearchActor', {
         type: 'anchor'
     },
     title: 'Search and Add Actor',
+    autoShow: true,
+    closable: false,
+    glyph: Packt.util.Glyphs.getGlyph('searchAndAdd'),
+    reference: 'search-actor',
 
     items: [
         {
             xtype: 'combo',
-            store: 'film.SearchActors',
+            reference: 'comboActors',
             displayField: 'first_name',
             valueField: 'actor_id',
             typeAhead: false,
@@ -20,6 +28,9 @@ Ext.define('Packt.view.film.FilmSearchActor', {
             hideTrigger:true,
             anchor: '100%',
             minChars: 2,
+            store: {
+                type: 'search-actors'
+            },
 
             displayTpl: new Ext.XTemplate(
                     '<tpl for=".">' +
@@ -44,5 +55,41 @@ Ext.define('Packt.view.film.FilmSearchActor', {
             style: 'margin-top:10px',
             html: 'Live search requires a minimum of 2 characters.'
         }
-    ]
+    ],
+
+    dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'bottom',
+        ui: 'footer',
+        layout: {
+            pack: 'end',
+            type: 'hbox'
+        },
+        items: [
+            {
+                xtype: 'button',
+                text: 'Cancel',
+                glyph: Packt.util.Glyphs.getGlyph('cancel'),
+                listeners: {
+                    click: 'onCancelActors'
+                }
+            },
+            {
+                xtype: 'button',
+                text: 'Clear',
+                glyph: Packt.util.Glyphs.getGlyph('clear'),
+                listeners: {
+                    click: 'onClearActors'
+                }
+            },
+            {
+                xtype: 'button',
+                text: 'Add Selected',
+                glyph: Packt.util.Glyphs.getGlyph('save'),
+                listeners: {
+                    click: 'onSaveActors'
+                }
+            }
+        ]
+    }]
 });

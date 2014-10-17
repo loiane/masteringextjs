@@ -39,12 +39,13 @@ Ext.define('Packt.view.film.FilmFormCategories', {
         },*/
 
         search: {
-            field: 'name',
-            store: {
+            field: 'name'//,
+            //bind: '{categories}'
+            //store: {
                 //source: Ext.getStore('staticData.Categories'),
-                type: 'categories',
-                autoLoad: true
-            }
+                //type: 'categories',
+                //autoLoad: true
+            //}
         }
     }]
 });

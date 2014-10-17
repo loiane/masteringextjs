@@ -5,7 +5,5 @@ Ext.define('Packt.model.security.Base', {
 
     fields: [
         { name: 'id', type: 'int' }
-    ],
-
-
+    ]
 });

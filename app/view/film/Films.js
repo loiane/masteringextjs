@@ -3,7 +3,7 @@ Ext.define('Packt.view.film.Films', {
     xtype: 'films',
 
     requires: [
-        //'Packt.view.base.TopToolBar',
+        'Packt.view.base.TopToolBar',
         'Packt.view.film.FilmsGrid',
         'Packt.view.film.FilmActorsGrid',
         'Packt.view.film.FilmCategoriesGrid',
@@ -44,17 +44,6 @@ Ext.define('Packt.view.film.Films', {
     }],
 
     dockedItems: [{
-        xtype: 'toolbar',
-        dock: 'top',
-        items: [
-            {
-                xtype: 'button',
-                text: 'Add',
-                glyph: Packt.util.Glyphs.getGlyph('add'),
-                listeners: {
-                    click: 'onAdd'
-                }
-            }
-        ]
+        xtype: 'top-tool-bar'
     }]
 });

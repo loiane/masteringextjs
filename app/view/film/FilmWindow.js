@@ -1,23 +1,14 @@
 Ext.define('Packt.view.film.FilmWindow', {
-    extend: 'Ext.window.Window',
+    extend: 'Packt.view.base.WindowForm',
     xtype: 'film-window',
 
     requires: [
-        'Packt.util.Util',
-        'Packt.util.Glyphs',
         'Packt.view.film.FilmFormContainer',
         'Packt.view.film.FilmActorsGrid',
         'Packt.view.film.FilmFormCategories'
     ],
 
     width: 537,
-    height: 400,
-    iconCls: 'film_add',
-    autoScroll: true,
-
-    bind: {
-        title: '{title}'
-    },
 
     items: [
         {
@@ -30,23 +21,32 @@ Ext.define('Packt.view.film.FilmWindow', {
                 xtype: 'tabpanel',
                 activeTab: 0,
                 items: [{
-                    xtype: 'film-form-container'
+                    xtype: 'film-form-container',
+                    glyph: Packt.util.Glyphs.getGlyph('film')
                 },{
-                    xtype: 'film-categories-form'
+                    xtype: 'film-categories-form',
+                    glyph: Packt.util.Glyphs.getGlyph('category')
                 },{
                     xtype: 'film-actors',
+                    reference: 'actorsGrid',
                     dockedItems: [{
                         dock: 'top',
                         items: [
                             {
                                 xtype: 'button',
                                 text: 'Search and Add',
-                                glyph: Packt.util.Glyphs.getGlyph('searchAndAdd')
+                                glyph: Packt.util.Glyphs.getGlyph('searchAndAdd'),
+                                listeners: {
+                                    click: 'onAddActor'
+                                }
                             },
                             {
                                 xtype: 'button',
                                 text: 'Delete',
-                                glyph: Packt.util.Glyphs.getGlyph('destroy')
+                                glyph: Packt.util.Glyphs.getGlyph('destroy'),
+                                listeners: {
+                                    click: 'onDeleteActor'
+                                }
                             }
                         ]
                     }]

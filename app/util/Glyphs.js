@@ -11,9 +11,11 @@ Ext.define('Packt.util.Glyphs', {
         saveAll: 'xf0c7',
         clearFilter: 'xf0b0',
         groupCountry: 'xf0ac',
+        film: 'xf1c8',
         actor: 'xf005',
         category: 'xf013',
-        searchAndAdd: 'xf1e5'
+        searchAndAdd: 'xf1e5',
+        clear: 'xf12d'
     },
 
     constructor: function(config) {

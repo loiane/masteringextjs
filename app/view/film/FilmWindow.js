@@ -25,10 +25,7 @@ Ext.define('Packt.view.film.FilmWindow', {
                     glyph: Packt.util.Glyphs.getGlyph('film')
                 },{
                     xtype: 'film-categories-form',
-                    glyph: Packt.util.Glyphs.getGlyph('category'),
-                    listeners: {
-                        activate: 'activate'
-                    }
+                    glyph: Packt.util.Glyphs.getGlyph('category')
                 },{
                     xtype: 'film-actors',
                     reference: 'actorsGrid',

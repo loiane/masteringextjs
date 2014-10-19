@@ -6,7 +6,7 @@ Ext.define('Packt.view.film.FilmsModel', {
     stores: {
         films: {
             model: 'Packt.model.film.Film',
-            pageSize: 1,
+            pageSize: 15,
             autoLoad: true,
             session: true
         },

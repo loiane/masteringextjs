@@ -24,9 +24,7 @@ Ext.define('Packt.view.base.WindowForm', {
 
     //items must be overrriden in subclass
 
-    dockedItems: [
-        {
-            xtype: 'cancel-save-toolbar'
-        }
-    ]
+    dockedItems: [{
+        xtype: 'cancel-save-toolbar'
+    }]
 });

@@ -2906,6 +2906,11 @@
   height: 70px;
 }
 
+/* line 34, ../../../../sass/etc/all.scss */
+.invalidCell {
+  background-color: red;
+}
+
 /* including package ext-theme-neptune */
 /** @class Global_CSS */
 /** @class Ext.LoadMask */
@@ -28569,9 +28574,4 @@ a.x-monthpicker-yearnav-button:hover {
 /* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-mr {
   background-position: right top;
-}
-
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
-.x-btn-plain-toolbar-large-tc {
-  background-position: 0 0;
 }

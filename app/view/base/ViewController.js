@@ -19,6 +19,21 @@ Ext.define('Packt.view.base.ViewController', {
         me.dialog = Ext.destroy(me.dialog);
     },
 
+    onDelete: function(button, e, options){
+        var record = button.getWidgetRecord();
+        Ext.Msg.show({
+            title:'Delete?',
+            msg: 'Are you sure you want to delete?',
+            buttons: Ext.Msg.YESNO,
+            icon: Ext.Msg.QUESTION,
+            fn: function (buttonId){
+                if (buttonId == 'yes'){
+                    record.drop();
+                }
+            }
+        });
+    },
+
     viewSessionChanges: function () {
         var changes = this.getView().getSession().getChanges();
         if (changes !== null) {

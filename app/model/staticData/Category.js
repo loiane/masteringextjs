@@ -11,7 +11,7 @@ Ext.define('Packt.model.staticData.Category', {
     ],
 
     manyToMany: {
-        Films: {
+        CategoryFilms: {
             type: 'Film',
             role: 'films',
             field: 'film_id',

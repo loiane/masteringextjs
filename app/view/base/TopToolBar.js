@@ -6,7 +6,6 @@ Ext.define('Packt.view.base.TopToolBar', {
         'Packt.util.Glyphs'
     ],
 
-    flex: 1,
     dock: 'top',
     items: [
         {

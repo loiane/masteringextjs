@@ -17,12 +17,7 @@ Ext.define('Packt.model.film.Film', {
         { name: 'length', type: 'int'},
         { name: 'replacement_cost', type: 'float'},
         { name: 'rating'},
-        { name: 'special_features'}/*,
-        { name: 'test', persist: false,
-            convert:function(v, rec){
-                console.log(rec.categories());
-            }
-        }*/
+        { name: 'special_features'}
     ],
 
     manyToMany: {

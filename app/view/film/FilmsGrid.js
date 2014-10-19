@@ -15,7 +15,12 @@ Ext.define('Packt.view.film.FilmsGrid', {
         {
             text: 'Title',
             flex: 1,
-            dataIndex: 'title'
+            dataIndex: 'title',
+            renderer: function(value, metaData, record ){
+                metaData['tdAttr'] = 'data-qtip="' +
+                    record.get('description') + '"';
+                return value;
+            }
         },
         {
             text: 'Language',

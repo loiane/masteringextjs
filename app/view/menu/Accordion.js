@@ -7,7 +7,7 @@ Ext.define('Packt.view.menu.Accordion', {
         type: 'accordion',
         multi: true
     },
-    collapsible: false,
+    collapsible: true,
     hideCollapseTool: false,
     split: true,
     iconCls: 'fa fa-sitemap fa-lg',

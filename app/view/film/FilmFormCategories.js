@@ -14,6 +14,7 @@ Ext.define('Packt.view.film.FilmFormCategories', {
     items: [{
         xtype: 'multiselector',
         title: 'Selected Categories',
+        reference: 'categoriesMultiSelector',
 
         fieldName: 'name',
 
@@ -39,13 +40,13 @@ Ext.define('Packt.view.film.FilmFormCategories', {
         },*/
 
         search: {
-            field: 'name'//,
+            field: 'name',
             //bind: '{categories}'
-            //store: {
-                //source: Ext.getStore('staticData.Categories'),
-                //type: 'categories',
-                //autoLoad: true
-            //}
+            store: {
+                //source: Ext.getStore('staticData.Categories')
+                type: 'categories',
+                autoLoad: true
+            }
         }
     }]
 });

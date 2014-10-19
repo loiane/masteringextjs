@@ -1,22 +1,14 @@
 Ext.define('Packt.view.base.Grid', {
     extend: 'Ext.grid.Panel',
-    xtype: 'base-grid',
 
     requires: [
-        'Packt.util.Glyphs',
-        'Packt.view.base.TopToolBar'
+        'Packt.util.Glyphs'
     ],
 
     columnLines: true,
     viewConfig: {
         stripeRows: true
     },
-
-    /*dockedItems: [
-        {
-            xtype: 'top-tool-bar'
-        }
-    ],*/
 
     initComponent: function() {
         var me = this;

@@ -11,32 +11,37 @@ Ext.define('Packt.view.base.TopToolBar', {
         {
             xtype: 'button',
             text: 'Add',
-            itemId: 'add',
             glyph: Packt.util.Glyphs.getGlyph('add'),
             listeners: {
                 click: 'onAdd'
             }
-        }/*,
+        },
         {
             xtype: 'tbseparator'
         },
         {
             xtype: 'button',
             text: 'Print',
-            itemId: 'print',
-            iconCls: 'print'
+            glyph: Packt.util.Glyphs.getGlyph('print'),
+            listeners: {
+                click: 'onPrint'
+            }
         },
         {
             xtype: 'button',
             text: 'Export to PDF',
-            itemId: 'pdf',
-            iconCls: 'pdf'
+            glyph: Packt.util.Glyphs.getGlyph('pdf'),
+            listeners: {
+                click: 'onExportPDF'
+            }
         },
         {
             xtype: 'button',
             text: 'Export to Excel',
-            itemId: 'excel',
-            iconCls: 'excel'
-        }*/
+            glyph: Packt.util.Glyphs.getGlyph('excel'),
+            listeners: {
+                click: 'onExportExcel'
+            }
+        }
     ]
 });

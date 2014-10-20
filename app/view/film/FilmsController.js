@@ -4,7 +4,8 @@ Ext.define('Packt.view.film.FilmsController', {
     alias: 'controller.films',
 
     requires: [
-        'Packt.view.film.FilmWindow'
+        'Packt.view.film.FilmWindow',
+        'Packt.ux.grid.Printer'
     ],
 
     createDialog: function(record){
@@ -98,10 +99,32 @@ Ext.define('Packt.view.film.FilmsController', {
         me.onCancelActors();
     },
 
+    onPrint: function(button, e, options) {
+        var printer = Packt.ux.grid.Printer;
+        printer.printAutomatically = false;
+        printer.print(this.lookupReference('filmsGrid'));
+    },
 
-    activate: function(){
-        var catSearch = this.lookupReference('categoriesMultiSelector').getSearch();
+    onExportPDF: function(button, e, options) {
+        var mainPanel = Ext.ComponentQuery.query('mainpanel')[0];
 
-        console.log(catSearch);
+        var newTab = mainPanel.add({
+            xtype: 'panel',
+            closable: true,
+            glyph: Packt.util.Glyphs.getGlyph('pdf'),
+            title: 'Films PDF',
+            layout: 'fit',
+            html: 'loading PDF...',
+            items: [{
+                xtype: 'uxiframe',
+                src: 'php/pdf/exportFilmsPdf.php'
+            }]
+        });
+
+        mainPanel.setActiveTab(newTab);
+    },
+
+    onExportExcel: function(button, e, options) {
+        window.open('php/pdf/exportFilmsExcel.php');
     }
 });

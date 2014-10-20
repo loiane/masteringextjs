@@ -15,7 +15,10 @@ Ext.define('Packt.util.Glyphs', {
         actor: 'xf005',
         category: 'xf013',
         searchAndAdd: 'xf1e5',
-        clear: 'xf12d'
+        clear: 'xf12d',
+        print: 'xf02f',
+        pdf: 'xf1c1',
+        excel: 'xf1c3'
     },
 
     constructor: function(config) {

@@ -10,100 +10,100 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
         'Ext.form.field.Text',
         'Ext.ux.statusbar.StatusBar'
     ],
-    
+
     /**
      * @private
      * search value initialization
      */
     searchValue: null,
-    
+
     /**
      * @private
      * The row indexes where matching strings are found. (used by previous and next buttons)
      */
     indexes: [],
-    
+
     /**
      * @private
      * The row index of the first search, it could change if next or previous buttons are used.
      */
     currentIndex: null,
-    
+
     /**
      * @private
      * The generated regular expression used for searching.
      */
     searchRegExp: null,
-    
+
     /**
      * @private
      * Case sensitive mode.
      */
     caseSensitive: false,
-    
+
     /**
      * @private
      * Regular expression mode.
      */
     regExpMode: false,
-    
+
     /**
      * @cfg {String} matchCls
      * The matched string css classe.
      */
     matchCls: 'x-livesearch-match',
-    
+
     defaultStatusText: 'Nothing Found',
-    
+
     // Component initialization override: adds the top and bottom toolbars and setup headers renderer.
     initComponent: function() {
         var me = this;
         me.tbar = ['Search',{
-                 xtype: 'textfield',
-                 name: 'searchField',
-                 hideLabel: true,
-                 width: 200,
-                 listeners: {
-                     change: {
-                         fn: me.onTextFieldChange,
-                         scope: this,
-                         buffer: 500
-                     }
-                 }
-            }, {
-                xtype: 'button',
-                text: '&lt;',
-                tooltip: 'Find Previous Row',
-                handler: me.onPreviousClick,
-                scope: me
-            },{
-                xtype: 'button',
-                text: '&gt;',
-                tooltip: 'Find Next Row',
-                handler: me.onNextClick,
-                scope: me
-            }, '-', {
-                xtype: 'checkbox',
-                hideLabel: true,
-                margin: '0 0 0 4px',
-                handler: me.regExpToggle,
-                scope: me                
-            }, 'Regular expression', {
-                xtype: 'checkbox',
-                hideLabel: true,
-                margin: '0 0 0 4px',
-                handler: me.caseSensitiveToggle,
-                scope: me
-            }, 'Case sensitive'];
+            xtype: 'textfield',
+            name: 'searchField',
+            hideLabel: true,
+            width: 200,
+            listeners: {
+                change: {
+                    fn: me.onTextFieldChange,
+                    scope: this,
+                    buffer: 500
+                }
+            }
+        }, {
+            xtype: 'button',
+            text: '&lt;',
+            tooltip: 'Find Previous Row',
+            handler: me.onPreviousClick,
+            scope: me
+        },{
+            xtype: 'button',
+            text: '&gt;',
+            tooltip: 'Find Next Row',
+            handler: me.onNextClick,
+            scope: me
+        }, '-', {
+            xtype: 'checkbox',
+            hideLabel: true,
+            margin: '0 0 0 4px',
+            handler: me.regExpToggle,
+            scope: me
+        }, 'Regular expression', {
+            xtype: 'checkbox',
+            hideLabel: true,
+            margin: '0 0 0 4px',
+            handler: me.caseSensitiveToggle,
+            scope: me
+        }, 'Case sensitive'];
 
         me.bbar = Ext.create('Ext.ux.StatusBar', {
             defaultText: me.defaultStatusText,
             name: 'searchStatusBar'
         });
-        
+
         me.callParent(arguments);
     },
-    
+
     // afterRender override: it adds textfield and statusbar reference and start monitoring keydown events in textfield input 
     afterRender: function() {
         var me = this;
@@ -113,10 +113,13 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
     },
     // detects html tag
     tagsRe: /<[^>]*>/gm,
-    
+
     // DEL ASCII code
     tagsProtect: '\x0f',
-    
+
+    // detects regexp reserved word
+    regExpProtect: /\\|\/|\+|\\|\.|\[|\]|\{|\}|\?|\$|\*|\^|\|/gm,
+
     /**
      * In normal mode it returns the value with protected regexp characters.
      * In regular expression mode it returns the raw value except if the regexp is invalid.
@@ -126,12 +129,14 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
     getSearchValue: function() {
         var me = this,
             value = me.textField.getValue();
-            
+
         if (value === '') {
             return null;
         }
         if (!me.regExpMode) {
-            value = Ext.String.escapeRegex(value);
+            value = value.replace(me.regExpProtect, function(m) {
+                return '\\' + m;
+            });
         } else {
             try {
                 new RegExp(value);
@@ -150,43 +155,40 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
 
         return value;
     },
-    
+
     /**
      * Finds all strings that matches the searched value in each grid cells.
      * @private
      */
-     onTextFieldChange: function() {
-         var me = this,
-             count = 0,
-             view = me.view,
-             cellSelector = view.cellSelector,
-             innerSelector = view.innerSelector;
+    onTextFieldChange: function() {
+        var me = this,
+            count = 0;
 
-         view.refresh();
-         // reset the statusbar
-         me.statusBar.setStatus({
-             text: me.defaultStatusText,
-             iconCls: ''
-         });
+        me.view.refresh();
+        // reset the statusbar
+        me.statusBar.setStatus({
+            text: me.defaultStatusText,
+            iconCls: ''
+        });
 
-         me.searchValue = me.getSearchValue();
-         me.indexes = [];
-         me.currentIndex = null;
+        me.searchValue = me.getSearchValue();
+        me.indexes = [];
+        me.currentIndex = null;
 
-         if (me.searchValue !== null) {
-             me.searchRegExp = new RegExp(me.getSearchValue(), 'g' + (me.caseSensitive ? '' : 'i'));
-             
-             
-             me.store.each(function(record, idx) {
-                 var td = Ext.fly(view.getNode(idx)).down(cellSelector),
-                     cell, matches, cellHTML;
-                 while (td) {
-                     cell = td.down(innerSelector);
-                     matches = cell.dom.innerHTML.match(me.tagsRe);
-                     cellHTML = cell.dom.innerHTML.replace(me.tagsRe, me.tagsProtect);
-                     
-                     // populate indexes array, set currentIndex, and replace wrap matched string in a span
-                     cellHTML = cellHTML.replace(me.searchRegExp, function(m) {
+        if (me.searchValue !== null) {
+            me.searchRegExp = new RegExp(me.searchValue, 'g' + (me.caseSensitive ? '' : 'i'));
+
+
+            me.store.each(function(record, idx) {
+                var td = Ext.fly(me.view.getNode(idx)).down('td'),
+                    cell, matches, cellHTML;
+                while(td) {
+                    cell = td.down('.x-grid-cell-inner');
+                    matches = cell.dom.innerHTML.match(me.tagsRe);
+                    cellHTML = cell.dom.innerHTML.replace(me.tagsRe, me.tagsProtect);
+
+                    // populate indexes array, set currentIndex, and replace wrap matched string in a span
+                    cellHTML = cellHTML.replace(me.searchRegExp, function(m) {
                         count += 1;
                         if (Ext.Array.indexOf(me.indexes, idx) === -1) {
                             me.indexes.push(idx);
@@ -195,72 +197,73 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
                             me.currentIndex = idx;
                         }
                         return '<span class="' + me.matchCls + '">' + m + '</span>';
-                     });
-                     // restore protected tags
-                     Ext.each(matches, function(match) {
-                        cellHTML = cellHTML.replace(me.tagsProtect, match); 
-                     });
-                     // update cell html
-                     cell.dom.innerHTML = cellHTML;
-                     td = td.next();
-                 }
-             }, me);
+                    });
+                    // restore protected tags
+                    Ext.each(matches, function(match) {
+                        cellHTML = cellHTML.replace(me.tagsProtect, match);
+                    });
+                    // update cell html
+                    cell.dom.innerHTML = cellHTML;
+                    td = td.next();
+                }
+            }, me);
 
-             // results found
-             if (me.currentIndex !== null) {
-                 me.getSelectionModel().select(me.currentIndex);
-                 me.statusBar.setStatus({
-                     text: count + ' matche(s) found.',
-                     iconCls: 'x-status-valid'
-                 });
-             }
-         }
+            // results found
+            if (me.currentIndex !== null) {
+                me.getSelectionModel().select(me.currentIndex);
+                me.statusBar.setStatus({
+                    text: count + ' matche(s) found.',
+                    iconCls: 'x-status-valid'
+                });
+            }
+        }
 
-         // no results found
-         if (me.currentIndex === null) {
-             me.getSelectionModel().deselectAll();
-         }
+        // no results found
+        if (me.currentIndex === null) {
+            me.getSelectionModel().deselectAll();
+        }
 
-         me.textField.focus();
-     },
-    
+        // force textfield focus
+        me.textField.focus();
+    },
+
     /**
      * Selects the previous row containing a match.
      * @private
-     */   
+     */
     onPreviousClick: function() {
         var me = this,
             idx;
-            
+
         if ((idx = Ext.Array.indexOf(me.indexes, me.currentIndex)) !== -1) {
             me.currentIndex = me.indexes[idx - 1] || me.indexes[me.indexes.length - 1];
             me.getSelectionModel().select(me.currentIndex);
-         }
+        }
     },
-    
+
     /**
      * Selects the next row containing a match.
      * @private
-     */    
+     */
     onNextClick: function() {
-         var me = this,
-             idx;
-             
-         if ((idx = Ext.Array.indexOf(me.indexes, me.currentIndex)) !== -1) {
+        var me = this,
+            idx;
+
+        if ((idx = Ext.Array.indexOf(me.indexes, me.currentIndex)) !== -1) {
             me.currentIndex = me.indexes[idx + 1] || me.indexes[0];
             me.getSelectionModel().select(me.currentIndex);
-         }
+        }
     },
-    
+
     /**
      * Switch to case sensitive mode.
      * @private
-     */    
+     */
     caseSensitiveToggle: function(checkbox, checked) {
         this.caseSensitive = checked;
         this.onTextFieldChange();
     },
-    
+
     /**
      * Switch to regular expression mode
      * @private

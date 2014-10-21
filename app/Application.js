@@ -46,7 +46,8 @@ Ext.define('Packt.Application', {
         'Packt.overrides.patch.data.ModelWithId' //ExtJS 5 bug fix - remove this once Sencha fixes it
 
         ,'Packt.view.film.Films'
-        ,'Packt.view.base.Grid'
+        ,'Packt.view.base.Grid',
+        'Packt.view.reports.SalesFilmCategory'
     ],
 
     enableQuickTips: true,

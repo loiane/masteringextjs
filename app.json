@@ -32,7 +32,7 @@
      *      ]
      */
     "requires": [
-
+        "sencha-charts"
     ],
 
 

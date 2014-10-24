@@ -1,39 +1,52 @@
 Ext.define('Packt.view.reports.SalesFilmCategoryColumn', {
-    extend: 'Ext.chart.Chart',
+    extend: 'Ext.chart.CartesianChart',
     alias: 'widget.salesfilmcategorycol',
 
-    animate: true,
-    store: 'reports.SalesFilmCategory',
-    shadow: true,
-    insetPadding: 60,
-    theme: 'Base:gradients',
+    requires: [
+        'Packt.view.charts.touch.ColumnSprite3D',
+        'Packt.view.charts.touch.ColumnSeries3D'
+    ],
+
+    bind: '{salesFilmCategory}',
+
+    insetPadding: {
+        top: 40,
+        bottom: 40,
+        left: 20,
+        right: 40
+    },
+    interactions: 'itemhighlight',
+
     axes: [{
-        type: 'Numeric',
+        type: 'numeric',
         position: 'left',
         fields: ['total_sales'],
         label: {
             renderer: Ext.util.Format.numberRenderer('0,0')
         },
-        title: 'Total Sales',
+        titleMargin: 20,
+        title: {
+            text: 'Total Sales',
+            fontSize: 14
+        },
         grid: true,
         minimum: 0
     }, {
-        type: 'Category',
+        type: 'category',
         position: 'bottom',
         fields: ['category'],
-        title: 'Film Category'
+        titleMargin: 20,
+        title: {
+            text: 'Film Category',
+            fontSize: 14
+        }
     }],
     series: [{
-        type: 'column',
+        type: 'column3d',
         axis: 'left',
         highlight: true,
-        tips: {
-            trackMouse: true,
-            width: 140,
-            height: 28,
-            renderer: function(storeItem, item) {
-                this.setTitle(storeItem.get('category') + ': ' + storeItem.get('total_sales') + ' $');
-            }
+        style: {
+            minGapWidth: 20
         },
         label: {
             display: 'insideEnd',

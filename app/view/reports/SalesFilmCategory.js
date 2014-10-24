@@ -4,10 +4,14 @@ Ext.define('Packt.view.reports.SalesFilmCategory', {
 
     requires: [
         'Packt.view.reports.SalesFilmCategoryModel',
-        'Packt.view.reports.SalesFilmCategoryPie'
+        'Packt.view.reports.SalesFilmCategoryController',
+        'Packt.view.reports.SalesFilmCategoryPie',
+        'Packt.view.reports.SalesFilmCategoryColumn',
+        'Packt.view.reports.SalesFilmCategoryBar',
+        'Packt.util.Glyphs'
     ],
 
-    //controller: 'sales-film-category',
+    controller: 'sales-film-category',
     viewModel: {
         type: 'sales-film-category'
     },
@@ -16,15 +20,12 @@ Ext.define('Packt.view.reports.SalesFilmCategory', {
     activeItem: 0,
 
     items: [{
-            xtype: 'salesfilmcategorypie'
-        }/*
-        {
-            xtype: 'salesfilmcategorycol'
-        },
-        {
-            xtype: 'salesfilmcategorybar'
-        }*/
-    ],
+        xtype: 'salesfilmcategorypie'
+    },{
+        xtype: 'salesfilmcategorycol'
+    },{
+        xtype: 'salesfilmcategorybar'
+    }],
 
     dockedItems: [{
         xtype: 'toolbar',
@@ -33,56 +34,66 @@ Ext.define('Packt.view.reports.SalesFilmCategory', {
         items: [
             {
                 text: 'Change Chart Type',
-                iconCls: 'menu_reports',
+                glyph: Packt.util.Glyphs.getGlyph('menuReports'),
                 menu: {
                     xtype: 'menu',
                     itemId: 'changeType',
+                    defaults: {
+                        listeners: {
+                            click: 'onChangeChart'
+                        }
+                    },
                     items: [
                         {
                             xtype: 'menuitem',
                             text: 'Pie',
                             itemId: 'pie',
-                            iconCls: 'chart_pie'
+                            glyph: Packt.util.Glyphs.getGlyph('chartPie')
                         },
                         {
                             xtype: 'menuitem',
                             text: 'Column',
                             itemId: 'column',
-                            iconCls: 'chart_bar'
+                            glyph: Packt.util.Glyphs.getGlyph('chartBar')
                         },
                         {
                             xtype: 'menuitem',
                             text: 'Bar',
                             itemId: 'bar',
-                            iconCls: 'chart_column'
+                            glyph: Packt.util.Glyphs.getGlyph('chartColumn')
                         }
                     ]
                 }
             },
             {
                 text: 'Download Chart',
-                iconCls: 'download',
+                glyph: Packt.util.Glyphs.getGlyph('download'),
                 menu: {
                     xtype: 'menu',
                     itemId: 'download',
+                    defaults: {
+                        listeners: {
+                            click: 'onChartDownload'
+                        }
+                    },
                     items: [
                         {
                             xtype: 'menuitem',
                             text: 'Download as Image',
                             itemId: 'png',
-                            iconCls: 'image'
+                            glyph: Packt.util.Glyphs.getGlyph('image')
                         },
                         {
                             xtype: 'menuitem',
                             text: 'Download as SVG',
                             itemId: 'svg',
-                            iconCls: 'svg'
+                            glyph: Packt.util.Glyphs.getGlyph('svg')
                         },
                         {
                             xtype: 'menuitem',
                             text: 'Download as PDF',
                             itemId: 'pdf',
-                            iconCls: 'pdf'
+                            glyph: Packt.util.Glyphs.getGlyph('pdf')
                         }
                     ]
                 }

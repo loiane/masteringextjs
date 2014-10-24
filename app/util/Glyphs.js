@@ -18,7 +18,15 @@ Ext.define('Packt.util.Glyphs', {
         clear: 'xf12d',
         print: 'xf02f',
         pdf: 'xf1c1',
-        excel: 'xf1c3'
+        excel: 'xf1c3',
+
+        menuReports: 'xf1fe',
+        chartPie: 'xf200',
+        chartBar: 'xf080',
+        chartColumn: 'xf201 ',
+        download: 'xf0ed',
+        image: 'xf1c5',
+        svg: 'xf1c9'
     },
 
     constructor: function(config) {

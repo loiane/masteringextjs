@@ -3,7 +3,7 @@ Ext.define('Packt.view.reports.SalesFilmCategoryPie', {
     alias: 'widget.salesfilmcategorypie',
 
     legend: {
-        docked: 'right'
+        docked: 'left'
     },
     interactions: ['rotate', 'itemhighlight'],
 

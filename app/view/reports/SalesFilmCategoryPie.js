@@ -31,5 +31,4 @@ Ext.define('Packt.view.reports.SalesFilmCategoryPie', {
         },
         xField: 'total_sales'
     }
-
 });

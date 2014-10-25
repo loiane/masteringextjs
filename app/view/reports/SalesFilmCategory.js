@@ -37,7 +37,6 @@ Ext.define('Packt.view.reports.SalesFilmCategory', {
                 glyph: Packt.util.Glyphs.getGlyph('menuReports'),
                 menu: {
                     xtype: 'menu',
-                    itemId: 'changeType',
                     defaults: {
                         listeners: {
                             click: 'onChangeChart'
@@ -70,7 +69,6 @@ Ext.define('Packt.view.reports.SalesFilmCategory', {
                 glyph: Packt.util.Glyphs.getGlyph('download'),
                 menu: {
                     xtype: 'menu',
-                    itemId: 'download',
                     defaults: {
                         listeners: {
                             click: 'onChartDownload'
@@ -82,12 +80,6 @@ Ext.define('Packt.view.reports.SalesFilmCategory', {
                             text: 'Download as Image',
                             itemId: 'png',
                             glyph: Packt.util.Glyphs.getGlyph('image')
-                        },
-                        {
-                            xtype: 'menuitem',
-                            text: 'Download as SVG',
-                            itemId: 'svg',
-                            glyph: Packt.util.Glyphs.getGlyph('svg')
                         },
                         {
                             xtype: 'menuitem',

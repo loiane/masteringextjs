@@ -3,10 +3,6 @@ Ext.define('Packt.view.reports.SalesFilmCategoryController', {
 
     alias: 'controller.sales-film-category',
 
-    requires: [
-        'Packt.util.Util'
-    ],
-
     onChangeChart: function(item, e, options){
         var panel = this.getView();
 
@@ -27,7 +23,8 @@ Ext.define('Packt.view.reports.SalesFilmCategoryController', {
             Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as Image?', function(choice){
                 if(choice == 'yes'){
                     chart.download({
-                        type: 'png'
+                        format: 'png',
+                        filename: 'SalesXFilmCategory'
                     });
                 }
             });
@@ -35,8 +32,13 @@ Ext.define('Packt.view.reports.SalesFilmCategoryController', {
             Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as PDF?', function(choice){
                 if(choice == 'yes'){
                     chart.download({
-                        //type: 'pdf',
-                        url: 'php/pdf/exportChartPdf.php'
+                        format: 'pdf',
+                        filename: 'SalesXFilmCategory',
+                        pdf: {
+                            format: 'A4',
+                            orientation: 'landscape',
+                            border: '1cm'
+                        }
                     });
                 }
             });

@@ -43,7 +43,7 @@ Ext.define('Packt.view.reports.SalesFilmCategoryColumn', {
     }],
     series: [{
         type: 'column3d',
-        axis: 'left',
+        //axis: 'left',
         highlight: true,
         style: {
             minGapWidth: 20

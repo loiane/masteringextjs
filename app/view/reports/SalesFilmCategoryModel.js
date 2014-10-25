@@ -20,5 +20,4 @@ Ext.define('Packt.view.reports.SalesFilmCategoryModel', {
             }
         }
     }
-
 });

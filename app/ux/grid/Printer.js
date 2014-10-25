@@ -189,9 +189,7 @@ Ext.define('Packt.ux.grid.Printer', {
                 '</html>'           
             ];
 
-            console.log(data);
-
-            var html = Ext.create('Ext.XTemplate', htmlMarkup).apply(data); 
+            var html = Ext.create('Ext.XTemplate', htmlMarkup).apply(data);
 
             //open up a new printing window, write to it, print it and close
             var win = window.open('', 'printgrid');

@@ -66,6 +66,8 @@ Ext.define('Packt.Application', {
     stores: [
         // TODO: add stores here
     ],
+
+    defaultToken : 'home',
     
     launch: function () {
 

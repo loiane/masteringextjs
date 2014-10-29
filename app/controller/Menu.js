@@ -75,6 +75,8 @@ Ext.define('Packt.controller.Menu', {
         }
 
         mainPanel.setActiveTab(newTab);
+
+        this.redirectTo(record.get('className'));
     },
 
     init: function(application) {

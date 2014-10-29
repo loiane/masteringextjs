@@ -74,5 +74,9 @@ Ext.define('Packt.view.film.FilmsGrid', {
             '<b>Rental Rate:</b> {rental_rate}</br>',
             '<b>Replacement Cost:</b> {replacement_cost}</br>'
         ]
-    }]
+    }],
+
+    listeners: {
+        itemclick: 'onItemClick'
+    }
 });

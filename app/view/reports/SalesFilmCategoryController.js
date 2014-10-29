@@ -32,6 +32,7 @@ Ext.define('Packt.view.reports.SalesFilmCategoryController', {
             Ext.MessageBox.confirm('Confirm Download', 'Would you like to download the chart as PDF?', function(choice){
                 if(choice == 'yes'){
                     chart.download({
+                        //url: 'php/pdf/exportChartPdf.php',
                         format: 'pdf',
                         filename: 'SalesXFilmCategory',
                         pdf: {

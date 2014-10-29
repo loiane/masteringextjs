@@ -12,13 +12,11 @@ Ext.define('Packt.view.film.FilmsModel', {
         },
         categories: {
             source: 'staticData.Categories',
-            //type: 'categories',
             autoLoad: true,
             session: true
         },
         actors: {
             source: 'staticData.Actors',
-            //type: 'actors',
             autoLoad: true,
             session: true
         },

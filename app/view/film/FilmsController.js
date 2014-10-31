@@ -74,7 +74,7 @@ Ext.define('Packt.view.film.FilmsController', {
             dialog = me.dialog,
             form = me.lookupReference('filmForm'),
             isEdit = me.isEdit,
-            session = me.getSession();
+            session = me.getSession(),
             id;
 
         if (form.isValid()) {
@@ -90,10 +90,10 @@ Ext.define('Packt.view.film.FilmsController', {
 
         me.viewSessionChanges();
 
-        session.getChanges();
         var batch = session.getSaveBatch();
-        console.log(batch);
-        batch.start(0);
+        if (batch){
+            batch.start();
+        }
     },
 
     onAddActor: function(button, e, options){

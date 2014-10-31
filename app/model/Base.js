@@ -2,7 +2,8 @@ Ext.define('Packt.model.Base', {
     extend: 'Ext.data.Model',
 
     requires: [
-        'Packt.util.Util'
+        'Packt.util.Util',
+        'Packt.ux.data.writer.AssociatedWriter'
     ],
 
     schema: {
@@ -21,7 +22,7 @@ Ext.define('Packt.model.Base', {
                 rootProperty: 'data'
             },
             writer: {
-                type: 'json',
+                type: 'associatedjson',
                 writeAllFields: true,
                 encode: true,
                 rootProperty: 'data',

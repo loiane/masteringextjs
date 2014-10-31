@@ -58,7 +58,7 @@ Ext.define('Packt.controller.Menu', {
     },
 
     onTreePanelItemClick: function(view, record, item, index, event, options){
-        var mainPanel = this.getMainPanel();
+        /*var mainPanel = this.getMainPanel();
 
         var newTab = mainPanel.items.findBy(
             function (tab){
@@ -74,7 +74,7 @@ Ext.define('Packt.controller.Menu', {
             });
         }
 
-        mainPanel.setActiveTab(newTab);
+        mainPanel.setActiveTab(newTab);*/
 
         this.redirectTo(record.get('className'));
     },

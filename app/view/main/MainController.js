@@ -13,6 +13,10 @@ Ext.define('Packt.view.main.MainController', {
         'Packt.util.Util'
     ],
 
+    init: function() {
+        Packt.app.createController('Root');
+    },
+
     onLogout: function(button, e, options){
 
         var me = this;

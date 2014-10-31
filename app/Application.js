@@ -57,7 +57,7 @@ Ext.define('Packt.Application', {
     ],
 
     controllers: [
-        'Root',
+        //'Root',
         'Menu',
         'StaticData'
         ,'Test'

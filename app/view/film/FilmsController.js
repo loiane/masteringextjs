@@ -8,25 +8,6 @@ Ext.define('Packt.view.film.FilmsController', {
         'Packt.ux.grid.Printer'
     ],
 
-    routes : {
-        'films/:id' : {
-            action     : 'onFilmSelect',
-            conditions : {
-                ':id' : '([0-9]+)'
-            }
-        }
-    },
-
-    onBeforeFilmSelect: function(id, action) {
-        var store = this.getStore('films'),
-            record = store.findRecord('film_id', id);
-        if(record){
-            action.resume();
-        } else {
-            action.stop();
-        }
-    },
-
     onFilmSelect: function(id){
         var me = this,
             grid = me.lookupReference('filmsGrid'),

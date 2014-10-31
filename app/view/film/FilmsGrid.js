@@ -77,6 +77,7 @@ Ext.define('Packt.view.film.FilmsGrid', {
     }],
 
     listeners: {
-        itemclick: 'onItemClick'
+        itemclick: 'onItemClick',
+        selectfilm: 'onFilmSelect'
     }
 });

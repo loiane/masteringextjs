@@ -25,7 +25,7 @@ Ext.define('Packt.controller.Root', {
     routes : {
         'home' : 'onHome',
 
-        'user|actorsgrid|categoriesgrid|languagesgrid|citiesgrid|countriesgrid|films|salesfilmcategory' :{
+        'user|actorsgrid|categoriesgrid|languagesgrid|citiesgrid|countriesgrid|films|salesfilmcategory': {
             before: 'onBeforeRoute',
             action: 'onRoute'
         },
@@ -40,7 +40,7 @@ Ext.define('Packt.controller.Root', {
     },
 
     onHome : function() {
-        var mainPanel = this.getMain();
+        var mainPanel = this.getMainPanel();
         if (mainPanel){
             mainPanel.setActiveTab(0);
         }
@@ -62,10 +62,19 @@ Ext.define('Packt.controller.Root', {
             params  : {
                 module : hash
             },
-            success : function() {
-                action.resume();
+            success : function(conn, response, options, eOpts) {
+
+                var result = Packt.util.Util.decodeJSON(conn.responseText);
+
+                if (result.success) {
+                    action.resume();
+                } else {
+                    Packt.util.Util.showErrorMsg(result.msg);
+                    action.stop();
+                }
             },
-            failure : function() {
+            failure : function(conn, response, options, eOpts) {
+                Packt.util.Util.showErrorMsg(conn.responseText);
                 action.stop();
             }
         });
@@ -76,16 +85,7 @@ Ext.define('Packt.controller.Root', {
             hash = Ext.util.History.getToken(),
             main = me.getMain();
 
-        if (!main){
-            var task = new Ext.util.DelayedTask(function() {
-                console.log('delayed');
-                main = me.getMain();
-                me.locateMenuItem(main, hash);
-            });
-            task.delay(2000);
-        } else {
-            me.locateMenuItem(main, hash);
-        }
+        me.locateMenuItem(main, hash);
     },
 
     onUnmatchedRoute : function(hash) {
@@ -134,23 +134,8 @@ Ext.define('Packt.controller.Root', {
         var me = this,
             main = me.getMain();
 
-        if (!main){
-            if (!main){
-                var task = new Ext.util.DelayedTask(function() {
-                    me.onBeforeFilmSelectResume(id, action);
-                });
-                task.delay(2000);
-            } else {
-                me.onBeforeFilmSelectResume(id, action);
-            }
-        }
-    },
-
-    onBeforeFilmSelectResume: function(id, action){
-
         this.locateMenuItem(this.getMain(),'films');
 
-        // check if record is in grid
         var record = this.getFilmsGrid().getStore().findRecord('film_id', id);
         if(record) {
             action.resume();
@@ -161,7 +146,6 @@ Ext.define('Packt.controller.Root', {
     },
 
     onFilmSelect: function(id){
-        console.log('select ' + id);
         this.getFilmsGrid().fireEvent('selectfilm', id);
     }
 });

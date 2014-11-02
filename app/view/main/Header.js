@@ -3,7 +3,8 @@ Ext.define('Packt.view.main.Header', {
     xtype: 'appheader',
 
     requires: [
-        'Packt.view.locale.Translation'
+        'Packt.view.locale.Translation',
+        'Packt.view.main.ResponsiveMenuButton'
     ],
 
     ui: 'footer',
@@ -21,6 +22,8 @@ Ext.define('Packt.view.main.Header', {
             }
         },{
             xtype: 'tbfill'
+        },{
+            xtype: 'responsive-mainmenu'
         },{
             xtype: 'translation'
         },{

@@ -40,6 +40,15 @@ Ext.define('Packt.view.main.Main', {
         region: 'south'
     },{
         xtype: 'mainmenu',
-        region: 'west'
+        region: 'west',
+        plugins: 'responsive',
+        responsiveConfig: {
+            'width < 768 && tall': {
+                visible: false
+            },
+            'width >= 768': {
+                visible: true
+            }
+        }
     }]
 });

@@ -96,7 +96,8 @@ Ext.define('Packt.controller.Root', {
     locateMenuItem: function(mainMenu, hash){
         var me = this,
             root, node;
-        Ext.each(mainMenu.items.items, function(tree){
+        var items = Ext.ComponentQuery.query('menutree');
+        Ext.each(items, function(tree){
             if (tree.getXType() === 'menutree'){
                 root = tree.getRootNode();
                 node = root.findChild('className', hash);

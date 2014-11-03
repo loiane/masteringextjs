@@ -3,7 +3,8 @@ Ext.define('Packt.view.base.TopToolBar', {
     xtype: 'top-tool-bar',
 
     requires: [
-        'Packt.util.Glyphs'
+        'Packt.util.Glyphs',
+        'Packt.view.base.CustomButton'
     ],
 
     dock: 'top',
@@ -20,7 +21,7 @@ Ext.define('Packt.view.base.TopToolBar', {
             xtype: 'tbseparator'
         },
         {
-            xtype: 'button',
+            xtype: 'custom-btn',
             text: 'Print',
             glyph: Packt.util.Glyphs.getGlyph('print'),
             listeners: {
@@ -28,7 +29,7 @@ Ext.define('Packt.view.base.TopToolBar', {
             }
         },
         {
-            xtype: 'button',
+            xtype: 'custom-btn',
             text: 'Export to PDF',
             glyph: Packt.util.Glyphs.getGlyph('pdf'),
             listeners: {
@@ -36,7 +37,7 @@ Ext.define('Packt.view.base.TopToolBar', {
             }
         },
         {
-            xtype: 'button',
+            xtype: 'custom-btn',
             text: 'Export to Excel',
             glyph: Packt.util.Glyphs.getGlyph('excel'),
             listeners: {

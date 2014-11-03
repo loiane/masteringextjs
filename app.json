@@ -20,7 +20,7 @@
     /**
      * The name of the theme for this application.
      */
-    "theme": "ext-theme-neptune",
+    "theme": "masteringextjs-theme",
 
     /**
      * The list of required packages (with optional versions; default is "latest").
@@ -116,6 +116,10 @@
         {
             "path": "app/CustomVTypes.js",
             "includeInBundle": true
+        },
+        {
+            "path": "resources/locale/en.js",
+            "includeInBundle": false
         }
     ],
 

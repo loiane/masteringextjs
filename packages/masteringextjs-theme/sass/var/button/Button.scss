@@ -1,0 +1,119 @@
+/** @class Ext.button.Button */
+//
+
+$packt-background-color: #669999 !default;
+$packt-mate-gradient: 'matte' !default;
+$packt-light-color: #339933 !default;
+$packt-dark-color: #006600 !default;
+
+$button-default-base-color: $packt-background-color;
+$button-default-base-color-over: $packt-dark-color;
+$button-default-base-color-pressed: $packt-dark-color;
+$button-default-base-color-disabled: mix(#000, $packt-dark-color, 8%);
+$button-default-border-color: $packt-dark-color !default;
+
+$button-small-font-weight: bold !default;
+$button-medium-font-weight: bold !default;
+$button-large-font-weight: bold !default;
+
+$button-default-color: #fff !default;
+
+$button-default-glyph-color: $button-default-color;
+
+$button-small-border-radius: 1px !default;
+$button-medium-border-radius: 1px !default;
+$button-large-border-radius: 1px !default;
+
+$button-default-background-gradient: $packt-mate-gradient;
+$button-default-background-gradient-disabled: $packt-mate-gradient;
+$button-default-background-gradient-over: $packt-mate-gradient;
+$button-default-background-gradient-pressed: $packt-mate-gradient;
+
+$button-toolbar-border-color: $packt-background-color;
+
+$button-toolbar-background-color: $packt-light-color;
+$button-toolbar-background-color-over: $packt-dark-color;
+$button-toolbar-background-color-pressed: $packt-dark-color;
+$button-toolbar-background-color-disabled: mix(#000, $packt-dark-color, 8%);
+
+$button-toolbar-color: #fff !default;
+
+$button-toolbar-background-gradient: $packt-mate-gradient;
+$button-toolbar-background-gradient-disabled: $packt-mate-gradient;
+$button-toolbar-background-gradient-focus: $packt-mate-gradient;
+$button-toolbar-background-gradient-over: $packt-mate-gradient;
+$button-toolbar-background-gradient-pressed: $packt-mate-gradient;
+
+$button-default-glyph-color: #fff !default;
+
+//UI for Gray Button-------------------------------------
+$button-packt-custom-color: #336600 !default;
+$packt-custom-base-color: #C2E0D1 !default;
+
+$button-packt-custom-small-border-radius: $button-small-border-radius;
+$button-packt-custom-small-border-width: 1px;
+
+$button-packt-custom-base-color: $packt-custom-base-color;
+$button-packt-custom-base-color-over: $packt-dark-color;
+$button-packt-custom-base-color-focus: $packt-dark-color;
+$button-packt-custom-base-color-pressed: $packt-dark-color;
+$button-packt-custom-base-color-disabled: lighten($button-packt-custom-base-color, 40%);
+
+$button-packt-custom-small-border-radius: 0px;
+$button-packt-custom-small-border-width: 1px;
+
+$button-packt-custom-border-color: darken($button-packt-custom-base-color, 20%);
+$button-packt-custom-border-color-over:$button-packt-custom-border-color;
+$button-packt-custom-border-color-focus:$button-packt-custom-border-color;
+$button-packt-custom-border-color-pressed:$button-packt-custom-border-color-over;
+$button-packt-custom-border-color-disabled:lighten($button-packt-custom-border-color, 40%);
+
+$button-packt-custom-small-padding: 2px;
+$button-packt-custom-small-text-padding: 4px;
+
+$button-packt-custom-background-color:$button-packt-custom-base-color;
+$button-packt-custom-background-color-over:$button-packt-custom-border-color;
+$button-packt-custom-background-color-focus:$button-packt-custom-background-color;
+$button-packt-custom-background-color-pressed:$button-packt-custom-base-color-pressed;
+$button-packt-custom-background-color-disabled:$button-packt-custom-base-color-disabled;
+
+$button-packt-custom-background-gradient: 'mate';
+$button-packt-custom-background-gradient-over: 'mate';
+$button-packt-custom-background-gradient-focus: 'mate';
+$button-packt-custom-background-gradient-pressed: 'mate-reverse';
+$button-packt-custom-background-gradient-disabled: 'mate';
+
+$packt-custom-font-size: 12px;
+$packt-custom-font-family: helvetica , arial , verdana , sans-serif;
+
+$button-packt-custom-color-over: #fff !default;
+$button-packt-custom-color-focus: $button-packt-custom-color-over;
+$button-packt-custom-color-pressed: $button-packt-custom-color-over;
+$button-packt-custom-color-disabled: $button-packt-custom-color-over;
+
+$button-packt-custom-small-font-size: $packt-custom-font-size;
+$button-packt-custom-small-font-size-over: $packt-custom-font-size;
+$button-packt-custom-small-font-size-focus: $packt-custom-font-size;
+$button-packt-custom-small-font-size-pressed: $packt-custom-font-size;
+$button-packt-custom-small-font-size-disabled: $packt-custom-font-size;
+
+$button-packt-custom-small-font-weight: $button-small-font-weight;
+$button-packt-custom-small-font-weight-over: $button-small-font-weight;
+$button-packt-custom-small-font-weight-focus: $button-small-font-weight;
+$button-packt-custom-small-font-weight-pressed: $button-small-font-weight;
+$button-packt-custom-small-font-weight-disabled: $button-small-font-weight;
+
+$button-packt-custom-small-font-family: $packt-custom-font-family;
+$button-packt-custom-small-font-family-over: $packt-custom-font-family;
+$button-packt-custom-small-font-family-focus: $packt-custom-font-family;
+$button-packt-custom-small-font-family-pressed: $packt-custom-font-family;
+$button-packt-custom-small-font-family-disabled: $packt-custom-font-family;
+
+$button-packt-custom-small-icon-size: 16px;
+$button-packt-custom-glyph-color: $button-packt-custom-color;
+$button-packt-custom-glyph-opacity: .5;
+$button-packt-custom-small-arrow-width: 12px;
+$button-packt-custom-small-arrow-height: 12px;
+$button-packt-custom-small-split-width: 14px;
+$button-packt-custom-small-split-height: 14px;
+//UI for Gray Button END-------------------------------------

@@ -1,0 +1,60 @@
+@include extjs-button-ui(
+  $ui: 'custom-btn-small',
+
+  $border-radius: $button-packt-custom-small-border-radius,
+  $border-width: $button-packt-custom-small-border-width,
+
+  $border-color: $button-packt-custom-border-color,
+  $border-color-over: $button-packt-custom-border-color-over,
+  $border-color-focus: $button-packt-custom-border-color-focus,
+  $border-color-pressed: $button-packt-custom-border-color-pressed,
+  $border-color-disabled: $button-packt-custom-border-color-disabled,
+
+  $padding: $button-packt-custom-small-padding,
+  $text-padding: $button-packt-custom-small-text-padding,
+
+  $background-color: $button-packt-custom-background-color,
+  $background-color-over: $button-packt-custom-background-color-over,
+  $background-color-focus: $button-packt-custom-background-color-focus,
+  $background-color-pressed: $button-packt-custom-background-color-pressed,
+  $background-color-disabled: $button-packt-custom-background-color-disabled,
+
+  $background-gradient: $button-packt-custom-background-gradient,
+  $background-gradient-over: $button-packt-custom-background-gradient-over,
+  $background-gradient-focus: $button-packt-custom-background-gradient-focus,
+  $background-gradient-pressed: $button-packt-custom-background-gradient-pressed,
+  $background-gradient-disabled: $button-packt-custom-background-gradient-disabled,
+
+  $color: $button-packt-custom-color,
+  $color-over: $button-packt-custom-color-over,
+  $color-focus: $button-packt-custom-color-focus,
+  $color-pressed: $button-packt-custom-color-pressed,
+  $color-disabled: $button-packt-custom-color-disabled,
+
+  $font-size: $button-packt-custom-small-font-size,
+  $font-size-over: $button-packt-custom-small-font-size-over,
+  $font-size-focus: $button-packt-custom-small-font-size-focus,
+  $font-size-pressed: $button-packt-custom-small-font-size-pressed,
+  $font-size-disabled: $button-packt-custom-small-font-size-disabled,
+
+  $font-weight: $button-packt-custom-small-font-weight,
+  $font-weight-over: $button-packt-custom-small-font-weight-over,
+  $font-weight-focus: $button-packt-custom-small-font-weight-focus,
+  $font-weight-pressed: $button-packt-custom-small-font-weight-pressed,
+  $font-weight-disabled: $button-packt-custom-small-font-weight-disabled,
+
+  $font-family: $button-packt-custom-small-font-family,
+  $font-family-over: $button-packt-custom-small-font-family-over,
+  $font-family-focus: $button-packt-custom-small-font-family-focus,
+  $font-family-pressed: $button-packt-custom-small-font-family-pressed,
+  $font-family-disabled: $button-packt-custom-small-font-family-disabled,
+
+  $icon-size: $button-packt-custom-small-icon-size,
+  $glyph-color: $button-packt-custom-glyph-color,
+  $arrow-width: $button-packt-custom-small-arrow-width,
+  $arrow-height: $button-packt-custom-small-arrow-height,
+  $split-width: $button-packt-custom-small-split-width,
+  $split-height: $button-packt-custom-small-split-height,
+  $opacity-disabled: $button-opacity-disabled,
+  $inner-opacity-disabled: $button-inner-opacity-disabled
+);

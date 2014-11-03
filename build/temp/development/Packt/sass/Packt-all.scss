@@ -1,5 +1,5 @@
 $image-search-path: '/Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/development/Packt/resources';
-$theme-name:  'ext-theme-neptune' !default;
+$theme-name:  'masteringextjs-theme' !default;
 $include-ext-abstractmanager: false;
 $include-ext-action: false;
 $include-ext-ajax: true;
@@ -893,6 +893,7 @@ $include-packt-util-util: true;
 $include-packt-ux-data-writer-associatedwriter: true;
 $include-packt-ux-grid-printer: true;
 $include-packt-view-base-cancelsavetoolbar: true;
+$include-packt-view-base-custombutton: true;
 $include-packt-view-base-grid: true;
 $include-packt-view-base-toptoolbar: true;
 $include-packt-view-base-viewcontroller: true;
@@ -946,8 +947,17 @@ $include-packt-view-staticdata-languages: true;
 @import '../../../../../ext/packages/ext-theme-neutral/sass/etc/all';
 /* including package ext-theme-neptune */
 @import '../../../../../ext/packages/ext-theme-neptune/sass/etc/all';
+/* including package masteringextjs-theme */
+@import '../../../../../packages/masteringextjs-theme/sass/etc/all';
 /* including package Packt */
 @import '../../../../../sass/etc/all';
+/* including package masteringextjs-theme */
+@import '../../../../../packages/masteringextjs-theme/sass/var/Component';
+@import '../../../../../packages/masteringextjs-theme/sass/var/button/Button';
+@import '../../../../../packages/masteringextjs-theme/sass/var/panel/Panel';
+@import '../../../../../packages/masteringextjs-theme/sass/var/tab/Tab';
+@import '../../../../../packages/masteringextjs-theme/sass/var/tab/Bar';
+@import '../../../../../packages/masteringextjs-theme/sass/var/layout/container/Accordion';
 /* including package ext-theme-neptune */
 @import '../../../../../ext/packages/ext-theme-neptune/sass/var/Component';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/var/LoadMask';
@@ -1159,6 +1169,10 @@ $relative-image-path-for-uis: $ext-theme-neptune-resource-path;
 @import '../../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/src/form/field/File';
 @import '../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer';
+/* including package masteringextjs-theme */
+$masteringextjs-theme-resource-path: 'images' !default;
+$relative-image-path-for-uis: $masteringextjs-theme-resource-path;
+@import '../../../../../packages/masteringextjs-theme/sass/src/button/Button';
 /* including package sencha-charts */
 $sencha-charts-resource-path: 'sencha-charts/images' !default;
 $relative-image-path-for-uis: $sencha-charts-resource-path;

@@ -858,7 +858,7 @@ $include-extthemeneptune-toolbar-toolbar: true;
 $include-packt-application: true;
 $include-packt-controller-main: false;
 $include-packt-controller-menu: true;
-$include-packt-controller-root: false;
+$include-packt-controller-root: true;
 $include-packt-controller-staticdata: true;
 $include-packt-controller-test: true;
 $include-packt-model-base: true;
@@ -1180,5 +1180,5 @@ $relative-image-path-for-uis: $sencha-charts-resource-path;
 /* including package Packt */
 $Packt-resource-path: 'images' !default;
 $relative-image-path-for-uis: $Packt-resource-path;
-@import '../../../../../sass/src/view/main/Footer';
 @import '../../../../../sass/src/view/main/Header';
+@import '../../../../../sass/src/view/main/Footer';

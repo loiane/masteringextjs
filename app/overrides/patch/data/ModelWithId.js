@@ -17,7 +17,7 @@ Ext.define('Packt.overrides.patch.data.ModelWithId', {
 }, function() {
     //<debug>
     if (!Ext.getVersion().match('5.0.0.970')) {
-        console.warn('This patch has not been tested with this version of ExtJS');
+        //console.warn('This patch has not been tested with this version of ExtJS');
     }
     //</debug>
 });

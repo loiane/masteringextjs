@@ -116,10 +116,6 @@
         {
             "path": "app/CustomVTypes.js",
             "includeInBundle": true
-        },
-        {
-            "path": "resources/locale/en.js",
-            "includeInBundle": false
         }
     ],
 

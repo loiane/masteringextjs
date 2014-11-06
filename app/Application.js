@@ -6,12 +6,12 @@
 function loadLocale(){
 
     var lang = localStorage ? (localStorage.getItem('user-lang') || 'en') : 'en',
-        file = Ext.util.Format.format("resources/locale/{0}.js", lang),
+        //file = Ext.util.Format.format("resources/locale/{0}.js", lang),
         extJsFile = Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", lang);
 
-    Ext.Loader.loadScript({url: file, onError: function(){
+    /*Ext.Loader.loadScript({url: file, onError: function(){
         alert('Error loading locale file. Please contact system administrator.');
-    }});
+    }});*/
     Ext.Loader.loadScript({url: extJsFile});
 }
 
@@ -31,6 +31,11 @@ Ext.require('Ext.ux.LiveSearchGridPanel');
 Ext.require('Ext.grid.column.Date');
 Ext.require('Ext.grid.column.Widget');
 Ext.require('Ext.form.field.Tag');
+
+Ext.require('Packt.view.login.Login');
+Ext.require('Packt.view.main.Main');
+Ext.require('Packt.controller.Root');
+Ext.require('Packt.view.menu.Tree');
 
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',

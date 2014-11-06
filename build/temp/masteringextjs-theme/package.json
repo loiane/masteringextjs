@@ -1,0 +1,19 @@
+{
+  "name": "masteringextjs-theme",
+  "format": "1",
+  "version": "1.0.0",
+  "creator": "anonymous",
+  "summary": "Short summary",
+  "detailedDescription": "Long description of package",
+  "type": "theme",
+  "extend": "ext-theme-neptune",
+  "local": true,
+  "slicer": {
+    "js": [
+      {
+        "path": "${package.dir}/sass/example/custom.js",
+        "isWidgetManifest": true
+      }
+    ]
+  }
+}

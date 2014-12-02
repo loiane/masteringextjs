@@ -5,7 +5,11 @@ Ext.define('Ext.view.BoundList', {
     extend: 'Ext.view.View',
     alias: 'widget.boundlist',
     alternateClassName: 'Ext.BoundList',
-    requires: ['Ext.layout.component.BoundList', 'Ext.toolbar.Paging'],
+    requires: [
+        'Ext.view.BoundListKeyNav',
+        'Ext.layout.component.BoundList', 
+        'Ext.toolbar.Paging'
+    ],
 
     mixins: [
         'Ext.mixin.Queryable'
@@ -37,19 +41,15 @@ Ext.define('Ext.view.BoundList', {
     shadow: false,
     trackOver: true,
 
-    // This flag indicates to any floaters shown above it that they should focus themselves when taking over topmost position.
-    // ZIndexManager#onCollectionSort decides whether to focus the new front component depending on whether the oldFront
-    // had focusOnToFront set. Even though this class is in fact not focusable.
-    //focusOnToFront: true,
-
     preserveScrollOnRefresh: true,
     enableInitialSelection: false,
+    refreshSelmodelOnRefresh: true,
 
     componentLayout: 'boundlist',
 
     navigationModel: 'boundlist',
 
-    autoScroll: true,
+    scrollable: true,
 
     childEls: [
         'listWrap', 'listEl'
@@ -57,7 +57,7 @@ Ext.define('Ext.view.BoundList', {
 
     renderTpl: [
         '<div id="{id}-listWrap" data-ref="listWrap" role="presentation" class="{baseCls}-list-ct ', Ext.dom.Element.unselectableCls, '">',
-            '<ul id="{id}-listEl" data-ref="listEl" class="' + Ext.plainListCls + '">',
+            '<ul id="{id}-listEl" data-ref="listEl" class="' + Ext.baseCSSPrefix + 'list-plain">',
             '</ul>',
         '</div>',
         '{%',
@@ -107,7 +107,11 @@ Ext.define('Ext.view.BoundList', {
      *
      */
 
-    focusable: false,
+     // Override because on non-touch devices, the bound field
+     // retains focus so that typing may narrow the list.
+     // Only when the show is triggered by a touch does the BoundList
+     // get explicitly focused so that the keyboard does not appear.
+    focusOnToFront: false,
 
     initComponent: function() {
         var me = this,
@@ -119,7 +123,7 @@ Ext.define('Ext.view.BoundList', {
             me.overItemCls = baseCls + '-item-over';
         }
         me.itemSelector = "." + itemCls;
-        me.scrollerSelector = 'ul.' + Ext.plainListCls;
+        me.scrollerSelector = 'ul.' + Ext.baseCSSPrefix + 'list-plain';
 
         if (me.floating) {
             me.addCls(baseCls + '-floating');
@@ -142,9 +146,6 @@ Ext.define('Ext.view.BoundList', {
         }
 
         me.callParent();
-
-        // The dropdown is never focused. Key navigation events flow through the input field.
-        me.getSelectionModel().preventFocus = true;
     },
 
     getRefOwner: function() {
@@ -223,6 +224,44 @@ Ext.define('Ext.view.BoundList', {
      */
     getInnerTpl: function(displayField) {
         return '{' + displayField + '}';
+    },
+    
+    onShow: function() {
+        this.callParent();
+
+        // If the input field is not focused, then focus the picker.
+        if (Ext.Element.getActiveElement() !== this.pickerField.inputEl.dom) {
+            this.focus();
+        }
+    },
+
+    onHide: function() {
+        var inputEl = this.pickerField.inputEl.dom;
+
+        // If we're hiding a focused picker, focus must move to the input field.
+        if (Ext.Element.getActiveElement() !== inputEl) {
+            inputEl.focus();
+        }
+        // Call parent (hide the element) *after* focus has been moved out.
+        // Maintainer: Component#onHide takes parameters. 
+        this.callParent(arguments);
+    },
+
+    // Clicking on an already selected item collapses the picker
+    onItemClick: function(record) {
+        // The selection change events won't fire when clicking on the selected element. Detect it here.
+        var me = this,
+            pickerField = me.pickerField,
+            valueField = pickerField.valueField,
+            selected = me.getSelectionModel().getSelection();
+
+        if (!pickerField.multiSelect && selected.length) {
+            selected = selected[0];
+            // Not all pickerField's have a collapse API, i.e. Ext.ux.form.MultiSelect.
+            if (selected && pickerField.isEqual(record.get(valueField), selected.get(valueField)) && pickerField.collapse) {
+                pickerField.collapse();
+            }
+        }
     },
 
     onDestroy: function() {

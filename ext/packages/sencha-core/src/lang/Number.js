@@ -237,6 +237,22 @@ Ext.Number = new function() {
         },
 
         /**
+         * The sign function.
+         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign
+         * @param x {Number} A number.
+         * @returns {Number} The sign of a number, indicating whether the number is positive, negative or zero.
+         */
+        sign: function (x) {
+            if (isNaN(x)) {
+                return NaN;
+            } else if (x === 0) {
+                return x;
+            } else {
+                return (x > 0 ? 1 : -1);
+            }
+        },
+
+        /**
          * Formats a number using fixed-point notation
          * @param {Number} value The number to format
          * @param {Number} precision The number of digits to show after the decimal point

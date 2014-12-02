@@ -181,19 +181,23 @@ Ext.define('Ext.grid.filters.Filters', {
      * @private
      */
     initColumns: function () {
-        // TODO: What to do about grouping columns?
-        var i, len, columns, column, filter, filterCollection;
+        var grid = this.grid,
+            store = grid.getStore(),
+            columns = grid.columnManager.getColumns(),
+            len = columns.length,
+            i, column, 
+            filter, filterCollection, block;
 
-        columns = this.grid.columnManager.getColumns();
+        
 
         // We start with filters defined on any columns.
-        for (i = 0, len = columns.length; i < len; i++) {
+        for (i = 0; i < len; i++) {
             column = columns[i];
             filter = column.filter;
 
             if (filter && !filter.isGridFilter) {
                 if (!filterCollection) {
-                    filterCollection = this.grid.store.getFilters();
+                    filterCollection = store.getFilters();
                     filterCollection.beginUpdate();
                 }
 
@@ -313,9 +317,25 @@ Ext.define('Ext.grid.filters.Filters', {
      * Handler called by the grid 'beforedestroy' event
      */
     destroy: function () {
-        this.bindStore(null);
-        Ext.destroyMembers(this, 'menuItem', 'sep');
-        this.callParent();
+        var me = this,
+            columns = me.grid.columnManager.getColumns(),
+            len = columns.length,
+            i, filter;
+
+        me.bindStore(null);
+        Ext.destroyMembers(me, 'menuItem', 'sep');
+
+        for (i = 0; i < len; ++i) {
+            filter = columns[i].filter;
+
+            if (filter && filter.isGridFilter) {
+                filter.destroy();
+            }
+        }
+
+        me.grid = null;
+
+        me.callParent();
     },
 
     onUnbindStore: function(store) {
@@ -442,7 +462,7 @@ Ext.define('Ext.grid.filters.Filters', {
     /**
      * Turns all filters off. This does not clear the configuration information.
      * @param {Boolean} autoFilter If true, don't fire the deactivate event in
-     * {@link Ext.grid.filters.filter.Filter#setActive setActive}.
+     * {@link Ext.grid.filters.filter.Base#setActive setActive}.
      */
     clearFilters: function (autoFilter) {
         var grid = this.grid,
@@ -479,23 +499,26 @@ Ext.define('Ext.grid.filters.Filters', {
         }
     },
 
-    onBeforeReconfigure: function (grid, store, columns) {
-        if (columns) {
+    onBeforeReconfigure: function(grid, store, columns) {
+        if (store) {
             store.getFilters().beginUpdate();
         }
 
         this.reconfiguring = true;
     },
 
-    onReconfigure: function (grid, store, columns, oldStore) {
+    onReconfigure: function(grid, store, columns, oldStore) {
         var me = this;
 
-        if (oldStore !== store) {
+        if (store && oldStore !== store) {
             me.bindStore(store);
         }
 
         if (columns) {
             me.initColumns();
+        }
+        
+        if (store) {
             store.getFilters().endUpdate();
         }
 

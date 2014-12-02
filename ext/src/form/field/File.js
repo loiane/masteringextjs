@@ -319,8 +319,7 @@ Ext.define('Ext.form.field.File', {
     },
 
     onDestroy: function(){
-        Ext.destroyMembers(this, 'button');
-        delete this.fileInputEl;
+        this.fileInputEl = this.button = null;
         this.callParent();
     },
 

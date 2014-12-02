@@ -106,7 +106,7 @@ Ext.define('Ext.fx.runner.Css', {
 
         this.ruleStylesCache = {};
 
-        return this;
+        this.callParent();
     },
 
     getStyleSheet: function() {

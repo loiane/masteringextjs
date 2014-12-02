@@ -46,15 +46,30 @@ Ext.define('Ext.direct.PollingProvider', {
 
     /**
      * @cfg {Object} [baseParams]
-     * An object containing properties which are to be sent as parameters on every polling request
+     * An object containing properties which are to be sent as parameters on every
+     * polling request. Note that if baseParams are set and {@link #url} parameter
+     * is an URL string, poll requests will use POST method instead of default GET.
      */
     
     /**
      * @cfg {String/Function} url
      * The url which the PollingProvider should contact with each request. This can also be
-     * an imported Ext.Direct method which will accept the baseParams as its only argument.
+     * an imported Ext.Direct method which will be passed baseParams as named arguments.
+     *
+     * *Note* that using string `url` is deprecated, use {@link #pollFn} instead.
      */
-
+    
+    /**
+     * @cfg {String/Function} pollFn
+     *
+     * Ext.Direct method to use for polling. If a method name is provided as a string,
+     * the actual function will not be resolved until the first time this provider
+     * is connected.
+     *
+     * The method should accept named arguments and will be passed {@link #baseParams}
+     * if set.
+     */
+    
     /**
      * @event beforepoll
      * @preventable
@@ -83,9 +98,33 @@ Ext.define('Ext.direct.PollingProvider', {
      */
     connect: function() {
         var me = this,
-            url = me.url;
+            url = me.url,
+            pollFn = me.pollFn;
         
-        if (url && !me.pollTask) {
+        if (pollFn && Ext.isString(pollFn)) {
+            //<debug>
+            var fnName = pollFn;
+            //</debug>
+            
+            me.pollFn = pollFn = Ext.direct.Manager.parseMethod(pollFn);
+            
+            //<debug>
+            if (!Ext.isFunction(pollFn)) {
+                Ext.Error.raise("Cannot resolve Ext.Direct API method " + fnName +
+                                " for PollingProvider");
+            }
+            //</debug>
+        }
+        else if (Ext.isFunction(url)) {
+            //<debug>
+            Ext.log.warn('Using a function for url is deprecated, use pollFn instead.');
+            //</debug>
+            
+            me.pollFn = pollFn = url;
+            me.url = url = null;
+        }
+        
+        if ((url || pollFn) && !me.pollTask) {
             me.pollTask = Ext.TaskManager.start({
                 run: me.runPoll,
                 interval: me.interval,
@@ -120,18 +159,27 @@ Ext.define('Ext.direct.PollingProvider', {
      */
     runPoll: function() {
         var me = this,
-            url = me.url;
+            url = me.url,
+            pollFn = me.pollFn,
+            baseParams = me.baseParams,
+            args;
         
         if (me.fireEvent('beforepoll', me) !== false) {
-            if (Ext.isFunction(url)) {
-                url(me.baseParams);
+            if (pollFn) {
+                args = pollFn.directCfg.method.getArgs({
+                    params: baseParams !== undefined ? baseParams : {},
+                    callback: me.onPollFn,
+                    scope: me
+                });
+                
+                pollFn.apply(window, args);
             }
             else {
                 Ext.Ajax.request({
                     url: url,
                     callback: me.onData,
                     scope: me,
-                    params: me.baseParams
+                    params: baseParams
                 });
             }
             
@@ -163,5 +211,12 @@ Ext.define('Ext.direct.PollingProvider', {
             
             me.fireEvent('data', me, events);
         }
+    },
+    
+    /**
+     * @private
+     */
+    onPollFn: function(result, event, success, options) {
+        this.onData(null, success, { responseText: result });
     }
 });

@@ -9,6 +9,7 @@ Ext.define('Ext.util.CollectionKey', {
     mixins: [
         'Ext.mixin.Identifiable'
     ],
+    isCollectionKey: true,
 
     config: {
         collection: null,
@@ -141,6 +142,16 @@ Ext.define('Ext.util.CollectionKey', {
     get: function (key) {
         var map = this.map || this.getMap();
         return map[key] || null;
+    },
+
+    /**
+     * @private
+     * Clears this index;
+     *
+     * Called by {@link Ext.util.Collection#clear} when the collection is cleared.
+     */
+    clear: function() {
+        this.map = null;
     },
 
     getRootProperty: function () {

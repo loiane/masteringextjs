@@ -489,16 +489,16 @@ Ext.define('Ext.container.Container', {
      * Usage:
      *
      *     defaults: { // defaults are applied to items, not the container
-     *         autoScroll: true
+     *         scrollable: true
      *     },
      *     items: [
-     *         // default will not be applied here, panel1 will be autoScroll: false
+     *         // default will not be applied here, panel1 will be scrollable: false
      *         {
      *             xtype: 'panel',
      *             id: 'panel1',
-     *             autoScroll: false
+     *             scrollable: false
      *         },
-     *         // this component will have autoScroll: true
+     *         // this component will have scrollable: true
      *         new Ext.panel.Panel({
      *             id: 'panel2'
      *         })
@@ -659,7 +659,14 @@ Ext.define('Ext.container.Container', {
      * See the introductory docs for {@link Ext.container.Container} for more information
      * about references & reference holders.
      */
-
+    
+    /**
+     * @cfg {String} defaultFocus
+     *
+     * Specifies a child Component to receive focus when this Container's {@link #method-focus}
+     * method is called. Should be a valid {@link Ext.ComponentQuery query} selector.
+     */
+    
     // ***********************************************************************************
     // End Config
     // ***********************************************************************************
@@ -700,9 +707,6 @@ Ext.define('Ext.container.Container', {
     /**
      * @event add
      * Fires after any {@link Ext.Component} is added or inserted into the container.
-     * 
-     * **This event bubbles:** 'add' will also be fired when Component is added to any of
-     * the child containers or their childern or ...
      * @param {Ext.container.Container} this
      * @param {Ext.Component} component The component that was added
      * @param {Number} index The index at which the component was added to the container's items collection
@@ -739,20 +743,14 @@ Ext.define('Ext.container.Container', {
     /**
      * @event remove
      * Fires after any {@link Ext.Component} is removed from the container.
-     *
-     * **This event bubbles:** 'remove' will also be fired when Component is removed from any of
-     * the child containers or their children or ...
      * @param {Ext.container.Container} this
      * @param {Ext.Component} component The component that was removed
      * @since 2.3.0
      */
 
     /**
-     * @event move
+     * @event childmove
      * Fires after any {@link Ext.Component} has changed its ordinal position within the container.
-     *
-     * **This event bubbles:** 'move' will also be fired when Component is removed from any of
-     * the child containers or their children or ...
      * @param {Ext.container.Container} this
      * @param {Ext.Component} component The component that was moved
      * @param {Ext.Component} prevIndex The previous ordinal position of the Component
@@ -822,9 +820,8 @@ Ext.define('Ext.container.Container', {
             index = (typeof args[0] == 'number') ? args.shift() : -1,
             layout = me.getLayout(),
             needsLayout = false,
-            addingArray, items, i, length, item, pos, ret,
-            instanced;
-            
+            addingArray, items, i, length, item, pos, ret, instanced;
+
 
         if (args.length == 1 && Ext.isArray(args[0])) {
             items = args[0];
@@ -887,6 +884,7 @@ Ext.define('Ext.container.Container', {
         if (needsLayout) {
             me.updateLayout();
         }
+
         if (me.rendered) {
             Ext.resumeLayouts(true);
         }
@@ -950,12 +948,12 @@ Ext.define('Ext.container.Container', {
      */
     afterLayout: function(layout) {
         var me = this,
-            scrollManager = me.scrollManager;
+            scroller = me.getScrollable();
 
         ++me.layoutCounter;
 
-        if (scrollManager && me.layoutCounter > 1) {
-            scrollManager.refresh();
+        if (scroller && me.layoutCounter > 1) {
+            scroller.refresh();
         }
 
         if (me.hasListeners.afterlayout) {
@@ -1241,7 +1239,22 @@ Ext.define('Ext.container.Container', {
 
         return result;
     },
-
+    
+    /**
+     * Finds the configured default focus item. See {@link #defaultFocus}.
+     */
+    getDefaultFocus: function() {
+        var defaultFocus = this.defaultFocus,
+            result;
+        
+        if (defaultFocus != undefined) {
+            result = this.down(defaultFocus);
+        }
+        
+        // Returning undefined is ok
+        return result;
+    },
+    
     initComponent: function(){
         var me = this;
 
@@ -1427,22 +1440,6 @@ Ext.define('Ext.container.Container', {
         return this.add(index, component);
     },
 
-    /**
-     * Determines whether **this Container** is an ancestor of the passed Component.
-     * This will return `true` if the passed Component is anywhere within the subtree
-     * beneath this Container.
-     * @param {Ext.Component} possibleDescendant The Component to test for presence
-     * within this Container's subtree.
-     */
-    isAncestor: function(possibleDescendant) {
-        while (possibleDescendant) {
-            if (possibleDescendant.ownerCt === this) {
-                return true;
-            }
-            possibleDescendant = possibleDescendant.ownerCt;
-        }
-    },
-
     // @private
     lookupComponent: function(comp) {
         if (!comp.isComponent) {
@@ -1458,12 +1455,12 @@ Ext.define('Ext.container.Container', {
     /**
      * Moves a Component within the Container. This method does **not** account for things
      * like splitter components added by a layout. To better handle these situations, it
-     * is recommended to use `{@link #moveBefore}` or `{@link moveAfter}` instead.
+     * is recommended to use `{@link #moveBefore}` or `{@link #moveAfter}` instead.
      *
      * @param {Number/Ext.Component} fromIdx The index/component to move.
      * @param {Number} toIdx The new index for the Component.
      * @return {Ext.Component} component The Component that was moved.
-     * @deprecated 5.0 Use `{@link #moveBefore}` or `{@link moveAfter}` instead.
+     * @deprecated 5.0 Use `{@link #moveBefore}` or `{@link #moveAfter}` instead.
      */
     move: function(fromIdx, toIdx) {
         var me = this,
@@ -1479,10 +1476,11 @@ Ext.define('Ext.container.Container', {
             if (item === false) {
                 return false;
             }
+            toIdx = Math.min(toIdx, items.getCount());
             items.insert(toIdx, item);
             me.onMove(item, fromIdx, toIdx);
-            if (me.hasListeners.move) {
-                me.fireEvent('move', me, item, fromIdx, toIdx);
+            if (me.hasListeners.childmove) {
+                me.fireEvent('childmove', me, item, fromIdx, toIdx);
             }
             me.updateLayout();
         }
@@ -1492,7 +1490,7 @@ Ext.define('Ext.container.Container', {
     /**
      * Moves the given `item` into this container in front of `before`. This method will
      * account for layout-generated components like splitters and should be used instead
-     * of index based `{@link #move}`. If `before` is `null` then the `item` will be the
+     * of index based `{@link #method-move}`. If `before` is `null` then the `item` will be the
      * last item in this container.
      * @param {Object/Ext.Component} item The item to move. May be a component configuration object.
      * @param {Ext.Component} before The reference component. May be `null`.
@@ -1500,13 +1498,16 @@ Ext.define('Ext.container.Container', {
      * @since 5.0.0
      */
     moveBefore: function (item, before) {
-        return this.layout.moveItemBefore(item, before);
+        if (item !== before) {
+            item = this.layout.moveItemBefore(item, before);
+        }
+        return item;
     },
 
     /**
      * Moves the given `item` into this container following `after`. This method will
      * account for layout-generated components like splitters and should be used instead
-     * of index based `{@link #move}`. If `after` is `null` then the `item` will be the
+     * of index based `{@link #method-move}`. If `after` is `null` then the `item` will be the
      * first item in this container.
      * @param {Ext.Component} item The item to move. May be a component configuration object.
      * @param {Ext.Component} after The reference component. May be `null`.
@@ -1514,13 +1515,14 @@ Ext.define('Ext.container.Container', {
      * @since 5.0.0
      */
     moveAfter: function (item, after) {
-        var me = this,
-            items = me.items,
-            layout = me.layout,
-            index = after ? layout.getMoveAfterIndex(after) : 0,
-            before = items.getAt(index);
-        
-        return layout.moveItemBefore(item, before);
+        var layout = this.layout,
+            index;
+
+        if (item !== after) {
+            index = after ? layout.getMoveAfterIndex(after) : 0;
+            item = layout.moveItemBefore(item, this.items.getAt(index));
+        }
+        return item;
     },
 
     /**
@@ -2003,16 +2005,28 @@ Ext.define('Ext.container.Container', {
         getDefaultContentTarget: function() {
             return this.el;
         },
-
+        
         /**
          * @private
-         * Returns the focus holder element associated with this Container. By default, this is the Container's target
-         * element. Subclasses which use embedded focusable elements (such as Window and Button) should override this for use
-         * by the {@link #method-focus} method.
+         * Returns the focus holder element associated with this Container.
+         * By default, this is the Container's target element; however if {@link #defaultFocus}
+         * is defined, the child component referenced by that property will be found
+         * and returned instead.
+         *
          * @returns {Ext.dom.Element} the focus holding element.
          */
         getFocusEl: function() {
-            return this.getTargetEl();
+            var delegate = this.getDefaultFocus();
+            
+            if (delegate) {
+                return delegate;
+            }
+            else if (this.focusable) {
+                return this.getTargetEl();
+            }
+            
+            // Containers that are not focusable should not return a focusEl
+            return undefined;
         },
 
         getScrollerEl: function() {

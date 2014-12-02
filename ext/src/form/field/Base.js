@@ -388,10 +388,24 @@ Ext.define('Ext.form.field.Base', {
 
     // private
     onRender: function() {
+        // This noOptimize can be removed after SDKTOOLS-946 is fixed
+        // @noOptimize.callParent
         this.callParent(arguments);
         this.mixins.labelable.self.initTip();
         this.renderActiveError();
     },
+
+    onFocusLeave: function(e) {
+        this.callParent([e]);
+        this.completeEdit();
+    },
+
+    /**
+     * @protected
+     * Called when focus leaves this input field.
+     * Used to postprocess raw values and perform conversion and validation.
+     */
+    completeEdit: Ext.emptyFn,
 
     isFileUpload: function() {
         return this.inputType === 'file';
@@ -554,7 +568,7 @@ Ext.define('Ext.form.field.Base', {
 
     onBoxReady: function() {
         var me = this;
-        me.callParent();
+        me.callParent(arguments);
         
         if (me.setReadOnlyOnBoxReady) {
             me.setReadOnly(me.readOnly);
@@ -625,10 +639,8 @@ Ext.define('Ext.form.field.Base', {
     initEvents : function(){
         var me = this,
             inputEl = me.inputEl,
-            onChangeTask,
-            onChangeEvent,
+            onFieldMutation = me.onFieldMutation,
             events = me.checkChangeEvents,
-            ignoreChangeRe = me.ignoreChangeRe,
             eLen = events.length,
             e, event;
 
@@ -636,26 +648,33 @@ Ext.define('Ext.form.field.Base', {
             me.mon(inputEl, Ext.supports.SpecialKeyDownRepeat ? 'keydown' : 'keypress', me.fireKey,  me);
 
             // listen for immediate value changes
-            onChangeTask = new Ext.util.DelayedTask(me.checkChange, me);
-            me.onChangeEvent = onChangeEvent = function(e) {
-                // When using propertychange, we want to skip out on various values, since they won't cause
-                // the underlying value to change.
-                if (!(e.type == 'propertychange' && ignoreChangeRe.test(e.browserEvent.propertyName))) {
-                    onChangeTask.delay(me.checkChangeBuffer);
-                }
-            };
+            me.checkChangeTask = new Ext.util.DelayedTask(me.checkChange, me);
 
             for (e = 0; e < eLen; e++) {
                 event = events[e];
-
                 if (event === 'propertychange') {
                     me.usesPropertychange = true;
                 }
-
-                me.mon(inputEl, event, onChangeEvent);
+                me.mon(inputEl, event, onFieldMutation, me);
             }
         }
         me.callParent();
+    },
+
+    /*
+     * @private
+     * Called when some event (See the checkChangeEvents property) mutates the input field.
+     * We react to changes.
+     *
+     * Subclasses may provide an inplementation which may perform other tasks (eg ComboBox value matching)
+     * before calling the checkChange method.
+     */
+    onFieldMutation: function(e) {
+        // When using propertychange, we want to skip out on various values, since they won't cause
+        // the underlying value to change.
+        if (!(e.type == 'propertychange' && this.ignoreChangeRe.test(e.browserEvent.propertyName))) {
+            this.checkChangeTask.delay(this.checkChangeBuffer);
+        }
     },
 
     /**
@@ -666,7 +685,7 @@ Ext.define('Ext.form.field.Base', {
             usesPropertychange = me.usesPropertychange;
             
         if (usesPropertychange) {
-            me[active ? 'mon' : 'mun'](me.inputEl, 'propertychange', me.onChangeEvent);
+            me[active ? 'mon' : 'mun'](me.inputEl, 'propertychange', me.onFieldMutation);
         }
     },
 
@@ -691,7 +710,7 @@ Ext.define('Ext.form.field.Base', {
      *
      * @return {Boolean} True if the value is valid, else false
      */
-    isValid : function() {
+    isValid: function() {
         var me = this,
             disabled = me.disabled,
             validate = me.forceValidation || !disabled;

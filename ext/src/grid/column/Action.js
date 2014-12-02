@@ -25,14 +25,14 @@
  *                 xtype:'actioncolumn',
  *                 width:50,
  *                 items: [{
- *                     icon: 'extjs/examples/shared/icons/fam/cog_edit.png',  // Use a URL in the icon config
+ *                     icon: 'extjs-build/examples/shared/icons/fam/cog_edit.png',  // Use a URL in the icon config
  *                     tooltip: 'Edit',
  *                     handler: function(grid, rowIndex, colIndex) {
  *                         var rec = grid.getStore().getAt(rowIndex);
  *                         alert("Edit " + rec.get('firstname'));
  *                     }
  *                 },{
- *                     icon: 'extjs/examples/restful/images/delete.png',
+ *                     icon: 'extjs-build/examples/restful/images/delete.png',
  *                     tooltip: 'Delete',
  *                     handler: function(grid, rowIndex, colIndex) {
  *                         var rec = grid.getStore().getAt(rowIndex);
@@ -234,7 +234,6 @@ Ext.define('Ext.grid.column.Action', {
             i,
             len;
 
-
         me.origRenderer = cfg.renderer || me.renderer;
         me.origScope = cfg.scope || me.scope;
 
@@ -293,7 +292,6 @@ Ext.define('Ext.grid.column.Action', {
 
             // Only process the item action setup once.
             if (!item.hasActionConfiguration) {
-
                 // Apply our documented default to all items
                 item.stopSelection = me.stopSelection;
                 item.disable = Ext.Function.bind(me.disableAction, me, [i], 0);
@@ -375,11 +373,6 @@ Ext.define('Ext.grid.column.Action', {
             item,
             disabled;
 
-        // Don't process mousedown events anymore!
-        if (type === 'mousedown') {
-            return false;
-        }
-
         // If the target was not within a cell (ie it's a keydown event from the View), then
         // rely on the selection data injected by View.processUIEvent to grab the
         // first action icon from the selected cell.
@@ -392,9 +385,16 @@ Ext.define('Ext.grid.column.Action', {
             item = me.items[parseInt(match[1], 10)];
             disabled = item.disabled || (item.isDisabled ? item.isDisabled.call(item.scope || me.origScope || me, view, recordIndex, cellIndex, item, record) : false);
             if (item && !disabled) {
+                // Don't process mousedown events anymore!
+                if (type === 'mousedown') {
+                    if (item.stopSelection) {
+                        e.preventDefault();
+                    }
+                    return false;
+                }
+
                 if (type === 'click' || (key === e.ENTER || key === e.SPACE)) {
                     Ext.callback(item.handler || me.handler, item.scope || me.origScope, [view, recordIndex, cellIndex, item, e, record, row], undefined, me);
-
                     // The default is to stop the event from propagating (thus preventing the selection model from
                     // selecting and focusing the grid row). See EXTJSIV-11177.
                     if (item.stopSelection !== false) {

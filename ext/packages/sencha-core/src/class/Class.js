@@ -1,16 +1,24 @@
 /**
  * @class Ext.Class
  *
- * Handles class creation throughout the framework. This is a low level factory that is used by Ext.ClassManager and generally
- * should not be used directly. If you choose to use Ext.Class you will lose out on the namespace, aliasing and depency loading
- * features made available by Ext.ClassManager. The only time you would use Ext.Class directly is to create an anonymous class.
+ * This is a low level factory that is used by {@link Ext#define Ext.define} and should not be used
+ * directly in application code.
+ * 
+ * The configs of this class are intended to be used in `Ext.define` calls to describe the class you
+ * are declaring. For example:
+ * 
+ *     Ext.define('App.util.Thing', {
+ *         extend: 'App.util.Other',
+ * 
+ *         alias: 'util.thing',
+ * 
+ *         config: {
+ *             foo: 42
+ *         }
+ *     });
  *
- * If you wish to create a class you should use {@link Ext#define Ext.define} which aliases
- * {@link Ext.ClassManager#create Ext.ClassManager.create} to enable namespacing and dynamic dependency resolution.
- *
- * Ext.Class is the factory and **not** the superclass of everything. For the base class that **all** Ext classes inherit
- * from, see {@link Ext.Base}.
- * @private
+ * Ext.Class is the factory and **not** the superclass of everything. For the base class that **all**
+ * classes inherit from, see {@link Ext.Base}.
  */
 (function() {
 // @tag class
@@ -30,7 +38,7 @@
         }
         //<debug>
         if (className) {
-            constructor.displayName = className;
+            constructor.name = className;
         }
         //</debug>
         return constructor;

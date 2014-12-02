@@ -37,6 +37,18 @@ Ext.require('Packt.view.main.Main');
 Ext.require('Packt.controller.Root');
 Ext.require('Packt.view.menu.Tree');
 
+Ext.require('Ext.data.validator.Exclusion');
+Ext.require('Ext.data.validator.Format');
+Ext.require('Ext.data.validator.Presence');
+Ext.require('Ext.data.validator.Length');
+Ext.require('Ext.data.validator.Email');
+
+Ext.require('Ext.chart.series.Pie');
+Ext.require('Ext.chart.interactions.Rotate');
+Ext.require('Ext.chart.interactions.ItemHighlight');
+Ext.require('Ext.chart.axis.Numeric');
+Ext.require('Ext.chart.axis.Category');
+
 Ext.define('Packt.Application', {
     extend: 'Ext.app.Application',
     

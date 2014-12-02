@@ -4,6 +4,7 @@
  * metadata-driven class system features
  */
 Ext.Boot.loadSyncBasePrefix([
+  ".sencha/package/Boot.js",
   "packages/sencha-core/src/Ext.js",
   "packages/sencha-core/src/lang/Error.js",
   "packages/sencha-core/src/lang/Array.js",
@@ -25,6 +26,18 @@ Ext.Boot.loadSyncBasePrefix([
   "packages/sencha-core/src/env/OS.js",
   "packages/sencha-core/src/env/Feature.js",
   "packages/sencha-core/src/env/Ready.js",
-  "packages/sencha-core/src/class/Loader.js"
+  "packages/sencha-core/src/class/Loader.js",
+  "overrides/Positionable.js",
+  "overrides/event/Event.js",
+  "overrides/event/publisher/Dom.js",
+  "overrides/event/publisher/Gesture.js",
+  "overrides/dom/Element.js",
+  "overrides/GlobalEvents.js",
+  "overrides/Widget.js",
+  "overrides/app/domain/Component.js",
+  "packages/sencha-core/overrides/app/Application.js",
+  "overrides/app/Application.js",
+  "overrides/dom/Helper.js",
+  "overrides/plugin/Abstract.js"
 ]);
 

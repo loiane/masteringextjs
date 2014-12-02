@@ -276,7 +276,6 @@ Ext.Configurator.prototype = {
             // Make a copy of the config properties for this instance so we can apply the
             // instanceConfig to it safely later:
             values = ExtObject.fork(me.values),
-            notStrict = !instance.$configStrict,
             remaining = 0,
             firstInstance = !initList,
             cachedInitList, cfg, getter, needsInit, i, internalName,
@@ -423,11 +422,16 @@ Ext.Configurator.prototype = {
                 value = instanceConfig[name];
                 cfg = configs[name];
                 if (!cfg) {
+                    //<debug>
+                    if (instance.$configStrict && typeof instance.self.prototype[name] === 'function') {
+                        // In strict mode you cannot override functions
+                        Ext.Error.raise("Cannot override method " + name + " on " + instance.$className + " instance.");
+                    }
+                    //</debug>
+
                     // Not all "configs" use the config system so in this case simply put
                     // the value on the instance:
-                    if (notStrict) {
-                        instance[name] = value;
-                    }
+                    instance[name] = value;
                 } else {
                     // However we still need to create the initial value that needs
                     // to be used. We also need to spin up the initGetter.
@@ -563,7 +567,6 @@ Ext.Configurator.prototype = {
     // private
     reconfigure: function (instance, instanceConfig, options) {
         var currentConfig = instance.config,
-            initialConfig = instance.initialConfig,
             configList = [],
             strict = instance.$configStrict,
             configs = this.configs,
@@ -612,20 +615,26 @@ Ext.Configurator.prototype = {
                     instance[names.set](instanceConfig[name]);
                     delete instance[getter];
                 }
-            } else if (!strict) {
+            } else {
                 cfg = configPropMap[name] || Ext.Config.get(name);
                 names = cfg.names;
 
                 if (instance[names.set]) {
                     instance[names.set](instanceConfig[name]);
                 } else if (applyProps) {
+                    //<debug>
+                    if (instance.$configStrict && typeof instance.self.prototype[name] === 'function') {
+                        // In strict mode you cannot override functions
+                        Ext.Error.raise("Cannot override method " + name + " on " + instance.$className + " instance.");
+                    }
+                    //</debug>
                     // apply non-config props directly to the instance if specified in options
                     instance[name] = instanceConfig[name];
                 }
                 //<debug>
                 else if (name !== 'type') {
                     Ext.Error.raise('Config "' + name + '" has no setter on class ' +
-                                    instance.$className);
+                        instance.$className);
                 }
                 //</debug>
             }

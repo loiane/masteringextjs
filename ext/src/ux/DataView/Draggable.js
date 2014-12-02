@@ -140,7 +140,7 @@ Ext.define('Ext.ux.DataView.Draggable', {
                 item: true
             };
 
-            if (selected.length == 1) {
+            if (selected.length === 1) {
                 dragData.single = true;
                 dragData.ddel = target;
             } else {
@@ -195,7 +195,7 @@ Ext.define('Ext.ux.DataView.Draggable', {
     /**
      * Updates the internal ghost DataView by ensuring it is rendered and contains the correct records
      * @param {Array} records The set of records that is currently selected in the parent DataView
-     * @return {Ext.view.View} The Ghost DataView
+     * @return {HtmlElement} The Ghost DataView's encapsulating HtmnlElement.
      */
     prepareGhost: function(records) {
         var ghost = this.createGhost(records),
@@ -204,7 +204,7 @@ Ext.define('Ext.ux.DataView.Draggable', {
         store.removeAll();
         store.add(records);
 
-        return ghost.getEl();
+        return ghost.getEl().dom;
     },
 
     /**

@@ -308,7 +308,7 @@ Ext.define('Ext.direct.RemotingProvider', {
         var me = this,
             actions = me.actions,
             namespace = me.namespace,
-            action, cls, methods, i, len, method;
+            action, cls, methods, i, len, method, handler;
             
         for (action in actions) {
             if (actions.hasOwnProperty(action)) {
@@ -331,7 +331,8 @@ Ext.define('Ext.direct.RemotingProvider', {
 
                 for (i = 0, len = methods.length; i < len; ++i) {
                     method = new Ext.direct.RemotingMethod(methods[i]);
-                    cls[method.name] = me.createHandler(action, method);
+                    cls[method.name] = handler = me.createHandler(action, method);
+                    handler.name = methods[i];
                 }
             }
         }
@@ -358,7 +359,7 @@ Ext.define('Ext.direct.RemotingProvider', {
             };
         }
         else {
-            handler = function(form, callback, scope) {
+            handler = function() {
                 me.configureFormRequest(action, method, slice.call(arguments, 0));
             };
         }
@@ -503,49 +504,6 @@ Ext.define('Ext.direct.RemotingProvider', {
     },
     
     /**
-     * Configure a direct request
-     *
-     * @param {String} action The action being executed
-     * @param {Object} method The being executed
-     *
-     * @private
-     */
-    configureRequest: function(action, method, args) {
-        var me = this,
-            callData, data, callback, scope, opts, transaction, params;
-
-        callData = method.getCallData(args);
-        data     = callData.data;
-        callback = callData.callback;
-        scope    = callData.scope;
-        opts     = callData.options || {};
-
-        params = Ext.apply({}, {
-            provider: me,
-            args: args,
-            action: action,
-            method: method.name,
-            data: data,
-            callbackOptions: opts,
-            callback: scope && Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback
-        });
-
-        if (opts.timeout) {
-            Ext.applyIf(params, {
-                timeout: opts.timeout
-            });
-        }
-
-        transaction = new Ext.direct.Transaction(params);
-
-        if (me.fireEvent('beforecall', me, transaction, method) !== false) {
-            Ext.direct.Manager.addTransaction(transaction);
-            me.queueTransaction(transaction);
-            me.fireEvent('call', me, transaction, method);
-        }
-    },
-    
-    /**
      * Gets the Ajax call info for a transaction
      *
      * @param {Ext.direct.Transaction} transaction The transaction
@@ -554,51 +512,58 @@ Ext.define('Ext.direct.RemotingProvider', {
      *
      * @private
      */
-    getCallData: function(transaction) {
-        return {
+    getPayload: function(transaction) {
+        var result = {
             action: transaction.action,
             method: transaction.method,
             data: transaction.data,
             type: 'rpc',
             tid: transaction.id
         };
+        
+        if (transaction.metadata) {
+            result.metadata = transaction.metadata;
+        }
+        
+        return result;
     },
     
     /**
      * Sends a request to the server
      *
-     * @param {Object/Array} data The data to send
+     * @param {Object/Array} transaction The transaction(s) to send
      *
      * @private
      */
-    sendRequest: function(data) {
+    sendRequest: function(transaction) {
         var me = this,
             request, callData, params,
             enableUrlEncode = me.enableUrlEncode,
-            i, len;
+            payload, i, len;
 
         request = {
             url: me.url,
             callback: me.onData,
             scope: me,
-            transaction: data,
+            transaction: transaction,
             timeout: me.timeout
         };
 
         // Explicitly specified timeout for Ext.Direct call overrides defaults
-        if (data.timeout) {
-            request.timeout = data.timeout;
+        if (transaction.timeout) {
+            request.timeout = transaction.timeout;
         }
 
-        if (Ext.isArray(data)) {
+        if (Ext.isArray(transaction)) {
             callData = [];
 
-            for (i = 0, len = data.length; i < len; ++i) {
-                callData.push(me.getCallData(data[i]));
+            for (i = 0, len = transaction.length; i < len; ++i) {
+                payload = me.getPayload(transaction[i]);
+                callData.push(payload);
             }
         }
         else {
-            callData = me.getCallData(data);
+            callData = me.getPayload(transaction);
         }
 
         if (enableUrlEncode) {
@@ -665,37 +630,102 @@ Ext.define('Ext.direct.RemotingProvider', {
     },
     
     /**
+     * Configure a transaction for a Direct request
+     *
+     * @param {String} action The action being executed
+     * @param {Object} method The method being executed
+     * @param {Array} args Method invocation arguments
+     * @param {Boolean} isForm True for a form submit
+     *
+     * @return {Object} Transaction object
+     *
+     * @private
+     */
+    configureTransaction: function(action, method, args, isForm) {
+        var data, cb, scope, options, params;
+        
+        data = method.getCallData(args);
+        
+        cb      = data.callback;
+        scope   = data.scope;
+        options = data.options;
+        
+        //<debug>
+        if (cb && !Ext.isFunction(cb)) {
+            Ext.Error.raise("Callback argument is not a function " +
+                            "for Ext.Direct method " +
+                            action + "." + method.name);
+        }
+        //</debug>
+        
+        // Callback might be unspecified for a notification
+        // that does not expect any return value
+        cb = cb && scope ? Ext.Function.bind(cb, scope) : cb;
+        
+        params = Ext.apply({}, {
+            provider: this,
+            args: args,
+            action: action,
+            method: method.name,
+            form: data.form,
+            data: data.data,
+            metadata: data.metadata,
+            callbackOptions: options,
+            callback: cb,
+            isForm: isForm
+        });
+        
+        if (options && options.timeout != null) {
+            params.timeout = options.timeout;
+        }
+        
+        return new Ext.direct.Transaction(params);
+    },
+    
+    /**
+     * Configure a direct request
+     *
+     * @param {String} action The action being executed
+     * @param {Object} method The method being executed
+     *
+     * @private
+     */
+    configureRequest: function(action, method, args) {
+        var me = this,
+            transaction;
+        
+        transaction = me.configureTransaction(action, method, args);
+
+        if (me.fireEvent('beforecall', me, transaction, method) !== false) {
+            Ext.direct.Manager.addTransaction(transaction);
+            me.queueTransaction(transaction);
+            me.fireEvent('call', me, transaction, method);
+        }
+    },
+    
+    /**
      * Configure a form submission request
      *
      * @param {String} action The action being executed
      * @param {Object} method The method being executed
-     * @param {HTMLElement} form The form being submitted
-     * @param {Function} [callback] A callback to run after the form submits
-     * @param {Object} [scope] A scope to execute the callback in
+     * @param {Array} args Method invocation arguments
      *
      * @private
      */
     configureFormRequest: function(action, method, args) {
         var me = this,
-            form = args[0],
-            callback = args[1],
-            scope = args[2],
-            transaction, isUpload, params;
-            
-        transaction = new Ext.direct.Transaction({
-            provider: me,
-            action: action,
-            method: method.name,
-            args: [form, callback, scope],
-            callback: scope && Ext.isFunction(callback) ? Ext.Function.bind(callback, scope) : callback,
-            isForm: true
-        });
-
+            transaction, form, isUpload, postParams;
+        
+        transaction = me.configureTransaction(action, method, args, true);
+        
         if (me.fireEvent('beforecall', me, transaction, method) !== false) {
             Ext.direct.Manager.addTransaction(transaction);
-            isUpload = String(form.getAttribute("enctype")).toLowerCase() == 'multipart/form-data';
             
-            params = {
+            form = transaction.form;
+            
+            isUpload = String(form.getAttribute("enctype")).toLowerCase() === 'multipart/form-data';
+            
+            postParams = {
                 extTID: transaction.id,
                 extAction: action,
                 extMethod: method.name,
@@ -703,16 +733,18 @@ Ext.define('Ext.direct.RemotingProvider', {
                 extUpload: String(isUpload)
             };
             
-            // change made from typeof callback check to callback.params
-            // to support addl param passing in DirectSubmit EAC 6/2
+            if (transaction.metadata) {
+                postParams.extMetadata = Ext.JSON.encode(transaction.metadata);
+            }
+            
             Ext.apply(transaction, {
-                form: Ext.getDom(form),
+                form: form,
                 isUpload: isUpload,
-                params: callback && Ext.isObject(callback.params) ? Ext.apply(params, callback.params) : params
+                params: postParams
             });
 
-            me.fireEvent('call', me, transaction, method);
             me.sendFormRequest(transaction);
+            me.fireEvent('call', me, transaction, method);
         }
     },
     

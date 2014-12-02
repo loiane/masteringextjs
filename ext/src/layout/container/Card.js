@@ -182,7 +182,7 @@ Ext.define('Ext.layout.container.Card', {
     renderChildren: function () {
         var me = this,
             active = me.getActiveItem();
-            
+
         if (!me.deferredRender) {
             me.callParent();
         } else if (active) {
@@ -204,45 +204,55 @@ Ext.define('Ext.layout.container.Card', {
      */
     getActiveItem: function() {
         var me = this,
-            // Ensure the calculated result references a Component
-            result = me.parseActiveItem(me.activeItem || (me.owner && me.owner.activeItem));
+            // It's necessary to check that me.activeItem is not undefined as it could be 0 (falsey). We're more interested in
+            // checking the layout's activeItem property, since that is the source of truth for an activeItem.  If it's
+            // determined to be empty, check the owner. Note that a default item is returned if activeItem is `undefined` but
+            // not `null`. Also, note that `null` is legitimate value and completely different from `undefined`.
+            item = me.activeItem === undefined ? (me.owner && me.owner.activeItem) : me.activeItem,
+            result = me.parseActiveItem(item);
 
         // Sanitize the result in case the active item is no longer there.
-        if (result && me.owner.items.indexOf(result) != -1) {
+        if (result && me.owner.items.indexOf(result) !== -1) {
             me.activeItem = result;
-        } else {
-            me.activeItem = null;
         }
 
-        return me.activeItem;
+        // Note that in every use case me.activeItem will have a truthy value except for when a container or tabpanel is explicity
+        // configured with activeItem/Tab === null or when an out-of-range index is given for an active tab (as it will be undefined).
+        // In those cases, it is meaningful to return the null value, so do so.
+        return result == null ? null : (me.activeItem || me.owner.activeItem);
     },
 
     // @private
-    parseActiveItem: function(item) {
+    parseActiveItem: function (item) {
+        var activeItem;
+
         if (item && item.isComponent) {
-            return item;
-        } else if (typeof item == 'number' || item === undefined) {
-            return this.getLayoutItems()[item || 0];
+            activeItem = item;
+        } else if (typeof item === 'number' || item === undefined) {
+            activeItem = this.getLayoutItems()[item || 0];
+        } else if (item === null) {
+            activeItem = null;
         } else {
-            return this.owner.getComponent(item);
+            activeItem = this.owner.getComponent(item);
         }
+
+        return activeItem;
     },
 
     // @private. Called before both dynamic render, and bulk render.
     // Ensure that the active item starts visible, and inactive ones start invisible
     configureItem: function(item) {
-        if (item === this.getActiveItem()) {
-            item.hidden = false;
-        } else {
-            item.hidden = true;
-        }
+        item.setHiddenState(item !== this.getActiveItem());
         this.callParent(arguments);
     },
 
     onRemove: function(component) {
-        this.callParent(arguments);
+        this.callParent([component]);
+
         if (component === this.activeItem) {
-            this.activeItem = null;
+            // Note setting to `undefined` is intentional. Don't null it out since null now has a specific meaning in
+            // tab management (it specifies not setting an active item).
+            this.activeItem = undefined;
         }
     },
 
@@ -331,7 +341,7 @@ Ext.define('Ext.layout.container.Card', {
 
         // If the card is not a child of the owner, then add it.
         // Without doing a layout!
-        if (newIndex == -1) {
+        if (newIndex === -1) {
             newIndex = owner.items.items.length;
             Ext.suspendLayouts();
             newCard = owner.add(newCard);

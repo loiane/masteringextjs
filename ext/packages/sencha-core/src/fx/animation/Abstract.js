@@ -130,6 +130,12 @@ Ext.define('Ext.fx.animation.Abstract', {
         return this.states;
     },
 
+    end: function() {
+        // alias for stop so that the following api is the same between ext/touch:
+        // element.getActiveAnimation().end()
+        this.stop();
+    },
+
     stop: function() {
         this.fireEvent('stop', this);
     },

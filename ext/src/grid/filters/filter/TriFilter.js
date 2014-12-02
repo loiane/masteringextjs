@@ -33,11 +33,20 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
         if (filterLt || filterGt || filterEq) {
             // This filter was restored from stateful filters on the store so enforce it as active.
             stateful = me.active = true;
+            if (filterLt) {
+                me.onStateRestore(filterLt);
+            }
+            if (filterGt) {
+                me.onStateRestore(filterGt);
+            }
+            if (filterEq) {
+                me.onStateRestore(filterEq);
+            }
         } else {
             // Once we've reached this block, we know that this grid filter doesn't have a stateful filter, so if our
             // flag to begin saving future filter mutations is set we know that any configured filter must be nulled
             // out or it will replace our stateful filter.
-            if (me.grid.stateful && me.getStore().saveStatefulFilters) {
+            if (me.grid.stateful && me.getGridStore().saveStatefulFilters) {
                 value = undefined;
             }
 
@@ -66,9 +75,12 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
 
         me.filter = filter;
 
-        if (!stateful && me.active) {
-            for (operator in value) {
-                me.addStoreFilter(me.filter[operator]);
+        if (me.active) {
+            me.setColumnActive(true);
+            if (!stateful) {
+                for (operator in value) {
+                    me.addStoreFilter(me.filter[operator]);
+                }
             }
             // TODO: maybe call this.activate?
         }
@@ -95,7 +107,6 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             value = filter.getValue();
 
             if (value) {
-                value = me.convertValue(value, /*convertToDate*/ true);
                 field.setValue(value);
                 field.up('menuitem').setChecked(true, /*suppressEvents*/ true);
 
@@ -136,11 +147,12 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
     hasActiveFilter: function () {
         var active = false,
             filters = this.filter,
-            filterCollection = this.getStore().getFilters();
+            filterCollection = this.getGridStore().getFilters(),
+            prefix = this.getBaseIdPrefix();
 
         if (filterCollection.length) {
             for (filter in filters) {
-                if (filterCollection.map[this.getBaseIdPrefix() + '-' + filter]) {
+                if (filterCollection.get(prefix + '-' + filter)) {
                     active = true;
                     break;
                 }
@@ -166,6 +178,8 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
         }
     },
 
+    onStateRestore: Ext.emptyFn,
+
     setValue: function (value) {
         var me = this,
             fields = me.fields,
@@ -173,7 +187,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             add = [],
             remove = [],
             active = false,
-            filterCollection = me.getStore().getFilters(),
+            filterCollection = me.getGridStore().getFilters(),
             field, filter, v, i, len;
 
         if (me.settingValue) {
@@ -183,31 +197,32 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
         me.settingValue = true;
 
         if ('eq' in value) {
-            if (filters.lt.getValue()) {
+            v = filters.lt.getValue();
+            if (v || v === 0) {
                 remove.push(fields.lt);
             }
 
-            if (filters.gt.getValue()) {
+            v = filters.gt.getValue();
+            if (v || v === 0) {
                 remove.push(fields.gt);
             }
 
-            if (value.eq) {
-                v = me.convertValue(value.eq, /*convertToDate*/ false);
-
+            v = value.eq;
+            if (v || v === 0) {
                 add.push(fields.eq);
                 filters.eq.setValue(v);
             } else {
                 remove.push(fields.eq);
             }
         } else {
-            if (filters.eq.getValue()) {
+            v = filters.eq.getValue();
+            if (v || v === 0) {
                 remove.push(fields.eq);
             }
 
             if ('lt' in value) {
-                if (value.lt) {
-                    v = me.convertValue(value.lt, /*convertToDate*/ false);
-
+                v = value.lt;
+                if (v || v === 0) {
                     add.push(fields.lt);
                     filters.lt.setValue(v);
                 } else {
@@ -216,9 +231,8 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             }
 
             if ('gt' in value) {
-                if (value.gt) {
-                    v = me.convertValue(value.gt, /*convertToDate*/ false);
-
+                v = value.gt;
+                if (v || v === 0) {
                     add.push(fields.gt);
                     filters.gt.setValue(v);
                 } else {

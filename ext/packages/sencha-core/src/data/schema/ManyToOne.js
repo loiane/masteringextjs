@@ -8,10 +8,6 @@
  * in their definition. The value in the `reference` field of an entity instance holds the
  * value of the id of the related entity instance. Since many entities can hold the same
  * value in a `reference` field, this allows many entities to reference one entity.
- */
-
-
-/*
  * OrderItem has a foreign key to Order.
  * 
  *      OrderItem -> Order
@@ -184,7 +180,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
         },
 
         onLoadMany: function(store, leftRecords, successful) {
-            var key = this.inverse.role,
+            var instanceName = this.inverse.getInstanceName(),
                 associated = store.associatedEntity,
                 id = associated.getId(),
                 field = this.association.field,
@@ -194,7 +190,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
             if (successful) {
                 for (i = 0, len = leftRecords.length; i < len; ++i) {
                     leftRecord = leftRecords[i];
-                    leftRecord[key] = associated;
+                    leftRecord[instanceName] = associated;
                     if (field) {
                         oldId = leftRecord.data[field.name];
                         if (oldId !== id) {
@@ -216,7 +212,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
             var me = this,
                 // We use the inverse role here since we're setting ourselves
                 // on the other record
-                key = me.inverse.role,
+                instanceName = me.inverse.getInstanceName(),
                 result = me.callParent([ rightRecord, node, fromReader, readOptions ]),
                 store, leftRecords, len, i;
             
@@ -230,7 +226,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
                 leftRecords = store.getData().items;
 
                 for (i = 0, len = leftRecords.length; i < len; ++i) {
-                    leftRecords[i][key] = rightRecord;
+                    leftRecords[i][instanceName] = rightRecord;
                 }
             }
         },
@@ -287,7 +283,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
             if (field) {
                 leftRecord.set(field.name, null);
             }
-            leftRecord[this.role] = null;
+            leftRecord[this.getInstanceName()] = null;
         },
 
         createGetter: function() {
@@ -325,9 +321,16 @@ Ext.define('Ext.data.schema.ManyToOne', {
             // If we have a session, we may be able to find the new store this belongs to
             // If not, the best we can do is to remove the record from the associated store/s.
             var me = this,
-                joined, store, i, len, associated;
+                instanceName = me.getInstanceName(),
+                cls = me.cls,
+                hasNewValue,
+                joined, store, i, len, associated, rightRecord;
 
             if (!leftRecord.changingKey) {
+                hasNewValue = newValue || newValue === 0;
+                if (!hasNewValue) {
+                    leftRecord[instanceName] = null;
+                }
                 if (session) {
                     // Find the store that holds this record and remove it if possible.
                     store = me.getSessionStore(session, oldValue);
@@ -335,11 +338,16 @@ Ext.define('Ext.data.schema.ManyToOne', {
                         store.remove(leftRecord);
                     }
                     // If we have a new value, try and find it and push it into the new store.
-                    if (newValue || newValue === 0) {
+                    if (hasNewValue) {
                         store = me.getSessionStore(session, newValue);
                         if (store && !store.isLoading()) {
                             store.add(leftRecord);
                         }
+                        if (cls) {
+                            rightRecord = session.peekRecord(cls, newValue);
+                        }
+                        // Setting to undefined is important so that we can load the record later.
+                        leftRecord[instanceName] = rightRecord || undefined;
                     }
                 } else {
                     joined = leftRecord.joined;
@@ -388,7 +396,8 @@ Ext.define('Ext.data.schema.ManyToOne', {
                 rightRecord = result.getRecords()[0];
 
             if (rightRecord) {
-                leftRecord[this.role] = rightRecord;
+                leftRecord[this.getInstanceName()] = rightRecord;
+                delete leftRecord.data[this.role];
             }
         }
     })

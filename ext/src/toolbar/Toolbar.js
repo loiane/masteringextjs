@@ -189,11 +189,11 @@
 Ext.define('Ext.toolbar.Toolbar', {
     extend: 'Ext.container.Container',
     requires: [
-        'Ext.toolbar.Fill',
         'Ext.layout.container.HBox',
         'Ext.layout.container.VBox'
     ],
     uses: [
+        'Ext.toolbar.Fill',
         'Ext.toolbar.Separator'
     ],
     alias: 'widget.toolbar',
@@ -228,6 +228,7 @@ Ext.define('Ext.toolbar.Toolbar', {
      */
     vertical: false,
 
+    // @cmd-auto-dependency { directRef: 'Ext.layout.container.boxOverflow.Menu' }
     /**
      * @cfg {Boolean} enableOverflow
      * Configure true to make the toolbar provide a button which activates a dropdown Menu to show
@@ -236,6 +237,7 @@ Ext.define('Ext.toolbar.Toolbar', {
      */
     enableOverflow: false,
 
+    // @cmd-auto-dependency { aliasPrefix: 'box.overflow.' }
     /**
      * @cfg {String} overflowHandler
      *

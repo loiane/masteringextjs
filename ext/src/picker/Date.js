@@ -58,6 +58,9 @@ Ext.define('Ext.picker.Date', {
             '</div>',
             '<table role="grid" id="{id}-eventEl" data-ref="eventEl" class="{baseCls}-inner" {%',
                 // If the DatePicker is focusable, make its eventEl tabbable.
+                // Note that we're looking at the `focusable` property because
+                // calling `isFocusable()` will always return false at that point
+                // as the picker is not yet rendered.
                 'if (values.$comp.focusable) {out.push("tabindex=\\\"0\\\"");}',
             '%} cellspacing="0">',
                 '<thead><tr role="row">',
@@ -70,7 +73,7 @@ Ext.define('Ext.picker.Date', {
                 '<tbody><tr role="row">',
                     '<tpl for="days">',
                         '{#:this.isEndOfWeek}',
-                        '<td role="gridcell" id="{[Ext.id()]}">',
+                        '<td role="gridcell">',
                             '<div hidefocus="on" class="{parent.baseCls}-date"></div>',
                         '</td>',
                     '</tpl>',
@@ -637,17 +640,15 @@ Ext.define('Ext.picker.Date', {
             cells = me.cells,
             cls = me.selectedCls,
             cellItems = cells.elements,
-            c,
             cLen = cellItems.length,
-            cell;
+            cell, c;
 
         cells.removeCls(cls);
 
         for (c = 0; c < cLen; c++) {
-            cell = Ext.fly(cellItems[c]);
-
-            if (cell.dom.firstChild.dateValue == t) {
-                return cell.dom.firstChild;
+            cell = cellItems[c].firstChild;
+            if (cell.dateValue == t) {
+                return cell;
             }
         }
         return null;
@@ -810,11 +811,14 @@ Ext.define('Ext.picker.Date', {
      * @param {Boolean} isHide True if it's a hide operation
      */
     runAnimation: function(isHide){
-        var picker = this.monthPicker,
+        var me = this,
+            picker = this.monthPicker,
             options = {
                 duration: 200,
                 callback: function() {
                     picker.setVisible(!isHide);
+                    // See showMonthPicker
+                    picker.ownerCmp = isHide ? null : me;
                 }
             };
 
@@ -841,6 +845,8 @@ Ext.define('Ext.picker.Date', {
                 me.runAnimation(true);
             } else {
                 picker.hide();
+                // See showMonthPicker
+                picker.ownerCmp = null;
             }
         }
         return me;
@@ -880,6 +886,11 @@ Ext.define('Ext.picker.Date', {
                     me.runAnimation(false);
                 } else {
                     picker.show();
+                    // We need to set the ownerCmp so that owns() can correctly
+                    // match up the component hierarchy, however when positioning the picker
+                    // we don't want it to position like a normal floater because we render it to 
+                    // month picker element itself.
+                    picker.ownerCmp = me;
                 }
             }
         }
@@ -1248,7 +1259,8 @@ Ext.define('Ext.picker.Date', {
                 me.monthBtn,
                 me.nextRepeater,
                 me.prevRepeater,
-                me.todayBtn
+                me.todayBtn,
+                me.todayElSpan
             );
             delete me.textNodes;
             delete me.cells.elements;

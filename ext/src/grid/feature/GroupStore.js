@@ -40,6 +40,7 @@ Ext.define('Ext.grid.feature.GroupStore', {
                 groupchange: me.onGroupChange,
                 remove: me.onRemove,
                 add: me.onAdd,
+                idchanged: me.onIdChanged,
                 update: me.onUpdate,
                 refresh: me.onRefresh,
                 clear: me.onClear,
@@ -98,7 +99,6 @@ Ext.define('Ext.grid.feature.GroupStore', {
                     if (group.isCollapsed) {
                         Model = store.getModel();
                         modelData = {};
-                        modelData[Model.idProperty] = 'group-' + key + '-placeholder';
                         modelData[groupField] = key;
                         group.placeholder = groupPlaceholder = new Model(modelData);
                         groupPlaceholder.isNonData = groupPlaceholder.isCollapsedPlaceholder = true;
@@ -129,6 +129,14 @@ Ext.define('Ext.grid.feature.GroupStore', {
             return groupData.isCollapsed || false;
         }
         return false;
+    },
+
+    isLoading: function() {
+        return false;
+    },
+
+    getData: function() {
+        return this.data;
     },
 
     getCount: function() {
@@ -239,8 +247,7 @@ Ext.define('Ext.grid.feature.GroupStore', {
                 modelData = {},
                 key = group.getGroupKey(),
                 groupPlaceholder;
-            
-            modelData[Model.idProperty] = 'group-' + key + '-placeholder';
+
             modelData[store.getGroupField()] = key;
             groupPlaceholder = group.placeholder = new Model(modelData);
             groupPlaceholder.isNonData = groupPlaceholder.isCollapsedPlaceholder = true;
@@ -256,6 +263,18 @@ Ext.define('Ext.grid.feature.GroupStore', {
             return this.data.indexOf(record);
         }
         return -1;
+    },
+
+    /**
+     * Get the index within the store of the Record with the passed id.
+     *
+     * Like #indexOf, this method is effected by filtering.
+     *
+     * @param {String} id The id of the Record to find.
+     * @return {Number} The index of the Record. Returns -1 if not found.
+     */
+    indexOfId: function(id) {
+        return this.data.indexOfKey(id);
     },
 
     /**
@@ -291,6 +310,10 @@ Ext.define('Ext.grid.feature.GroupStore', {
         // Use indexOf to find the index of the records added.
         // It will be different in this store, and this store is what the View sees.
         this.fireEvent('replace', this, this.indexOf(records[0]), [], records);
+    },
+
+    onIdChanged: function(store, rec, oldId, newId) {
+        this.data.updateKey(rec, oldId);
     },
 
     onUpdate: function(store, record, operation, modifiedFieldNames) {
@@ -352,7 +375,18 @@ Ext.define('Ext.grid.feature.GroupStore', {
     },
 
     // Relay the groupchange event
-    onGroupChange: function(store) {
-        this.fireEvent('groupchange', store);
+    onGroupChange: function(store, grouper) {
+        if (!grouper) {
+            this.processStore(store);
+        }
+        this.fireEvent('groupchange', store, grouper);
+    },
+
+    destroy: function() {
+        var me = this;
+
+        me.bindStore(null);
+        me.clearListeners();
+        me.data = Ext.destroy(me.data);
     }
 });

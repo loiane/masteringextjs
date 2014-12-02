@@ -327,7 +327,7 @@ Ext.define('Ext.panel.Panel', {
      * @cfg {String} collapseDirection
      * The direction to collapse the Panel when the toggle button is clicked.
      *
-     * Defaults to the {@link #headerPosition}
+     * Defaults to the {@link #cfg-headerPosition}
      *
      * **Important: This config is _ignored_ for {@link #collapsible} Panels which are direct child items of a {@link
      * Ext.layout.container.Border border layout}.**
@@ -591,7 +591,7 @@ Ext.define('Ext.panel.Panel', {
      * You may also configure the Panel's `header` option with its own child items which go *before* the {@link #tools}
      *
      * By default the panel {@link #title} is inserted after items configured in this config, but before any tools.
-     * To insert the title at any point in the full array, specify the {@link Ext.panel.Header#titlePosition titlePosition} config:
+     * To insert the title at any point in the full array, specify the {@link Ext.panel.Header#cfg-titlePosition titlePosition} config:
      *
      *     new Ext.panel.Panel({
      *         title: 'Test',
@@ -1033,6 +1033,10 @@ Ext.define('Ext.panel.Panel', {
             me.removeCls(Ext.baseCSSPrefix + 'animating-size');
         }
 
+        if (ownerLayout) {
+            ownerLayout.afterCollapse(me, animated);
+        }
+
         me.setHiddenDocked();
         me.fireEvent('collapse', me);
     },
@@ -1056,6 +1060,10 @@ Ext.define('Ext.panel.Panel', {
         // content is clipped during animation.
         if (animated) {
             me.removeCls(Ext.baseCSSPrefix + 'animating-size');
+        }
+
+        if (ownerLayout) {
+            ownerLayout.afterExpand(me, animated);
         }
 
         me.fireEvent('expand', me);
@@ -1087,6 +1095,7 @@ Ext.define('Ext.panel.Panel', {
         if (!(me.preventHeader || (me.header === false))) {
             me.updateHeader();
         }
+        me.afterHeaderInit = true;
 
         // If we are rendering collapsed, we still need to save and modify various configs
         if (me.collapsed) {
@@ -1480,10 +1489,10 @@ Ext.define('Ext.panel.Panel', {
             // Tools are explicitly copied. We do not want the overhead of a KeyMap for the ghost
             closable: false,
 
-            floating: {
-                shadow: false
-            },
+            floating: true,
+            shadow: false,
             frame: frame,
+            shim: me.shim,
             alwaysFramed: me.alwaysFramed,
             overlapHeader: me.overlapHeader,
             headerPosition: me.getHeaderPosition(),
@@ -1706,7 +1715,6 @@ Ext.define('Ext.panel.Panel', {
         var me = this,
             placeholder = me.placeholder,
             ps = placeholder.getSize(),
-            myBox,
             floatCls = Ext.baseCSSPrefix + 'border-region-slide-in',
             collapsed = me.collapsed,
             layoutOwner = me.ownerCt || me,
@@ -1731,7 +1739,6 @@ Ext.define('Ext.panel.Panel', {
         me.setHiddenState(false);
         me.collapsed = false;
         layoutOwner.updateLayout();
-        myBox = me.getBox(false, true);
 
         // Then go back immediately to collapsed state from which to initiate the float into view.
         placeholder.el.show();
@@ -1751,13 +1758,13 @@ Ext.define('Ext.panel.Panel', {
                     me.slideOutFloatedPanel();
                 }
             });
-            if (!me.placeholderListener) {
-                me.placeholderListener = placeholder.on({
-                    resize: me.onPlaceholderResize,
-                    scope: me,
-                    destroyable: true
-                });
-            }
+        }
+        if (!me.placeholderListener) {
+            me.placeholderListener = placeholder.on({
+                resize: me.onPlaceholderResize,
+                scope: me,
+                destroyable: true
+            });
         }
         placeholder.el.on('mouseleave', me.onMouseLeaveFloated, me);
         me.el.on('mouseleave', me.onMouseLeaveFloated, me);
@@ -1772,20 +1779,7 @@ Ext.define('Ext.panel.Panel', {
             me.collapseTool.el.hide();
         }
 
-        switch (me.collapsed) {
-            case 'top':
-                me.setLocalXY(myBox.x, myBox.y + ps.height - 1);
-                break;
-            case 'right':
-                me.setLocalXY(myBox.x - ps.width + 1, myBox.y);
-                break;
-            case 'bottom':
-                me.setLocalXY(myBox.x, myBox.y - ps.height + 1);
-                break;
-            case 'left':
-                me.setLocalXY(myBox.x + ps.width - 1, myBox.y);
-                break;
-        }
+        me.resizePlaceholder(placeholder, placeholder.getWidth(), placeholder.getHeight());
         slideDirection = me.convertCollapseDir(me.collapsed);
 
         // Remember how we are really collapsed so we can restore it, but also so we can
@@ -1806,33 +1800,37 @@ Ext.define('Ext.panel.Panel', {
         });
     },
 
-    onPlaceholderResize: function(ph, newWidth, newHeight) {
+    onPlaceholderResize: function(ph, width, height) {
+        this.resizePlaceholder(ph, width, height);
+        this.updateLayout({
+            isRoot: true
+        });
+    },
+
+    resizePlaceholder: function(ph, newWidth, newHeight) {
         var me = this,
             myBox = me.getBox(false, true),
-            phBox = me.placeholder.getBox(false, true);
+            phBox = ph.getBox(false, true);
 
         // Position floated panel alongside the placeholder, and sync the parallel dimension
         switch (me.floated) {
             case 'top':
-                this.width = newWidth;
+                me.width = newWidth;
                 me.setLocalY(phBox.y + phBox.height);
                 break;
             case 'right':
-                this.height = newHeight;
+                me.height = newHeight;
                 me.setLocalX(phBox.x - myBox.width);
                 break;
             case 'bottom':
-                this.width = newWidth;
+                me.width = newWidth;
                 me.setLocalY(phBox.y - myBox.height);
                 break;
             case 'left':
-                this.height = newHeight;
+                me.height = newHeight;
                 me.setLocalX(phBox.x + phBox.width);
                 break;
         }
-        this.updateLayout({
-            isRoot: true
-        });
     },
 
     getAnimationProps: function() {
@@ -1887,13 +1885,14 @@ Ext.define('Ext.panel.Panel', {
 
     /**
      * Gets the {@link Ext.panel.Header Header} for this panel.
+     * @return {Ext.panel.Header}
      */
     getHeader: function() {
         return this.header;
     },
 
     // @private
-    // Create the class array to add to the Header when collpsed.
+    // Create the class array to add to the Header when collapsed.
     getHeaderCollapsedClasses: function(header) {
         var me = this,
             collapsedCls = me.collapsedCls,
@@ -2078,6 +2077,7 @@ Ext.define('Ext.panel.Panel', {
 
         if (!ghostPanel) {
             me.ghostPanel = ghostPanel = Ext.widget(me.createGhost(cls));
+            ghostPanel.el.dom.removeAttribute('tabIndex');
         } else {
             ghostPanel.el.show();
         }
@@ -2258,19 +2258,21 @@ Ext.define('Ext.panel.Panel', {
      */
     calculateConstrainedPosition: function(constrainTo, proposedPosition, local, proposedSize) {
         var me = this,
-            fp;
+            header = me.header,
+            lastBox, fp;
 
         // If we are only constraining the header, ask the header for its constrained position
         // based upon the size the header will take on based upon this panel's proposedSize
         if (me.constrainHeader) {
+            lastBox = header.lastBox;
             if (proposedSize) {
-                if (!me.header.vertical) {
-                    proposedSize = [proposedSize[0], me.header.lastBox.height];
+                if (!header.vertical) {
+                    proposedSize = [proposedSize[0], lastBox ? lastBox.height : proposedSize[1]];
                 } else {
-                    proposedSize = [me.header.lastBox.width, proposedSize[1]];
+                    proposedSize = [lastBox ? lastBox.width : proposedSize[0], proposedSize[1]];
                 }
-            } else {
-                proposedSize = [me.header.lastBox.width, me.header.lastBox.height];
+            } else if (lastBox) {
+                proposedSize = [lastBox.width, lastBox.height];
             }
             fp = me.floatParent;
             constrainTo = constrainTo || me.constrainTo || (fp ? fp.getTargetEl() : null) || me.container || me.el.parent();
@@ -2350,7 +2352,7 @@ Ext.define('Ext.panel.Panel', {
     },
 
     onBoxReady: function(){
-        this.callParent();
+        this.callParent(arguments);
         if (this.collapsed) {
             this.setHiddenDocked();
         }
@@ -2713,7 +2715,7 @@ Ext.define('Ext.panel.Panel', {
                 } else {
                     header.glyph = glyph;
                 }
-            } else if (me.rendered) {
+            } else if (me.rendered|| me.afterHeaderInit) {
                 me.updateHeader();
             }
 
@@ -2740,7 +2742,7 @@ Ext.define('Ext.panel.Panel', {
                 } else {
                     header.icon = icon;
                 }
-            } else if (me.rendered) {
+            } else if (me.rendered|| me.afterHeaderInit) {
                 me.updateHeader();
             }
 
@@ -2767,7 +2769,7 @@ Ext.define('Ext.panel.Panel', {
                 } else {
                     header.iconCls = iconCls;
                 }
-            } else if (me.rendered) {
+            } else if (me.rendered|| me.afterHeaderInit) {
                 me.updateHeader();
             }
 
@@ -2793,7 +2795,7 @@ Ext.define('Ext.panel.Panel', {
                 if (header.isHeader) {
                     header.setTitle(title);
                 }
-            } else if (me.rendered) {
+            } else if (me.rendered || me.afterHeaderInit) {
                 me.updateHeader();
             }
 
@@ -3015,10 +3017,6 @@ Ext.define('Ext.panel.Panel', {
 
         getDefaultContentTarget: function() {
             return this.body;
-        },
-
-        getFocusEl: function() {
-            return  this.el;
         },
 
         getTargetEl: function() {

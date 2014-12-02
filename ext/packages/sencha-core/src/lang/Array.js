@@ -48,7 +48,6 @@ Ext.Array = new (function() {
     function stableSort(array, userComparator) {
         var len = array.length,
             indices = new Array(len),
-            result = new Array(len),
             i;
 
         // generate 0-n index map from original array
@@ -63,12 +62,12 @@ Ext.Array = new (function() {
 
         // Reconsitute a sorted array using the array that the indices have been sorted into
         for (i = 0; i < len; i++) {
-            result[i] = array[indices[i]];
+            indices[i] = array[indices[i]];
         }
 
         // Rebuild the original array
         for (i = 0; i < len; i++) {
-            array[i] = result[i];
+            array[i] = indices[i];
         }
 
         return array;
@@ -282,7 +281,7 @@ Ext.Array = new (function() {
             return (lhs < rhs) ? -1 : ((lhs > rhs) ? 1 : 0);
         },
 
-        // Default comparatyor to use when no comparator is specified for the sort method.
+        // Default comparator to use when no comparator is specified for the sort method.
         // Javascript sort does LEXICAL comparison.
         lexicalCompare: function (lhs, rhs) {
             lhs = String(lhs);
@@ -686,7 +685,7 @@ Ext.Array = new (function() {
 
         /**
          * Creates a new array with all of the elements of this array for which
-         * the provided filtering function returns true.
+         * the provided filtering function returns a truthy value.
          *
          * @param {Array} array
          * @param {Function} fn Callback function for each item.

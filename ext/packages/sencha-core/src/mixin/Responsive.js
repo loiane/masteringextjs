@@ -18,6 +18,50 @@
  *          }
  *      });
  *
+ *  For a config to participate as a responsiveConfig it must have a "setter" method. In
+ *  the below example, a "setRegion" method must exist.
+ *
+ *      Ext.create({
+ *         xtype: 'viewport',
+ *         layout: 'border',
+ *
+ *         items: [{
+ *             title: 'Some Title',
+ *             plugins: 'responsive',
+ *
+ *             responsiveConfig: {
+ *                 'width < 800': {
+ *                     region: 'north'
+ *                 },
+ *                 'width >= 800': {
+ *                     region: 'west'
+ *                 }
+ *             }
+ *         }]
+ *      });
+ *
+ *  To use responsiveConfig the class must be defined using the Ext.mixin.Responsive mixin.
+ *
+ *    Ext.define('App.view.Foo', {
+ *      extend: 'Ext.panel.Panel',
+ *      xtype: 'foo',
+ *      mixins: [
+ *           'Ext.mixin.Responsive'
+ *      ],
+ *      ...
+ *    });
+ *
+ *  Otherwise, you will need to use the responsive plugin if the class is not one you authored.
+ *
+ *    Ext.create('Ext.panel.Panel', {
+ *      renderTo: document.body,
+ *      plugins: 'responsive',
+ *      ...
+ *    });
+ * 
+ *  _Note:_ There is the exception of `Ext.container.Viewport` or other classes using `Ext.plugin.Viewport`.
+ *  In those cases, the viewport plugin inherits from `Ext.plugin.Responsive`.
+ *
  * For details see `{@link #responsiveConfig}`.
  * @since 5.0.0
  */

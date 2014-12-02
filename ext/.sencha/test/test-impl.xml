@@ -151,15 +151,41 @@ Ext.Boot.load([
         </x-script-def>
         <x-load-specs base="${local.runner.dir}" property="specfiles.list" configprop="specs"/>
 <echo file="${local.runner.dir}/${bootstrap.specs.file}"><![CDATA[
-Ext.Boot.load({
-    charset: "UTF-8",
-    url: [
-${specfiles.list}
-    ],
-    success: function() {
-        Ext.Boot.load('../start-tests.js');
+(function() {
+    function split(a, n) {
+        var len = a.length,out = [], i = 0;
+        while (i < len) {
+            var size = Math.ceil((len - i) / n--);
+            out.push(a.slice(i, i += size));
+        }
+        return out;
     }
-});
+
+    function getParam(name){
+        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(top.location.search))
+            return decodeURIComponent(name[1]);
+    }
+    
+    var cmdTestSplit = getParam('cmd-test-split'),
+        cmdTestChunk, cmdTestChunks,
+        url = [
+${specfiles.list}
+        ];
+
+    if (cmdTestSplit) {
+        cmdTestChunk = cmdTestSplit.split("/")[0],
+        cmdTestChunks = cmdTestSplit.split("/")[1],
+        url = split(url, cmdTestChunks)[cmdTestChunk];
+    }
+    
+    Ext.Boot.load({
+        charset: "UTF-8",
+        url: url,
+        success: function() {
+            Ext.Boot.load('../start-tests.js');
+        }
+    });
+})();
 ]]>
 </echo>
     </target>

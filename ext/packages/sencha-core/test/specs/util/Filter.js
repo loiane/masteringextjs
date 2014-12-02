@@ -9,16 +9,49 @@ describe("Ext.util.Filter", function() {
         };
 
         it("should accept a property and value", function() {
-            expect(createFilter({property: 'test', value: 'a'})).not.toRaiseExtError();
+            expect(createFilter({property: 'test', value: 'a'})).not.toThrow();
+        });
+
+        it("should accept a false", function() {
+            expect(createFilter({property: 'test', value: false})).not.toThrow();
+        });
+
+        it("should accept a 0", function() {
+            expect(createFilter({property: 'test', value: 0})).not.toThrow();
+        });
+
+        it("should accept a ''", function() {
+            expect(createFilter({property: 'test', value: ''})).not.toThrow();
         });
 
         it("should accept a filter function", function() {
-            expect(createFilter({filterFn: Ext.emptyFn})).not.toRaiseExtError();
+            expect(createFilter({filterFn: Ext.emptyFn})).not.toThrow();
         });
 
-        //removed temporarily until Model can accept string ids. TODO: reinstate this after updating Model
-        xit("should require at least a filter function or a property/value combination", function() {
-            expect(createFilter()).toRaiseExtError();
+        it("should require at least a filter function or a property/value combination", function() {
+            expect(createFilter()).toThrow();
+        });
+    });
+
+    describe("disableOnEmpty", function() {
+        var filter;
+
+        function makeFilter(v) {
+            filter = new Ext.util.Filter({
+                disableOnEmpty: true,
+                property: 'foo',
+                value: v
+            });
+        }
+
+        it("should disable when the value is ''", function() {
+            makeFilter('');
+            expect(filter.getDisabled()).toBe(true);
+        });
+
+        it("should disable when the value is null", function() {
+            makeFilter(null);
+            expect(filter.getDisabled()).toBe(true);
         });
     });
 

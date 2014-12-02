@@ -249,7 +249,11 @@ Ext.define('Ext.data.schema.ManyToMany', {
             }
         },
 
-        onLoadMany: Ext.emptyFn,
+        onLoadMany: function(store, leftRecords, successful) {
+            if (successful) {
+                this.onAddToMany(store, leftRecords, true);
+            }
+        },
 
         /*
          * This method is called when records are removed from the association store. The
@@ -300,6 +304,19 @@ Ext.define('Ext.data.schema.ManyToMany', {
                 }
 
                 store.matrixUpdate = 0;
+            }
+        },
+
+        adoptAssociated: function(record, session) {
+            var store = this.getAssociatedItem(record),
+                records, i, len;
+
+            if (store) {
+                store.setSession(session);
+                records = store.getData().items;
+                for (i = 0, len = records.length; i < len; ++i) {
+                    session.adopt(records[i]);
+                }
             }
         }
     },

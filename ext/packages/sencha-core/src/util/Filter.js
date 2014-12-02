@@ -87,13 +87,22 @@ Ext.define('Ext.util.Filter', {
         caseSensitive: false,
 
         /**
-         * @property {Boolean} disabled
+         * @cfg {Boolean} disabled
          * Setting this property to `true` disables this individual Filter so that it no longer contributes to a {@link Ext.data.Store#cfg-filters Store's filter set}
          *
          * When disabled, the next time the store is filtered, the Filter plays no part in filtering and records eliminated by it may rejoin the dataset.
          *
          */
         disabled: false,
+
+        /**
+         * @cfg {Boolean} disableOnEmpty
+         * `true` to not have this filter participate in the filtering process when the {@link #value} of
+         * this the filter is empty according to {@link Ext#isEmpty}.
+         *
+         * @since 5.0.2
+         */
+        disableOnEmpty: false,
 
         /**
          * @cfg {String} [operator]
@@ -123,7 +132,15 @@ Ext.define('Ext.util.Filter', {
          * Optional root property. This is mostly useful when filtering a Store, in which case we set the root to 'data' to
          * make the filter pull the {@link #property} out of the data object of each item
          */
-        root: null
+        root: null,
+
+        /**
+         * @cfg {Function} [serializer]
+         * A function to post-process any serialization.
+         * @cfg {Object} serializer.data The serialized data
+         * @private
+         */
+        serializer: null
     },
 
     /**
@@ -181,19 +198,14 @@ Ext.define('Ext.util.Filter', {
          * @private
          */
         isInvalid: function(cfg) {
-            var value = cfg.value;
-            
             if (!cfg.filterFn) {
                 // If we don't have a filterFn, we must have a property
                 if (!cfg.property) {
                     return 'A Filter requires either a property or a filterFn to be set';
                 }
                 
-                if (!(value || value === 0 || value === false || (value === '' && cfg.exatchMatch))) {
-                    // No valid valid
-                    if (!cfg.operator) {
-                        return 'A Filter requires either a property and value, or a filterFn to be set';
-                    }
+                if (!cfg.hasOwnProperty('value') && !cfg.operator) {
+                    return 'A Filter requires either a property and value, or a filterFn to be set';
                 }
                 
             }
@@ -326,11 +338,36 @@ Ext.define('Ext.util.Filter', {
      * @return {Object}
      */
     serialize: function () {
-        var result = this.getState();
+        var result = this.getState(),
+            serializer = this.getSerializer();
 
         delete result.id;
+        delete result.serializer;
+
+        if (serializer) {
+            serializer.call(this, result);
+        }
 
         return result;
+    },
+
+    updateOperator: function() {
+        this._filterFn = null;
+    },
+
+    updateValue: function(value) {
+        this._filterFn = null;
+        if (this.getDisableOnEmpty()) {
+            this.setDisabled(Ext.isEmpty(value));
+        }
+    },
+
+    updateDisableOnEmpty: function(disableOnEmpty) {
+        var disabled = false;
+        if (disableOnEmpty) {
+            disabled = Ext.isEmpty(this.getValue());
+        }
+        this.setDisabled(disabled);
     }
 }, function() {
     var prototype = this.prototype,
@@ -367,17 +404,7 @@ Ext.define('Ext.util.Filter', {
                 var v = this._value;
                 return v && Ext.coerce(this.getPropertyValue(candidate), v).toLowerCase().indexOf(v.toLowerCase()) > -1;
             }
-        }),
-        invalidateFilterFn = function () {
-            this._filterFn = null;
-        },
-        updaters = [
-            // These updaters all clear filterFn so that it will be recreated on the next
-            // call to getFilterFn.
-            'updateOperator',
-            'updateValue'
-        ],
-        i;
+        });
 
     // Operator type '==' is the same as operator type '='
     operatorFns['=='] = operatorFns['='];
@@ -390,8 +417,4 @@ Ext.define('Ext.util.Filter', {
 
     operatorFns.eq = operatorFns['='];
     operatorFns.ne = operatorFns['!='];
-
-    for (i = updaters.length; i-- > 0; ) {
-        prototype[updaters[i]] = invalidateFilterFn;
-    }
 });

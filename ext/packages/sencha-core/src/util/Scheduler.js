@@ -86,6 +86,7 @@ Ext.define('Ext.util.Scheduler', {
         }
 
         me.destroyed = true;
+        me.items.destroy();
         me.items = me.orderedItems = null;
 
         me.destroy = Ext.emptyFn;

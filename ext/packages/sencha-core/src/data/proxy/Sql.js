@@ -5,14 +5,14 @@
  *
  * You can create a Store for the proxy, for example:
  *
- *    Ext.require(["Ext.data.proxy.SQL"]);
+ *     Ext.require(["Ext.data.proxy.SQL"]);
  *
- *    Ext.define("User", {
- *       extend: "Ext.data.Model",
- *       config: {
- *          fields: [ "firstName", "lastName" ]
- *       }
- *     });
+ *     Ext.define("User", {
+ *        extend: "Ext.data.Model",
+ *        config: {
+ *           fields: [ "firstName", "lastName" ]
+ *        }
+ *      });
  *
  *     Ext.create("Ext.data.Store", {
  *        model: "User",
@@ -31,7 +31,7 @@
  *
  * To destroy a table use:
  *
- *    Ext.getStore("Users").getModel().getProxy().dropTable();
+ *     Ext.getStore("Users").getProxy().dropTable();
  *
  * To recreate a table use:
  *

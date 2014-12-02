@@ -89,6 +89,18 @@ Ext.define('Ext.grid.CellContext', {
         }
     },
 
+    next: function() {
+        var me = this,
+            mgr = me.view.getVisibleColumnManager();
+
+        me.colIdx++;
+        if (me.colIdx === mgr.getColumns().length) {
+            me.setPosition(Math.min(me.rowIdx + 1, me.view.dataSource.getCount() - 1), me.colIdx);
+        } else {
+            me.setColumn(me.colIdx);
+        }
+    },
+
     equal: function(other) {
         return (other && other.isCellContext && other.view === this.view && other.record === this.record && other.column === this.column);
     },

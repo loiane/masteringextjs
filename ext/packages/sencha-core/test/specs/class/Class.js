@@ -945,7 +945,7 @@ describe("Ext.Class", function() {
         });
         
         describe("$configStrict", function() {
-            it("should not copy non-configs to the instance when true", function() {
+            it("should copy non-configs to the instance when true", function() {
                 cls = Ext.define(null, {
                     $configStrict: true,
                     config: {
@@ -957,8 +957,27 @@ describe("Ext.Class", function() {
                 o = new cls({
                     baz: 1
                 });
-                expect(o.baz).not.toBeDefined();
-            });  
+                expect(o.baz).toBe(1);
+            });
+
+            it("should not copy non-configs to the instance when true if the class has a method by the same name", function() {
+                Ext.define('spec.MyClass', {
+                    $configStrict: true,
+                    config: {
+                        foo: 'bar'
+                    },
+                    constructor: defaultInitConfig,
+                    baz: Ext.emptyFn
+                });
+
+                expect(function() {
+                    o = new spec.MyClass({
+                        baz: 1
+                    });
+                }).toThrow('Cannot override method baz on spec.MyClass instance.');
+
+                Ext.undefine('spec.MyClass');
+            });
             
             it("should copy non-configs to the instance when false", function() {
                 cls = Ext.define(null, {

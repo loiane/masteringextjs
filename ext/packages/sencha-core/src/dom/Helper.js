@@ -1,5 +1,6 @@
 /**
  * @alternateClassName Ext.DomHelper
+ * @singleton
  *
  * The DomHelper class provides a layer of abstraction from DOM and transparently supports creating elements via DOM or
  * using HTML fragments. It also has the ability to create HTML fragment templates from your DOM building code.
@@ -553,7 +554,6 @@ Ext.define('Ext.dom.Helper', function() {
         /**
          * @method createHtml
          * Alias for {@link #markup}.
-         * @inheritdoc Ext.dom.AbstractHelper#markup
          * @deprecated 5.0.0
          */
         createHtml: function(spec) {

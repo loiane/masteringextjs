@@ -447,7 +447,17 @@ Ext.define('Ext.chart.series.Scatter', {
         // Hide unused sprites
         ln = group.getCount();
         for (i = attrs.length; i < ln; i++) {
-            group.getAt(i).hide(true);
+            sprite = group.getAt(i);
+            sprite.hide(true);
+
+            // Shadow sprites have to be hidden separately
+            shadows = sprite.shadows;
+            
+            if (shadows) {
+                for (shindex = 0; shindex < lnsh; shindex++) {
+                    shadows[shindex].hide(true);
+                }
+            }
         }
         me.renderLabels();
         me.renderCallouts();

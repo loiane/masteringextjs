@@ -200,8 +200,8 @@ Ext.define('Ext.data.schema.Role', {
         // begins from a Ticket (inverseRecord).
 
         var me = this,
-            propertyName = me.storeName || me.getStoreName(),
-            store = inverseRecord[propertyName],
+            storeName = me.getStoreName(),
+            store = inverseRecord[storeName],
             load = options && options.reload,
             source = inverseRecord.$source,
             session = inverseRecord.session,
@@ -212,7 +212,7 @@ Ext.define('Ext.data.schema.Role', {
             // For this to occur, we need to have a parent in the session, and the store needs to be created
             // and loaded with the initial dataset.
             if (!records && source) {
-                source = source[propertyName];
+                source = source[storeName];
                 if (source && !source.isLoading()) {
                     sourceStore = source;
                     records = [];
@@ -232,7 +232,7 @@ Ext.define('Ext.data.schema.Role', {
                 load = true;
             }
 
-            inverseRecord[propertyName] = store;
+            inverseRecord[storeName] = store;
         }
 
         if (options) {
@@ -281,7 +281,7 @@ Ext.define('Ext.data.schema.Role', {
      * @private
      */
     getAssociatedItem: function(rec) {
-        var key = this.isMany ? this.getStoreName() : this.role;
+        var key = this.isMany ? this.getStoreName() : this.getInstanceName();
         return rec[key] || null;
     },
 
@@ -301,29 +301,27 @@ Ext.define('Ext.data.schema.Role', {
             useSimpleAccessors = !me.associationKey,
             root = this.getReaderRoot();
             
-        if (reader) {
+        if (reader && !reader.isReader) {
             if (Ext.isString(reader)) {
                 reader = {
-                    type: reader,
-                    rootProperty: root,
-                    useSimpleAccessors: useSimpleAccessors
+                    type: reader
                 };
             }
-            if (reader.isReader) {
-                reader.setModel(Model);
-                reader.setRootProperty(root);
-                reader.setUseSimpleAccessors(useSimpleAccessors);
-            } else {
-                Ext.applyIf(reader, {
-                    model: Model,
-                    rootProperty: root,
-                    useSimpleAccessors: useSimpleAccessors,
-                    type: me.defaultReaderType
-                });
-            }
+            Ext.applyIf(reader, {
+                model: Model,
+                rootProperty: root,
+                useSimpleAccessors: useSimpleAccessors,
+                type: me.defaultReaderType
+            });
             reader = me.reader = Ext.createByAlias('reader.' + reader.type, reader);
         }   
         return reader; 
+    },
+
+    getInstanceName: function () {
+        var me = this;
+        return me.instanceName ||
+               (me.instanceName = me.association.schema.getNamer().instanceName(me.role));
     },
 
     getStoreName: function () {
@@ -338,6 +336,7 @@ Ext.define('Ext.data.schema.Role', {
             Model = me.cls,
             useSimpleAccessors = !me.associationKey,
             root = me.getReaderRoot(),
+            proxyReader,
             proxy;
         
         // No reader supplied
@@ -345,8 +344,9 @@ Ext.define('Ext.data.schema.Role', {
             proxy = Model.getProxy();
             // if the associated model has a Reader already, use that, otherwise attempt to create a sensible one
             if (proxy) {
-                reader = proxy.getReader();
-                me.savedRoot = reader.getRootProperty();
+                proxyReader = proxy.getReader();
+                reader = new proxyReader.self();
+                reader.copyFrom(proxyReader);
                 reader.setRootProperty(root);
             } else {
                 reader = new fromReader.self({
@@ -355,21 +355,16 @@ Ext.define('Ext.data.schema.Role', {
                     rootProperty: root
                 });
             }
+            me.reader = reader
         }
         return reader;
     },
     
     read: function (record, data, fromReader, readOptions) {
         var me = this,
-            reader = this.constructReader(fromReader),
-            result = reader.read(data, readOptions),
-            saved = me.savedRoot;
-        
-        if (saved !== undefined) {
-            reader.setRootProperty(saved);
-            delete me.savedRoot;
-        }
-        return result;
+            reader = this.constructReader(fromReader);
+            
+        return reader.read(data, readOptions);
     },
 
     getCallbackOptions: function(options, scope, defaultScope) {
@@ -395,8 +390,8 @@ Ext.define('Ext.data.schema.Role', {
         var me           = this,    // the "manager" role
             cls          = me.cls,  // User
             foreignKey   = me.association.getFieldName(),  // "managerId"
-            propertyName = me.role,  // "manager"
-            rightRecord  = leftRecord[propertyName], // = department.manager
+            instanceName = me.getInstanceName(),  // "manager"
+            rightRecord  = leftRecord[instanceName], // = department.manager
             reload       = options && options.reload,
             done         = rightRecord !== undefined && !reload,
             session      = leftRecord.session,
@@ -412,7 +407,7 @@ Ext.define('Ext.data.schema.Role', {
                     rightRecord = session.getRecord(cls, foreignKeyId, false);
                 } else {
                     done = true;
-                    leftRecord[propertyName] = rightRecord = null;
+                    leftRecord[instanceName] = rightRecord = null;
                 }
             } else if (foreignKey) {
                 // The good news is that we do indeed have a FK so we can do a load using
@@ -423,7 +418,7 @@ Ext.define('Ext.data.schema.Role', {
                     // A value of null ends that hope though... but we still need to do
                     // some callbacks perhaps.
                     done = true;
-                    leftRecord[propertyName] = rightRecord = null;
+                    leftRecord[instanceName] = rightRecord = null;
                 } else {
                     // foreignKeyId is the managerId from the Department (record), so
                     // make a new User, set its idProperty and load the real record via
@@ -455,7 +450,7 @@ Ext.define('Ext.data.schema.Role', {
                 Ext.callback(options.callback, scope, args);
             }
         } else {
-            leftRecord[propertyName] = rightRecord;
+            leftRecord[instanceName] = rightRecord;
             options = me.getCallbackOptions(options, scope, leftRecord);
             rightRecord.load(options);
         }
@@ -472,8 +467,8 @@ Ext.define('Ext.data.schema.Role', {
 
         var me = this,
             foreignKey = me.association.getFieldName(),  // "managerId"
-            propertyName = me.role,  // "managerDepartment"
-            ret = leftRecord[propertyName],
+            instanceName = me.getInstanceName(),  // "manager"
+            ret = leftRecord[instanceName],
             inverse = me.inverse,
             inverseSetter = inverse.setterName,  // setManagerDepartment for User
             session = leftRecord.session,
@@ -485,7 +480,7 @@ Ext.define('Ext.data.schema.Role', {
                     leftRecord.set(foreignKey, rightRecord.getId());
                 }
                 
-                leftRecord[propertyName] = rightRecord;
+                leftRecord[instanceName] = rightRecord;
 
                 if (inverseSetter) {
                     // Because the rightRecord has a reference back to the leftRecord
@@ -511,9 +506,9 @@ Ext.define('Ext.data.schema.Role', {
             if (modified && ret && ret.isEntity && !ret.isEqual(ret.getId(), rightRecord)) {
                 // If we just modified the FK value and it no longer matches the id of the
                 // record we had cached (ret), remove references from *both* sides:
-                leftRecord[propertyName] = undefined;
+                leftRecord[instanceName] = undefined;
                 if (!inverse.isMany) {
-                    ret[inverse.role] = undefined;
+                    ret[inverse.getInstanceName()] = undefined;
                 }
             }
         }

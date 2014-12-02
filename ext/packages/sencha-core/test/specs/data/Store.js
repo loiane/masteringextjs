@@ -1,4 +1,9 @@
 describe("Ext.data.Store", function() {
+    var fakeScope = {},
+        abeRaw, aaronRaw, edRaw, tommyRaw,
+        abeRec, aaronRec, edRec, tommyRec, 
+        store, User, spy;
+        
     function customSort(v) {
         return v * -1;
     }
@@ -12,12 +17,12 @@ describe("Ext.data.Store", function() {
         return spy;
     }
 
-    var fakeScope = {},
-        abeRec, aaronRec, edRec, tommyRec, 
-        store, User;
-        
     function addStoreData() {
         store.add(edRaw, abeRaw, aaronRaw, tommyRaw);
+        assignRecs();
+    }
+
+    function assignRecs() {
         edRec    = store.getAt(0);
         abeRec   = store.getAt(1);
         aaronRec = store.getAt(2);
@@ -36,11 +41,15 @@ describe("Ext.data.Store", function() {
         return new User(data);
     }
     
-    function createStore(cfg) {
+    function createStore(cfg, withData) {
         cfg = cfg || {};
         store = new Ext.data.Store(Ext.applyIf(cfg, {
-            model: User
+            model: User,
+            data: withData ? [edRaw, abeRaw, aaronRaw, tommyRaw] : null
         }));
+        if (withData) {
+            assignRecs();
+        }
     }
     
     function completeWithData(data) {
@@ -92,7 +101,7 @@ describe("Ext.data.Store", function() {
         Ext.undefine('spec.User');
         Ext.data.Model.schema.clear();
         store.destroy();
-        store = null;
+        store = spy = User = null;
         edRaw = edRec = abeRaw = abeRec = aaronRaw = aaronRec = tommyRaw = tommyRec = null;
     });
     
@@ -207,7 +216,7 @@ describe("Ext.data.Store", function() {
                         return store.load.callCount > 0;
                     }, 'Load never called');
                     runs(function() {
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
                 });
                 
@@ -222,6 +231,7 @@ describe("Ext.data.Store", function() {
                     });
                     runs(function() {
                         expect(store.load).toHaveBeenCalledWith(o);
+                        expect(store.load.callCount).toBe(1);
                     });
                 });
             });
@@ -287,7 +297,7 @@ describe("Ext.data.Store", function() {
                         });
                         expect(store.first().id).toBe('abe@sencha.com');
                         expect(store.last().id).toBe('tommy@sencha.com');
-                        expect(proxy.read).toHaveBeenCalled();
+                        expect(proxy.read.callCount).toBe(1);
                     });
 
                     it("should not fire any events", function() {
@@ -525,6 +535,10 @@ describe("Ext.data.Store", function() {
                 expect(store.find('id', undefined)).toBe(-1);
                 expect(store.find('id', [])).toBe(-1);
                 expect(store.find('id', 'foo')).toBe(-1);
+            });
+
+            it("should match the start of strings as a default", function() {
+                 expect(store.find('email', 'to')).toBe(3);
             });
         });
         
@@ -1462,7 +1476,7 @@ describe("Ext.data.Store", function() {
                     var range = store.getRange();
                     store.on('clear', spy);
                     store.removeAll();
-                    expect(spy).toHaveBeenCalled();
+                    expect(spy.callCount).toBe(1);
                     expect(spy.mostRecentCall.args[0]).toBe(store);
                     expect(spy.mostRecentCall.args[1]).toEqual(range);
                 });
@@ -1470,7 +1484,7 @@ describe("Ext.data.Store", function() {
                 it("should fire the datachanged event", function() {
                     store.on('datachanged', spy);
                     store.removeAll();
-                    expect(spy).toHaveBeenCalled();
+                    expect(spy.callCount).toBe(1);
                 });
                 
                 describe("with silent: true", function() {
@@ -1485,6 +1499,14 @@ describe("Ext.data.Store", function() {
                         store.removeAll(true);
                         expect(spy).not.toHaveBeenCalled();
                     });
+                });
+
+                it("should be able to fire remove events after calling removeAll", function() {
+                    store.removeAll();
+                    store.add({}, {}, {});
+                    store.on('remove', spy);
+                    store.removeAt(0);
+                    expect(spy.callCount).toBe(1);
                 });
             });
         });
@@ -1983,7 +2005,7 @@ describe("Ext.data.Store", function() {
                         expect(getOperation().getSorters()).toBeUndefined();
 
                         // The Collection should have sorted itself
-                        expect(collectionSortSpy).toHaveBeenCalled();
+                        expect(collectionSortSpy.callCount).toBe(2);
                     });
                 });
                 
@@ -2292,7 +2314,7 @@ describe("Ext.data.Store", function() {
                     it("should accept a function", function() {
                         store.load(spy);
                         completeWithData(successData);
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                     
                     it("should default the scope to the store", function() {
@@ -2308,7 +2330,7 @@ describe("Ext.data.Store", function() {
                             callback: spy
                         });
                         completeWithData(successData);
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                     
                     it("should use a passed scope", function() {
@@ -2414,7 +2436,7 @@ describe("Ext.data.Store", function() {
                     it("should fire the beforeload event", function() {
                         store.on('beforeload', spy);
                         store.load();
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                     
                     it("should pass the store and the operation", function() {
@@ -2560,7 +2582,7 @@ describe("Ext.data.Store", function() {
                         callback: spy
                     });
                     completeWithData(successData);
-                    expect(spy).toHaveBeenCalled();
+                    expect(spy.callCount).toBe(1);
                 });
                 
                 it("should use the params from the last load", function() {
@@ -2619,6 +2641,7 @@ describe("Ext.data.Store", function() {
                 store.currentPage = 9;
                 store.previousPage(o);
                 expect(store.loadPage).toHaveBeenCalledWith(8, o);
+                expect(store.loadPage.callCount).toBe(1);
             });
         });
         
@@ -2629,6 +2652,7 @@ describe("Ext.data.Store", function() {
                 store.currentPage = 3;
                 store.nextPage(o);
                 expect(store.loadPage).toHaveBeenCalledWith(4, o);
+                expect(store.loadPage.callCount).toBe(1);
             });
         });
         
@@ -2742,6 +2766,42 @@ describe("Ext.data.Store", function() {
     });
     
     describe("sorting", function() {
+        function expectSorter(sorter, property, direction) {
+            expect(sorter.getProperty()).toBe(property);
+            expect(sorter.getDirection()).toBe(direction);
+        }
+
+        describe("the sorter collection", function() {
+            it("should be an instance of Ext.util.SorterCollection", function() {
+                createStore();
+                expect(store.getSorters() instanceof Ext.util.SorterCollection).toBe(true);
+            });
+
+            it("should be empty by default", function() {
+                createStore();
+                expect(store.getSorters().getCount()).toBe(0);
+            });
+
+            it("should add any sorters passed in the constructor", function() {
+                createStore({
+                    sorters: [{
+                        property: 'foo',
+                        direction: 'DESC'
+                    }, {
+                        property: 'bar',
+                        direction: 'ASC'
+                    }]
+                });
+                expectSorter(store.getSorters().getAt(0), 'foo', 'DESC');
+                expectSorter(store.getSorters().getAt(1), 'bar', 'ASC');
+            });
+
+            it("should not set the rootProperty as data on the sorter collection", function() {
+                createStore();
+                expect(store.getSorters().getRootProperty()).not.toBe('data');
+            });
+        });
+
         describe("sort method", function() {
             beforeEach(function() {
                 createStore();
@@ -2749,32 +2809,25 @@ describe("Ext.data.Store", function() {
             
             it("should accept a field name, default direction to ASC", function() {
                 store.sort('name');
-                var sorter = store.getSorters().first();
-                expect(sorter.getProperty()).toBe('name');
-                expect(sorter.getDirection()).toBe('ASC');
+                expectSorter(store.getSorters().getAt(0), 'name', 'ASC');
             });
             
             it("should accept a field nameand direction", function() {
                 store.sort('name', 'DESC');
-                var sorter = store.getSorters().first();
-                expect(sorter.getProperty()).toBe('name');
-                expect(sorter.getDirection()).toBe('DESC');
+                expectSorter(store.getSorters().getAt(0), 'name', 'DESC');
             });
             
             it("should toggle the direction if we pass a string name and no direction for an existing sorter", function() {
                 store.sort('name');
                 store.sort('name');
-                var sorter = store.getSorters().first();
-                expect(sorter.getProperty()).toBe('name');
-                expect(sorter.getDirection()).toBe('DESC');
+                expectSorter(store.getSorters().getAt(0), 'name', 'DESC');
             });
             
             it("should clear any existing sorters", function() {
                 store.sort('name');
                 store.sort('evilness');
-                var sorter = store.getSorters().first();
                 expect(store.getSorters().getCount()).toBe(1);
-                expect(sorter.getProperty()).toBe('evilness');
+                expectSorter(store.getSorters().getAt(0), 'evilness', 'ASC');
             });
 
             it("should not throw an error when the store has no model", function() {
@@ -2815,6 +2868,85 @@ describe("Ext.data.Store", function() {
                     property: 'group'
                 });
                 expect(store.isSorted()).toBe(true);
+            });
+        });
+
+        describe("setRemoteSort", function() {
+            describe("setting to true", function() {
+                beforeEach(function() {
+                    createStore({
+                        remoteSort: false
+                    });
+                    addStoreData();
+                    spyOn(store.getProxy(), 'read').andCallThrough();
+                });
+
+                describe("with sorters", function() {
+                    it("should not trigger a load and not alter the sort order", function() {
+                        store.getSorters().add('name');
+                        store.setRemoteSort(true);
+                        expect(store.getProxy().read).not.toHaveBeenCalled();
+                        expect(store.getAt(0)).toBe(aaronRec);
+                        expect(store.getAt(1)).toBe(abeRec);
+                        expect(store.getAt(2)).toBe(edRec);
+                        expect(store.getAt(3)).toBe(tommyRec);
+                    });
+
+                    it("should use the order provided by the server", function() {
+                        store.getSorters().add('name');
+                        store.setRemoteSort(true);
+                        store.load();
+                        completeWithData([{
+                            name: 'Z'
+                        }, {
+                            name: 'Y'
+                        }, {
+                            name: 'A'
+                        }]);
+                        expect(store.getAt(0).get('name')).toBe('Z');
+                        expect(store.getAt(1).get('name')).toBe('Y');
+                        expect(store.getAt(2).get('name')).toBe('A');
+                    });
+                });
+
+                describe("with no sorters", function() {
+                    it("should not trigger a load", function() {
+                        store.setRemoteSort(true);
+                        expect(store.getProxy().read).not.toHaveBeenCalled();
+                    });
+                }); 
+            });
+
+            describe("setting to false", function() {
+                describe("with sorters", function() {
+                    it("should sort the local data", function() {
+                        createStore({
+                            remoteSort: true,
+                            sorters: 'name'
+                        });
+                        addStoreData();
+
+                        store.setRemoteSort(false);
+                        expect(store.getAt(0)).toBe(aaronRec);
+                        expect(store.getAt(1)).toBe(abeRec);
+                        expect(store.getAt(2)).toBe(edRec);
+                        expect(store.getAt(3)).toBe(tommyRec);
+                    });
+                });
+
+                describe("with no sorters", function() {
+                    it("should not sort the data", function() {
+                        createStore({
+                            remoteSort: true
+                        });
+                        addStoreData();
+                        store.setRemoteSort(false);
+                        expect(store.getAt(0)).toBe(edRec);
+                        expect(store.getAt(1)).toBe(abeRec);
+                        expect(store.getAt(2)).toBe(aaronRec);
+                        expect(store.getAt(3)).toBe(tommyRec);
+                    });
+                }); 
             });
         });
         
@@ -3013,14 +3145,14 @@ describe("Ext.data.Store", function() {
                     it("should trigger a load when adding a sorter", function() {
                         spyOn(store, 'load');
                         store.getSorters().add('name');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
                     it("should trigger a load when adding to an existing sorter", function() {
                         store.getSorters().add('name');
                         spyOn(store, 'load');
                         store.getSorters().add('evilness');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
                     it("should not trigger a load when removing the only sorter", function() {
@@ -3035,7 +3167,7 @@ describe("Ext.data.Store", function() {
                         store.getSorters().add('evilness');
                         spyOn(store, 'load');
                         store.getSorters().remove('name');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
                 });
                 
@@ -3044,7 +3176,7 @@ describe("Ext.data.Store", function() {
                         store.getSorters().add('name');
                         spyOn(store, 'load');
                         store.sort();
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                         expect(store.getSorters().getCount()).toBe(1);
                     });
 
@@ -3052,7 +3184,7 @@ describe("Ext.data.Store", function() {
                         store.getSorters().add('name');
                         spyOn(store, 'load');
                         store.sort('name');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                         expect(store.getSorters().getCount()).toBe(1);
                     });
 
@@ -3060,25 +3192,41 @@ describe("Ext.data.Store", function() {
                         store.getSorters().add('name');
                         spyOn(store, 'load');
                         store.sort('age', 'DESC');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                         expect(store.getSorters().getCount()).toBe(1);
                     });
                 });
             });
             
             describe("store data", function() {
-                beforeEach(function() {
+                it("should ignore sortOnLoad", function() {
+                    createStore({
+                        remoteSort: true,
+                        sorters: ['name'],
+                        sortOnLoad: false,
+                        proxy: {
+                            type: 'ajax',
+                            url: 'fakeurl'
+                        }
+                    }); 
+                    store.load();
+                    completeWithData([{
+                        name: 'ZZZ'
+                    }, {
+                        name: 'AAA'
+                    }]);
+                
+                    expect(store.first().get('name')).toBe('ZZZ');
+                });
+                
+                it("should not sort the data when the store load has completed", function() {
                     createStore({
                         remoteSort: true,
                         proxy: {
                             type: 'ajax',
                             url: 'fakeurl'
                         }
-                    });    
-                });
-                
-                it("should not sort the data when the store load has completed", function() {
-                    
+                    }); 
                     store.getSorters().add('name');
                     completeWithData([{
                         name: 'ZZZ'
@@ -3090,6 +3238,13 @@ describe("Ext.data.Store", function() {
                 });
                 
                 it("should not sort the data when adding a record", function() {
+                    createStore({
+                        remoteSort: true,
+                        proxy: {
+                            type: 'ajax',
+                            url: 'fakeurl'
+                        }
+                    }); 
                     store.getSorters().add('name');
                     addStoreData();
                     expect(store.first().get('name')).toBe('Ed Spencer');
@@ -3110,7 +3265,7 @@ describe("Ext.data.Store", function() {
             it("should fire the sort event when adding a sorter to an empty collection", function() {
                 store.on('sort', spy);
                 store.getSorters().add('name');
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(1);
@@ -3122,7 +3277,7 @@ describe("Ext.data.Store", function() {
                 store.getSorters().add('name');
                 store.on('sort', spy);
                 store.getSorters().add('evilness');
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(2);
@@ -3137,7 +3292,7 @@ describe("Ext.data.Store", function() {
                 store.getSorters().add('evilness');
                 store.on('sort', spy);
                 store.getSorters().remove('name');
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(1);
@@ -3149,7 +3304,7 @@ describe("Ext.data.Store", function() {
                 store.getSorters().add('name');
                 store.on('sort', spy);
                 store.getSorters().remove('name');
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(0);
@@ -3164,14 +3319,14 @@ describe("Ext.data.Store", function() {
                     it("should fire the refresh event", function() {
                         store.on('refresh', spy);
                         store.getSorters().add('name');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         expect(spy.mostRecentCall.args[0]).toBe(store);
                     });
 
                     it("should fire the datachanged event", function() {
                         store.on('datachanged', spy);
                         store.getSorters().add('name');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         expect(spy.mostRecentCall.args[0]).toBe(store);
                     });
                 });
@@ -3182,7 +3337,7 @@ describe("Ext.data.Store", function() {
                         store.getSorters().add('evilness');
                         store.on('refresh', spy);
                         store.getSorters().remove('name');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         expect(spy.mostRecentCall.args[0]).toBe(store);
                     });
                     
@@ -3191,7 +3346,7 @@ describe("Ext.data.Store", function() {
                         store.getSorters().add('evilness');
                         store.on('datachanged', spy);
                         store.getSorters().remove('name');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         expect(spy.mostRecentCall.args[0]).toBe(store);
                     });
                     
@@ -3213,13 +3368,13 @@ describe("Ext.data.Store", function() {
                     it("should fire refresh when adding a sorter", function() {
                         store.on('refresh', spy);
                         store.sort('email');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                 
                     it("should fire datachanged when adding a sorter", function() {
                         store.on('datachanged', spy);
                         store.sort('email');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                 });
                 
@@ -3231,7 +3386,7 @@ describe("Ext.data.Store", function() {
                         store.sort('evilness', null, 'append');
                         store.on('refresh', spy);
                         store.getSorters().remove('email');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                 
                     it("should fire datachanged when removing the non-last sorter", function() {
@@ -3241,7 +3396,7 @@ describe("Ext.data.Store", function() {
                         store.sort('evilness', null, 'append');
                         store.on('datachanged', spy);
                         store.getSorters().remove('email');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                 });
             });
@@ -3692,6 +3847,25 @@ describe("Ext.data.Store", function() {
                     expect(store.indexOf(edRec)).toBe(1);
                 });
 
+                it("should sort the groups by the sorterFn", function() {
+                    store.setGrouper({
+                        property: 'group',
+                        sorterFn: function(a, b) {
+                            a = a.get('group');
+                            b = b.get('group');
+
+                            if (a === b) {
+                                return 0;
+                            }
+                            // Inverted on purpose to test sorter
+                            return a < b ? 1 : -1;
+                        }
+                    });
+                    var groups = store.getGroups();
+                    expect(groups.getAt(0).getGroupKey()).toBe('code');
+                    expect(groups.getAt(1).getGroupKey()).toBe('admin');
+                });
+
                 describe("with sorters", function() {
                     it("should sort the collection by grouper first", function() {
                         sortBy('evilness');
@@ -3831,23 +4005,34 @@ describe("Ext.data.Store", function() {
                     it("should trigger a load when adding a grouper", function() {
                         spyOn(store, 'load');
                         store.group('group');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
-                    it("should not trigger a load when removing the grouper and there are no sorters", function() {
+                    it("should not trigger a load when removing the grouper", function() {
                         store.group('group');
                         spyOn(store, 'load');
                         store.group(null);
                         expect(store.load).not.toHaveBeenCalled();
                     });
 
-                    it("should trigger a load when removing the grouper and there are sorters", function() {
-                        store.getSorters().add('name');
-                        store.group('group');
-                        spyOn(store, 'load');
-                        store.group(null);
-                        expect(store.load).toHaveBeenCalled();
+                    describe("with sorters", function() {
+                        it("should only load once when adding a grouper and there are sorters", function() {
+                            store.sort('name');
+                            spyOn(store, 'load');
+                            store.group('group');
+                            expect(store.load.callCount).toBe(1);
+                        });
+
+                        it("should trigger a load when removing the grouper", function() {
+                            store.getSorters().add('name');
+                            store.group('group');
+                            spyOn(store, 'load');
+                            store.group(null);
+                            expect(store.load.callCount).toBe(1);
+                        });
                     });
+
+                    
                 });
                 
                 describe("via setGrouper", function() {
@@ -3856,10 +4041,10 @@ describe("Ext.data.Store", function() {
                         store.setGrouper({
                             property: 'group'
                         });
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
-                    it("should not trigger a load when removing the grouper and there are no sorters", function() {
+                    it("should not trigger a load when removing the grouper", function() {
                         store.setGrouper({
                             property: 'group'
                         });
@@ -3868,14 +4053,25 @@ describe("Ext.data.Store", function() {
                         expect(store.load).not.toHaveBeenCalled();
                     });
 
-                    it("should trigger a load when removing the grouper and there are sorters", function() {
-                        store.getSorters().add('name');
-                        store.setGrouper({
-                            property: 'group'
+                    describe("with sorters", function() {
+                        it("should only load once when adding a grouper and there are sorters", function() {
+                            store.getSorters().add('name');
+                            spyOn(store, 'load');
+                            store.setGrouper({
+                                property: 'group'
+                            });
+                            expect(store.load.callCount).toBe(1);
                         });
-                        spyOn(store, 'load');
-                        store.setGrouper(null);
-                        expect(store.load).toHaveBeenCalled();
+
+                        it("should trigger a load when removing the grouper", function() {
+                            store.getSorters().add('name');
+                            store.setGrouper({
+                                property: 'group'
+                            });
+                            spyOn(store, 'load');
+                            store.setGrouper(null);
+                            expect(store.load.callCount).toBe(1);
+                        });
                     });
                 });
             });
@@ -3885,163 +4081,494 @@ describe("Ext.data.Store", function() {
             var spy;
             
             beforeEach(function() {
-                createStore({
-                    remoteSort: true,
-                    proxy: 'memory'
-                });
                 spy = jasmine.createSpy();
             });
-            
-            it("should fire the groupchange event when adding a grouper and pass the store & grouper", function() {
-                store.on('groupchange', spy);
-                store.group('group');
-                expect(spy).toHaveBeenCalled();
-                var args = spy.mostRecentCall.args;
-                expect(args[0]).toBe(store);
-                expect(args[1].getProperty()).toBe('group');
-                expect(args[1].getDirection()).toBe('ASC');
-            });
-            
-            it("should fire the groupchange event when setting the grouper to null", function() {
-                store.group('group');
-                store.on('groupchange', spy);
-                store.group(null);
-                expect(spy).toHaveBeenCalled();
-                var args = spy.mostRecentCall.args;
-                expect(args[0]).toBe(store);
-                expect(args[1]).toBeNull();
+
+            afterEach(function() {
+                spy = null;
             });
             
             describe("local", function() {
                 beforeEach(function() {
-                    store.setRemoteSort(false);
+                    createStore({
+                        remoteSort: false
+                    });
                 });
                 
                 describe("adding", function() {
-                    it("should trigger the refresh event when adding a grouper", function() {
-                        store.on('refresh', spy);
-                        store.group('group');
-                        expect(spy).toHaveBeenCalled();
-                        expect(spy.mostRecentCall.args[0]).toBe(store);
-                    });
+                    describe("with no sorters", function() {
+                        it("should trigger the groupchange event and pass the store & grouper", function() {
+                            store.on('groupchange', spy);
+                            store.group('group');
+                            expect(spy.callCount).toBe(1);
+                            var args = spy.mostRecentCall.args;
+                            expect(args[0]).toBe(store);
+                            expect(args[1].getProperty()).toBe('group');
+                            expect(args[1].getDirection()).toBe('ASC');
+                        });
+
+                        it("should trigger the refresh event", function() {
+                            store.on('refresh', spy);
+                            store.group('group');
+                            expect(spy.callCount).toBe(1);
+                            expect(spy.mostRecentCall.args[0]).toBe(store);
+                        });
                 
-                    it("should trigger the datachanged event when adding a grouper", function() {
-                        store.on('datachanged', spy);
-                        store.group('group');
-                        expect(spy).toHaveBeenCalled();
-                        expect(spy.mostRecentCall.args[0]).toBe(store);
+                        it("should trigger the datachanged event", function() {
+                            store.on('datachanged', spy);
+                            store.group('group');
+                            expect(spy.callCount).toBe(1);
+                            expect(spy.mostRecentCall.args[0]).toBe(store);
+                        });
+
+                        it("should not trigger the sort event", function() {
+                            store.on('sort', spy);
+                            store.group('group');
+                            expect(spy).not.toHaveBeenCalled();
+                        });
+                    });
+
+                    describe("with sorters", function() {
+                        beforeEach(function() {
+                            store.getSorters().add('name');
+                        });
+
+                        it("should trigger the groupchange event and pass the store & grouper", function() {
+                            store.on('groupchange', spy);
+                            store.group('group');
+                            expect(spy.callCount).toBe(1);
+                            var args = spy.mostRecentCall.args;
+                            expect(args[0]).toBe(store);
+                            expect(args[1].getProperty()).toBe('group');
+                            expect(args[1].getDirection()).toBe('ASC');
+                        });
+
+                        it("should trigger the refresh event", function() {
+                            store.on('refresh', spy);
+                            store.group('group');
+                            expect(spy.callCount).toBe(1);
+                            expect(spy.mostRecentCall.args[0]).toBe(store);
+                        });
+                
+                        it("should trigger the datachanged event", function() {
+                            store.on('datachanged', spy);
+                            store.group('group');
+                            expect(spy.callCount).toBe(1);
+                            expect(spy.mostRecentCall.args[0]).toBe(store);
+                        });
+
+                        it("should not trigger the sort event", function() {
+                            store.on('sort', spy);
+                            store.group('group');
+                            expect(spy).not.toHaveBeenCalled();
+                        });
                     });
                 });
                 
                 describe("removing", function() {
-                    it("should trigger the refresh event when removing a grouper and sorters exist", function() {
-                        store.sort('email');
-                        store.group('group');
-                        store.on('refresh', spy);
-                        store.group(null);
-                        expect(spy).toHaveBeenCalled();
-                        expect(spy.mostRecentCall.args[0]).toBe(store);
-                    });
+                    describe("with no sorters", function() {
+                        it("should trigger the groupchange event", function() {
+                            store.group('group');
+                            store.on('groupchange', spy);
+                            store.group(null);
+                            expect(spy.callCount).toBe(1);
+                            var args = spy.mostRecentCall.args;
+                            expect(args[0]).toBe(store);
+                            expect(args[1]).toBeNull();
+                        });
+
+                        it("should not trigger the refresh event", function() {
+                            store.group('group');
+                            store.on('refresh', spy);
+                            store.group(null);
+                            expect(spy).not.toHaveBeenCalled();
+                        });
                 
-                    it("should trigger the datachanged event when removing a grouper and sorters exist", function() {
-                        store.sort('email');
-                        store.group('group');
-                        store.on('datachanged', spy);
-                        store.group(null);
-                        expect(spy).toHaveBeenCalled();
-                        expect(spy.mostRecentCall.args[0]).toBe(store);
+                        it("should trigger the datachanged event", function() {
+                            store.group('group');
+                            store.on('datachanged', spy);
+                            store.group(null);
+                            expect(spy).not.toHaveBeenCalled();
+                        });
+
+                        it("should not trigger the sort event", function() {
+                            store.group('group');
+                            store.on('sort', spy);
+                            store.group(null);
+                            expect(spy).not.toHaveBeenCalled();
+                        });
                     });
+
+                    describe("with sorters", function() {
+                        beforeEach(function() {
+                            store.getSorters().add('email');
+                        });
+
+                        it("should trigger the groupchange event", function() {
+                            store.group('group');
+                            store.on('groupchange', spy);
+                            store.group(null);
+                            expect(spy.callCount).toBe(1);
+                            var args = spy.mostRecentCall.args;
+                            expect(args[0]).toBe(store);
+                            expect(args[1]).toBeNull();
+                        })
+
+                        it("should trigger the refresh event", function() {
+                            store.group('group');
+                            store.on('refresh', spy);
+                            store.group(null);
+                            expect(spy.callCount).toBe(1);
+                            expect(spy.mostRecentCall.args[0]).toBe(store);
+                        });
                 
-                    it("should not trigger the refresh event when removing a grouper and no sorters exist", function() {
-                        store.group('group');
-                        store.on('refresh', spy);
-                        store.group(null);
-                        expect(spy).not.toHaveBeenCalled();
-                    });
-                
-                    it("should trigger the datachanged event when removing a grouper and no sorters exist", function() {
-                        store.group('group');
-                        store.on('datachanged', spy);
-                        store.group(null);
-                        expect(spy).not.toHaveBeenCalled();
+                        it("should trigger the datachanged event", function() {
+                            store.group('group');
+                            store.on('datachanged', spy);
+                            store.group(null);
+                            expect(spy.callCount).toBe(1);
+                            expect(spy.mostRecentCall.args[0]).toBe(store);
+                        });
+
+                        it("should not trigger the sort event", function() {
+                            store.group('group');
+                            store.on('sort', spy);
+                            store.group(null);
+                            expect(spy).not.toHaveBeenCalled();
+                        });
                     });
                 });
             });
             
             describe("remote", function() {
+                describe("with a synchronous proxy", function() {
+                    beforeEach(function() {
+                        createStore({
+                            remoteSort: true,
+                            proxy: {
+                                type: 'memory'
+                            }
+                        });
+                    });
+                    describe("adding", function() {
+                        describe("with no sorters", function() {
+                            it("should trigger the groupchange event and pass the store & grouper", function() {
+                                store.on('groupchange', spy);
+                                store.group('group');
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1].getProperty()).toBe('group');
+                                expect(args[1].getDirection()).toBe('ASC');
+                            });
 
-                // Remote loads synchronously from memory proxy, so refresh and datachanged events fire synchronously
-                describe("adding", function() {
-                    it("should not fire refresh when adding a group", function() {
-                        store.on('refresh', spy);
-                        store.group('group');
-                        expect(spy).toHaveBeenCalled();
+                            it("should trigger the refresh event", function() {
+                                store.on('refresh', spy);
+                                store.group('group');
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+                    
+                            it("should trigger the datachanged event", function() {
+                                store.on('datachanged', spy);
+                                store.group('group');
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.on('sort', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
+
+                        describe("with sorters", function() {
+                            beforeEach(function() {
+                                store.getSorters().add('name');
+                            });
+
+                            it("should trigger the groupchange event and pass the store & grouper", function() {
+                                store.on('groupchange', spy);
+                                store.group('group');
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1].getProperty()).toBe('group');
+                                expect(args[1].getDirection()).toBe('ASC');
+                            });
+
+                            it("should trigger the refresh event", function() {
+                                store.on('refresh', spy);
+                                store.group('group');
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+                    
+                            it("should trigger the datachanged event", function() {
+                                store.on('datachanged', spy);
+                                store.group('group');
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.on('sort', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
                     });
-                
-                    it("should not fire datachanged when adding a group", function() {
-                        store.on('datachanged', spy);
-                        store.group('group');
-                        expect(spy).toHaveBeenCalled();
+                    
+                    describe("removing", function() {
+                        describe("with no sorters", function() {
+                            it("should trigger the groupchange event", function() {
+                                store.group('group');
+                                store.on('groupchange', spy);
+                                store.group(null);
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1]).toBeNull();
+                            });
+
+                            it("should not trigger the refresh event", function() {
+                                store.group('group');
+                                store.on('refresh', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                    
+                            it("should trigger the datachanged event", function() {
+                                store.group('group');
+                                store.on('datachanged', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.group('group');
+                                store.on('sort', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
+
+                        describe("with sorters", function() {
+                            beforeEach(function() {
+                                store.getSorters().add('email');
+                            });
+
+                            it("should trigger the groupchange event", function() {
+                                store.group('group');
+                                store.on('groupchange', spy);
+                                store.group(null);
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1]).toBeNull();
+                            })
+
+                            it("should trigger the refresh event", function() {
+                                store.group('group');
+                                store.on('refresh', spy);
+                                store.group(null);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+                    
+                            it("should trigger the datachanged event", function() {
+                                store.group('group');
+                                store.on('datachanged', spy);
+                                store.group(null);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.group('group');
+                                store.on('sort', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
                     });
-                });
-                
-                describe("removing", function() {
-                    it("should not fire refresh when removing a grouper and sorters exist", function() {
-                        store.sort('email');
-                        store.group('group');
-                        store.on('refresh', spy);
-                        store.group(null);
-                        expect(spy).toHaveBeenCalled();
-                    });
-                
-                    it("should not fire datachanged when removing a grouper and sorters exist", function() {
-                        store.sort('email');
-                        store.group('group');
-                        store.on('datachanged', spy);
-                        store.group(null);
-                        expect(spy).toHaveBeenCalled();
-                    });
-                });
-            });
-            
-            describe("remote async", function() {
-                beforeEach(function() {
-                    createStore({
-                        remoteSort: true
-                    });
-                    spy = jasmine.createSpy();
                 });
 
-                // Remote loads asynchronously from ajax proxy here, so refresh and datachaged events will not fire synchronously
-                describe("adding", function() {
-                    it("should not fire refresh when adding a group", function() {
-                        store.on('refresh', spy);
-                        store.group('group');
-                        expect(spy).not.toHaveBeenCalled();
+                describe("with an asynchronous proxy", function() {
+                    beforeEach(function() {
+                        createStore({
+                            remoteSort: true,
+                            proxy: {
+                                type: 'ajax',
+                                url: 'foo'
+                            }
+                        });
                     });
-                
-                    it("should not fire datachanged when adding a group", function() {
-                        store.on('datachanged', spy);
-                        store.group('group');
-                        expect(spy).not.toHaveBeenCalled();
+                    describe("adding", function() {
+                        describe("with no sorters", function() {
+                            it("should trigger the groupchange event and pass the store & grouper after the load completes", function() {
+                                store.on('groupchange', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1].getProperty()).toBe('group');
+                                expect(args[1].getDirection()).toBe('ASC');
+                            });
+
+                            it("should trigger the refresh event after the load completes", function() {
+                                store.on('refresh', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+                    
+                            it("should trigger the datachanged event after the load completes", function() {
+                                store.on('datachanged', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.on('sort', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
+
+                        describe("with sorters", function() {
+                            beforeEach(function() {
+                                store.getSorters().add('name');
+                                completeWithData([]);
+                            });
+
+                            it("should trigger the groupchange event and pass the store & grouper after the load completes", function() {
+                                store.on('groupchange', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1].getProperty()).toBe('group');
+                                expect(args[1].getDirection()).toBe('ASC');
+                            });
+
+                            it("should trigger the refresh event", function() {
+                                store.on('refresh', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+                    
+                            it("should trigger the datachanged event", function() {
+                                store.on('datachanged', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.on('sort', spy);
+                                store.group('group');
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
                     });
-                });
-                
-                describe("removing", function() {
-                    it("should not fire refresh when removing a grouper and sorters exist", function() {
-                        store.sort('email');
-                        store.group('group');
-                        store.on('refresh', spy);
-                        store.group(null);
-                        expect(spy).not.toHaveBeenCalled();
-                    });
-                
-                    it("should not fire datachanged when removing a grouper and sorters exist", function() {
-                        store.sort('email');
-                        store.group('group');
-                        store.on('datachanged', spy);
-                        store.group(null);
-                        expect(spy).not.toHaveBeenCalled();
+                    
+                    describe("removing", function() {
+                        beforeEach(function() {
+                            store.group('group');
+                            completeWithData([]);
+                        });
+                        describe("with no sorters", function() {
+                            it("should trigger the groupchange event without loading", function() {
+                                store.on('groupchange', spy);
+                                store.group(null);
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1]).toBeNull();
+                            });
+
+                            it("should not trigger the refresh event without loading", function() {
+                                store.on('refresh', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                    
+                            it("should trigger the datachanged event without loading", function() {
+                                store.on('datachanged', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.on('sort', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
+
+                        describe("with sorters", function() {
+                            beforeEach(function() {
+                                store.getSorters().add('email');
+                                completeWithData([]);
+                            });
+
+                            it("should trigger the groupchange event after the load completes", function() {
+                                store.on('groupchange', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                var args = spy.mostRecentCall.args;
+                                expect(args[0]).toBe(store);
+                                expect(args[1]).toBeNull();
+                            })
+
+                            it("should trigger the refresh event after the load completes", function() {
+                                store.on('refresh', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+                    
+                            it("should trigger the datachanged event after the load completes", function() {
+                                store.on('datachanged', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy.callCount).toBe(1);
+                                expect(spy.mostRecentCall.args[0]).toBe(store);
+                            });
+
+                            it("should not trigger the sort event", function() {
+                                store.on('sort', spy);
+                                store.group(null);
+                                expect(spy).not.toHaveBeenCalled();
+                                completeWithData([]);
+                                expect(spy).not.toHaveBeenCalled();
+                            });
+                        });
                     });
                 });
             });
@@ -4049,6 +4576,42 @@ describe("Ext.data.Store", function() {
     });
     
     describe("filtering", function() {
+        describe("the filter collection", function() {
+            it("should be an instance of Ext.util.FilterCollection", function() {
+                createStore();
+                expect(store.getFilters() instanceof Ext.util.FilterCollection).toBe(true);
+            });
+
+            it("should be empty by default", function() {
+                createStore();
+                expect(store.getFilters().getCount()).toBe(0);
+            });
+
+            it("should add any filters passed in the constructor", function() {
+                createStore({
+                    filters: [{
+                        property: 'foo',
+                        value: 'a'
+                    }, {
+                        property: 'bar',
+                        value: 'b'
+                    }]
+                });
+                var filter = store.getFilters().getAt(0);
+                expect(filter.getProperty()).toBe('foo');
+                expect(filter.getValue()).toBe('a');
+
+                filter = store.getFilters().getAt(1);
+                expect(filter.getProperty()).toBe('bar');
+                expect(filter.getValue()).toBe('b');
+            });
+
+            it("should not set the rootProperty as data on the filter collection", function() {
+                createStore();
+                expect(store.getFilters().getRootProperty()).not.toBe('data');
+            });
+        });
+
         describe("filter method", function() {
             beforeEach(function() {
                 createStore();
@@ -4121,7 +4684,7 @@ describe("Ext.data.Store", function() {
                 store.filter('evilness', 100);
                 spyOn(store, 'load');
                 store.clearFilter();
-                expect(store.load).toHaveBeenCalled();
+                expect(store.load.callCount).toBe(1);
             });
             
             it("should trigger a load when using remoteFilter: true & passing suppressEvent", function() {
@@ -4366,7 +4929,7 @@ describe("Ext.data.Store", function() {
                             property: 'group',
                             value: 'code'
                         });
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
                     it("should trigger a load when adding to an existing filter", function() {
@@ -4379,7 +4942,7 @@ describe("Ext.data.Store", function() {
                             property: 'evilness',
                             value: 100
                         });
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
                     it("should trigger a load when removing the only filter", function() {
@@ -4389,7 +4952,7 @@ describe("Ext.data.Store", function() {
                         });
                         spyOn(store, 'load');
                         store.getFilters().remove('group');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
 
                     it("should trigger a load when removing a filter and there are others remaining", function() {
@@ -4403,7 +4966,7 @@ describe("Ext.data.Store", function() {
                         });
                         spyOn(store, 'load');
                         store.getFilters().remove('evilness');
-                        expect(store.load).toHaveBeenCalled();
+                        expect(store.load.callCount).toBe(1);
                     });
                 });
             });
@@ -4453,7 +5016,7 @@ describe("Ext.data.Store", function() {
                     property: 'group',
                     value: 'code'
                 });
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(1);
@@ -4472,7 +5035,7 @@ describe("Ext.data.Store", function() {
                     property: 'evilness',
                     value: 100
                 });
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(2);
@@ -4494,7 +5057,7 @@ describe("Ext.data.Store", function() {
                 });
                 store.on('filterchange', spy);
                 store.getFilters().remove('group');
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(1);
@@ -4510,7 +5073,7 @@ describe("Ext.data.Store", function() {
                 });
                 store.on('filterchange', spy);
                 store.getFilters().remove('group');
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
                 var args = spy.mostRecentCall.args;
                 expect(args[0]).toBe(store);
                 expect(args[1].length).toBe(0);
@@ -4529,7 +5092,7 @@ describe("Ext.data.Store", function() {
                             property: 'group',
                             value: 'code'
                         });
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         var args = spy.mostRecentCall.args;
                         expect(args[0]).toBe(store);
                     });
@@ -4541,7 +5104,7 @@ describe("Ext.data.Store", function() {
                             property: 'group',
                             value: 'code'
                         });
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         var args = spy.mostRecentCall.args;
                         expect(args[0]).toBe(store);
                     });
@@ -4556,7 +5119,7 @@ describe("Ext.data.Store", function() {
                         });
                         store.on('refresh', spy);
                         store.getFilters().remove('group');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         var args = spy.mostRecentCall.args;
                         expect(args[0]).toBe(store);
                     });
@@ -4569,7 +5132,7 @@ describe("Ext.data.Store", function() {
                         });
                         store.on('datachanged', spy);
                         store.getFilters().remove('group');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                         var args = spy.mostRecentCall.args;
                         expect(args[0]).toBe(store);
                     });
@@ -4852,7 +5415,7 @@ describe("Ext.data.Store", function() {
 
                     store.on('update', spy);
                     store.first().set('name', 'Ned Spencer');
-                    expect(spy).toHaveBeenCalled();
+                    expect(spy.callCount).toBe(1);
 
                     // datachanged is only for record additions/removals
                     expect(datachangedSpy).not.toHaveBeenCalled();
@@ -4943,7 +5506,7 @@ describe("Ext.data.Store", function() {
                         edRec.set('group', 'admin');
 
                         // Data events still apply even when nodes are filtered from visibility
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                 });
                 
@@ -4958,7 +5521,7 @@ describe("Ext.data.Store", function() {
                         store.on('update', spy);
                         store.filter('group', 'code');
                         aaronRec.set('group', 'code');
-                        expect(spy).toHaveBeenCalled();
+                        expect(spy.callCount).toBe(1);
                     });
                 });
             });
@@ -4969,7 +5532,7 @@ describe("Ext.data.Store", function() {
                 edRec.set('name', 'Foo');
                 store.on('update', spy);
                 edRec.commit();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
             
             it("should pass the store, model, type & null (modified fields)", function() {
@@ -4990,7 +5553,7 @@ describe("Ext.data.Store", function() {
                 store.on('update', spy);
                 store.filter('name', 'Aaron');
                 edRec.commit();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
         });
         
@@ -4999,7 +5562,7 @@ describe("Ext.data.Store", function() {
                 edRec.set('name', 'Foo');
                 store.on('update', spy);
                 edRec.reject();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
             
             it("should pass the store, model, type & null (modified fields)", function() {
@@ -5018,7 +5581,7 @@ describe("Ext.data.Store", function() {
                 store.on('update', spy);
                 store.filter('name', 'Aaron');
                 edRec.reject();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
         });
         
@@ -5026,6 +5589,11 @@ describe("Ext.data.Store", function() {
             it("should remove the record from the store", function() {
                 edRec.erase();
                 expect(store.indexOf(edRec)).toBe(-1);
+
+                // Because the erase operation communicates the destruction to the server,
+                // it should not trigger the store to need a sync, and should not add to the to remove stack.
+                expect(store.needsSync).toBe(false);
+                expect(store.getRemovedRecords().length).toBe(0);
             });
         });
 
@@ -5050,7 +5618,7 @@ describe("Ext.data.Store", function() {
                 })[0];
                 spyOn(phantom, 'commit');
                 store.commitChanges();
-                expect(phantom.commit).toHaveBeenCalled();
+                expect(phantom.commit.callCount).toBe(1);
             });
 
             it("should not commit invalid phantoms", function() {
@@ -5066,7 +5634,7 @@ describe("Ext.data.Store", function() {
                 edRec.set('validField', 'Foo');
                 spyOn(edRec, 'commit');
                 store.commitChanges();
-                expect(edRec.commit).toHaveBeenCalled();
+                expect(edRec.commit.callCount).toBe(1);
             });
 
             it("should not commit invalid dirty non-phantoms", function() {
@@ -5110,7 +5678,7 @@ describe("Ext.data.Store", function() {
                 edRec.set('name', 'Foo');
                 var spy = spyOn(edRec, 'reject');
                 store.rejectChanges();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
 
             it("should reject phantom records", function() {
@@ -5119,7 +5687,7 @@ describe("Ext.data.Store", function() {
                 })[0];
                 var spy = spyOn(phantom, 'reject');
                 store.rejectChanges();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
 
             it("should reject phantom + dirty records", function() {
@@ -5129,7 +5697,7 @@ describe("Ext.data.Store", function() {
                 phantom.set('name', 'Y');
                 var spy = spyOn(phantom, 'reject');
                 store.rejectChanges();
-                expect(spy).toHaveBeenCalled();
+                expect(spy.callCount).toBe(1);
             });
 
             it("should not reject non-phantom non-dirty records", function() {
@@ -5312,15 +5880,105 @@ describe("Ext.data.Store", function() {
         });
     });
 
+    describe("autoSync", function() {
+        beforeEach(function() {
+            createStore({
+                autoSync: true
+            }, true);
+            spyOn(store, 'sync').andCallFake(function() {
+                store.needsSync = false;
+            });
+        });
+        describe("adding", function() {
+            it("should trigger a sync if the record is a phantom", function() {
+                store.add({});
+                expect(store.sync.callCount).toBe(1);
+            });
+
+            it("should trigger a sync if the record is dirty", function() {
+                var rec = makeUser('foo@sencha.com');
+                rec.set('name', 'foo');
+                store.add(rec);
+                expect(store.sync.callCount).toBe(1);
+            });
+
+            it("should not trigger a sync if the record is not a phantom or dirty", function() {
+                var rec = makeUser('foo@sencha.com');
+                store.add(rec);
+                expect(store.sync).not.toHaveBeenCalled();
+            });
+
+            it("should only trigger a single sync when adding multiple records", function() {
+                store.add([{}, {}, {}, {}]);
+                expect(store.sync.callCount).toBe(1);
+            });
+
+            describe("with sorting", function() {
+                it("should only trigger a single sync when adding multiple records in a discontiguous range", function() {
+                    store.sort('email');
+                    var recs = [makeUser('aaa@sencha.com'), makeUser('foo@sencha.com'), makeUser('zzz@sencha.com')];
+                    Ext.Array.forEach(recs, function(rec, i) {
+                        rec.set('name', 'foo' + i);
+                    });
+                    store.add(recs);
+                    expect(store.sync.callCount).toBe(1);
+                });
+            });
+
+            describe("with filtering", function() {
+                it("should trigger a sync if the record is filtered out", function() {
+                    store.filter('name', 'Foo');
+                    store.add({
+                        name: 'Bar'
+                    });
+                    expect(store.sync.callCount).toBe(1);
+                });
+            });
+        });
+
+        describe("removing", function() {
+            it("should not trigger a sync if the record is a phantom", function() {
+                var rec = store.add({})[0];
+                store.sync.reset();
+                store.remove(rec);
+                expect(store.sync).not.toHaveBeenCalled();
+            });
+
+            it("should trigger when removing a record", function() {
+                store.remove(edRec);
+                expect(store.sync.callCount).toBe(1);
+            });
+
+            it("should only trigger a single sync when removing multiple records", function() {
+                store.remove([edRec, tommyRec]);
+                expect(store.sync.callCount).toBe(1);
+            });
+        });
+
+        describe("updating", function() {
+            it("should not trigger a sync if the record is not dirty", function() {
+                edRec.set('name', 'Foo');
+                store.sync.reset();
+                edRec.set('name', 'Ed Spencer');
+                expect(store.sync).not.toHaveBeenCalled();
+            });
+
+            it("should trigger a sync if the record is dirty", function() {
+                edRec.set('name', 'Foo');
+                expect(store.sync.callCount).toBe(1);
+            });
+        });
+    });
+
     describe("joining/unjoining the the store", function() {
         function expectJoined(rec) {
             var joined = rec.joined || [];
-            expect(joined.indexOf(store)).not.toBe(-1);
+            expect(Ext.Array.indexOf(joined, store)).not.toBe(-1);
         }
 
         function expectNotJoined(rec) {
             var joined = rec.joined || [];
-            expect(joined.indexOf(store)).toBe(-1);
+            expect(Ext.Array.indexOf(joined, store)).toBe(-1);
         }
 
         describe("loading", function () {
@@ -5595,6 +6253,81 @@ describe("Ext.data.Store", function() {
             store.on('clear', spy);
             store.destroy();
             expect(spy).not.toHaveBeenCalled();
+        });
+
+        describe("proxy", function() {
+            function getKeys(proxy) {
+                var items = proxy.hasListeners,
+                    o = {},
+                    key;
+
+                for (key in items) {
+                    if (items.hasOwnProperty(key)) {
+                        o[key] = items[key];
+                    }
+                }
+                return o;
+            }
+
+            describe("proxy created by the store", function() {
+                it("should destroy a stringified proxy and clear it from the store", function() {
+                    createStore({
+                        proxy: 'ajax'
+                    });
+                    var proxy = store.getProxy(),
+                        spy = spyOn(proxy, 'destroy').andCallThrough();
+
+                    store.destroy();
+                    expect(spy).toHaveBeenCalled();
+                    expect(store.getProxy()).toBeNull();
+                });
+
+                it("should destroy an object config proxy and clear it from the store", function() {
+                    createStore({
+                        proxy: {
+                            type: 'ajax'
+                        }
+                    });
+                    var proxy = store.getProxy(),
+                        spy = spyOn(proxy, 'destroy').andCallThrough();
+
+                    store.destroy();
+                    expect(spy).toHaveBeenCalled();
+                    expect(store.getProxy()).toBeNull();
+                });
+            });
+
+            describe("proxy from model", function() {
+                it("should clear any listeners and detach from the store, but not destroy it", function() {
+                    var proxy = User.getProxy(),
+                        hasListeners = getKeys(proxy),
+                        spy;
+
+                    createStore();
+                    spy = spyOn(proxy, 'destroy').andCallThrough();
+                    store.destroy();
+                    expect(spy).not.toHaveBeenCalled();
+                    expect(store.getProxy()).toBeNull();
+                    expect(getKeys(proxy.hasListeners)).toEqual(hasListeners);
+                });
+            });
+
+            describe("proxy instance", function() {
+                it("should clear any listeners and detach from the store, but not destroy it", function() {
+                    var proxy = new Ext.data.proxy.Ajax(),
+                        hasListeners = getKeys(proxy),
+                        spy;
+
+                    createStore({
+                        proxy: proxy
+                    });
+                    spy = spyOn(proxy, 'destroy').andCallThrough();
+                    store.destroy();
+                    expect(spy).not.toHaveBeenCalled();
+                    expect(store.getProxy()).toBeNull();
+                    expect(getKeys(proxy.hasListeners)).toEqual(hasListeners);
+                });
+            });
         });
     });
 

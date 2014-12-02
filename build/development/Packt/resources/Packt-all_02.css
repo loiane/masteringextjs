@@ -1,189 +1,189 @@
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-frameInfo {
   font-family: th-1-1-1-1-1-1-1-1-3-3-3-3;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-tl {
   background-position: 0 -2px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-tr {
   background-position: right -3px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-bl {
   background-position: 0 -4px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-br {
   background-position: right -5px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-ml {
   background-position: 0 top;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-mr {
   background-position: right top;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-bc {
   background-position: 0 -1px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-tr,
 .x-btn-plain-toolbar-large-br,
 .x-btn-plain-toolbar-large-mr {
   padding-right: 1px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-tl,
 .x-btn-plain-toolbar-large-bl,
 .x-btn-plain-toolbar-large-ml {
   padding-left: 1px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-tc {
   height: 1px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-bc {
   height: 1px;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-plain-toolbar-large-mc {
   padding: 3px 3px 3px 3px;
 }
 
 /* */
-/* line 423, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 423, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-plain-toolbar-large {
   border-color: transparent;
 }
 
-/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 430, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-button-plain-toolbar-large {
   height: 32px;
 }
 
-/* line 435, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 435, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-inner-plain-toolbar-large {
   font: bold 16px/20px helvetica, arial, verdana, sans-serif;
   color: white;
   padding: 0 10px;
   max-width: 100%;
 }
-/* line 446, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 446, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-right > .x-btn-inner-plain-toolbar-large, .x-btn-icon-left > .x-btn-inner-plain-toolbar-large {
   max-width: calc(100% - 32px);
 }
 
-/* line 453, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 453, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-el-plain-toolbar-large {
   height: 32px;
 }
-/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 457, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-left > .x-btn-icon-el-plain-toolbar-large, .x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
   width: 32px;
 }
-/* line 462, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 462, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-top > .x-btn-icon-el-plain-toolbar-large, .x-btn-icon-bottom > .x-btn-icon-el-plain-toolbar-large {
   min-width: 32px;
 }
-/* line 466, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 466, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-el-plain-toolbar-large.x-btn-glyph {
   font-size: 32px;
   line-height: 32px;
   color: white;
   opacity: 0.5;
 }
-/* line 486, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 486, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-ie8 .x-btn-icon-el-plain-toolbar-large.x-btn-glyph {
   color: white;
 }
-/* line 493, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 493, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-left > .x-btn-icon-el-plain-toolbar-large {
   margin-right: 0;
 }
-/* line 504, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 504, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
   margin-left: 0;
 }
-/* line 515, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 515, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-top > .x-btn-icon-el-plain-toolbar-large {
   margin-bottom: 5px;
 }
-/* line 519, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 519, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-bottom > .x-btn-icon-el-plain-toolbar-large {
   margin-top: 5px;
 }
 
-/* line 525, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 525, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-arrow-right > .x-btn-icon.x-btn-no-text.x-btn-button-plain-toolbar-large {
   padding-right: 10px;
 }
-/* line 528, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 528, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-arrow-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
   margin-right: 10px;
 }
 
-/* line 535, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 535, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-arrow-bottom > .x-btn-button-plain-toolbar-large,
 .x-btn-split-bottom > .x-btn-button-plain-toolbar-large {
   padding-bottom: 3px;
 }
 
-/* line 541, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 541, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-plain-toolbar-large.x-btn-arrow-right:after {
   width: 28px;
   padding-right: 28px;
   background-image: url(images/button/plain-toolbar-large-arrow.png);
 }
-/* line 563, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 563, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-plain-toolbar-large.x-btn-arrow-bottom:after {
   height: 20px;
   background-image: url(images/button/plain-toolbar-large-arrow.png);
 }
 
-/* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 583, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-plain-toolbar-large.x-btn-split-right:after {
   width: 35px;
   padding-right: 35px;
   background-image: url(images/button/plain-toolbar-large-s-arrow.png);
 }
-/* line 597, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 597, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-plain-toolbar-large.x-btn-split-bottom:after {
   height: 29px;
   background-image: url(images/button/plain-toolbar-large-s-arrow-b.png);
 }
 
-/* line 624, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 624, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-split-right > .x-btn-icon.x-btn-no-text.x-btn-button-plain-toolbar-large {
   padding-right: 10px;
 }
-/* line 627, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 627, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-split-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-plain-toolbar-large {
   margin-right: 10px;
 }
 
-/* line 632, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 632, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-plain-toolbar-large {
   background-image: none;
   background-color: transparent;
@@ -192,7 +192,7 @@
   box-shadow: #31783d 0 1px 0px 0 inset, #31783d 0 -1px 0px 0 inset, #31783d -1px 0 0px 0 inset, #31783d 1px 0 0px 0 inset;
 }
 
-/* line 667, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 667, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over.x-btn-plain-toolbar-large {
   border-color: #619292;
   background-image: none;
@@ -205,14 +205,14 @@
   background-image: linear-gradient(top, #007500, #005200);
 }
 
-/* line 694, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 694, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over.x-btn-plain-toolbar-large {
   -webkit-box-shadow: #31783d 0 1px 0px 0 inset, #31783d 0 -1px 0px 0 inset, #31783d -1px 0 0px 0 inset, #31783d 1px 0 0px 0 inset;
   -moz-box-shadow: #31783d 0 1px 0px 0 inset, #31783d 0 -1px 0px 0 inset, #31783d -1px 0 0px 0 inset, #31783d 1px 0 0px 0 inset;
   box-shadow: #31783d 0 1px 0px 0 inset, #31783d 0 -1px 0px 0 inset, #31783d -1px 0 0px 0 inset, #31783d 1px 0 0px 0 inset;
 }
 
-/* line 723, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 723, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active.x-btn-plain-toolbar-large,
 .x-btn.x-btn-pressed.x-btn-plain-toolbar-large {
   border-color: #5d8c8c;
@@ -226,7 +226,7 @@
   background-image: linear-gradient(top, #007500, #005200);
 }
 
-/* line 751, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 751, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active.x-btn-plain-toolbar-large,
 .x-btn-focus.x-btn-pressed.x-btn-plain-toolbar-large {
   -webkit-box-shadow: #31783d 0 1px 0px 0 inset, #31783d 0 -1px 0px 0 inset, #31783d -1px 0 0px 0 inset, #31783d 1px 0 0px 0 inset;
@@ -234,13 +234,13 @@
   box-shadow: #31783d 0 1px 0px 0 inset, #31783d 0 -1px 0px 0 inset, #31783d -1px 0 0px 0 inset, #31783d 1px 0 0px 0 inset;
 }
 
-/* line 779, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 779, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled.x-btn-plain-toolbar-large {
   background-image: none;
   background-color: transparent;
 }
 
-/* line 816, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 816, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus .x-btn-plain-toolbar-large-tl,
 .x-btn-focus .x-btn-plain-toolbar-large-bl,
 .x-btn-focus .x-btn-plain-toolbar-large-tr,
@@ -249,18 +249,18 @@
 .x-btn-focus .x-btn-plain-toolbar-large-bc {
   background-image: url(images/btn/btn-plain-toolbar-large-focus-corners.gif);
 }
-/* line 820, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 820, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus .x-btn-plain-toolbar-large-ml,
 .x-btn-focus .x-btn-plain-toolbar-large-mr {
   background-image: url(images/btn/btn-plain-toolbar-large-focus-sides.gif);
 }
-/* line 823, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 823, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus .x-btn-plain-toolbar-large-mc {
   background-color: transparent;
   background-image: url(images/btn/btn-plain-toolbar-large-focus-fbg.gif);
 }
 
-/* line 840, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 840, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over .x-btn-plain-toolbar-large-tl,
 .x-btn-over .x-btn-plain-toolbar-large-bl,
 .x-btn-over .x-btn-plain-toolbar-large-tr,
@@ -269,18 +269,18 @@
 .x-btn-over .x-btn-plain-toolbar-large-bc {
   background-image: url(images/btn/btn-plain-toolbar-large-over-corners.gif);
 }
-/* line 844, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 844, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over .x-btn-plain-toolbar-large-ml,
 .x-btn-over .x-btn-plain-toolbar-large-mr {
   background-image: url(images/btn/btn-plain-toolbar-large-over-sides.gif);
 }
-/* line 847, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 847, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over .x-btn-plain-toolbar-large-mc {
   background-color: #006600;
   background-image: url(images/btn/btn-plain-toolbar-large-over-fbg.gif);
 }
 
-/* line 864, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 864, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tl,
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-bl,
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-tr,
@@ -289,18 +289,18 @@
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-bc {
   background-image: url(images/btn/btn-plain-toolbar-large-focus-over-corners.gif);
 }
-/* line 868, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 868, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-ml,
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-mr {
   background-image: url(images/btn/btn-plain-toolbar-large-focus-over-sides.gif);
 }
-/* line 871, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 871, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over .x-btn-plain-toolbar-large-mc {
   background-color: #006600;
   background-image: url(images/btn/btn-plain-toolbar-large-focus-over-fbg.gif);
 }
 
-/* line 890, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 890, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tl,
 .x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-bl,
 .x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-tr,
@@ -315,21 +315,21 @@
 .x-btn.x-btn-pressed .x-btn-plain-toolbar-large-bc {
   background-image: url(images/btn/btn-plain-toolbar-large-pressed-corners.gif);
 }
-/* line 894, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 894, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-ml,
 .x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-mr,
 .x-btn.x-btn-pressed .x-btn-plain-toolbar-large-ml,
 .x-btn.x-btn-pressed .x-btn-plain-toolbar-large-mr {
   background-image: url(images/btn/btn-plain-toolbar-large-pressed-sides.gif);
 }
-/* line 897, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 897, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active .x-btn-plain-toolbar-large-mc,
 .x-btn.x-btn-pressed .x-btn-plain-toolbar-large-mc {
   background-color: #006600;
   background-image: url(images/btn/btn-plain-toolbar-large-pressed-fbg.gif);
 }
 
-/* line 915, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 915, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tl,
 .x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-bl,
 .x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-tr,
@@ -344,21 +344,21 @@
 .x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-bc {
   background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-corners.gif);
 }
-/* line 919, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 919, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-ml,
 .x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-mr,
 .x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-ml,
 .x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-mr {
   background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-sides.gif);
 }
-/* line 922, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 922, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active .x-btn-plain-toolbar-large-mc,
 .x-btn-focus.x-btn-pressed .x-btn-plain-toolbar-large-mc {
   background-color: #006600;
   background-image: url(images/btn/btn-plain-toolbar-large-focus-pressed-fbg.gif);
 }
 
-/* line 940, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 940, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tl,
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-bl,
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-tr,
@@ -367,23 +367,23 @@
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-bc {
   background-image: url(images/btn/btn-plain-toolbar-large-disabled-corners.gif);
 }
-/* line 944, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 944, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-ml,
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-mr {
   background-image: url(images/btn/btn-plain-toolbar-large-disabled-sides.gif);
 }
-/* line 947, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 947, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled .x-btn-plain-toolbar-large-mc {
   background-color: transparent;
   background-image: url(images/btn/btn-plain-toolbar-large-disabled-fbg.gif);
 }
 
-/* line 957, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 957, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-nbr .x-btn-plain-toolbar-large {
   background-image: none;
 }
 
-/* line 963, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 963, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-disabled.x-btn-plain-toolbar-large {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
@@ -395,23 +395,23 @@
 /* */
 /* */
 /* */
-/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 1128, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-button-plain-toolbar-large-cell > .x-grid-cell-inner {
   padding-top: 0;
   padding-bottom: 0;
 }
-/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 1133, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-button-plain-toolbar-large-cell > .x-grid-cell-inner > .x-btn-plain-toolbar-large {
   vertical-align: top;
 }
 
-/* line 220, ../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
+/* line 220, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
 .x-btn-plain-toolbar-small-disabled .x-btn-icon-el,
 .x-btn-plain-toolbar-medium-disabled .x-btn-icon-el,
 .x-btn-plain-toolbar-large-disabled .x-btn-icon-el {
   background-color: white;
 }
-/* line 223, ../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
+/* line 223, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/button/Button.scss */
 .x-ie8 .x-btn-plain-toolbar-small-disabled .x-btn-icon-el, .x-ie8
 .x-btn-plain-toolbar-medium-disabled .x-btn-icon-el, .x-ie8
 .x-btn-plain-toolbar-large-disabled .x-btn-icon-el {
@@ -419,64 +419,64 @@
   opacity: 0.5;
 }
 
-/* line 252, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 252, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light {
   border-color: #e5eee7;
   padding: 0;
 }
 
-/* line 258, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 258, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light {
   font-size: 13px;
   border: 1px solid #e5eee7;
 }
-/* line 265, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 265, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light .x-tool-img {
   background-image: url(images/tools/tool-sprites-dark.png);
   background-color: #e5eee7;
 }
 
-/* line 278, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 278, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-horizontal {
   padding: 9px 9px 10px 9px;
 }
-/* line 282, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 282, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-horizontal .x-panel-header-light-tab-bar {
   margin-top: -9px;
   margin-bottom: -10px;
 }
 
-/* line 290, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 290, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-horizontal.x-header-noborder {
   padding: 10px 10px 10px 10px;
 }
-/* line 294, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 294, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-horizontal.x-header-noborder .x-panel-header-light-tab-bar {
   margin-top: -10px;
   margin-bottom: -10px;
 }
 
-/* line 302, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 302, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical {
   padding: 9px 9px 9px 10px;
 }
-/* line 306, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 306, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical .x-panel-header-light-tab-bar {
   margin-right: -9px;
   margin-left: -10px;
 }
 
-/* line 314, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 314, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical.x-header-noborder {
   padding: 10px 10px 10px 10px;
 }
-/* line 318, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 318, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical.x-header-noborder .x-panel-header-light-tab-bar {
   margin-right: -10px;
   margin-left: -10px;
 }
 
-/* line 352, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 352, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light {
   color: #336600;
   font-size: 13px;
@@ -484,50 +484,50 @@
   font-family: helvetica, arial, verdana, sans-serif;
   line-height: 16px;
 }
-/* line 365, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 365, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-text-light {
   text-transform: none;
   padding: 0;
 }
-/* line 390, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-top {
   height: 22px;
   padding-bottom: 6px;
 }
-/* line 395, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 395, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-right {
   width: 22px;
   padding-left: 6px;
 }
-/* line 407, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 407, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-bottom {
   height: 22px;
   padding-top: 6px;
 }
-/* line 412, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 412, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-icon-wrap-light.x-title-icon-left {
   width: 22px;
   padding-right: 6px;
 }
-/* line 424, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 424, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-icon-light {
   width: 16px;
   height: 16px;
   background-position: center center;
 }
-/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 430, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-glyph {
   color: white;
   font-size: 16px;
   line-height: 16px;
   opacity: 0.5;
 }
-/* line 447, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 447, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-ie8 .x-panel-header-title-light > .x-title-icon-wrap-light > .x-title-glyph {
   color: #f2f6f3;
 }
 
-/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 457, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-body-light {
   background: white;
   border-color: #e5eee7;
@@ -539,31 +539,31 @@
   border-style: solid;
 }
 
-/* line 621, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 621, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light {
   background-image: none;
   background-color: #e5eee7;
 }
 
-/* line 625, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 625, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical {
   background-image: none;
   background-color: #e5eee7;
 }
 
-/* line 683, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 683, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-collapsed-border-top {
   border-bottom-width: 1px !important;
 }
-/* line 687, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 687, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-collapsed-border-right {
   border-left-width: 1px !important;
 }
-/* line 691, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 691, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-collapsed-border-bottom {
   border-top-width: 1px !important;
 }
-/* line 695, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 695, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-collapsed-border-left {
   border-right-width: 1px !important;
 }
@@ -572,43 +572,43 @@
 /* */
 /* */
 /* */
-/* line 731, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 731, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-horizontal .x-tool-after-title {
   margin: 0 0 0 6px;
 }
-/* line 741, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 741, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-horizontal .x-tool-before-title {
   margin: 0 6px 0 0;
 }
 
-/* line 753, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 753, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical .x-tool-after-title {
   margin: 6px 0 0 0;
 }
-/* line 763, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 763, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-vertical .x-tool-before-title {
   margin: 0 0 6px 0;
 }
 
-/* line 793, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 793, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-resizable .x-panel-handle {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
 
-/* line 2, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 2, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-l {
   border-left-color: #e5eee7 !important;
   border-left-width: 1px !important;
 }
 
-/* line 6, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 6, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-b {
   border-bottom-color: #e5eee7 !important;
   border-bottom-width: 1px !important;
 }
 
-/* line 10, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 10, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-bl {
   border-bottom-color: #e5eee7 !important;
   border-bottom-width: 1px !important;
@@ -616,13 +616,13 @@
   border-left-width: 1px !important;
 }
 
-/* line 16, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 16, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-r {
   border-right-color: #e5eee7 !important;
   border-right-width: 1px !important;
 }
 
-/* line 20, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 20, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-rl {
   border-right-color: #e5eee7 !important;
   border-right-width: 1px !important;
@@ -630,7 +630,7 @@
   border-left-width: 1px !important;
 }
 
-/* line 26, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 26, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-rb {
   border-right-color: #e5eee7 !important;
   border-right-width: 1px !important;
@@ -638,7 +638,7 @@
   border-bottom-width: 1px !important;
 }
 
-/* line 32, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 32, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-rbl {
   border-right-color: #e5eee7 !important;
   border-right-width: 1px !important;
@@ -648,13 +648,13 @@
   border-left-width: 1px !important;
 }
 
-/* line 40, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 40, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-t {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
 }
 
-/* line 44, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-tl {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
@@ -662,7 +662,7 @@
   border-left-width: 1px !important;
 }
 
-/* line 50, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 50, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-tb {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
@@ -670,7 +670,7 @@
   border-bottom-width: 1px !important;
 }
 
-/* line 56, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 56, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-tbl {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
@@ -680,7 +680,7 @@
   border-left-width: 1px !important;
 }
 
-/* line 64, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 64, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-tr {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
@@ -688,7 +688,7 @@
   border-right-width: 1px !important;
 }
 
-/* line 70, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 70, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-trl {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
@@ -698,7 +698,7 @@
   border-left-width: 1px !important;
 }
 
-/* line 78, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 78, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-trb {
   border-top-color: #e5eee7 !important;
   border-top-width: 1px !important;
@@ -708,70 +708,70 @@
   border-bottom-width: 1px !important;
 }
 
-/* line 86, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 86, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-outer-border-trbl {
   border-color: #e5eee7 !important;
   border-width: 1px !important;
 }
 
-/* line 252, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 252, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed {
   border-color: #e5eee7;
   padding: 0;
 }
 
-/* line 258, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 258, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed {
   font-size: 13px;
   border: 5px solid #e5eee7;
 }
-/* line 265, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 265, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed .x-tool-img {
   background-image: url(images/tools/tool-sprites-dark.png);
   background-color: #e5eee7;
 }
 
-/* line 278, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 278, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-horizontal {
   padding: 5px 5px 5px 5px;
 }
-/* line 282, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 282, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-horizontal .x-panel-header-light-framed-tab-bar {
   margin-top: -5px;
   margin-bottom: -5px;
 }
 
-/* line 290, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 290, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-horizontal.x-header-noborder {
   padding: 10px 10px 5px 10px;
 }
-/* line 294, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 294, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-horizontal.x-header-noborder .x-panel-header-light-framed-tab-bar {
   margin-top: -10px;
   margin-bottom: -5px;
 }
 
-/* line 302, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 302, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical {
   padding: 5px 5px 5px 5px;
 }
-/* line 306, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 306, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical .x-panel-header-light-framed-tab-bar {
   margin-right: -5px;
   margin-left: -5px;
 }
 
-/* line 314, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 314, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical.x-header-noborder {
   padding: 10px 10px 10px 5px;
 }
-/* line 318, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 318, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical.x-header-noborder .x-panel-header-light-framed-tab-bar {
   margin-right: -10px;
   margin-left: -5px;
 }
 
-/* line 352, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 352, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed {
   color: #336600;
   font-size: 13px;
@@ -779,50 +779,50 @@
   font-family: helvetica, arial, verdana, sans-serif;
   line-height: 16px;
 }
-/* line 365, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 365, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-text-light-framed {
   text-transform: none;
   padding: 0;
 }
-/* line 390, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed.x-title-icon-top {
   height: 22px;
   padding-bottom: 6px;
 }
-/* line 395, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 395, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed.x-title-icon-right {
   width: 22px;
   padding-left: 6px;
 }
-/* line 407, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 407, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed.x-title-icon-bottom {
   height: 22px;
   padding-top: 6px;
 }
-/* line 412, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 412, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed.x-title-icon-left {
   width: 22px;
   padding-right: 6px;
 }
-/* line 424, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 424, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed > .x-title-icon-light-framed {
   width: 16px;
   height: 16px;
   background-position: center center;
 }
-/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 430, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed > .x-title-glyph {
   color: white;
   font-size: 16px;
   line-height: 16px;
   opacity: 0.5;
 }
-/* line 447, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 447, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-ie8 .x-panel-header-title-light-framed > .x-title-icon-wrap-light-framed > .x-title-glyph {
   color: #f2f6f3;
 }
 
-/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 457, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-body-light-framed {
   background: white;
   border-color: #e5eee7;
@@ -834,7 +834,7 @@
   border-style: solid;
 }
 
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -847,12 +847,12 @@
   background-color: white;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-mc {
   background-color: white;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-light-framed {
   padding: 0 !important;
   border-width: 0 !important;
@@ -865,76 +865,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-frameInfo {
   font-family: dh-5-5-5-5-5-5-5-5-0-0-0-0;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-ml {
   background-position: 0 top;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-mr {
   background-position: right top;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tr,
 .x-panel-light-framed-br,
 .x-panel-light-framed-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tl,
 .x-panel-light-framed-bl,
 .x-panel-light-framed-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-tl,
 .x-panel-light-framed-bl,
 .x-panel-light-framed-tr,
@@ -946,20 +946,20 @@
   background-image: url(images/panel/panel-light-framed-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-ml,
 .x-panel-light-framed-mr {
   background-image: url(images/panel/panel-light-framed-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-light-framed-mc {
   padding: 0px 0px 0px 0px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top {
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
@@ -979,12 +979,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-top {
   padding: 0 !important;
   border-width: 0 !important;
@@ -997,76 +997,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-frameInfo {
   font-family: dh-5-5-0-5-5-5-0-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-ml {
   background-position: 0 top;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-mr {
   background-position: right top;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tr,
 .x-panel-header-light-framed-top-br,
 .x-panel-header-light-framed-top-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tl,
 .x-panel-header-light-framed-top-bl,
 .x-panel-header-light-framed-top-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-bc {
   height: 0;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-tl,
 .x-panel-header-light-framed-top-bl,
 .x-panel-header-light-framed-top-tr,
@@ -1078,20 +1078,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-top-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-ml,
 .x-panel-header-light-framed-top-mr {
   background-image: url(images/panel-header/panel-header-light-framed-top-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-top-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right {
   -moz-border-radius-topleft: 0;
   -webkit-border-top-left-radius: 0;
@@ -1111,12 +1111,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-right {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1129,76 +1129,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-frameInfo {
   font-family: dh-5-5-5-0-5-5-5-0-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-ml {
   background-position: right 0;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-mr {
   background-position: right 0;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tr,
 .x-panel-header-light-framed-right-br,
 .x-panel-header-light-framed-right-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tl,
 .x-panel-header-light-framed-right-bl,
 .x-panel-header-light-framed-right-ml {
   padding-left: 0;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-tl,
 .x-panel-header-light-framed-right-bl,
 .x-panel-header-light-framed-right-tr,
@@ -1210,20 +1210,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-right-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-ml,
 .x-panel-header-light-framed-right-mr {
   background-image: url(images/panel-header/panel-header-light-framed-right-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-right-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom {
   -moz-border-radius-topleft: 0;
   -webkit-border-top-left-radius: 0;
@@ -1243,12 +1243,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-bottom {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1261,76 +1261,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-frameInfo {
   font-family: dh-0-5-5-5-0-5-5-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-ml {
   background-position: 0 bottom;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-mr {
   background-position: right bottom;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tr,
 .x-panel-header-light-framed-bottom-br,
 .x-panel-header-light-framed-bottom-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tl,
 .x-panel-header-light-framed-bottom-bl,
 .x-panel-header-light-framed-bottom-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tc {
   height: 0;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-tl,
 .x-panel-header-light-framed-bottom-bl,
 .x-panel-header-light-framed-bottom-tr,
@@ -1342,20 +1342,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-bottom-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-ml,
 .x-panel-header-light-framed-bottom-mr {
   background-image: url(images/panel-header/panel-header-light-framed-bottom-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-bottom-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left {
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
@@ -1375,12 +1375,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-left {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1393,76 +1393,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-frameInfo {
   font-family: dh-5-0-5-5-5-0-5-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-ml {
   background-position: left 0;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-mr {
   background-position: left 0;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tr,
 .x-panel-header-light-framed-left-br,
 .x-panel-header-light-framed-left-mr {
   padding-right: 0;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tl,
 .x-panel-header-light-framed-left-bl,
 .x-panel-header-light-framed-left-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-tl,
 .x-panel-header-light-framed-left-bl,
 .x-panel-header-light-framed-left-tr,
@@ -1474,20 +1474,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-left-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-ml,
 .x-panel-header-light-framed-left-mr {
   background-image: url(images/panel-header/panel-header-light-framed-left-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-left-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top {
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
@@ -1507,12 +1507,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-top {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1525,76 +1525,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-frameInfo {
   font-family: dh-5-5-5-5-5-5-5-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-ml {
   background-position: 0 top;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-mr {
   background-position: right top;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tr,
 .x-panel-header-light-framed-collapsed-top-br,
 .x-panel-header-light-framed-collapsed-top-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tl,
 .x-panel-header-light-framed-collapsed-top-bl,
 .x-panel-header-light-framed-collapsed-top-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-tl,
 .x-panel-header-light-framed-collapsed-top-bl,
 .x-panel-header-light-framed-collapsed-top-tr,
@@ -1606,20 +1606,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-top-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-ml,
 .x-panel-header-light-framed-collapsed-top-mr {
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-top-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-top-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right {
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
@@ -1639,12 +1639,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-right {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1657,76 +1657,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-frameInfo {
   font-family: dh-5-5-5-5-5-5-5-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-ml {
   background-position: right 0;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-mr {
   background-position: right 0;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tr,
 .x-panel-header-light-framed-collapsed-right-br,
 .x-panel-header-light-framed-collapsed-right-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tl,
 .x-panel-header-light-framed-collapsed-right-bl,
 .x-panel-header-light-framed-collapsed-right-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-tl,
 .x-panel-header-light-framed-collapsed-right-bl,
 .x-panel-header-light-framed-collapsed-right-tr,
@@ -1738,20 +1738,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-right-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-ml,
 .x-panel-header-light-framed-collapsed-right-mr {
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-right-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-right-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom {
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
@@ -1771,12 +1771,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-bottom {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1789,76 +1789,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-frameInfo {
   font-family: dh-5-5-5-5-5-5-5-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-ml {
   background-position: 0 bottom;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-mr {
   background-position: right bottom;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tr,
 .x-panel-header-light-framed-collapsed-bottom-br,
 .x-panel-header-light-framed-collapsed-bottom-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tl,
 .x-panel-header-light-framed-collapsed-bottom-bl,
 .x-panel-header-light-framed-collapsed-bottom-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-tl,
 .x-panel-header-light-framed-collapsed-bottom-bl,
 .x-panel-header-light-framed-collapsed-bottom-tr,
@@ -1870,20 +1870,20 @@
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-bottom-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-ml,
 .x-panel-header-light-framed-collapsed-bottom-mr {
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-bottom-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-bottom-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left {
   -moz-border-radius-topleft: 4px;
   -webkit-border-top-left-radius: 4px;
@@ -1903,12 +1903,12 @@
   background-color: #e5eee7;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-mc {
   background-color: #e5eee7;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-left {
   padding: 0 !important;
   border-width: 0 !important;
@@ -1921,76 +1921,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-frameInfo {
   font-family: dh-5-5-5-5-5-5-5-5-5-5-5-5;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tl {
   background-position: 0 -10px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tr {
   background-position: right -15px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-bl {
   background-position: 0 -20px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-br {
   background-position: right -25px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-ml {
   background-position: left 0;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-mr {
   background-position: left 0;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-bc {
   background-position: 0 -5px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tr,
 .x-panel-header-light-framed-collapsed-left-br,
 .x-panel-header-light-framed-collapsed-left-mr {
   padding-right: 5px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tl,
 .x-panel-header-light-framed-collapsed-left-bl,
 .x-panel-header-light-framed-collapsed-left-ml {
   padding-left: 5px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tc {
   height: 5px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-bc {
   height: 5px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-tl,
 .x-panel-header-light-framed-collapsed-left-bl,
 .x-panel-header-light-framed-collapsed-left-tr,
@@ -2002,130 +2002,130 @@
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-left-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-ml,
 .x-panel-header-light-framed-collapsed-left-mr {
   background-image: url(images/panel-header/panel-header-light-framed-collapsed-left-sides.gif);
   background-repeat: repeat-y;
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-panel-header-light-framed-collapsed-left-mc {
   padding: 5px 5px 5px 5px;
 }
 
 /* */
-/* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 583, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-framed-top {
   border-bottom-width: 5px !important;
 }
-/* line 587, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 587, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-framed-right {
   border-left-width: 5px !important;
 }
-/* line 591, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 591, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-framed-bottom {
   border-top-width: 5px !important;
 }
-/* line 595, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 595, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel .x-panel-header-light-framed-left {
   border-right-width: 5px !important;
 }
 
-/* line 601, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 601, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-top {
   border-bottom-width: 0 !important;
 }
-/* line 605, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 605, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-right {
   border-left-width: 0 !important;
 }
-/* line 609, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 609, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-bottom {
   border-top-width: 0 !important;
 }
-/* line 613, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 613, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-nbr .x-panel-header-light-framed-collapsed-left {
   border-right-width: 0 !important;
 }
 
-/* line 731, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 731, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-horizontal .x-tool-after-title {
   margin: 0 0 0 6px;
 }
-/* line 741, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 741, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-horizontal .x-tool-before-title {
   margin: 0 6px 0 0;
 }
 
-/* line 753, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 753, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical .x-tool-after-title {
   margin: 6px 0 0 0;
 }
-/* line 763, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 763, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-header-light-framed-vertical .x-tool-before-title {
   margin: 0 0 6px 0;
 }
 
-/* line 790, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 790, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable {
   overflow: visible;
 }
-/* line 793, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 793, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 802, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 802, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-north-br {
   top: -5px;
 }
-/* line 805, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 805, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-south-br {
   bottom: -5px;
 }
-/* line 808, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 808, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-east-br {
   right: -5px;
 }
-/* line 811, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 811, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-west-br {
   left: -5px;
 }
-/* line 814, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 814, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-northwest-br {
   left: -5px;
   top: -5px;
 }
-/* line 818, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 818, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-northeast-br {
   right: -5px;
   top: -5px;
 }
-/* line 822, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 822, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-southeast-br {
   right: -5px;
   bottom: -5px;
 }
-/* line 826, ../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
+/* line 826, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/panel/Panel.scss */
 .x-panel-light-framed-resizable .x-panel-handle-southwest-br {
   left: -5px;
   bottom: -5px;
 }
 
-/* line 2, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 2, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-l {
   border-left-color: #e5eee7 !important;
   border-left-width: 5px !important;
 }
 
-/* line 6, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 6, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-b {
   border-bottom-color: #e5eee7 !important;
   border-bottom-width: 5px !important;
 }
 
-/* line 10, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 10, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-bl {
   border-bottom-color: #e5eee7 !important;
   border-bottom-width: 5px !important;
@@ -2133,13 +2133,13 @@
   border-left-width: 5px !important;
 }
 
-/* line 16, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 16, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-r {
   border-right-color: #e5eee7 !important;
   border-right-width: 5px !important;
 }
 
-/* line 20, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 20, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-rl {
   border-right-color: #e5eee7 !important;
   border-right-width: 5px !important;
@@ -2147,7 +2147,7 @@
   border-left-width: 5px !important;
 }
 
-/* line 26, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 26, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-rb {
   border-right-color: #e5eee7 !important;
   border-right-width: 5px !important;
@@ -2155,7 +2155,7 @@
   border-bottom-width: 5px !important;
 }
 
-/* line 32, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 32, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-rbl {
   border-right-color: #e5eee7 !important;
   border-right-width: 5px !important;
@@ -2165,13 +2165,13 @@
   border-left-width: 5px !important;
 }
 
-/* line 40, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 40, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-t {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
 }
 
-/* line 44, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-tl {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
@@ -2179,7 +2179,7 @@
   border-left-width: 5px !important;
 }
 
-/* line 50, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 50, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-tb {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
@@ -2187,7 +2187,7 @@
   border-bottom-width: 5px !important;
 }
 
-/* line 56, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 56, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-tbl {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
@@ -2197,7 +2197,7 @@
   border-left-width: 5px !important;
 }
 
-/* line 64, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 64, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-tr {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
@@ -2205,7 +2205,7 @@
   border-right-width: 5px !important;
 }
 
-/* line 70, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 70, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-trl {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
@@ -2215,7 +2215,7 @@
   border-left-width: 5px !important;
 }
 
-/* line 78, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 78, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-trb {
   border-top-color: #e5eee7 !important;
   border-top-width: 5px !important;
@@ -2225,111 +2225,111 @@
   border-bottom-width: 5px !important;
 }
 
-/* line 86, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
+/* line 86, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/border-management.scss */
 .x-panel-light-framed-outer-border-trbl {
   border-color: #e5eee7 !important;
   border-width: 5px !important;
 }
 
-/* line 1, ../../../../ext/packages/ext-theme-neptune/sass/src/grid/header/Container.scss */
+/* line 1, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/grid/header/Container.scss */
 .x-grid-header-ct {
   border: 1px solid #ced6ce;
 }
 
-/* line 6, ../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column.scss */
+/* line 6, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column.scss */
 .x-column-header-trigger {
   background: #f0f4f1 url(images/grid/hd-pop.png) no-repeat center center;
   border-left: 1px solid #ced6ce;
 }
 
-/* line 18, ../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column.scss */
+/* line 18, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column.scss */
 .x-column-header-last {
   border-right-width: 0;
 }
-/* line 20, ../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column.scss */
+/* line 20, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/grid/column/Column.scss */
 .x-column-header-last .x-column-header-over .x-column-header-trigger {
   border-right: 1px solid #ced6ce;
 }
 
-/* line 3, ../../../../ext/packages/ext-theme-neptune/sass/src/form/field/File.scss */
+/* line 3, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/form/field/File.scss */
 .x-form-file-wrap .x-form-trigger-wrap {
   border: 0;
 }
 
-/* line 7, ../../../../ext/packages/ext-theme-neptune/sass/src/form/field/File.scss */
+/* line 7, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/form/field/File.scss */
 .x-form-file-wrap .x-form-trigger-wrap .x-form-text {
   border: 1px solid;
   border-color: #ced6ce #e1e6e1 #e1e6e1;
   height: 24px;
 }
 
-/* line 1, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 1, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle {
   background-color: #ced6ce;
   background-repeat: no-repeat;
 }
 
-/* line 8, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 8, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle-east-over,
 .x-resizable-handle-west-over {
   background-position: center;
 }
 
-/* line 13, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 13, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle-south-over,
 .x-resizable-handle-north-over {
   background-position: center;
 }
 
-/* line 17, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 17, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle-southeast-over {
   background-position: -2px -2px;
 }
 
-/* line 21, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 21, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle-northwest-over {
   background-position: 2px 2px;
 }
 
-/* line 25, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 25, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle-northeast-over {
   background-position: -2px 2px;
 }
 
-/* line 29, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 29, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-handle-southwest-over {
   background-position: 2px -2px;
 }
 
-/* line 35, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 35, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-east,
 .x-resizable-pinned .x-resizable-handle-west {
   background-position: center;
 }
-/* line 40, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 40, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-south,
 .x-resizable-pinned .x-resizable-handle-north {
   background-position: center;
 }
-/* line 44, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 44, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-southeast {
   background-position: -2px -2px;
 }
-/* line 48, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 48, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-northwest {
   background-position: 2px 2px;
 }
-/* line 52, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 52, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-northeast {
   background-position: -2px 2px;
 }
-/* line 56, ../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
+/* line 56, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neptune/sass/src/resizer/Resizer.scss */
 .x-resizable-pinned .x-resizable-handle-southwest {
   background-position: 2px -2px;
 }
 
 /* including package masteringextjs-theme */
-/* line 187, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 187, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -2343,14 +2343,14 @@
   background-color: #c2e0d1;
 }
 
-/* line 237, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 237, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-mc {
   background-image: url(images/btn/btn-custom-btn-small-fbg.gif);
   background-position: 0 top;
   background-color: #c2e0d1;
 }
 
-/* line 264, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 264, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-nbr .x-btn-custom-btn-small {
   padding: 0 !important;
   border-width: 0 !important;
@@ -2364,76 +2364,76 @@
   box-shadow: none !important;
 }
 
-/* line 281, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 281, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-frameInfo {
   font-family: th-1-1-1-1-1-1-1-1-2-2-2-2;
 }
 
-/* line 347, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 347, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tl {
   background-position: 0 -2px;
 }
 
-/* line 351, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 351, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tr {
   background-position: right -3px;
 }
 
-/* line 355, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 355, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-bl {
   background-position: 0 -4px;
 }
 
-/* line 359, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 359, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-br {
   background-position: right -5px;
 }
 
-/* line 363, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 363, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-ml {
   background-position: 0 top;
 }
 
-/* line 371, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 371, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-mr {
   background-position: right top;
 }
 
-/* line 379, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 379, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tc {
   background-position: 0 0;
 }
 
-/* line 383, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 383, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-bc {
   background-position: 0 -1px;
 }
 
-/* line 390, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 390, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tr,
 .x-btn-custom-btn-small-br,
 .x-btn-custom-btn-small-mr {
   padding-right: 1px;
 }
 
-/* line 396, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 396, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tl,
 .x-btn-custom-btn-small-bl,
 .x-btn-custom-btn-small-ml {
   padding-left: 1px;
 }
 
-/* line 400, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 400, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tc {
   height: 1px;
 }
 
-/* line 403, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 403, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-bc {
   height: 1px;
 }
 
-/* line 414, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 414, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-tl,
 .x-btn-custom-btn-small-bl,
 .x-btn-custom-btn-small-tr,
@@ -2445,155 +2445,155 @@
   background-image: url(images/btn/btn-custom-btn-small-corners.gif);
 }
 
-/* line 454, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 454, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-ml,
 .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-sides.gif);
 }
 
-/* line 464, ../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
+/* line 464, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-base/sass/etc/mixins/frame.scss */
 .x-btn-custom-btn-small-mc {
   padding: 2px 2px 2px 2px;
 }
 
 /* */
-/* line 423, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 423, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-custom-btn-small {
   border-color: #7ebe9e;
 }
 
-/* line 430, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 430, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-button-custom-btn-small {
   height: 16px;
 }
 
-/* line 435, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 435, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-inner-custom-btn-small {
   font: bold 12px/16px helvetica, arial, verdana, sans-serif;
   color: #336600;
   padding: 0 4px;
   max-width: 100%;
 }
-/* line 446, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 446, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-right > .x-btn-inner-custom-btn-small, .x-btn-icon-left > .x-btn-inner-custom-btn-small {
   max-width: calc(100% - 16px);
 }
 
-/* line 453, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 453, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-el-custom-btn-small {
   height: 16px;
 }
-/* line 457, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 457, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-left > .x-btn-icon-el-custom-btn-small, .x-btn-icon-right > .x-btn-icon-el-custom-btn-small {
   width: 16px;
 }
-/* line 462, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 462, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-top > .x-btn-icon-el-custom-btn-small, .x-btn-icon-bottom > .x-btn-icon-el-custom-btn-small {
   min-width: 16px;
 }
-/* line 466, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 466, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-icon-el-custom-btn-small.x-btn-glyph {
   font-size: 16px;
   line-height: 16px;
   color: #336600;
   opacity: 0.5;
 }
-/* line 486, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 486, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-ie8 .x-btn-icon-el-custom-btn-small.x-btn-glyph {
   color: #7aa368;
 }
-/* line 493, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 493, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-left > .x-btn-icon-el-custom-btn-small {
   margin-right: 1px;
 }
-/* line 504, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 504, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-right > .x-btn-icon-el-custom-btn-small {
   margin-left: 1px;
 }
-/* line 515, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 515, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-top > .x-btn-icon-el-custom-btn-small {
   margin-bottom: 5px;
 }
-/* line 519, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 519, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-text.x-btn-icon-bottom > .x-btn-icon-el-custom-btn-small {
   margin-top: 5px;
 }
 
-/* line 525, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 525, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-arrow-right > .x-btn-icon.x-btn-no-text.x-btn-button-custom-btn-small {
   padding-right: 4px;
 }
-/* line 528, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 528, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-arrow-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-custom-btn-small {
   margin-right: 4px;
 }
 
-/* line 535, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 535, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-arrow-bottom > .x-btn-button-custom-btn-small,
 .x-btn-split-bottom > .x-btn-button-custom-btn-small {
   padding-bottom: 2px;
 }
 
-/* line 541, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 541, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-custom-btn-small.x-btn-arrow-right:after {
   width: 12px;
   padding-right: 12px;
   background-image: url(images/button/custom-btn-small-arrow.png);
 }
-/* line 563, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 563, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-custom-btn-small.x-btn-arrow-bottom:after {
   height: 12px;
   background-image: url(images/button/custom-btn-small-arrow.png);
 }
 
-/* line 583, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 583, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-custom-btn-small.x-btn-split-right:after {
   width: 14px;
   padding-right: 14px;
   background-image: url(images/button/custom-btn-small-s-arrow.png);
 }
-/* line 597, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 597, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-wrap-custom-btn-small.x-btn-split-bottom:after {
   height: 14px;
   background-image: url(images/button/custom-btn-small-s-arrow-b.png);
 }
 
-/* line 624, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 624, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-split-right > .x-btn-icon.x-btn-no-text.x-btn-button-custom-btn-small {
   padding-right: 4px;
 }
-/* line 627, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 627, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-split-right > .x-btn-text.x-btn-icon-right > .x-btn-icon-el-custom-btn-small {
   margin-right: 4px;
 }
 
-/* line 632, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 632, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-custom-btn-small {
   background-image: none;
   background-color: #c2e0d1;
 }
-/* line 651, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 651, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-custom-btn-small .x-btn-inner {
   color: white;
 }
 
-/* line 667, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 667, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over.x-btn-custom-btn-small {
   background-image: none;
   background-color: #7ebe9e;
 }
-/* line 678, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 678, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over.x-btn-custom-btn-small .x-btn-inner {
   color: white;
 }
 
-/* line 694, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 694, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over.x-btn-custom-btn-small {
   border-color: null;
   background-image: none;
   background-color: null;
 }
-/* line 705, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 705, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over.x-btn-custom-btn-small .x-btn-inner {
   color: null;
   font-weight: null;
@@ -2601,26 +2601,26 @@
   font-family: null;
 }
 
-/* line 723, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 723, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active.x-btn-custom-btn-small,
 .x-btn.x-btn-pressed.x-btn-custom-btn-small {
   background-image: none;
   background-color: #006600;
 }
-/* line 734, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 734, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active.x-btn-custom-btn-small .x-btn-inner,
 .x-btn.x-btn-pressed.x-btn-custom-btn-small .x-btn-inner {
   color: white;
 }
 
-/* line 751, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 751, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active.x-btn-custom-btn-small,
 .x-btn-focus.x-btn-pressed.x-btn-custom-btn-small {
   border-color: null;
   background-image: none;
   background-color: null;
 }
-/* line 762, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 762, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active.x-btn-custom-btn-small .x-btn-inner,
 .x-btn-focus.x-btn-pressed.x-btn-custom-btn-small .x-btn-inner {
   color: null;
@@ -2629,18 +2629,18 @@
   font-family: null;
 }
 
-/* line 779, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 779, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled.x-btn-custom-btn-small {
   border-color: white;
   background-image: none;
   background-color: white;
 }
-/* line 790, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 790, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled.x-btn-custom-btn-small .x-btn-inner {
   color: white;
 }
 
-/* line 816, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 816, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus .x-btn-custom-btn-small-tl,
 .x-btn-focus .x-btn-custom-btn-small-bl,
 .x-btn-focus .x-btn-custom-btn-small-tr,
@@ -2649,18 +2649,18 @@
 .x-btn-focus .x-btn-custom-btn-small-bc {
   background-image: url(images/btn/btn-custom-btn-small-focus-corners.gif);
 }
-/* line 820, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 820, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus .x-btn-custom-btn-small-ml,
 .x-btn-focus .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-focus-sides.gif);
 }
-/* line 823, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 823, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus .x-btn-custom-btn-small-mc {
   background-color: #c2e0d1;
   background-image: url(images/btn/btn-custom-btn-small-focus-fbg.gif);
 }
 
-/* line 840, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 840, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over .x-btn-custom-btn-small-tl,
 .x-btn-over .x-btn-custom-btn-small-bl,
 .x-btn-over .x-btn-custom-btn-small-tr,
@@ -2669,18 +2669,18 @@
 .x-btn-over .x-btn-custom-btn-small-bc {
   background-image: url(images/btn/btn-custom-btn-small-over-corners.gif);
 }
-/* line 844, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 844, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over .x-btn-custom-btn-small-ml,
 .x-btn-over .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-over-sides.gif);
 }
-/* line 847, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 847, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-over .x-btn-custom-btn-small-mc {
   background-color: #7ebe9e;
   background-image: url(images/btn/btn-custom-btn-small-over-fbg.gif);
 }
 
-/* line 864, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 864, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-tl,
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-bl,
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-tr,
@@ -2689,17 +2689,17 @@
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-bc {
   background-image: url(images/btn/btn-custom-btn-small-focus-over-corners.gif);
 }
-/* line 868, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 868, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-ml,
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-focus-over-sides.gif);
 }
-/* line 871, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 871, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-over .x-btn-custom-btn-small-mc {
   background-color: null;
 }
 
-/* line 890, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 890, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active .x-btn-custom-btn-small-tl,
 .x-btn.x-btn-menu-active .x-btn-custom-btn-small-bl,
 .x-btn.x-btn-menu-active .x-btn-custom-btn-small-tr,
@@ -2714,20 +2714,20 @@
 .x-btn.x-btn-pressed .x-btn-custom-btn-small-bc {
   background-image: url(images/btn/btn-custom-btn-small-pressed-corners.gif);
 }
-/* line 894, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 894, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active .x-btn-custom-btn-small-ml,
 .x-btn.x-btn-menu-active .x-btn-custom-btn-small-mr,
 .x-btn.x-btn-pressed .x-btn-custom-btn-small-ml,
 .x-btn.x-btn-pressed .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-pressed-sides.gif);
 }
-/* line 897, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 897, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-menu-active .x-btn-custom-btn-small-mc,
 .x-btn.x-btn-pressed .x-btn-custom-btn-small-mc {
   background-color: #006600;
 }
 
-/* line 915, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 915, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active .x-btn-custom-btn-small-tl,
 .x-btn-focus.x-btn-menu-active .x-btn-custom-btn-small-bl,
 .x-btn-focus.x-btn-menu-active .x-btn-custom-btn-small-tr,
@@ -2742,20 +2742,20 @@
 .x-btn-focus.x-btn-pressed .x-btn-custom-btn-small-bc {
   background-image: url(images/btn/btn-custom-btn-small-focus-pressed-corners.gif);
 }
-/* line 919, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 919, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active .x-btn-custom-btn-small-ml,
 .x-btn-focus.x-btn-menu-active .x-btn-custom-btn-small-mr,
 .x-btn-focus.x-btn-pressed .x-btn-custom-btn-small-ml,
 .x-btn-focus.x-btn-pressed .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-focus-pressed-sides.gif);
 }
-/* line 922, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 922, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-focus.x-btn-menu-active .x-btn-custom-btn-small-mc,
 .x-btn-focus.x-btn-pressed .x-btn-custom-btn-small-mc {
   background-color: null;
 }
 
-/* line 940, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 940, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-tl,
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-bl,
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-tr,
@@ -2764,23 +2764,23 @@
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-bc {
   background-image: url(images/btn/btn-custom-btn-small-disabled-corners.gif);
 }
-/* line 944, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 944, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-ml,
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-mr {
   background-image: url(images/btn/btn-custom-btn-small-disabled-sides.gif);
 }
-/* line 947, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 947, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn.x-btn-disabled .x-btn-custom-btn-small-mc {
   background-color: white;
   background-image: url(images/btn/btn-custom-btn-small-disabled-fbg.gif);
 }
 
-/* line 957, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 957, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-nbr .x-btn-custom-btn-small {
   background-image: none;
 }
 
-/* line 963, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 963, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-btn-disabled.x-btn-custom-btn-small {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
@@ -2792,12 +2792,12 @@
 /* */
 /* */
 /* */
-/* line 1128, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 1128, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-button-custom-btn-small-cell > .x-grid-cell-inner {
   padding-top: 1px;
   padding-bottom: 1px;
 }
-/* line 1133, ../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
+/* line 1133, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/ext-theme-neutral/sass/src/button/Button.scss */
 .x-button-custom-btn-small-cell > .x-grid-cell-inner > .x-btn-custom-btn-small {
   vertical-align: top;
 }
@@ -2806,12 +2806,12 @@
 /*
   Copied from touch/resources/themes/stylesheets/sencha-touch/base/src/chart/_AbstractChart.scss
 */
-/* line 8, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 8, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-android-3 .x-surface-wrap, .x-android-3 .x-surface-wrap > * {
   -webkit-perspective: 1;
 }
 
-/* line 12, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 12, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-draw-container {
   position: relative;
   -webkit-user-select: none;
@@ -2820,17 +2820,17 @@
   -ms-user-select: none;
   cursor: default;
 }
-/* line 17, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 17, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-draw-container .x-inner {
   overflow: hidden;
 }
 
-/* line 22, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 22, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-surface-canvas {
   position: absolute;
 }
 
-/* line 26, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 26, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-watermark {
   opacity: 0.5;
   z-index: 9;
@@ -2847,13 +2847,13 @@
   -webkit-border-top-left-radius: 4px;
 }
 
-/* line 42, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 42, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-image {
   width: 100%;
   height: auto;
 }
 
-/* line 47, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 47, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend-container {
   display: inline-block;
   line-height: 0;
@@ -2869,7 +2869,7 @@
   box-shadow: rgba(255, 255, 255, 0.6) 0 1px 1px;
 }
 
-/* line 61, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 61, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend-item {
   padding: 0.8em 1em 0.8em 1.8em;
   color: #333333;
@@ -2886,13 +2886,13 @@
   position: relative;
 }
 
-/* line 77, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 77, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend-inactive {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
   opacity: 0.3;
 }
 
-/* line 81, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 81, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend-item-marker {
   position: absolute;
   width: 0.8em;
@@ -2909,62 +2909,62 @@
   top: .85em;
 }
 
-/* line 91, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 91, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-rtl > * > .x-legend-item {
   padding: 0.8em 1.8em 0.8em 1em;
 }
 
-/* line 95, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 95, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-rtl > * > * > .x-legend-item-marker {
   right: .7em;
 }
 
-/* line 99, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 99, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend, .x-legend-panel {
   background: white;
   outline: none;
 }
-/* line 104, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 104, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-top .x-legend-item, .x-legend.x-docked-bottom .x-legend-item, .x-legend-panel.x-docked-top .x-legend-item, .x-legend-panel.x-docked-bottom .x-legend-item {
   border-left: 1px solid rgba(204, 204, 204, 0.5);
 }
-/* line 106, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 106, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-top .x-legend-item:first-child, .x-legend.x-docked-bottom .x-legend-item:first-child, .x-legend-panel.x-docked-top .x-legend-item:first-child, .x-legend-panel.x-docked-bottom .x-legend-item:first-child {
   border-left: none;
 }
-/* line 111, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 111, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-top.x-rtl .x-legend-item:first-child, .x-legend.x-docked-bottom.x-rtl .x-legend-item:first-child, .x-legend-panel.x-docked-top.x-rtl .x-legend-item:first-child, .x-legend-panel.x-docked-bottom.x-rtl .x-legend-item:first-child {
   border-left: 1px solid rgba(204, 204, 204, 0.5);
 }
-/* line 114, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 114, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-top.x-rtl .x-legend-item:last-child, .x-legend.x-docked-bottom.x-rtl .x-legend-item:last-child, .x-legend-panel.x-docked-top.x-rtl .x-legend-item:last-child, .x-legend-panel.x-docked-bottom.x-rtl .x-legend-item:last-child {
   border-left: none;
 }
-/* line 121, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 121, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-left .x-legend-item, .x-legend.x-docked-right .x-legend-item, .x-legend-panel.x-docked-left .x-legend-item, .x-legend-panel.x-docked-right .x-legend-item {
   border-top: 1px solid rgba(204, 204, 204, 0.5);
 }
-/* line 123, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 123, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-left .x-legend-item:first-child, .x-legend.x-docked-right .x-legend-item:first-child, .x-legend-panel.x-docked-left .x-legend-item:first-child, .x-legend-panel.x-docked-right .x-legend-item:first-child {
   border-top: none;
 }
-/* line 127, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 127, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-docked-left .x-legend-inner, .x-legend.x-docked-right .x-legend-inner, .x-legend-panel.x-docked-left .x-legend-inner, .x-legend-panel.x-docked-right .x-legend-inner {
   display: -webkit-box;
   -webkit-box-align: center;
   -webkit-box-pack: center;
 }
 
-/* line 135, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 135, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-horizontal {
   white-space: nowrap;
 }
-/* line 137, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 137, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-legend.x-horizontal .x-legend-item {
   display: inline-block;
 }
 
-/* line 142, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 142, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar {
   position: absolute;
   z-index: 9;
@@ -2974,11 +2974,11 @@
   display: box;
   padding: .6em;
 }
-/* line 148, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 148, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar .x-button {
   margin: .2em;
 }
-/* line 152, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 152, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar[data-side=left], .x-chart-toolbar[data-side=right] {
   top: 0;
   -webkit-box-orient: vertical;
@@ -2986,15 +2986,15 @@
   -ms-box-orient: vertical;
   box-orient: vertical;
 }
-/* line 157, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 157, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar[data-side=left] {
   left: 0;
 }
-/* line 161, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 161, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar[data-side=right] {
   right: 0;
 }
-/* line 165, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 165, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar[data-side=top], .x-chart-toolbar[data-side=bottom] {
   -webkit-box-orient: horizontal;
   -moz-box-orient: horizontal;
@@ -3002,11 +3002,11 @@
   box-orient: horizontal;
   right: 0;
 }
-/* line 170, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 170, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar[data-side=top] {
   top: 0;
 }
-/* line 174, ../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
+/* line 174, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../ext/packages/sencha-charts/sass/src/chart/AbstractChart.scss */
 .x-chart-toolbar[data-side=bottom] {
   bottom: 0;
   -webkit-box-orient: horizontal;
@@ -3016,12 +3016,12 @@
 }
 
 /* including package Packt */
-/* line 3, ../../../../sass/src/view/main/Header.scss */
+/* line 3, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../sass/src/view/main/Header.scss */
 .app-header-logo {
   color: #2a3f5d;
 }
 
-/* line 7, ../../../../sass/src/view/main/Header.scss */
+/* line 7, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../sass/src/view/main/Header.scss */
 .app-header-title {
   padding: 5px 0 5px 3px;
   color: #2a3f5d;
@@ -3029,14 +3029,14 @@
   font-weight: bold;
 }
 
-/* line 3, ../../../../sass/src/view/main/Footer.scss */
+/* line 3, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../sass/src/view/main/Footer.scss */
 .app-footer-title {
   color: #0b67c4;
   font-size: 12px;
   font-weight: bold;
 }
 
-/* line 9, ../../../../sass/src/view/main/Footer.scss */
+/* line 9, /Applications/XAMPP/xamppfiles/htdocs/masteringextjs/build/temp/development/Packt/sass/../../../../../sass/src/view/main/Footer.scss */
 .app-footer {
   border-top: 1px solid #07417c;
   background-color: #FFF;

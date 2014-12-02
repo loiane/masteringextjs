@@ -3,5 +3,4 @@ Ext.define('Packt.view.base.CustomButton', {
     xtype: 'custom-btn',
 
     ui: 'custom-btn'
-
 });

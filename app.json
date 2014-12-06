@@ -32,7 +32,8 @@
      *      ]
      */
     "requires": [
-        "sencha-charts"
+        "sencha-charts",
+        "ext-ux"
     ],
 
 

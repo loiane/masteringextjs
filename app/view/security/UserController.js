@@ -120,10 +120,10 @@ Ext.define('Packt.view.security.UserController', {
         store.load();
     },
 
-    onFileFieldChange: function(filefield, value, options) {
+    onFileFieldChange: function(fileField, value, options) {
 
         var me = this,
-            file = filefield.fileInputEl.dom.files[0],
+            file = fileField.fileInputEl.dom.files[0],
             picture = this.lookupReference('userPicture');
 
         /*
@@ -138,7 +138,7 @@ Ext.define('Packt.view.security.UserController', {
             reader.readAsDataURL(file);
         } else if (!(/image/i).test(file.type)){
             Ext.Msg.alert('Warning', 'You can only upload image files!');
-            filefield.reset();
+            fileField.reset();
         }
     }
 });

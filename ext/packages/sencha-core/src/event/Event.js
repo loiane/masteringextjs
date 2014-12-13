@@ -163,12 +163,20 @@ Ext.define('Ext.event.Event', {
             mousedown: 1,
             mousemove: 1,
             mouseup: 1,
-            click: 1,
-            dblclick: 1,
             mouseover: 1,
             mouseout: 1,
             mouseenter: 1,
             mouseleave: 1
+        },
+
+        // private.
+        // These are tracked separately from mouseEvents because the mouseEvents map
+        // is used by Dom publisher to eliminate duplicate events on devices that fire
+        // multiple kinds of events (mouse, touch, pointer).  Adding click events to the
+        // mouse events map can cause click events to be blocked from firing in some cases.
+        clickEvents: {
+            click: 1,
+            dblclick: 1
         },
 
         // private
@@ -240,7 +248,7 @@ Ext.define('Ext.event.Event', {
             me.forwardTab = self.forwardTab;
         }
 
-        if (self.mouseEvents[type]) {
+        if (self.mouseEvents[type] || self.clickEvents[type]) {
             pointerType = 'mouse';
         } else if (self.pointerEvents[type]) {
             pointerType = self.pointerTypes[event.pointerType];

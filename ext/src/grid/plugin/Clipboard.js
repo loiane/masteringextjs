@@ -1,6 +1,8 @@
 /**
  * This {@link Ext.grid.Panel grid} plugin adds clipboard support to a grid.
  *
+ * *Note that the grid must use the {@link Ext.grid.selection.SpreadsheetModel spreadsheet selection model} to utilize this plugin.*
+ *
  * This class supports the following `{@link Ext.plugin.AbstractClipboard#formats formats}`
  * for grid data:
  *
@@ -43,8 +45,8 @@ Ext.define('Ext.grid.plugin.Clipboard', {
             viewNode,
             cell, data, dataIndex, lastRecord, record, row, view;
 
-        selModel.selectionData.eachCell(function (cellContext) {
-            view = cellContext.view;
+        selModel.getSelected().eachCell(function (cellContext) {
+            view = cellContext.column.getView();
             record = cellContext.record;
 
             if (lastRecord !== record) {
@@ -86,7 +88,7 @@ Ext.define('Ext.grid.plugin.Clipboard', {
             ret = [],
             dataIndex, lastRecord, record, row;
 
-        selModel.selectionData.eachCell(function (cellContext) {
+        selModel.getSelected().eachCell(function (cellContext) {
             record = cellContext.record;
             if (lastRecord !== record) {
                 lastRecord = record;
@@ -122,13 +124,19 @@ Ext.define('Ext.grid.plugin.Clipboard', {
             colCount = recCount ? values[0].length : 0,
             sourceRowIdx, sourceColIdx,
             view = this.getCmp().getView(),
+            maxRowIdx = view.dataSource.getCount() - 1,
             maxColIdx = view.getVisibleColumnManager().getColumns().length - 1,
             navModel = view.getNavigationModel(),
             destination = navModel.getPosition(),
             dataIndex, destinationStartColumn,
             dataObject = {};
 
-        if (!destination) {
+        if (destination) {
+            // Create a new Context based upon the outermost View.
+            // NavigationModel works on local views. TODO: remove this step when NavModel is fixed to use outermost view in locked grid.
+            // At that point, we can use navModel.getPosition()
+            destination = new Ext.grid.CellContext(view).setPosition(destination.record, destination.column);
+        } else {
             destination = new Ext.grid.CellContext(view).setPosition(0, 0);
         }
         destinationStartColumn = destination.colIdx;
@@ -165,6 +173,11 @@ Ext.define('Ext.grid.plugin.Clipboard', {
 
             // Update the record in one go.
             destination.record.set(dataObject);
+
+            // If we are at the end of the destination store, break the row loop.
+            if (destination.rowIdx === maxRowIdx) {
+                break;
+            }
 
             // Jump to next row in destination
             destination.setPosition(destination.rowIdx + 1, destinationStartColumn);

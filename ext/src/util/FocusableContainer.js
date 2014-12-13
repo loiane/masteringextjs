@@ -73,10 +73,7 @@ Ext.define('Ext.util.FocusableContainer', {
             // could tab into it; we catch its focus event and focus a child instead
             me.activateFocusableContainerEl(el);
         
-            me.mon(el, {
-                scope: me,
-                mousedown: me.onFocusableContainerMousedown
-            });
+            me.mon(el, 'mousedown', me.onFocusableContainerMousedown, me);
         
             me.focusableKeyNav = me.createFocusableContainerKeyNav(el);
         },
@@ -357,22 +354,30 @@ Ext.define('Ext.util.FocusableContainer', {
         onFocusableContainerMousedown: function(e, target) {
             var targetCmp = Ext.ComponentManager.byElement(target);
             
-            if (targetCmp === this) {
-                e.preventDefault();
-            }
+            // Capture the timestamp for the mousedown. If we're navigating into the container itself
+            // via the mouse we don't want to default focus the first child like we would when using
+            // the keyboard. By the time we get to the focusenter handling, we don't know what has caused
+            // the focus to be triggered, so if the timestamp falls within some small epsilon, the focus enter
+            // has been caused via the mouse and we can react accordingly.
+            this.mousedownTimestamp = targetCmp === this ? Ext.Date.now() : 0;
         },
 
         onFocusEnter: function(e) {
             var me = this,
                 target = e.toComponent,
+                mousedownTimestamp = me.mousedownTimestamp,
+                epsilon = 50,
                 child;
             
+            me.mousedownTimestamp = 0;
             if (target === me) {
-                child = me.initDefaultFocusable();
+                if (!mousedownTimestamp || Ext.Date.now() - mousedownTimestamp > epsilon) {
+                    child = me.initDefaultFocusable();
 
-                if (child) {
-                    me.deactivateFocusableContainerEl();
-                    child.focus();
+                    if (child) {
+                        me.deactivateFocusableContainerEl();
+                        child.focus();
+                    }
                 }
             } else {
                 me.deactivateFocusableContainerEl();

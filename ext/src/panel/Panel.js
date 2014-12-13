@@ -1718,8 +1718,7 @@ Ext.define('Ext.panel.Panel', {
             floatCls = Ext.baseCSSPrefix + 'border-region-slide-in',
             collapsed = me.collapsed,
             layoutOwner = me.ownerCt || me,
-            slideDirection,
-            onBodyMousedown;
+            slideDirection, onBodyMousedown, myBox;
 
         if (me.isSliding) {
             return;
@@ -1747,6 +1746,7 @@ Ext.define('Ext.panel.Panel', {
         me.setHiddenState(true);
         me.collapsed = collapsed;
         layoutOwner.updateLayout();
+        myBox = me.getBox(false, true);
 
         me.slideOutTask = me.slideOutTask || new Ext.util.DelayedTask(me.slideOutFloatedPanel, me);
 
@@ -1779,7 +1779,24 @@ Ext.define('Ext.panel.Panel', {
             me.collapseTool.el.hide();
         }
 
-        me.resizePlaceholder(placeholder, placeholder.getWidth(), placeholder.getHeight());
+        switch (me.collapsed) {
+            case 'top':
+                me.width = ps.width;
+                me.setLocalXY(myBox.x, myBox.y + ps.height);
+                break;
+            case 'right':
+                me.height = ps.height;
+                me.setLocalXY(myBox.x - ps.width, myBox.y);
+                break;
+            case 'bottom':
+                me.width = ps.width;
+                me.setLocalXY(myBox.x, myBox.y - ps.height);
+                break;
+            case 'left':
+                me.height = ps.height;
+                me.setLocalXY(myBox.x + ps.width, myBox.y);
+                break;
+        }
         slideDirection = me.convertCollapseDir(me.collapsed);
 
         // Remember how we are really collapsed so we can restore it, but also so we can
@@ -1800,14 +1817,7 @@ Ext.define('Ext.panel.Panel', {
         });
     },
 
-    onPlaceholderResize: function(ph, width, height) {
-        this.resizePlaceholder(ph, width, height);
-        this.updateLayout({
-            isRoot: true
-        });
-    },
-
-    resizePlaceholder: function(ph, newWidth, newHeight) {
+    onPlaceholderResize: function(ph, newWidth, newHeight) {
         var me = this,
             myBox = me.getBox(false, true),
             phBox = ph.getBox(false, true);
@@ -1831,6 +1841,10 @@ Ext.define('Ext.panel.Panel', {
                 me.setLocalX(phBox.x + phBox.width);
                 break;
         }
+
+        me.updateLayout({
+            isRoot: true
+        });
     },
 
     getAnimationProps: function() {
@@ -2358,7 +2372,7 @@ Ext.define('Ext.panel.Panel', {
         }
     },
 
-    onHide: function() {
+    onHide: function(animateTarget, cb, scope) {
         var me = this,
             dd = me.dd;
 
@@ -2374,7 +2388,7 @@ Ext.define('Ext.panel.Panel', {
         if (me.collapsed && me.placeholder) {
             me.placeholder.hide();
         } else {
-            me.callParent(arguments);
+            me.callParent([animateTarget, cb, scope]);
         }
     },
 

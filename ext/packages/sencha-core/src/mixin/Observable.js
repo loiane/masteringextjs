@@ -408,13 +408,19 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
         *         extend: 'Ext.Component',
         *
         *         initComponent: function () {
-        *             this.addManagedListener(MyApp.SomeGlobalSharedMenu, 'show', this.doSomething, this);
+        *             this.addManagedListener(MyApp.SomeGlobalSharedMenu, 'show', this.doSomething);
         *             this.callParent();
         *         }
         *     });
         *
         * As you can see, when an instance of Foo is destroyed, it ensures that the 'show' 
         * listener on the menu (`MyApp.SomeGlobalSharedMenu`) is also removed.
+        *
+        * As of version 5.1 it is no longer necessary to use this method in most cases because
+        * listeners are automatically managed if the scope object provided to {@link #addListener}
+        * is an Observable instance. However, if the observable instance and scope are not the
+        * same object you still need to use `mon` or `addManagedListener` if you want the listener
+        * to be managed.
         *
         * @param {Ext.util.Observable/Ext.dom.Element} item The item to which to add a listener/listeners.
         * @param {Object/String} ename The event name, or an object containing event name properties.
@@ -607,15 +613,15 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
          * @param {String} [order='before'] The order to call the action function relative
          * too the event handlers (`'before'` or `'after'`).  Note that this option is
          * simply used to sort the action function relative to the event handlers by "priority".
-         * An order of `'before'` is equivalent to a priority of `99`, while an order of
-         * `'after'` is equivalent to a priority of `-99`.  See the `priority` option
+         * An order of `'before'` is equivalent to a priority of `99.5`, while an order of
+         * `'after'` is equivalent to a priority of `-99.5`.  See the `priority` option
          * of `{@link #addListener}` for more details.
          */
         fireAction: function(eventName, args, fn, scope, options, order) {
             // chain options to avoid mutating the user's options object
             options = options ? Ext.Object.chain(options) : {};
             options.single = true;
-            options.priority = ((order === 'after') ? -99 : 99);
+            options.priority = ((order === 'after') ? -99.5 : 99.5);
 
             this.doAddListener(eventName, fn, scope, options);
             this.fireEventArgs(eventName, args);
@@ -757,6 +763,10 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
         *           }
         *       });
         *
+        * @param {Array} [options.args]
+        *   Optional arguments to pass to the handler function. Any additional arguments
+        *   passed to {@link #fireEvent} will be appended to these arguments.
+        *
         * @param {Boolean} [options.destroyable=false]
         *   When specified as `true`, the function returns A `Destroyable` object. An object which implements the `destroy` method which removes all listeners added in this call.
         *   
@@ -769,6 +779,8 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
         *   greater, and -1000 or lesser for handlers that are intended to run before or
         *   after all others, so it is recommended to stay within the range of -999 to 999
         *   when setting the priority of event handlers in application-level code.
+        *   A priority must be an integer to be valid.  Fractional values are reserved for
+        *   internal framework use.
         *
         * @param {String} [options.order='current']
         *   A legacy option that is provided for backward compatibility.
@@ -870,63 +882,6 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
             return me;
         },
 
-        doAddListener: function(ename, fn, scope, options, order, caller, manager) {
-            var me = this,
-                event, managedListeners, priority;
-
-            order = order || (options && options.order);
-
-            if (order) {
-                priority = (options && options.priority);
-
-                if (!priority) { // priority option takes precedence over order
-                    // do not mutate the user's options
-                    options = options ? Ext.Object.chain(options) : {};
-                    options.priority = me.$orderToPriority[order];
-                }
-            }
-
-            ename = Ext.canonicalEventName(ename);
-
-            //<debug>
-            if (!fn) {
-                Ext.Error.raise("Cannot add '" + ename + "' listener to " + me.$className +
-                    " instance.  No function specified.");
-            }
-            //</debug>
-
-            if (!manager && (scope && scope.isObservable && (scope !== me))) {
-                manager = scope;
-            }
-
-            if (manager) {
-                // if scope is an observable, the listener will be automatically managed
-                // this eliminates the need to call mon() in a majority of cases
-                managedListeners = manager.managedListeners = manager.managedListeners || [];
-
-                managedListeners.push({
-                    item: me,
-                    ename: ename,
-                    fn: fn,
-                    scope: scope,
-                    options: options
-                });
-            }
-
-            event = (me.events || (me.events = {}))[ename];
-            if (!event || !event.isEvent) {
-                event = me._initEvent(ename);
-            }
-
-            if (fn !== emptyFn) {
-                if (event.addListener(fn, scope, options, caller, manager)) {
-                    // If a new listener has been added (Event.addListener rejects duplicates of the same fn+scope)
-                    // then increment the hasListeners counter
-                    me.hasListeners._incr_(ename);
-                }
-            }
-        },
-
         /**
         * Removes an event handler.
         *
@@ -958,28 +913,6 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
             }
 
             return me;
-        },
-
-        doRemoveListener: function(ename, fn, scope) {
-            var me = this,
-                events = me.events,
-                event;
-
-            ename = Ext.canonicalEventName(ename);
-            event = events && events[ename];
-
-            //<debug>
-            if (!fn) {
-                Ext.Error.raise("Cannot remove '" + ename + "' listener to " + me.$className +
-                    " instance.  No function specified.");
-            }
-            //</debug>
-
-            if (event && event.isEvent) {
-                if (event.removeListener(fn, scope)) {
-                    me.hasListeners._decr_(ename);
-                }
-            }
         },
 
         /**
@@ -1318,6 +1251,85 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
         },
 
         privates: {
+            doAddListener: function(ename, fn, scope, options, order, caller, manager) {
+                var me = this,
+                    event, managedListeners, priority;
+
+                order = order || (options && options.order);
+
+                if (order) {
+                    priority = (options && options.priority);
+
+                    if (!priority) { // priority option takes precedence over order
+                        // do not mutate the user's options
+                        options = options ? Ext.Object.chain(options) : {};
+                        options.priority = me.$orderToPriority[order];
+                    }
+                }
+
+                ename = Ext.canonicalEventName(ename);
+
+                //<debug>
+                if (!fn) {
+                    Ext.Error.raise("Cannot add '" + ename + "' listener to " + me.$className +
+                        " instance.  No function specified.");
+                }
+                //</debug>
+
+                if (!manager && (scope && scope.isObservable && (scope !== me))) {
+                    manager = scope;
+                }
+
+                if (manager) {
+                    // if scope is an observable, the listener will be automatically managed
+                    // this eliminates the need to call mon() in a majority of cases
+                    managedListeners = manager.managedListeners = manager.managedListeners || [];
+
+                    managedListeners.push({
+                        item: me,
+                        ename: ename,
+                        fn: fn,
+                        scope: scope,
+                        options: options
+                    });
+                }
+
+                event = (me.events || (me.events = {}))[ename];
+                if (!event || !event.isEvent) {
+                    event = me._initEvent(ename);
+                }
+
+                if (fn !== emptyFn) {
+                    if (event.addListener(fn, scope, options, caller, manager)) {
+                        // If a new listener has been added (Event.addListener rejects duplicates of the same fn+scope)
+                        // then increment the hasListeners counter
+                        me.hasListeners._incr_(ename);
+                    }
+                }
+            },
+
+            doRemoveListener: function(ename, fn, scope) {
+                var me = this,
+                    events = me.events,
+                    event;
+
+                ename = Ext.canonicalEventName(ename);
+                event = events && events[ename];
+
+                //<debug>
+                if (!fn) {
+                    Ext.Error.raise("Cannot remove '" + ename + "' listener to " + me.$className +
+                        " instance.  No function specified.");
+                }
+                //</debug>
+
+                if (event && event.isEvent) {
+                    if (event.removeListener(fn, scope)) {
+                        me.hasListeners._decr_(ename);
+                    }
+                }
+            },
+
             _initEvent: function(eventName) {
                 return (this.events[eventName] = new Ext.util.Event(this, eventName));
             }
@@ -1517,7 +1529,17 @@ Ext.define('Ext.mixin.Observable', function(Observable) {
          * Shorthand for {@link #removeManagedListener}.
          * @inheritdoc Ext.util.Observable#removeManagedListener
          */
-        mun: 'removeManagedListener'
+        mun: 'removeManagedListener',
+        /**
+         * @method
+         * An alias for {@link #addListener}.  In versions prior to 5.1, {@link #listeners}
+         * had a generated setter which could be called to add listeners.  In 5.1 the listeners
+         * config is not processed using the config system and has no generated setter, so
+         * this method is provided for backward compatibility.  The preferred way of
+         * adding listeners is to use the {@link #on} method.
+         * @param {Object} listeners The listeners
+         */
+        setListeners: 'addListener'
     });
 
     //deprecated, will be removed in 5.0

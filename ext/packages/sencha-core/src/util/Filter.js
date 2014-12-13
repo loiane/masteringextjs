@@ -100,7 +100,7 @@ Ext.define('Ext.util.Filter', {
          * `true` to not have this filter participate in the filtering process when the {@link #value} of
          * this the filter is empty according to {@link Ext#isEmpty}.
          *
-         * @since 5.0.2
+         * @since 5.1.0
          */
         disableOnEmpty: false,
 
@@ -137,10 +137,20 @@ Ext.define('Ext.util.Filter', {
         /**
          * @cfg {Function} [serializer]
          * A function to post-process any serialization.
-         * @cfg {Object} serializer.data The serialized data
+         * @param {Object} serializer.data The serialized data.
          * @private
          */
-        serializer: null
+        serializer: null,
+
+        /**
+         * @cfg {Function} [convert]
+         * A function to do any conversion on the value before comparison. For example,
+         * something that returns the date only part of a date.
+         * @cfg {Object} convert.value The value to convert.
+         * @cfg {Object} convert.return The converted value.
+         * @private
+         */
+        convert: null
     },
 
     /**
@@ -227,9 +237,24 @@ Ext.define('Ext.util.Filter', {
         this.initConfig(config);
     },
 
+    preventConvert: {
+        'in': 1
+    },
+
     filter: function (item) {
         var me = this,
-            filterFn = me._filterFn || me.getFilterFn();
+            filterFn = me._filterFn || me.getFilterFn(),
+            convert = me.getConvert(),
+            value = me._value;
+
+        me._filterValue = value;
+        me.isDateValue = Ext.isDate(value);
+        if (me.isDateValue) {
+            me.dateValue = value.getTime();
+        }
+        if (convert && !me.preventConvert[me.getOperator()]) {
+            me._filterValue = convert.call(me.scope || me, value);
+        }
 
         return filterFn.call(me.scope || me, item);
     },
@@ -368,41 +393,96 @@ Ext.define('Ext.util.Filter', {
             disabled = Ext.isEmpty(this.getValue());
         }
         this.setDisabled(disabled);
+    },
+
+    privates: {
+        getCandidateValue: function(candidate, v, preventCoerce) {
+            var me = this,
+                convert = me._convert,
+                result = me.getPropertyValue(candidate);
+
+            if (convert) {
+                result = convert.call(me.scope || me, result);
+            } else if (!preventCoerce) {
+                result = Ext.coerce(result, v);
+            }
+            return result;
+        }
     }
 }, function() {
     var prototype = this.prototype,
         operatorFns = (prototype.operatorFns = {
             "<": function (candidate) {
-                var v = this._value;
-                return Ext.coerce(this.getPropertyValue(candidate), v) < v;
+                var v = this._filterValue;
+                return this.getCandidateValue(candidate, v) < v;
             },
             "<=": function (candidate) {
-                var v = this._value;
-                return Ext.coerce(this.getPropertyValue(candidate), v) <= v;
+                var v = this._filterValue;
+                return this.getCandidateValue(candidate, v) <= v;
             },
             "=": function (candidate) {
-                var v = this._value;
-                return Ext.coerce(this.getPropertyValue(candidate), v) == v;
+                var me = this,
+                    v = me._filterValue;
+
+                candidate = me.getCandidateValue(candidate, v);
+
+                if (me.isDateValue && candidate instanceof Date) {
+                    candidate = candidate.getTime();
+                    v = me.dateValue;
+                }
+                return candidate == v;
+            },
+            "===": function(candidate) {
+                var me = this,
+                    v = me._filterValue;
+
+                candidate = me.getCandidateValue(candidate, v, true);
+
+                if (me.isDateValue && candidate instanceof Date) {
+                    candidate = candidate.getTime();
+                    v = me.dateValue;
+                }
+                return candidate === v;
             },
             ">=": function (candidate) {
-                var v = this._value;
-                return Ext.coerce(this.getPropertyValue(candidate), v) >= v;
+                var v = this._filterValue;
+                return this.getCandidateValue(candidate, v) >= v;
             },
             ">": function (candidate) {
-                var v = this._value;
-                return Ext.coerce(this.getPropertyValue(candidate), v) > v;
+                var v = this._filterValue;
+                return this.getCandidateValue(candidate, v) > v;
             },
             "!=": function (candidate) {
-                var v = this._value;
-                return Ext.coerce(this.getPropertyValue(candidate), v) != v;
+                var me = this,
+                    v = me._filterValue;
+
+                candidate = me.getCandidateValue(candidate, v);
+
+                if (me.isDateValue && candidate instanceof Date) {
+                    candidate = candidate.getTime();
+                    v = me.dateValue;
+                }
+                return candidate != v;
+            },
+            "!==": function(candidate) {
+                var me = this,
+                    v = me._filterValue;
+
+                candidate = me.getCandidateValue(candidate, v, true);
+
+                if (me.isDateValue && candidate instanceof Date) {
+                    candidate = candidate.getTime();
+                    v = me.dateValue;
+                }
+                return candidate !== v;
             },
             "in": function (candidate) {
-                var v = this._value;
-                return Ext.Array.contains(v, Ext.coerce(this.getPropertyValue(candidate), v));
+                var v = this._filterValue;
+                return Ext.Array.contains(v, this.getCandidateValue(candidate, v));
             },
             like: function (candidate) {
-                var v = this._value;
-                return v && Ext.coerce(this.getPropertyValue(candidate), v).toLowerCase().indexOf(v.toLowerCase()) > -1;
+                var v = this._filterValue;
+                return v && this.getCandidateValue(candidate, v).toLowerCase().indexOf(v.toLowerCase()) > -1;
             }
         });
 

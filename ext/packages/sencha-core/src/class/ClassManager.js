@@ -255,7 +255,7 @@ var makeCtor = Ext.Class.makeCtor,
         isCreated: function(className) {
             var i, ln, part, root, parts;
 
-            //<debug error>
+            //<debug>
             if (typeof className !== 'string' || className.length < 1) {
                 throw new Error("[Ext.ClassManager] Invalid classname, must be a string and must not be empty");
             }
@@ -399,7 +399,7 @@ var makeCtor = Ext.Class.makeCtor,
          * @private
          */
         parseNamespace: function(namespace) {
-            //<debug error>
+            //<debug>
             if (typeof namespace !== 'string') {
                 throw new Error("[Ext.ClassManager] Invalid namespace, must be a string");
             }
@@ -636,7 +636,7 @@ var makeCtor = Ext.Class.makeCtor,
          * @private
          */
         create: function(className, data, createdFn) {
-            //<debug error>
+            //<debug>
             if (className != null && typeof className !== 'string') {
                 throw new Error("[Ext.define] Invalid class name '" + className + "' specified, must be a non-empty string");
             }
@@ -847,7 +847,7 @@ var makeCtor = Ext.Class.makeCtor,
                 args = arraySlice.call(arguments),
                 className = this.getNameByAlias(alias);
 
-            //<debug error>
+            //<debug>
             if (!className) {
                 throw new Error("[Ext.createByAlias] Unrecognized alias: " + alias);
             }
@@ -1122,7 +1122,7 @@ var makeCtor = Ext.Class.makeCtor,
         for (i = 0, ln = alternates.length; i < ln; i++) {
             alternate = alternates[i];
 
-            //<debug error>
+            //<debug>
             if (typeof alternate !== 'string') {
                 throw new Error("[Ext.define] Invalid alternate of: '" + alternate + "' for class: '" + name + "'; must be a valid string");
             }
@@ -1879,7 +1879,7 @@ var makeCtor = Ext.Class.makeCtor,
         for (i = 0,ln = aliases.length; i < ln; i++) {
             alias = aliases[i];
 
-            //<debug error>
+            //<debug>
             if (typeof alias !== 'string' || alias.length < 1) {
                 throw new Error("[Ext.define] Invalid alias of: '" + alias + "' for class: '" + name + "'; must be a valid string");
             }
@@ -1937,7 +1937,7 @@ var makeCtor = Ext.Class.makeCtor,
         for (i = 0,ln = xtypes.length; i < ln; i++) {
             xtype = xtypes[i];
 
-            //<debug error>
+            //<debug>
             if (typeof xtype !== 'string' || xtype.length < 1) {
                 throw new Error("[Ext.define] Invalid xtype of: '" + xtype + "' for class: '" + name + "'; must be a valid non-empty string");
             }

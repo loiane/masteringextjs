@@ -486,14 +486,16 @@ Ext.define('Ext.data.AbstractStore', {
         }
     },
 
-    filter: function(filters, value) {
+    filter: function(filters, value, supressEvent) {
         if (Ext.isString(filters)) {
             filters = {
                 property: filters,
                 value: value
             };
         }
+        this.suppressNextFilter = !!supressEvent;
         this.getFilters().add(filters);
+        this.suppressNextFilter = false;
     },
 
     /**
@@ -501,16 +503,19 @@ Ext.define('Ext.data.AbstractStore', {
      * by default, applys the updated filter set to the Store's unfiltered dataset.
      *
      * @param {String/Ext.util.Filter} toRemove The id of a Filter to remove from the filter set, or a Filter instance to remove.
+     * @param {Boolean} [suppressEvent] If `true` the filter is cleared silently.
      */
-    removeFilter: function(filter) {
+    removeFilter: function(filter, supressEvent) {
         var me = this,
             filters = me.getFilters();
 
+        me.suppressNextFilter = !!supressEvent;
         if (filter instanceof Ext.util.Filter) {
             filters.remove(filter);
         } else {
             filters.removeByKey(filter);
         }
+        me.suppressNextFilter = false;
     },
 
     updateRemoteSort: function (remote) {
@@ -547,9 +552,12 @@ Ext.define('Ext.data.AbstractStore', {
      * Adds a new Filter to this Store's {@link #cfg-filters filter set} and
      * by default, applys the updated filter set to the Store's unfiltered dataset.
      * @param {Object[]/Ext.util.Filter[]} filters The set of filters to add to the current {@link #cfg-filters filter set}.
+     * @param {Boolean} [suppressEvent] If `true` the filter is cleared silently.
      */
-    addFilter: function(filters) {
+    addFilter: function(filters, supressEvent) {
+        this.suppressNextFilter = !!supressEvent;
         this.getFilters().add(filters);
+        this.suppressNextFilter = false;
     },
 
     /**
@@ -897,6 +905,13 @@ Ext.define('Ext.data.AbstractStore', {
 
         if (me.getAutoFilter()) {
             if (me.getRemoteFilter()) {
+                //<debug>
+                me.getFilters().each(function(filter) {
+                    if (filter.getInitialConfig().filterFn) {
+                        Ext.Error.raise('Unable to use a filtering function in conjunction with remote filtering.');
+                    }
+                });
+                //</debug>
                 me.currentPage = 1;
                 if (!suppressNext) {
                     me.attemptLoad();

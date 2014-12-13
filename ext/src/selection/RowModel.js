@@ -194,10 +194,10 @@ Ext.define('Ext.selection.RowModel', {
     },
 
     selectByPosition: function (position, keepExisting) {
-        var context = new Ext.grid.CellContext(this.view);
-            
-        context.setPosition(position.row, position.column);
-        this.select(context.record, keepExisting);
+        if (!position.isCellContext) {
+            position = new Ext.grid.CellContext(this.view).setPosition(position.row, position.column);
+        }
+        this.select(position.record, keepExisting);
     },
 
     /**

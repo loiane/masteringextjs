@@ -4,6 +4,9 @@
  * 
  * Creates a 3D Pie Chart.
  *
+ * **Note:** Labels, legends, and lines are not currently available when using the
+ * 3D Pie chart series.
+ * 
  *     @example
  *     Ext.create('Ext.Container', {
  *         renderTo: Ext.getBody(),

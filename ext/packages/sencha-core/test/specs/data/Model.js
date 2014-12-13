@@ -352,48 +352,138 @@ describe("Ext.data.Model", function() {
                     });
 
                     describe("changing the idProperty", function() {
-                        it("should replace a generated idField from the parent", function() {
-                            defineA(['foo', 'bar']);
-                            defineB(['baz'], {idProperty: 'customId'});
+                        describe("id declared as a field in superclass & subclass", function() {
+                            it("should keep both idFields in the defined order", function() {
+                                defineA(['foo', 'id', 'bar']);
+                                defineB(['customId', 'baz'], {idProperty: 'customId'});
 
-                            var fields = spec.A.getFields();
-                            expect(fields.length).toBe(3);
-                            expect(fields[0].name).toBe('foo');
-                            expect(fields[1].name).toBe('bar');
-                            expect(fields[2].name).toBe('id');
+                                var fields = spec.A.getFields();
+                                expect(fields.length).toBe(3);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('id');
+                                expect(fields[2].name).toBe('bar');
 
-                            fields = spec.B.getFields();
-                            expect(fields.length).toBe(4);
-                            expect(fields[0].name).toBe('foo');
-                            expect(fields[1].name).toBe('bar');
-                            expect(fields[2].name).toBe('customId');
-                            expect(fields[3].name).toBe('baz');
+                                fields = spec.B.getFields();
+                                expect(fields.length).toBe(5);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('id');
+                                expect(fields[2].name).toBe('bar');
+                                expect(fields[3].name).toBe('customId');
+                                expect(fields[4].name).toBe('baz');
 
-                            expect(spec.A.idField.name).toBe('id');
-                            expect(spec.B.idField.name).toBe('customId');
+                                expect(spec.A.idField.name).toBe('id');
+                                expect(spec.B.idField.name).toBe('customId');
+                            });
                         });
 
-                        it("should keep a defined idField from the parent, but it should not be the idField", function() {
-                            defineA(['foo', 'id', 'bar']);
-                            defineB(['baz'], {idProperty: 'customId'});
+                        describe("id declared as field only in superclass", function() {
+                            it("should keep a defined idField from the parent, but it should not be the idField", function() {
+                                defineA(['foo', 'id', 'bar']);
+                                defineB(['baz'], {idProperty: 'customId'});
 
-                            var fields = spec.A.getFields();
-                            expect(fields.length).toBe(3);
-                            expect(fields[0].name).toBe('foo');
-                            expect(fields[1].name).toBe('id');
-                            expect(fields[2].name).toBe('bar');
+                                var fields = spec.A.getFields();
+                                expect(fields.length).toBe(3);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('id');
+                                expect(fields[2].name).toBe('bar');
 
-                            fields = spec.B.getFields();
-                            expect(fields.length).toBe(5);
-                            expect(fields[0].name).toBe('foo');
-                            expect(fields[1].name).toBe('id');
-                            expect(fields[2].name).toBe('bar');
-                            expect(fields[3].name).toBe('baz');
-                            expect(fields[4].name).toBe('customId');
+                                fields = spec.B.getFields();
+                                expect(fields.length).toBe(5);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('id');
+                                expect(fields[2].name).toBe('bar');
+                                expect(fields[3].name).toBe('baz');
+                                expect(fields[4].name).toBe('customId');
 
-                            expect(spec.A.idField.name).toBe('id');
-                            expect(spec.B.idField.name).toBe('customId');
+                                expect(spec.A.idField.name).toBe('id');
+                                expect(spec.B.idField.name).toBe('customId');
+                            });
                         });
+
+                        describe("id declared as a field only in subclass", function() {
+                            it("should remove the generated id field and leave the declared idField in place", function() {
+                                defineA(['foo']);
+                                defineB(['bar', 'customId', 'baz'], {idProperty: 'customId'});
+
+                                var fields = spec.A.getFields();
+                                expect(fields.length).toBe(2);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('id');
+
+                                fields = spec.B.getFields();
+                                expect(fields.length).toBe(4);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('bar');
+                                expect(fields[2].name).toBe('customId');
+                                expect(fields[3].name).toBe('baz');
+
+                                expect(spec.A.idField.name).toBe('id');
+                                expect(spec.B.idField.name).toBe('customId');
+                            });
+                        });
+
+                        describe("id not declared as a field", function() {
+                            it("should replace a generated idField from the parent", function() {
+                                defineA(['foo', 'bar']);
+                                defineB(['baz'], {idProperty: 'customId'});
+
+                                var fields = spec.A.getFields();
+                                expect(fields.length).toBe(3);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('bar');
+                                expect(fields[2].name).toBe('id');
+
+                                fields = spec.B.getFields();
+                                expect(fields.length).toBe(4);
+                                expect(fields[0].name).toBe('foo');
+                                expect(fields[1].name).toBe('bar');
+                                expect(fields[2].name).toBe('customId');
+                                expect(fields[3].name).toBe('baz');
+
+                                expect(spec.A.idField.name).toBe('id');
+                                expect(spec.B.idField.name).toBe('customId');
+                            });
+                        });
+                    });
+                });
+
+                describe("versionProperty", function() {
+                    it("should append versionProperty if it's not declared as a field", function() {
+                        defineA(['foo'], {
+                            versionProperty: 'version'
+                        });
+
+                        var fields = spec.A.getFields(),
+                            version = fields[2];
+
+                        expect(fields.length).toBe(3);
+                        expect(fields[0].name).toBe('foo');
+                        expect(fields[1].name).toBe('id');
+                        expect(fields[2].name).toBe('version');
+
+                        expect(version.critical).toBe(true);
+                        expect(version.defaultValue).toBe(1);
+                    });
+
+                    it("should leave a declared versionProperty in position", function() {
+                        defineA(['foo', {
+                            name: 'version',
+                            type: 'int'
+                        }, 'bar'], {
+                            versionProperty: 'version'
+                        });
+
+                        var fields = spec.A.getFields(),
+                            version = fields[1];
+
+                        expect(fields.length).toBe(4);
+                        expect(fields[0].name).toBe('foo');
+                        expect(fields[1].name).toBe('version');
+                        expect(fields[2].name).toBe('bar');
+                        expect(fields[3].name).toBe('id');
+
+                        expect(version.critical).toBe(true);
+                        expect(version.defaultValue).toBe(1);
                     });
                 });
             });
@@ -6589,6 +6679,54 @@ describe("Ext.data.Model", function() {
                 expect(address.dropped).toBe(false);
                 expect(orderItem.dropped).toBe(false);
             });
+        });
+    });
+
+    describe("versionProperty", function() {
+        var User;
+
+        beforeEach(function() {
+            User = Ext.define('spec.User', {
+                extend: 'Ext.data.Model',
+                fields: ['name'],
+                versionProperty: 'version'
+            })
+        });
+
+        afterEach(function() {
+            Ext.undefine('spec.User');
+            User = null;
+        });
+
+        it("should increment the versionProperty when commiting", function() {
+            var user = new User({
+                id: 1,
+                name: 'Foo',
+                version: 5
+            });
+            user.set('name', 'Bar');
+            user.commit();
+            expect(user.get('version')).toBe(6);
+        });
+
+        it("should not increment the versionProperty when committing a phantom", function() {
+            var user = new User({
+                name: 'Foo'
+            });
+            expect(user.get('version')).toBe(1);
+            user.set('name', 'Bar');
+            user.commit();
+            expect(user.get('version')).toBe(1);
+        });
+
+        it("should not increment the versionProperty when rejecting", function() {
+            var user = new User({
+                id: 1,
+                name: 'X'
+            });
+            user.set('name', 'Bar');
+            user.reject();
+            expect(user.get('version')).toBe(1);
         });
     });
 });

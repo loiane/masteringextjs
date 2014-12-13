@@ -44,7 +44,7 @@ Ext.define('Ext.app.bind.Multi', {
      *          }
      *      }
      * @private
-     * @since 5.0.2
+     * @since 5.1.0
      */
 
     constructor: function (descriptor, owner, callback, scope, options) {

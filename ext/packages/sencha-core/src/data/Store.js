@@ -298,6 +298,8 @@ Ext.define('Ext.data.Store', {
      */
     complete: false,
 
+    moveMapCount: 0,
+
     /**
      * Creates the store.
      * @param {Object} [config] Config object.
@@ -487,8 +489,8 @@ Ext.define('Ext.data.Store', {
             removed = me.getRemovedRecords(),
             ignoreAdd = me.ignoreCollectionAdd,
             session = me.getSession(),
-            i, sync, record;
-
+            replaced = info && info.replaced,
+            i, sync, record, replacedItems;
 
         for (i = 0; i < len; ++i) {
             record = records[i];
@@ -511,6 +513,15 @@ Ext.define('Ext.data.Store', {
         if (ignoreAdd) {
             return;
         }
+
+        if (replaced) {
+            replacedItems = [];
+            do {
+                Ext.Array.push(replacedItems, replaced.items);
+                replaced = replaced.next;
+            } while (replaced)
+            me.setMoving(replacedItems, true);
+        }
         
         if (info) {
             me.fireEvent('add', me, records, info.at);
@@ -520,6 +531,10 @@ Ext.define('Ext.data.Store', {
             if (lastChunk) {
                 me.fireEvent('datachanged', me);
             }
+        }
+
+        if (replaced) {
+            me.setMoving(replacedItems, false);
         }
 
         // Addition means a sync is needed.
@@ -544,17 +559,21 @@ Ext.define('Ext.data.Store', {
         me.fireEvent('update', me, record, type, modifiedFieldNames, info);
     },
 
+    afterChange: function(record, modifiedFieldNames, type) {
+        this.getData().itemChanged(record, modifiedFieldNames || null, undefined, type);
+    },
+
     afterCommit: function(record, modifiedFieldNames) {
-        this.getData().itemChanged(record, modifiedFieldNames || null, undefined, Ext.data.Model.COMMIT);
+        this.afterChange(record, modifiedFieldNames, Ext.data.Model.COMMIT);
     },
 
     afterEdit: function(record, modifiedFieldNames) {
         this.needsSync = this.needsSync || record.dirty;
-        this.getData().itemChanged(record, modifiedFieldNames || null, undefined, Ext.data.Model.EDIT);
+        this.afterChange(record, modifiedFieldNames, Ext.data.Model.EDIT);
     },
 
     afterReject: function(record) {
-        this.getData().itemChanged(record, null, undefined, Ext.data.Model.REJECT);
+        this.afterChange(record, null, Ext.data.Model.REJECT);
     },
 
     afterDrop: function(record) {
@@ -649,15 +668,20 @@ Ext.define('Ext.data.Store', {
             // but on removal of child nodes on onNodeRemove,
             removed = me.removed,
             records = info.items,
-            index = info.at,
             len = records.length,
+            index = info.at,
             isMove = me.removeIsMove,
             silent = me.removeIsSilent,
             lastChunk = !info.next,
+            replacement = info.replacement,
             i, record;
         
         if (me.ignoreCollectionRemove) {
             return;
+        }
+
+        if (replacement) {
+            me.setMoving(replacement.items, true);
         }
         
         for (i = 0; i < len; ++i) {
@@ -685,6 +709,10 @@ Ext.define('Ext.data.Store', {
             if (lastChunk) {
                 me.fireEvent('datachanged', me);
             }
+        }
+
+        if (replacement) {
+            me.setMoving(replacement.items, false);
         }
     },
 
@@ -819,9 +847,9 @@ Ext.define('Ext.data.Store', {
         }
 
         if (pageSize || 'start' in options || 'limit' in options || 'page' in options) {
-            options.page = options.page || me.currentPage;
+            options.page  = options.page != null ? options.page : me.currentPage;
             options.start = (options.start !== undefined) ? options.start : (options.page - 1) * pageSize;
-            options.limit = options.limit || pageSize;
+            options.limit = options.limit != null ? options.limit : pageSize;
         }
 
         options.addRecords = options.addRecords || false;
@@ -844,8 +872,7 @@ Ext.define('Ext.data.Store', {
         var me = this,
             resultSet = operation.getResultSet(),
             records = operation.getRecords(),
-            successful = operation.wasSuccessful(),
-            session, associatedEntity;
+            successful = operation.wasSuccessful();
 
         if (me.isDestroyed) {
             return;
@@ -856,11 +883,7 @@ Ext.define('Ext.data.Store', {
         }
 
         if (successful) {
-            session = me.getSession();
-            associatedEntity = me.getAssociatedEntity();
-            if (session && associatedEntity && !associatedEntity.phantom) {
-                records = me.getRole().validateAssociationRecords(session, associatedEntity, records);
-            }
+            records = me.processAssociation(records);
             me.loadRecords(records, operation.getAddRecords() ? {
                 addRecords: true
             } : undefined);
@@ -901,16 +924,19 @@ Ext.define('Ext.data.Store', {
      * to remove the old ones first.
      */
     loadData: function(data, append) {
-        var length = data.length,
+        var me = this,
+            length = data.length,
             newData = [],
             i;
 
         //make sure each data element is an Ext.data.Model instance
         for (i = 0; i < length; i++) {
-            newData.push(this.createModel(data[i]));
+            newData.push(me.createModel(data[i]));
         }
 
-        this.loadRecords(newData, append ? this.addRecordsOptions : undefined);
+        newData = me.processAssociation(newData);
+
+        me.loadRecords(newData, append ? me.addRecordsOptions : undefined);
     },
 
     /**
@@ -1166,6 +1192,73 @@ Ext.define('Ext.data.Store', {
     privates: {
         onBeforeLoad: function(operation) {
             this.callObservers('BeforeLoad', [operation]);
+        },
+
+        /**
+         * Checks whether records are being moved within the store. This can be used in conjunction with the
+         * {@link #event-add} and {@link #event-remove} events to determine whether the records are being removed/added
+         * or just having the position changed.
+         * @param {Ext.data.Model[]/Ext.data.Model} [records] The record(s).
+         * @return {Number} The number of records being moved. `0` if no records are moving. If records are passed
+         * the number will refer to how many of the passed records are moving.
+         */
+        isMoving: function(records, getMap) {
+            var map = this.moveMap,
+                moving = 0,
+                len, i;
+
+            if (map) {
+                if (records) {
+                    if (Ext.isArray(records)) {
+                        for (i = 0, len = records.length; i < len; ++i) {
+                            moving += map[records[i].id] ? 1 : 0;
+                        }
+                    } else if (map[records.id]) {
+                        ++moving;
+                    }
+                } else {
+                    moving = getMap ? map : this.moveMapCount;
+                }
+            }
+            return moving;
+        },
+
+        setMoving: function(records, isMoving) {
+            var me = this,
+                map = me.moveMap || (me.moveMap = {}),
+                len = records.length,
+                i, id;
+
+            for (i = 0; i < len; ++i) {
+                id = records[i].id;
+                if (isMoving) {
+                    if (map[id]) {
+                        ++map[id];
+                    } else {
+                        map[id] = 1;
+                        ++me.moveMapCount;
+                    }
+                } else {
+                    if (--map[id] === 0) {
+                        delete map[id];
+                        --me.moveMapCount;
+                    }
+                }
+            }
+
+            if (me.moveMapCount === 0) {
+                me.moveMap = null;
+            }
+        },
+
+        processAssociation: function(records) {
+            var me = this,
+                associatedEntity = me.getAssociatedEntity();
+
+            if (associatedEntity) {
+                records = me.getRole().processLoad(me, associatedEntity, records, me.getSession());
+            }
+            return records;
         }
     }
 

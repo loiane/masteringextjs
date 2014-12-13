@@ -229,22 +229,18 @@ Ext.define('Ext.data.ChainedStore', {
         me.fireEvent('datachanged', me);
     },
     
-    // inherit docs
     hasPendingLoad: function() {
         return this.getSource().hasPendingLoad();
     },
     
-    // inherit docs
     isLoaded: function() {
         return this.getSource().isLoaded();
     },
 
-    // inherit docs
     isLoading: function() {
         return this.getSource().isLoading();
     },
-    
-    // inherit docs
+
     onDestroy: function() {
         var me = this;
 
@@ -255,6 +251,11 @@ Ext.define('Ext.data.ChainedStore', {
     },
 
     privates: {
+        isMoving: function () {
+            var source = this.getSource();
+            return source.isMoving ? source.isMoving.apply(source, arguments) : false;
+        },
+
         loadsSynchronously: function() {
             return this.getSource().loadsSynchronously();
         }

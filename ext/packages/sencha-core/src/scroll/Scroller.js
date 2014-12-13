@@ -64,7 +64,7 @@ Ext.define('Ext.scroll.Scroller', {
     config: {
         /**
          * @cfg {'auto'/'vertical'/'horizontal'/'both'} [direction='auto']
-         * @deprecated 5.0.2 use {@link #x} and {@link #y} instead
+         * @deprecated 5.1.0 use {@link #x} and {@link #y} instead
          */
         direction: undefined, // undefined because we need the updater to always run
 
@@ -527,7 +527,7 @@ Ext.define('Ext.scroll.Scroller', {
                 }
             }
         },
-        '5.0.2': {
+        '5.1.0': {
             methods: {
                 /**
                  * Scrolls to 0 on both axes
@@ -535,7 +535,7 @@ Ext.define('Ext.scroll.Scroller', {
                  * @private
                  * @return {Ext.scroll.Scroller} this
                  * @chainable
-                 * @deprecated 5.0.2 Use scrollTo instead
+                 * @deprecated 5.1.0 Use scrollTo instead
                  */
                 scrollToTop: function(animate) {
                     return this.scrollTo(0, 0, animate);
@@ -547,7 +547,7 @@ Ext.define('Ext.scroll.Scroller', {
                  * @private
                  * @return {Ext.scroll.Scroller} this
                  * @chainable
-                 * @deprecated 5.0.2 Use scrollTo instead
+                 * @deprecated 5.1.0 Use scrollTo instead
                  */
                 scrollToEnd: function(animate) {
                     return this.scrollTo(Infinity, Infinity, animate)

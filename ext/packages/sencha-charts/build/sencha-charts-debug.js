@@ -1431,9 +1431,8 @@ Ext.define('Ext.draw.sprite.AttributeDefinition', {
          */
         processors: {},
         /**
-         * @deprecated Use the {@link #triggers} config instead.
-         * @since 5.0.2
          * @cfg {Object} dirtyTriggers
+         * @deprecated Use the {@link #triggers} config instead.
          */
         dirtyTriggers: {},
         /**
@@ -1453,6 +1452,7 @@ Ext.define('Ext.draw.sprite.AttributeDefinition', {
          * The updater functions themselves are defined in the {@link #updaters} config,
          * aside from the 'canvas' updater, which doesn't have to be defined and acts as a flag,
          * indicating that this attribute should be applied to a Canvas context (or whatever emulates it).
+         * @since 5.1.0
          */
         triggers: {},
         /**
@@ -8381,11 +8381,11 @@ Ext.define('Ext.draw.Surface', {
      */
     devicePixelRatio: window.devicePixelRatio || 1,
     deprecated: {
-        '5.0.2': {
+        '5.1.0': {
             statics: {
                 methods: {
                     /**
-                     * @deprecated 5.0.2
+                     * @deprecated 5.1.0
                      * Stably sort the list of sprites by their zIndex.
                      * Deprecated, use the {@link Ext.Array#sort} method instead.
                      * @param {Array} list
@@ -23837,7 +23837,8 @@ Ext.define('Ext.chart.series.sprite.Bar', {
             right = surface.roundPixel(center + barWidth / 2) - halfLineWidth;
             bottom = surface.roundPixel(yLow * yy + dy + lineWidth);
             me.drawBar(ctx, surface, clip, left, top - halfLineWidth, right, bottom - halfLineWidth, i);
-            if (drawMarkers && dataText[i]) {
+            // We want 0 values to be passed to the renderer
+            if (drawMarkers && dataText[i] != null) {
                 me.drawLabel(dataText[i], center, bottom, top, i);
             }
             me.putMarker('markers', {
@@ -24350,50 +24351,50 @@ Ext.define('Ext.chart.series.sprite.Box', {
  *         height: 400,
  *         layout: 'fit',
  *         items: {
-*              xtype: 'cartesian',
-*              innerPadding: '0 10 0 10',
-*              store: {
-*                  fields: ['name', 'apples', 'oranges'],
-*                  data: [
-*                      {name: 'Eric', apples: 10, oranges: 3},
-*                      {name: 'Mary', apples: 7,  oranges: 2},
-*                      {name: 'John', apples: 5,  oranges: 2},,
-*                      {name: 'Bob',  apples: 2,  oranges: 3},
-*                      {name: 'Joe',  apples: 19, oranges: 1},
-*                      {name: 'Macy', apples: 13, oranges: 4}
-*                  ]
-*              },
-*              axes: [{
-*                  type: 'numeric3d',
-*                  position: 'left',
-*                  fields: ['apples', 'oranges'],
-*                  title: {
-*                      text: 'Inventory',
-*                      fontSize: 15
-*                  },
-*                  grid: {
-                       odd: {
-                           fillStyle: 'rgba(255, 255, 255, 0.06)'
-                       },
-                       even: {
-                           fillStyle: 'rgba(0, 0, 0, 0.03)'
-                       }
-                   }
-*              }, {
-*                  type: 'category3d',
-*                  position: 'bottom',
-*                  title: {
-*                      text: 'People',
-*                      fontSize: 15
-*                  },
-*                  fields: 'name'
-*              }],
-*              series: {
-*                  type: 'bar3d',
-*                  xField: 'name',
-*                  yField: ['apples', 'oranges']
-*              }
-*          }
+ *             xtype: 'cartesian',
+ *             innerPadding: '0 10 0 10',
+ *             store: {
+ *                 fields: ['name', 'apples', 'oranges'],
+ *                 data: [
+ *                      {name: 'Eric', apples: 10, oranges: 3},
+ *                      {name: 'Mary', apples: 7,  oranges: 2},
+ *                      {name: 'John', apples: 5,  oranges: 2},,
+ *                      {name: 'Bob',  apples: 2,  oranges: 3},
+ *                      {name: 'Joe',  apples: 19, oranges: 1},
+ *                      {name: 'Macy', apples: 13, oranges: 4}
+ *                 ]
+ *             },
+ *             axes: [{
+ *                 type: 'numeric3d',
+ *                 position: 'left',
+ *                 fields: ['apples', 'oranges'],
+ *                 title: {
+ *                     text: 'Inventory',
+ *                     fontSize: 15
+ *                 },
+ *                 grid: {
+ *                     odd: {
+ *                         fillStyle: 'rgba(255, 255, 255, 0.06)'
+ *                     },
+ *                     even: {
+ *                         fillStyle: 'rgba(0, 0, 0, 0.03)'
+ *                     }
+ *                 }
+ *             }, {
+ *                 type: 'category3d',
+ *                 position: 'bottom',
+ *                 title: {
+ *                     text: 'People',
+ *                     fontSize: 15
+ *                 },
+ *                 fields: 'name'
+ *             }],
+ *             series: {
+ *                 type: 'bar3d',
+ *                 xField: 'name',
+ *                 yField: ['apples', 'oranges']
+ *             }
+ *         }
  *     });
  */
 Ext.define('Ext.chart.series.Bar3D', {
@@ -27782,6 +27783,9 @@ Ext.define('Ext.chart.series.sprite.Pie3DPart', {
  * 
  * Creates a 3D Pie Chart.
  *
+ * **Note:** Labels, legends, and lines are not currently available when using the
+ * 3D Pie chart series.
+ * 
  *     @example
  *     Ext.create('Ext.Container', {
  *         renderTo: Ext.getBody(),

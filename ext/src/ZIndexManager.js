@@ -237,6 +237,12 @@ Ext.define('Ext.ZIndexManager', {
             mask.setVisibilityMode(Ext.Element.DISPLAY);
             mask.on('click', me._onMaskClick, me);
         }
+        
+        // If the mask is already shown, hide it before showing again
+        // to ensure underlying elements' tabbability is restored
+        else {
+            me._hideModalMask();
+        }
 
         mask.maskTarget = maskTarget;
         viewSize = me._getMaskBox();
@@ -463,13 +469,19 @@ Ext.define('Ext.ZIndexManager', {
      */
     hide: function() {
         var me = this,
+            activeElement = Ext.Element.getActiveElement(),
             all = me.tempHidden = me.zIndexStack.getRange(),
             len = all.length,
             i,
             comp;
 
+        // If any of the components contained focus, we must restore it on show.
+        me.focusRestoreElement = null;
         for (i = 0; i < len; i++) {
             comp = all[i];
+            if (comp.el.contains(activeElement)) {
+                me.focusRestoreElement = activeElement;
+            }
             comp.el.hide();
             comp.hidden = true;
         }
@@ -480,8 +492,9 @@ Ext.define('Ext.ZIndexManager', {
      * Restores temporarily hidden managed Components to visibility.
      */
     show: function() {
-        var i,
-            tempHidden = this.tempHidden,
+        var me = this,
+            i,
+            tempHidden = me.tempHidden,
             len = tempHidden ? tempHidden.length : 0,
             comp;
 
@@ -491,7 +504,10 @@ Ext.define('Ext.ZIndexManager', {
             comp.hidden = false;
             comp.setPosition(comp.x, comp.y);
         }
-        this.tempHidden = null;
+        me.tempHidden = null;
+        if (me.focusRestoreElement) {
+            me.focusRestoreElement.focus();
+        }
     },
 
     /**

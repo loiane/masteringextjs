@@ -280,7 +280,7 @@ Ext.define('Ext.grid.header.DropZone', {
                 // Get the last header in the most deeply-nested header group and add one.
                 visibleColumnManager.getHeaderIndex(me.getNestedHeader(targetHeader, 1)) + 1 :
                 // Get the first header in the most deeply-nested header group.
-                visibleColumnManager.getHeaderIndex(me.getNestedHeader(targetHeader, 0)),
+                visibleColumnManager.getHeaderIndex(me.getNestedHeader(targetHeader, 0));
 
             me.invalidateDrop();
             // Cache the width here, we need to get it before we removed it from the DOM
@@ -350,7 +350,7 @@ Ext.define('Ext.grid.header.DropZone', {
 
                 // It's necessary to lookup the ancestor grid of the grouped header b/c the header could be
                 // nested at any level.
-                toCt.up('grid').view.moveColumn(visibleFromIdx, visibleToIdx, colsToMove);
+                toCt.getRootHeaderCt().grid.view.moveColumn(visibleFromIdx, visibleToIdx, colsToMove);
             }
 
             // We need to always fire a columnmove event. Check for an .ownerCt first in case this is a

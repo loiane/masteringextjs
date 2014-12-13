@@ -11,6 +11,8 @@ Ext.define('Ext.util.CollectionKey', {
     ],
     isCollectionKey: true,
 
+    observerPriority: -200,
+
     config: {
         collection: null,
 

@@ -274,7 +274,7 @@ Ext.define('Ext.plugin.AbstractClipboard', {
         finishInit: function (comp) {
             var me = this;
 
-            me.map = new Ext.util.KeyMap({
+            me.keyMap = new Ext.util.KeyMap({
                 target: comp.el,
 
                 binding: [{

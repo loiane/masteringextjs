@@ -2802,9 +2802,11 @@ Ext.define('Ext.util.Collection', {
             observers.push(observer);
             observerMap[observerId] = observer;
 
-            // Allow observers to be inserted with a priority.
-            // For example GroupCollections must react to Collection mutation before views.
-            Ext.Array.sort(observers, this.prioritySortFn);
+            if (observers.length > 1) {
+                // Allow observers to be inserted with a priority.
+                // For example GroupCollections must react to Collection mutation before views.
+                Ext.Array.sort(observers, this.prioritySortFn);
+            }
         }
     },
 

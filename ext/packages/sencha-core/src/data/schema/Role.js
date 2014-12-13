@@ -84,16 +84,18 @@ Ext.define('Ext.data.schema.Role', {
 
     /**
      * Exclude any locally modified records that don't belong in the store. Include locally
-     * modified records that should be in the store.
-     * 
-     * @param {Ext.data.Session} session The session holding the records
+     * modified records that should be in the store. Also correct any foreign keys that
+     * need to be updated.
+     *
+     * @param {Ext.data.Store} store The store.
      * @param {Ext.data.Model} associatedEntity The entity that owns the records.
      * @param {Ext.data.Model[]} records The records to check.
+     * @param {Ext.data.Session} session The session holding the records
      * @return {Ext.data.Model[]} The corrected set of records.
      *
      * @private
      */
-    validateAssociationRecords: function(session, associatedEntity, records) {
+    processLoad: function(store, associatedEntity, records, session) {
         return records;
     },
 
@@ -129,7 +131,6 @@ Ext.define('Ext.data.schema.Role', {
             id = from.getId(),
             config = {
                 model: me.cls,
-                data: records,
                 role: me,
                 session: session,
                 associatedEntity: from,
@@ -137,8 +138,7 @@ Ext.define('Ext.data.schema.Role', {
                 pageSize: null,
                 remoteFilter: true,
                 trackRemoved: !session
-            },
-            matrix, store;
+            }, store;
 
         if (isMany) {
             // For many-to-many associations each role has a field
@@ -161,37 +161,27 @@ Ext.define('Ext.data.schema.Role', {
         }
 
         store = Ext.Factory.store(config);
-        if (records) {
-            store.complete = !!isComplete;
-        }
-        if (isMany) {
-            if (session) {
-                // If we are creating a store of say Groups in a UserGroups matrix, we want
-                // to traverse the inverse side of the matrix (Users) because the id we have
-                // is that of the User to which these Groups are associated.
-                matrix = session.getMatrixSlice(me.inverse, id);
-
-                matrix.attach(store);
-                matrix.notify = me.onMatrixUpdate;
-                matrix.scope = me;
-            }
-        }
+        
+        me.onStoreCreate(store, session, id);
 
         if (foreignKeyName || (isMany && session)) {
             store.on({
+                scope: me,
                 add: 'onAddToMany',
-                load: 'onLoadMany',
                 remove: 'onRemoveFromMany',
-                clear: 'onRemoveFromMany',
-                scope: me
+                clear: 'onRemoveFromMany'
             });
-            if (records) {
-                me.onLoadMany(store, store.getData().items, true);
-            }
+        }
+
+        if (records) {
+            store.loadData(records);
+            store.complete = !!isComplete;
         }
 
         return store;
     },
+
+    onStoreCreate: Ext.emptyFn,
 
     getAssociatedStore: function (inverseRecord, options, scope, records, isComplete) {
         // Consider the Comment entity with a ticketId to a Ticket entity. The Comment

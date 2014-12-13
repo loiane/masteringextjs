@@ -287,6 +287,10 @@ Ext.define('Ext.selection.CellModel', {
             pos = me.getPosition();
 
         me.callParent(arguments);
+        if (pos && store.isMoving(pos.record)) {
+            return;
+        }
+        
         if (pos && store.getCount() && store.indexOf(pos.record) !== -1) {
             pos.setRow(pos.record);
         } else {

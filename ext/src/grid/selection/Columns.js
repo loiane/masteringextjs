@@ -17,22 +17,6 @@ Ext.define('Ext.grid.selection.Columns', {
     //-------------------------------------------------------------------------
     // Base Selection API
 
-    /**
-     * @inheritdoc
-     */
-    clear: function() {
-        var me = this,
-            prevSelection = me.selectedColumns;
-
-        if (prevSelection && prevSelection.length) {
-            me.selectedColumns = [];
-            me.refreshColumns.apply(me, prevSelection);
-        }
-    },
-
-    /**
-     * @inheritdoc
-     */
     clone: function() {
         var me = this,
             result = new me.self(me.view),
@@ -44,9 +28,33 @@ Ext.define('Ext.grid.selection.Columns', {
         return result;
     },
 
-    /**
-     * @inheritdoc
-     */
+    eachRow: function (fn, scope) {
+        var columns = this.selectedColumns;
+
+        if (columns && columns.length) {
+            this.view.dataSource.each(fn, scope || this);
+        }
+    },
+
+    eachColumn: function (fn, scope) {
+        var me = this,
+            view = me.view,
+            columns = me.selectedColumns,
+            len,
+            i,
+            context = new Ext.grid.CellContext(view);
+
+        if (columns) {
+            len = columns.length;
+            for (i = 0; i < len; i++) {
+                context.setColumn(columns[i]);
+                if (fn.call(scope || me, context.column, context.colIdx) === false) {
+                    return false;
+                }
+            }
+        }
+    },
+
     eachCell: function (fn, scope) {
         var me = this,
             view = me.view,
@@ -75,54 +83,17 @@ Ext.define('Ext.grid.selection.Columns', {
     // Methods unique to this type of Selection
 
     /**
-     * @private
-     * Adds the passed Column to the selection.
-     * @param {Ext.grid.column.Column} column
-     */
-    add: function(column) {
-        //<debug>
-        if (!column.isColumn) {
-            Ext.Error.raise('Column selection must be passed a grid Column header object');
-        }
-        //</debug>
-
-        Ext.Array.include((this.selectedColumns || (this.selectedColumns = [])), column);
-        this.refreshColumns(column);
-    },
-
-    /**
-     * @private
-     * Removes the passed Column from the selection.
-     * @param {Ext.grid.column.Column} column
-     */
-    remove: function(column) {
-        //<debug>
-        if (!column.isColumn) {
-            Ext.Error.raise('Column selection must be passed a grid Column header object');
-        }
-        //</debug>
-
-        if (this.selectedColumns) {
-            Ext.Array.remove(this.selectedColumns, column);
-            this.refreshColumns(column);
-        }
-    },
-
-    /**
      * Returns `true` if the passed {@link Ext.grid.column.Column column} is selected.
      * @param {Ext.grid.column.Column} column The column to test.
      * @returns {Boolean} `true` if the passed {@link Ext.grid.column.Column column} is selected.
      */
     contains: function(column) {
-        //<debug>
-        if (!column.isColumn) {
-            Ext.Error.raise('Column selection must be passed a grid Column header object');
-        }
-        //</debug>
+        var selectedColumns = this.selectedColumns;
 
-        if (this.selectedColumns && this.selectedColumns.length) {
-            return Ext.Array.contains(this.selectedColumns, column);
+        if (column && column.isColumn && selectedColumns && selectedColumns.length) {
+            return Ext.Array.contains(selectedColumns, column);
         }
+
         return false;
     },
 
@@ -136,48 +107,117 @@ Ext.define('Ext.grid.selection.Columns', {
     },
 
     /**
-     * @private
      * Returns the columns selected.
      * @returns {Ext.grid.column.Column[]} The columns selected.
      */
-    getSelected: function() {
+    getColumns: function() {
         return this.selectedColumns || [];
     },
 
-    selectAll: function() {
-        var me = this;
+    //-------------------------------------------------------------------------
 
-        me.clear();
-        me.selectedColumns = me.view.getVisibleColumnManager().getColumns();
-        me.refreshColumns.apply(me, me.selectedColumns);
-    },
+    privates: {
+        /**
+         * Adds the passed Column to the selection.
+         * @param {Ext.grid.column.Column} column
+         * @private
+         */
+        add: function(column) {
+            //<debug>
+            if (!column.isColumn) {
+                Ext.Error.raise('Column selection must be passed a grid Column header object');
+            }
+            //</debug>
 
-    refreshColumns: function(column) {
-        var me = this,
-            view = me.view,
-            rows = view.all,
-            rowIdx,
-            columns = arguments,
-            len = columns.length,
-            colIdx,
-            cellContext = new Ext.grid.CellContext(view),
-            selected = [];
+            Ext.Array.include((this.selectedColumns || (this.selectedColumns = [])), column);
+            this.refreshColumns(column);
+        },
 
-        for (colIdx = 0; colIdx < len; colIdx++) {
-            selected[colIdx] = me.contains(columns[colIdx]);
-        }
+        /**
+         * @private
+         */
+        clear: function() {
+            var me = this,
+                prevSelection = me.selectedColumns;
 
-        for (rowIdx = rows.startIndex; rowIdx <= rows.endIndex; rowIdx++) {
-            cellContext.setRow(rowIdx);
-            for (colIdx = 0; colIdx < len; colIdx++) {
-                // Note colIdx is not the column's visible index. setColumn must be passed the column object
-                cellContext.setColumn(columns[colIdx]);
-                if (selected[colIdx]) {
-                    view.onCellSelect(cellContext);
-                } else {
-                    view.onCellDeselect(cellContext);
+            if (prevSelection && prevSelection.length) {
+                me.selectedColumns = [];
+                me.refreshColumns.apply(me, prevSelection);
+            }
+        },
+
+        /**
+         * @return {Boolean}
+         * @private
+         */
+        isAllSelected: function() {
+            var selectedColumns = this.selectedColumns;
+
+            // All selected means all columns, across both views if we are in a locking assembly.
+            return selectedColumns && selectedColumns.length === this.view.ownerGrid.getVisibleColumnManager().getColumns().length;
+        },
+
+        /**
+         * @private
+         */
+        refreshColumns: function(column) {
+            var me = this,
+                view = me.view,
+                rows = view.all,
+                rowIdx,
+                columns = arguments,
+                len = columns.length,
+                colIdx,
+                cellContext = new Ext.grid.CellContext(view),
+                selected = [];
+
+            if (view.rendered) {
+                for (colIdx = 0; colIdx < len; colIdx++) {
+                    selected[colIdx] = me.contains(columns[colIdx]);
+                }
+
+                for (rowIdx = rows.startIndex; rowIdx <= rows.endIndex; rowIdx++) {
+                    cellContext.setRow(rowIdx);
+                    for (colIdx = 0; colIdx < len; colIdx++) {
+                        // Note colIdx is not the column's visible index. setColumn must be passed the column object
+                        cellContext.setColumn(columns[colIdx]);
+                        if (selected[colIdx]) {
+                            view.onCellSelect(cellContext);
+                        } else {
+                            view.onCellDeselect(cellContext);
+                        }
+                    }
                 }
             }
+        },
+
+        /**
+         * Removes the passed Column from the selection.
+         * @param {Ext.grid.column.Column} column
+         * @private
+         */
+        remove: function(column) {
+            //<debug>
+            if (!column.isColumn) {
+                Ext.Error.raise('Column selection must be passed a grid Column header object');
+            }
+            //</debug>
+
+            if (this.selectedColumns) {
+                Ext.Array.remove(this.selectedColumns, column);
+                this.refreshColumns(column);
+            }
+        },
+
+        /**
+         * @private
+         */
+        selectAll: function () {
+            var me = this;
+
+            me.clear();
+            me.selectedColumns = me.view.getVisibleColumnManager().getColumns();
+            me.refreshColumns.apply(me, me.selectedColumns);
         }
     }
 });

@@ -66,10 +66,9 @@ Ext.define('Ext.event.publisher.Publisher', {
            publishersByEvent = Ext.event.publisher.Publisher.publishersByEvent,
            handledEvents = events || me.handledEvents,
            ln = handledEvents.length,
-           i = 0,
-           eventName;
+           eventName, i;
 
-        for (; i < ln; i++) {
+        for (i = 0; i < ln; i++) {
             eventName = handledEvents[i];
             me.handles[eventName] = 1;
             publishersByEvent[eventName] = me;

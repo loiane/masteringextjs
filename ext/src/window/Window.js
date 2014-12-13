@@ -289,12 +289,7 @@ Ext.define('Ext.window.Window', {
      */
     hideMode: 'offsets',
 
-    /**
-     * @property {Boolean}
-     * A Window is always floating.
-     * @private
-     * @readonly
-     */
+    // Windows are always floating.
     floating: true,
 
     itemCls: Ext.baseCSSPrefix + 'window-item',

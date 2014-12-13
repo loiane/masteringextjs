@@ -112,7 +112,10 @@ Ext.define('Ext.view.BoundListKeyNav', {
             if (field.selectOnTab) {
                 this.selectHighlighted(e);
             }
-            field.collapse();
+            
+            if (field.collapse) {
+                field.collapse();
+            }
         }
 
         // Tab key event is allowed to propagate to field
@@ -132,7 +135,7 @@ Ext.define('Ext.view.BoundListKeyNav', {
 
         // Handle the case where the highlighted item is already selected
         // In this case, the change event won't fire, so just collapse
-        if (!field.multiSelect && count === selModel.getCount()) {
+        if (!field.multiSelect && count === selModel.getCount() && field.collapse) {
             field.collapse();
         }
     },

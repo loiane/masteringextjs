@@ -3,6 +3,9 @@
 @import "iconColors";
 @import "fix";
 
+@import "ux/statusbar.css";
+@import "ux/LiveSearchGridPanel.css";
+
 /** loading screen */
 .x-mask.splashscreen {
   background-color: white;

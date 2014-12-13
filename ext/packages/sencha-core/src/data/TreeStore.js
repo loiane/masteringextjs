@@ -341,8 +341,7 @@ Ext.define('Ext.data.TreeStore', {
     },
 
     afterEdit: function(node, modifiedFieldNames) {
-        var me = this,
-            filters = me.getFilters();
+        var me = this;
 
         if (me.needsLocalFilter()) {
             me.doFilter(node);
@@ -901,7 +900,6 @@ Ext.define('Ext.data.TreeStore', {
     onNodeInsert: function(parent, node, index) {
         var me = this,
             data = node.raw || node.data,
-            filters = me.getFilters(),
             refNode,
             sibling,
             storeReader,
@@ -909,7 +907,6 @@ Ext.define('Ext.data.TreeStore', {
             nodeReader,
             reader,
             dataRoot,
-            isVisible,
             childType;
 
         if (parent && me.needsLocalFilter()) {
@@ -1234,11 +1231,18 @@ Ext.define('Ext.data.TreeStore', {
     },
 
     /**
-     * Loads the Store using its configured {@link #proxy}.
+     * Loads the passed node (defaulting to the root node) using the configured {@link #cfg-proxy}.
+     *
+     * **Be aware that it is not usually valid for a developer to call this method on a TreeStore.**
+     *
+     * TreeStore loads are triggered by a load request from an existing {@link Ext.data.NodeInterface tree node},
+     * when the node is expanding, and it has no locally defined children in its data.
+     *
      * @param {Object} options (Optional) config object. This is passed into the {@link Ext.data.operation.Operation Operation}
      * object that is created and then sent to the proxy's {@link Ext.data.proxy.Proxy#read} function.
      * The options can also contain a node, which indicates which node is to be loaded. If not specified, it will
      * default to the root node.
+     * @param {Ext.data.NodeInterface} [options.node] The tree node to load. Defaults to the store's {@link #cfg-root root node}
      */
     load: function(options) {
         options = options || {};
@@ -1270,7 +1274,7 @@ Ext.define('Ext.data.TreeStore', {
             if (clearOnLoad) {
                 node.data.expanded = false;
             }
-            options.callback = function() {
+            options.callback = function(loadedNodes, operation, success) {
 
                 // If newly loaded nodes are to be added to the existing child node set, then we have to collapse
                 // first so that they get removed from the NodeStore, and the subsequent expand will reveal the
@@ -1281,7 +1285,7 @@ Ext.define('Ext.data.TreeStore', {
                 node.expand();
 
                 // Call the original callback (if any)
-                Ext.callback(callback, scope, arguments);
+                Ext.callback(callback, scope, [loadedNodes, operation, success]);
             };
         }
 

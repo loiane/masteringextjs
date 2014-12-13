@@ -46,9 +46,6 @@ Ext.define('Ext.grid.filters.filter.SingleFilter', {
             me.setColumnActive(true);
         }
 
-        // Perform any preprocessing now.
-        me.preprocess();
-
         me.filter = filter;
     },
 

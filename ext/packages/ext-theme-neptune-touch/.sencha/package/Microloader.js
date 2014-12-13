@@ -15,30 +15,16 @@ Ext.Microloader = Ext.Microloader || (function () {
     var Boot = Ext.Boot,
         _listeners = [],
         _loaded = false,
-        _tags = Boot.platformTags,
+
         Microloader = {
-
-            /**
-             * the global map of tags used
-             */
-            platformTags: _tags,
-
             detectPlatformTags: function () {
                 if (Ext.beforeLoad) {
-                    Ext.beforeLoad(_tags);
+                    Ext.beforeLoad(Ext.platformTags);
                 }
             },
 
             initPlatformTags: function () {
                 Microloader.detectPlatformTags();
-            },
-
-            getPlatformTags: function () {
-                return Boot.platformTags;
-            },
-
-            filterPlatform: function (platform) {
-                return Boot.filterPlatform(platform);
             },
 
             init: function () {

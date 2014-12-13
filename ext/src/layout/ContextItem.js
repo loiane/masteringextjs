@@ -1609,7 +1609,7 @@ Ext.define('Ext.layout.ContextItem', {
 
     writeProps: function(dirtyProps, flushing) {
         if (!(dirtyProps && typeof dirtyProps == 'object')) {
-            //<debug warn>
+            //<debug>
             Ext.Logger.warn('writeProps expected dirtyProps to be an object');
             //</debug>
             return;

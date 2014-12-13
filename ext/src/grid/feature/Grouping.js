@@ -586,7 +586,7 @@ Ext.define('Ext.grid.feature.Grouping', {
         }
     },
 
-    showMenuBy: function(t, header) {
+    showMenuBy: function(clickEvent, t, header) {
         var menu = this.getMenu(),
             groupMenuItem  = menu.down('#groupMenuItem'),
             groupMenuMeth = header.groupable === false || !header.dataIndex || this.view.headerCt.getVisibleGridColumns().length < 2 ?  'disable' : 'enable',
@@ -1245,13 +1245,17 @@ Ext.define('Ext.grid.feature.Grouping', {
         return [type, view, targetEl, this.getGroupName(targetEl), e];
     },
 
-    destroy: function(){
+    destroy: function() {
         var me = this,
             dataSource = me.dataSource;
 
+        Ext.destroy(me.storeListeners);
         me.view = me.prunedHeader = me.grid = me.groupCache = me.dataSource = null;
         me.callParent();
-        Ext.destroy(dataSource);
+        if (dataSource) {
+            dataSource.bindStore(null);
+            Ext.destroy(dataSource);
+        }
     },
 
     beforeReconfigure: function(grid, store, columns, oldStore, oldColumns) {

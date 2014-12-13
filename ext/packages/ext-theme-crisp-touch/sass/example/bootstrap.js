@@ -71,7 +71,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
             node: !isBrowser && (typeof require === 'function'),
             phantom: (typeof phantom !== 'undefined' && phantom.fs)
         },
-        _tags = {},
+        _tags = (Ext.platformTags = {}),
 
         _apply = function (object, config, defaults) {
             if (defaults) {
@@ -138,8 +138,6 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
             Request: Request,
 
             Entry: Entry,
-
-            platformTags: _tags,
 
             /**
              * The defult function that detects various platforms and sets tags
@@ -238,7 +236,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                     ios: (uaTags.iPad || uaTags.iPhone || uaTags.iPod),
                     android: uaTags.Android || uaTags.Silk,
                     blackberry: isBlackberry,
-                    safari: uaTags.Safari && isBlackberry,
+                    safari: uaTags.Safari && !isBlackberry,
                     chrome: uaTags.Chrome,
                     ie10: isIE10,
                     windows: isIE10 || uaTags.Trident,
@@ -292,19 +290,14 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                 return platform;
             },
 
-            getPlatformTags: function () {
-                return Boot.platformTags;
-            },
-
             filterPlatform: function (platform) {
                 platform = [].concat(platform);
-                var tags = Boot.getPlatformTags(),
-                    len, p, tag;
+                var len, p, tag;
 
                 for (len = platform.length, p = 0; p < len; p++) {
                     tag = platform[p];
-                    if (tags.hasOwnProperty(tag)) {
-                        return !!tags[tag];
+                    if (_tags.hasOwnProperty(tag)) {
+                        return !!_tags[tag];
                     }
                 }
                 return false;
@@ -1454,30 +1447,16 @@ Ext.Microloader = Ext.Microloader || (function () {
     var Boot = Ext.Boot,
         _listeners = [],
         _loaded = false,
-        _tags = Boot.platformTags,
+
         Microloader = {
-
-            /**
-             * the global map of tags used
-             */
-            platformTags: _tags,
-
             detectPlatformTags: function () {
                 if (Ext.beforeLoad) {
-                    Ext.beforeLoad(_tags);
+                    Ext.beforeLoad(Ext.platformTags);
                 }
             },
 
             initPlatformTags: function () {
                 Microloader.detectPlatformTags();
-            },
-
-            getPlatformTags: function () {
-                return Boot.platformTags;
-            },
-
-            filterPlatform: function (platform) {
-                return Boot.filterPlatform(platform);
             },
 
             init: function () {

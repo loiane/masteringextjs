@@ -1047,5 +1047,11 @@ Ext.define('Ext.data.BufferedStore', {
     clearAndLoad: function(options) {
         this.getData().clear();
         this.loadPage(1, options);
+    },
+    
+    privates: {
+        isMoving: function () {
+            return false;
+        }
     }
 });

@@ -7,7 +7,8 @@
 Ext.define('Ext.grid.locking.View', {
     alternateClassName: 'Ext.grid.LockingView',
     requires: [
-        'Ext.view.AbstractView'
+        'Ext.view.AbstractView',
+        'Ext.view.Table'
     ],
 
     mixins: [
@@ -32,9 +33,10 @@ Ext.define('Ext.grid.locking.View', {
             normalView;
 
         me.ownerGrid = config.ownerGrid;
+        me.ownerGrid.view = me;
 
         // A single NavigationModel is configured into both views.
-        me.navigationModel = new Ext.grid.NavigationModel(me);
+        me.navigationModel = config.locked.xtype === 'treepanel' ? new Ext.tree.NavigationModel(me) : new Ext.grid.NavigationModel(me);
 
         // Disable store binding for the two child views.
         // The store is bound to the *this* locking View.
@@ -42,6 +44,7 @@ Ext.define('Ext.grid.locking.View', {
         // and also avoids the store being bound to the selection model twice.
         config.locked.viewConfig.bindStore = Ext.emptyFn;
         config.normal.viewConfig.bindStore = me.subViewBindStore;
+        config.normal.viewConfig.isNormalView = config.locked.viewConfig.isLockedView = true;
 
         // Override the point at which first refresh is kicked off.
         // The initial refresh of both sides must take place within a layout suspension
@@ -84,7 +87,6 @@ Ext.define('Ext.grid.locking.View', {
         me.normalGrid = me.ownerGrid.normalGrid = Ext.ComponentManager.create(config.normal);
         lockedView.lockingPartner = normalView = me.normalView = me.normalGrid.getView();
         normalView.lockingPartner = lockedView;
-        lockedView.isLockedView   = normalView.isNormalView = true;
 
         me.loadMask = (config.loadMask !== undefined) ? config.loadMask : me.loadMask;
 
@@ -114,6 +116,10 @@ Ext.define('Ext.grid.locking.View', {
         me.loadingText = normalView.loadingText;
         me.loadingCls = normalView.loadingCls;
         me.loadingUseMsg = normalView.loadingUseMsg;
+
+        // Share the items arrey with the normal view.
+        // Certain methods need access to the start/end/count
+        me.all = normalView.all;
 
         // Bind to the data source. Cache it by the property name "dataSource".
         // The store property is public and must reference the provided store.
@@ -265,15 +271,16 @@ Ext.define('Ext.grid.locking.View', {
     relayFn: function(name, args){
         args = args || [];
 
-        var view = this.lockedView;
+        var me = this,
+            view = me.lockedView;
 
         // Flag that we are already manipulating the view pair, so resulting excursions
         // back into this class can avoid breaking the sequence.
-        this.relayingOperation = true;
+        me.relayingOperation = true;
         view[name].apply(view, args);
-        view = this.normalView;
+        view = me.normalView;
         view[name].apply(view, args);
-        this.relayingOperation = false;
+        me.relayingOperation = false;
     },
 
     getSelectionModel: function(){
@@ -409,9 +416,14 @@ Ext.define('Ext.grid.locking.View', {
     },
 
     focus: function() {
-        this.getFocusEl().focus();
+        // Delegate to the view of first visible child tablepanel of the owning lockable assembly.
+        var target = this.ownerGrid.down('>tablepanel:not(hidden)>tableview');
+
+        if (target) {
+            target.focus();
+        }
     },
-    
+
     focusRow: function(row) {
         var view,
             // Access lastFocused directly because getter nulls it if the record is no longer in view
@@ -461,6 +473,37 @@ Ext.define('Ext.grid.locking.View', {
         }
     },
 
+    getHeaderByCell: function(cell) {
+        if (cell) {
+            return this.getVisibleColumnManager().getHeaderById(cell.getAttribute('data-columnId'));
+        }
+        return false;
+    },
+
+    onRowSelect: function() {
+        this.relayFn('onRowSelect', arguments);
+    },
+
+    onRowDeselect: function() {
+        this.relayFn('onRowDeselect', arguments);
+    },
+
+    onCellSelect: function(cellContext) {
+        // Pass a contextless cell descriptor to the child view
+        cellContext.column.getView().onCellSelect({
+            record: cellContext.record,
+            column: cellContext.column
+        });
+    },
+
+    onCellDeselect: function(cellContext) {
+        // Pass a contextless cell descriptor to the child view
+        cellContext.column.getView().onCellDeselect({
+            record: cellContext.record,
+            column: cellContext.column
+        });
+    },
+
     getCellByPosition: function(pos, returnDom) {
         var me = this,
             view = pos.view,
@@ -484,6 +527,19 @@ Ext.define('Ext.grid.locking.View', {
     scrollBy: function(){
         var normal = this.normalView;
         normal.scrollBy.apply(normal, arguments);
+    },
+
+    ensureVisible: function() {
+        var normal = this.normalView;
+        normal.ensureVisible.apply(normal, arguments);
+    },
+
+    disable: function() {
+        this.relayFn('disable', arguments);
+    },
+
+    enable: function() {
+        this.relayFn('enable', arguments);
     },
 
     addElListener: function() {
@@ -520,4 +576,5 @@ Ext.define('Ext.grid.locking.View', {
 }, function() {
     this.borrow(Ext.Component, ['up']);
     this.borrow(Ext.view.AbstractView, ['doFirstRefresh', 'applyFirstRefresh']);
+    this.borrow(Ext.view.Table, ['cellSelector', 'selectedCellCls', 'selectedItemCls']);
 });

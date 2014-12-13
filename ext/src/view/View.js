@@ -565,7 +565,10 @@ Ext.define('Ext.view.View', {
         
         // We need to prevent default action on navigation keys
         // that can cause View element scroll unless the event is from an input field.
-        if (isKeyEvent && !Ext.fly(e.target).isInputField() && e.isNavKeyPress(true)) {
+        // We MUST prevent browser's default action on SPACE which is to focus the event's target element.
+        // Focusing causes the browser to attempt to scroll the element into view.
+        
+        if (isKeyEvent && ((e.getKey() === e.SPACE && !Ext.fly(e.target).isInputField()) || e.isNavKeyPress(true))) {
             e.preventDefault();
         }
     },

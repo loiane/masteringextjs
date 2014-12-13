@@ -16,7 +16,7 @@ Ext.define('Ext.selection.TreeModel', {
      * `true` to select the row when clicking on the icon to collapse or expand
      * a tree node.
      *
-     * @since 5.0.2
+     * @since 5.1.0
      */
     selectOnExpanderClick: false,
 
@@ -62,8 +62,9 @@ Ext.define('Ext.selection.TreeModel', {
     },
 
     vetoSelection: function(e) {
-        var select = this.selectOnExpanderClick,
-            veto = !select && e.type === 'click' && e.getTarget(this.view.expanderSelector);
+        var view = this.view,
+            select = this.selectOnExpanderClick,
+            veto = !select && e.type === 'click' && e.getTarget(view.expanderSelector || (view.lockingPartner && view.lockingPartner.expanderSelector));
 
         return veto || this.callParent([e]);
     },

@@ -1,7 +1,7 @@
 /**
  * An extended {@link Ext.dom.Element} object that supports a shadow and shim
  *
- * @deprecated 5.0.2 Ext.dom.Element now includes support for shadow and shim
+ * @deprecated 5.1.0 Ext.dom.Element now includes support for shadow and shim
  * see {@link Ext.dom.Element#enableShadow enableShadow} and
  * {@link Ext.dom.Element#enableShim enableShim}
  */

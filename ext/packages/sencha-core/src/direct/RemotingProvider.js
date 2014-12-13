@@ -19,10 +19,13 @@ Ext.define('Ext.direct.RemotingProvider', {
         'Ext.util.MixedCollection', 
         'Ext.util.DelayedTask', 
         'Ext.direct.Transaction',
-        'Ext.direct.RemotingMethod'
+        'Ext.direct.RemotingMethod',
+        'Ext.direct.Manager'
     ],
-   
-   /**
+    
+    type: 'remoting',
+    
+    /**
      * @cfg {Object} actions
      *
      * Object literal defining the server side actions and methods. For example, if
@@ -254,18 +257,25 @@ Ext.define('Ext.direct.RemotingProvider', {
         me.callBuffer = [];
     },
     
+    doConnect: function() {
+        if (!this.apiCreated) {
+            this.initAPI();
+            this.apiCreated = true;
+        }
+    },
+    
     /**
      * Get nested namespace by property.
      *
      * @private
      */
     getNamespace: function(root, action) {
-        var parts, ns, i, l;
+        var parts, ns, i, len;
         
         root  = root || Ext.global;
         parts = action.toString().split('.');
 
-        for (i = 0, l = parts.length; i < l; i++) {
+        for (i = 0, len = parts.length; i < len; i++) {
             ns   = parts[i];
             root = root[ns];
 
@@ -284,12 +294,12 @@ Ext.define('Ext.direct.RemotingProvider', {
      * @private
      */
     createNamespaces: function(root, action) {
-        var parts, ns;
+        var parts, ns, i, len;
         
         root  = root || Ext.global;
         parts = action.toString().split('.');
         
-        for ( var i = 0, l = parts.length; i < l; i++ ) {
+        for (i = 0, len = parts.length; i < len; i++) {
             ns = parts[i];
             
             root[ns] = root[ns] || {};
@@ -308,6 +318,7 @@ Ext.define('Ext.direct.RemotingProvider', {
         var me = this,
             actions = me.actions,
             namespace = me.namespace,
+            Manager = Ext.direct.Manager,
             action, cls, methods, i, len, method, handler;
             
         for (action in actions) {
@@ -332,7 +343,8 @@ Ext.define('Ext.direct.RemotingProvider', {
                 for (i = 0, len = methods.length; i < len; ++i) {
                     method = new Ext.direct.RemotingMethod(methods[i]);
                     cls[method.name] = handler = me.createHandler(action, method);
-                    handler.name = methods[i];
+                    
+                    Manager.registerMethod(handler.$name, handler);
                 }
             }
         }
@@ -363,8 +375,11 @@ Ext.define('Ext.direct.RemotingProvider', {
                 me.configureFormRequest(action, method, slice.call(arguments, 0));
             };
         }
-
-        handler.directCfg = {
+        
+        handler.name = handler.$name = action + '.' + method.name;
+        handler.$directFn = true;
+        
+        handler.directCfg = handler.$directCfg = {
             action: action,
             method: method
         };
@@ -375,41 +390,19 @@ Ext.define('Ext.direct.RemotingProvider', {
     /**
      * @inheritdoc
      */
-    isConnected: function() {
-        return !!this.connected;
-    },
-
-    /**
-     * @inheritdoc
-     */
     connect: function() {
         var me = this;
-        
-        if (me.url) {
-            me.initAPI();
-            me.connected = true;
-            me.fireEvent('connect', me);
-        }
+
         //<debug>
-        else if (!me.url) {
+        if (!me.url) {
             Ext.Error.raise('Error initializing RemotingProvider "' + me.id +
                             '", no url configured.');
         }
         //</debug>
+        
+        me.callParent();
     },
 
-    /**
-     * @inheritdoc
-     */
-    disconnect: function() {
-        var me = this;
-        
-        if (me.connected) {
-            me.connected = false;
-            me.fireEvent('disconnect', me);
-        }
-    },
-    
     /**
      * Run any callbacks related to the transaction.
      *
@@ -767,5 +760,14 @@ Ext.define('Ext.direct.RemotingProvider', {
             isUpload: transaction.isUpload,
             transaction: transaction
         });
+    },
+    
+    inheritableStatics: {
+        checkConfig: function(config) {
+            // RemotingProvider needs service URI,
+            // type and array of Actions
+            return config && config.type === 'remoting' &&
+                   config.url && Ext.isArray(config.actions);
+        }
     }
 });

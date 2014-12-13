@@ -530,7 +530,8 @@ Ext.define('Ext.scroll.TouchScroller', {
                 innerElement = innerElement.dom.firstChild;
             }
 
-            if (!innerElement || !Ext.fly(innerElement).hasCls(me.scrollerCls)) {
+            if (!innerElement || innerElement.nodeType !== 1 ||
+                    !Ext.fly(innerElement).hasCls(me.scrollerCls)) {
                 // no scrollerEl found, generate one now
                 innerElement = me.wrapContent(element);
             }
@@ -1386,7 +1387,7 @@ Ext.define('Ext.scroll.TouchScroller', {
         toggleResizeListeners: function(on) {
             var me = this,
                 element = me.getElement(),
-                method = on ? 'addListener' : 'removeListener';
+                method = on ? 'on' : 'un';
 
             if (element) {
                 element[method]('resize', 'onElementResize', me);

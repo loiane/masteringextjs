@@ -13,7 +13,7 @@ Ext.define('Ext.selection.DataViewModel', {
     /**
      * @cfg {Boolean} [enableKeyNav=true]
      *
-     * @deprecated 5.0.2 Keyboard navigation is a function of the view's {@link Ext.view.NavigationModel navigation model}, 
+     * @deprecated 5.1.0 Keyboard navigation is a function of the view's {@link Ext.view.NavigationModel navigation model},
      * and is enabled for accessibilty purposes.
      */
 

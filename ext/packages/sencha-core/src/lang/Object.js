@@ -272,7 +272,7 @@ var TemplateClass = function(){},
                     matchedKeys = name.match(/(\[):?([^\]]*)\]/g);
                     matchedName = name.match(/^([^\[]+)/);
 
-                    //<debug error>
+                    //<debug>
                     if (!matchedName) {
                         throw new Error('[Ext.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"');
                     }

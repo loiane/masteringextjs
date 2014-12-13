@@ -331,11 +331,23 @@ Ext.define('Ext.dom.Helper', function() {
         createDom: function(o, parentNode){
             var me = this,
                 markup = me.markup(o),
-                div = me.detachedDiv;
+                div = me.detachedDiv,
+                child;
 
             div.innerHTML = markup;
+            child = div.firstChild;
 
-            return div.firstChild;
+            // Important to clone the node here, IE8 & 9 have an issue where the markup
+            // in the first element will be lost.
+            // var ct = document.createElement('div'),
+            //     a, b;
+            //     ct.innerHTML = '<div>markup1</div>';
+            //     a = ct.firstChild;
+            //     ct.innerHTML = '<div>markup2</div>';
+            //     b = ct.firstChild;
+            //     console.log(a.innerHTML, b.innerHTML);
+
+            return Ext.supports.ChildContentClearedWhenSettingInnerHTML ? child.cloneNode(true) : child;
         },
 
         /**

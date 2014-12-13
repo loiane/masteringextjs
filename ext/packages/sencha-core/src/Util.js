@@ -543,7 +543,7 @@ Ext.apply(Ext, {
             return instance || Ext.create(classReference);
         }
 
-        //<debug error>
+        //<debug>
         if (!Ext.isObject(config)) {
             Ext.Logger.error("Invalid config, must be a valid config object");
         }

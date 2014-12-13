@@ -61,15 +61,25 @@ describe("Ext.direct.PollingProvider", function() {
         Ext.util.TaskManager.stopAll();
     });
     
+    describe("construction", function() {
+        it("should create pollTask", function() {
+            expect(provider.pollTask.isTask).toBe(true);
+        });
+        
+        it("should not start pollTask", function() {
+            expect(provider.pollTask.stopped).toBe(true);
+        });
+    });
+    
     describe("should handle connect:", function() {
         beforeEach(function() {
             spyOn(provider, 'runPoll').andReturn();
         });
         
-        it("creates poll task", function() {
+        it("starts poll task", function() {
             provider.connect();
             
-            expect(provider.pollTask).toBeDefined();
+            expect(provider.pollTask.pending).toBe(true);
         });
         
         it("fires 'connect' event", function() {
@@ -111,10 +121,10 @@ describe("Ext.direct.PollingProvider", function() {
             provider.connect();
         });
         
-        it("destroys polling task", function() {
+        it("stops polling task", function() {
             provider.disconnect();
             
-            expect(provider.pollTask).toBeUndefined();
+            expect(provider.pollTask.stopped).toBe(true);
         });
         
         it("fires 'disconnect' event", function() {
@@ -237,6 +247,51 @@ describe("Ext.direct.PollingProvider", function() {
                     expect(args[0]).toEqual({ bar: 'baz' });
                 });
             });
+        });
+    });
+    
+    describe("getInterval", function() {
+        it("should return default interval", function() {
+            expect(provider.getInterval()).toBe(3000);
+        });
+        
+        it("should return actual pollTask interval", function() {
+            provider.pollTask.interval = 5000;
+            
+            expect(provider.getInterval()).toBe(5000);
+        });
+    });
+    
+    describe("setInterval", function() {
+        it("should raise error when interval is too short", function() {
+            expect(function() {
+                provider.setInterval(10);
+            }).toThrow(
+                'Attempting to configure PollProvider ' + provider.id +
+                ' with interval that is less than 100ms.'
+            );
+        });
+        
+        it("should set new interval config", function() {
+            provider.setInterval(5000);
+            
+            expect(provider.interval).toBe(5000);
+        });
+        
+        it("should set pollTask interval", function() {
+            provider.setInterval(10000);
+            
+            expect(provider.pollTask.interval).toBe(10000);
+        });
+        
+        it("should restart pollTask if connected", function() {
+            provider.connect();
+            
+            spyOn(provider.pollTask, 'restart');
+            
+            provider.setInterval(15000);
+            
+            expect(provider.pollTask.restart).toHaveBeenCalled();
         });
     });
     

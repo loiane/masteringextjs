@@ -4113,13 +4113,14 @@ jasmine.simulateArrowKey = function(from, key) {
 // In IE, focus events are asynchronous so we often have to wait
 // after attempting to focus something. Otherwise tests will fail.
 jasmine.waitForFocus = jasmine.waitsForFocus = function(cmp, desc, timeout) {
-    var dom = cmp.isComponent ? cmp.getFocusEl().dom
-            : cmp.isElement   ? cmp.dom
-            :                   cmp
-        ;
+    var isComponent = cmp.isComponent,
+        dom = isComponent   ? cmp.getFocusEl().dom
+            : cmp.isElement ? cmp.dom
+            :                 cmp,
+        id = isComponent ? (cmp.itemId || cmp.id) : dom.id;
     
     if (!desc) {
-        desc = dom.id + ' to focus';
+        desc = id + ' to focus';
     }
 
     // Default to Jasmine's default timeout.

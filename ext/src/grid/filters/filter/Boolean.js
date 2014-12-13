@@ -77,7 +77,8 @@ Ext.define('Ext.grid.filters.filter.Boolean', {
         me.filter.setValue(value);
 
         if (value !== undefined && me.active) {
-            me.updateStoreFilter(me.filter);
+            me.value = value;
+            me.updateStoreFilter();
         } else {
             me.setActive(true);
         }

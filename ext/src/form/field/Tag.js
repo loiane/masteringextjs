@@ -297,7 +297,9 @@ Ext.define('Ext.form.field.Tag', {
                     scope: me,
                     filterFn: me.filterPicked
                 });
+                me.changingFilters = true;
                 store.filter(me.listFilter);
+                me.changingFilters = false;
             }
         }
     },
@@ -321,7 +323,9 @@ Ext.define('Ext.form.field.Tag', {
         }
 
         if (me.filterPickList) {
+            me.changingFilters = true;
             store.removeFilter(me.listFilter);
+            me.changingFilters = false;
         }
         me.callParent(arguments);
     },
@@ -337,7 +341,9 @@ Ext.define('Ext.form.field.Tag', {
 
         // Ensure the source store is filtered down
         if (me.filterPickList) {
+            me.changingFilters = true;
             me.store.filter(me.listFilter);
+            me.changingFilters = false;
         }
         me.callParent();
 
@@ -349,6 +355,8 @@ Ext.define('Ext.form.field.Tag', {
         }
         Ext.resumeLayouts(true);
     },
+
+    checkValueOnDataChange: Ext.emptyFn,
 
     onSelectionChange: function(selModel, selectedRecs) {
         this.applyMultiselectItemMarkup();

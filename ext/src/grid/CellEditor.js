@@ -5,14 +5,33 @@
 Ext.define('Ext.grid.CellEditor', {
     extend: 'Ext.Editor',
 
+    alignment: 'l-l?',
+
+    hideEl : false,
+
+    cls: Ext.baseCSSPrefix + 'small-editor ' +
+        Ext.baseCSSPrefix + 'grid-editor ' +
+        Ext.baseCSSPrefix + 'grid-cell-editor',
+
+    treeNodeSelector: '.' + Ext.baseCSSPrefix + 'tree-node-text',
+
+    shim: false,
+
+    shadow: false,
+
     constructor: function(config) {
-        // Editor must appear at the top so that it does not contribute to scrollbars
+        var field;
+
+        // Editor must appear at the top so that it does not contribute to scrollbars.
         this.y = 0;
+
         config = Ext.apply({}, config);
-        
-        if (config.field) {
-            config.field.monitorTab = false;
+        field = config.field;
+
+        if (field) {
+            field.monitorTab = false;
         }
+
         this.callParent([config]);
     },
 
@@ -255,7 +274,7 @@ Ext.define('Ext.grid.CellEditor', {
         if (grid.columnLines) {
             // Subtract the column border width so that the editor displays inside the
             // borders. The column border could be either on the left or the right depending
-            // on whether the grid is RTL - using the sum of both borders works in both modes. 
+            // on whether the grid is RTL - using the sum of both borders works in both modes.
             width -= boundEl.getBorderWidth('rl');
         }
 
@@ -267,7 +286,9 @@ Ext.define('Ext.grid.CellEditor', {
         if (isEmpty) {
             innerCell.dom.innerHTML = 'X';
         }
+
         me.alignTo(innerCell, me.alignment, offsets);
+
         if (isEmpty) {
             innerCell.dom.firstChild.data = v;
         }
@@ -286,18 +307,14 @@ Ext.define('Ext.grid.CellEditor', {
     },
 
     onFocusLeave : function(e) {
+        // We are going to hide because of this focus exit.
+        // Ensure that hide processing does not throw focus back to the previously focused element.
+        this.previousFocus = null;
+
         this.callParent([e]);
+
         // Reset the flag that may have been set by CellEditing#startEdit to prevent
         // Ext.Editor#onFieldBlur from canceling editing.
         this.selectSameEditor = false;
-    },
-
-    alignment: "l-l",
-    hideEl : false,
-    cls: Ext.baseCSSPrefix + 'small-editor ' +
-        Ext.baseCSSPrefix + 'grid-editor ' + 
-        Ext.baseCSSPrefix + 'grid-cell-editor',
-    treeNodeSelector: '.' + Ext.baseCSSPrefix + 'tree-node-text',
-    shim: false,
-    shadow: false
+    }
 });

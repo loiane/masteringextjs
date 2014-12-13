@@ -402,6 +402,34 @@ Ext.define('Ext.util.Focusable', {
         }
     },
     
+    /**
+     * @template
+     * @protected
+     * Called when focus enters this Component's hierarchy
+     * @param {type} e
+     */
+    onFocusEnter: function(e) {
+        var me = this;
+
+        me.previousFocus = e.relatedTarget;
+        me.containsFocus = true;
+        me.fireEvent('focusenter', me, e);
+    },
+
+    /**
+     * @template
+     * @protected
+     * Called when focus exits from this Component's hierarchy
+     * @param {type} e
+     */
+    onFocusLeave: function(e) {
+        var me = this;
+
+        me.previousFocus = null;
+        me.containsFocus = false;
+        me.fireEvent('focusleave', me, e);
+    },
+
     privates: {
         /**
          * Sets up the focus listener on this Component's {@link #getFocusEl focusEl} if it has one.

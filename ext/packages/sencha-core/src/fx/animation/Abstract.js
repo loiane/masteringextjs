@@ -154,7 +154,7 @@ Ext.define('Ext.fx.animation.Abstract', {
         if (stateInstance) {
             states[name] = stateInstance;
         }
-        //<debug error>
+        //<debug>
         else if (name === this.STATE_TO) {
             Ext.Logger.error("Setting and invalid '100%' / 'to' state of: " + state);
         }

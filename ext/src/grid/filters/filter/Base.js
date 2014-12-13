@@ -100,9 +100,15 @@ Ext.define('Ext.grid.filters.filter.Base', {
      * @param {Object} config
      */
     constructor: function (config) {
-        var me = this;
+        var me = this,
+            column;
 
         me.initConfig(config);
+
+        column = me.column;
+        column.on('destroy', me.destroy, me);
+        me.dataIndex = me.dataIndex || column.dataIndex;
+
         me.task = new Ext.util.DelayedTask(me.setValue, me);
     },
 
@@ -127,7 +133,7 @@ Ext.define('Ext.grid.filters.filter.Base', {
         config.id = this.getBaseIdPrefix();
 
         if (!config.property) {
-            config.property = this.column.dataIndex;
+            config.property = this.dataIndex;
         }
 
         if (!config.root) {
@@ -151,7 +157,7 @@ Ext.define('Ext.grid.filters.filter.Base', {
     },
 
     getBaseIdPrefix: function () {
-        return this.filterIdPrefix + '-' + this.column.dataIndex;
+        return this.filterIdPrefix + '-' + this.dataIndex;
     },
 
     getMenuConfig: function () {
@@ -246,9 +252,12 @@ Ext.define('Ext.grid.filters.filter.Base', {
         if (me.active !== active) {
             me.active = active;
 
+            // The store filter will be updated, but we don't want to recreate the list store or the menu items in the
+            // onDataChanged listener so we need to set this flag.
+            me.preventDefault = true;
+
             filterCollection = me.getGridStore().getFilters();
             filterCollection.beginUpdate();
-
             if (active) {
                 me.activate();
             } else {
@@ -256,6 +265,8 @@ Ext.define('Ext.grid.filters.filter.Base', {
             }
 
             filterCollection.endUpdate();
+
+            me.preventDefault = false;
 
             // Make sure we update the 'Filters' menu item.
             if (menuItem && menuItem.activeFilter === me) {
@@ -272,23 +283,23 @@ Ext.define('Ext.grid.filters.filter.Base', {
     },
 
     showMenu: function (menuItem) {
-        if (!this.menu) {
-            this.createMenu();
+        var me = this;
+
+        if (!me.menu) {
+            me.createMenu();
         }
 
-        menuItem.activeFilter = this;
+        menuItem.activeFilter = me;
 
-        menuItem.setMenu(this.menu, false);
-        menuItem.setChecked(this.active);
+        menuItem.setMenu(me.menu, false);
+        menuItem.setChecked(me.active);
         // Disable the menu if filter.disabled explicitly set to true.
-        menuItem.setDisabled(this.disabled === true);
+        menuItem.setDisabled(me.disabled === true);
 
-        if (this.active) {
-            this.activate(/*showingMenu*/ true);
-        }
+        me.activate(/*showingMenu*/ true);
     },
 
-    updateStoreFilter: function (filter) {
+    updateStoreFilter: function () {
         this.getGridStore().getFilters().notify('endupdate');
     }
 });

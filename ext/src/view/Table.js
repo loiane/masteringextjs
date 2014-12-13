@@ -24,6 +24,12 @@ Ext.define('Ext.view.Table', {
         'Ext.util.MixedCollection'
     ],
 
+    /*
+     * @property {Boolean}
+     * `true` in this class to identify an object as an instantiated Ext.view.TableView, or subclass thereof.
+     */
+    isTableView: true,
+
     config: {
         selectionModel: {
             type: 'rowmodel'
@@ -222,6 +228,22 @@ Ext.define('Ext.view.Table', {
      * @readonly
      * @private
      * @since 5.0.0
+     */
+
+    /**
+     * @method disable
+     * Disable this view.
+     *
+     * Disables interaction with, and masks this view.
+     *
+     * Note that the encapsulating {@link Ext.panel.Table} panel is *not* disabled, and other *docked*
+     * components such as the panel header, the column header container, and docked toolbars will still be enabled.
+     * The panel itself can be disabled if that is required, or individual docked components could be disabled.
+     *
+     * See {@link Ext.panel.Table #disableColumnHeaders disableColumnHeaders} and {@link Ext.panel.Table #enableColumnHeaders enableColumnHeaders}.
+     *
+     * @param {Boolean} [silent=false] Passing `true` will suppress the `disable` event from being fired.
+     * @since 1.1.0
      */
 
     /**
@@ -1193,13 +1215,10 @@ Ext.define('Ext.view.Table', {
         }
     },
 
-    // Masking a TableView masks its owning GridPanel
     getMaskTarget: function() {
-        var grid = this.ownerCt;
-        if (grid.ownerLockable) {
-            grid = grid.ownerLockable;
-        }
-        return grid.getMaskTarget();
+        // Masking a TableView masks its IMMEDIATE parent GridPanel's body.
+        // Disabling/enabling a locking view relays the call to both child views.
+        return this.ownerCt.body;
     },
 
     statics: {
@@ -1794,12 +1813,16 @@ Ext.define('Ext.view.Table', {
         // CellEditors are rendered into the view's encapculating element,
         // So focusleave will fire when they are programatically blurred.
         // We will not have focus at that point.
-        if (this.cellFocused) {
+        if (me.cellFocused) {
 
-            // Blur the focused cell
-            me.getNavigationModel().setPosition(null, null, e.event, null, true);
+            // Blur the focused cell unless we are navigating into a locking partner,
+            // in which case, the focus of that will setPosition to the target
+            // without an intervening position to null.
+            if (e.toComponent !== me.lockingPartner) {
+                me.getNavigationModel().setPosition(null, null, e.event, null, true);
+            }
 
-            this.cellFocused = false;
+            me.cellFocused = false;
             me.focusEl = me.el;
             me.focusEl.dom.setAttribute('tabindex', 0);
         }
@@ -1985,8 +2008,6 @@ Ext.define('Ext.view.Table', {
             newItemDom,
             newAttrs, attLen, attName, attrIndex,
             overItemCls,
-            focusedItemCls,
-            selectedItemCls,
             columns,
             column,
             len, i,
@@ -2291,22 +2312,10 @@ Ext.define('Ext.view.Table', {
      */
     refresh: function() {
         var me = this,
-            navModel = me.getNavigationModel(),
-            lastFocusPosition = navModel.getPosition(),
             scroller;
-
-        // Clone position to restore to because the blur caused by refresh will null the NavModel's position object.
-        lastFocusPosition = lastFocusPosition && lastFocusPosition.clone();
 
         me.callParent(arguments);
 
-        // If the grid contained focus before the refresh, it will have been lost to the document body
-        // Restore focus to the last focused position after refresh.
-        // Pass "preventNavigation" as true so that that does not cause selection.
-        if (lastFocusPosition) {
-            me.cellFocused = true;
-            navModel.setPosition(lastFocusPosition, null, null, null, true);
-        }
         me.headerCt.setSortState();
 
         // Create horizontal stretcher element if no records in view and there is overflow of the header container.

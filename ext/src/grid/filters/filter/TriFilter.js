@@ -97,7 +97,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             fields = me.fields,
             filter, field, operator, value;
 
-        if (me.settingValue) {
+        if (me.preventFilterRemoval) {
             return;
         }
 
@@ -124,31 +124,33 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
      * This method will be called when a filter is deactivated. The UI and the store will be synced.
      */
     deactivate: function () {
-        var filters = this.filter,
+        var me = this,
+            filters = me.filter,
             f, filter;
 
-        if (!this.hasActiveFilter() || this.settingValue) {
+        if (!me.hasActiveFilter() || me.preventFilterRemoval) {
             return;
         }
 
-        this.settingValue = true;
+        me.preventFilterRemoval = true;
 
         for (f in filters) {
             filter = filters[f];
 
             if (filter.getValue()) {
-                this.removeStoreFilter(filter);
+                me.removeStoreFilter(filter);
             }
         }
 
-        this.settingValue = false;
+        me.preventFilterRemoval = false;
     },
 
     hasActiveFilter: function () {
         var active = false,
             filters = this.filter,
             filterCollection = this.getGridStore().getFilters(),
-            prefix = this.getBaseIdPrefix();
+            prefix = this.getBaseIdPrefix(),
+            filter;
 
         if (filterCollection.length) {
             for (filter in filters) {
@@ -190,11 +192,11 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             filterCollection = me.getGridStore().getFilters(),
             field, filter, v, i, len;
 
-        if (me.settingValue) {
+        if (me.preventFilterRemoval) {
             return;
         }
 
-        me.settingValue = true;
+        me.preventFilterRemoval = true;
 
         if ('eq' in value) {
             v = filters.lt.getValue();
@@ -254,7 +256,7 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
                     me.removeStoreFilter(filter);
                 }
             }
-            
+
             if (add.length) {
                 for (i = 0, len = add.length; i < len; i++) {
                     me.addStoreFilter(add[i].filter);
@@ -274,6 +276,6 @@ Ext.define('Ext.grid.filters.filter.TriFilter', {
             me.setActive(active);
         }
 
-        me.settingValue = false;
+        me.preventFilterRemoval = false;
     }
 });

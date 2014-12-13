@@ -873,12 +873,12 @@ Ext.define('Ext.layout.Context', {
                 newEntry = newQueue[newIndex];
                 newComp = newEntry.item.target;
                 
-                if (!oldComp.floating && oldComp.up(newComp)) {
+                if (oldComp.isLayoutChild(newComp)) {
                     keep = false;
                     break;
                 }
                 
-                if (!newComp.floating && newComp.up(oldComp)) {
+                if (newComp.isLayoutChild(oldComp)) {
                     Ext.Array.erase(newQueue, newIndex, 1);
                 }
             }
@@ -954,7 +954,7 @@ Ext.define('Ext.layout.Context', {
                 return;
             }
 
-            if (oldComp.floating || !oldComp.up(comp)) {
+            if (!oldComp.isLayoutChild(comp)) {
                 newQueue.push(old); // comp does not contain oldComp
             }
             // else if (oldComp isDescendant of comp) skip

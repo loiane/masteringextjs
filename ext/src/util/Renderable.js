@@ -1130,7 +1130,7 @@ Ext.define('Ext.util.Renderable', {
                     frameInfo = false;
                 }
 
-                //<debug error>
+                //<debug>
                 // This happens when you set frame: true explicitly without using the x-frame mixin in sass.
                 // This way IE can't figure out what sizes to use and thus framing can't work.
                 if (me.frame === true && !frameInfo) {

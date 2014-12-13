@@ -291,7 +291,7 @@ Ext.define('Ext.menu.Item', {
         me.callParent([e]);
 
         if (!me.plain) {
-            me.el.addCls(me.activeCls);
+            me.addCls(me.activeCls);
         }
 
         me.activated = true;
@@ -307,7 +307,7 @@ Ext.define('Ext.menu.Item', {
 
         if (me.activated) {
             if (!me.plain) {
-                me.el.removeCls(me.activeCls);
+                me.removeCls(me.activeCls);
             }
 
             me.doHideMenu();
@@ -336,38 +336,42 @@ Ext.define('Ext.menu.Item', {
      * Walks up the refOwner axis to find topmost floating Menu and hides that.
      */
     deferHideParentMenus: function() {
-        var topMenu = this.ownerCt;
+        var topMenu = this.getRefOwner(),
+            owner;
 
-        // Walk up the refOwner axis until we find the topmost floating menu.
         if (topMenu.floating) {
-            topMenu.bubble(function(ancestor) {
-                if (!ancestor.floating) {
+            topMenu.bubble(function(parent) {
+                if (!parent.floating && !parent.isMenuItem) {
                     return false;
                 }
-                if (ancestor.isMenu) {
-                    topMenu = ancestor;
+                if (parent.isMenu) {
+                    topMenu = parent;
                 }
             });
-            // Hide the topmost Menu that we found.
             topMenu.hide();
         }
     },
 
-    expandMenu: function(delay) {
+    expandMenu: function(event, delay) {
         var me = this;
 
         if (me.menu) {
+
+            // hideOnClick makes no sense when there's a child menu
+            me.hideOnClick = false;
+
             me.cancelDeferHide();
             if (delay === 0) {
-                me.doExpandMenu();
+                me.doExpandMenu(event);
             } else {
                 clearTimeout(me.expandMenuTimer);
-                me.expandMenuTimer = Ext.defer(me.doExpandMenu, Ext.isNumber(delay) ? delay : me.menuExpandDelay, me);
+                // Delay can't be 0 by this point
+                me.expandMenuTimer = Ext.defer(me.doExpandMenu, delay || me.menuExpandDelay, me, [event]);
             }
         }
     },
 
-    doExpandMenu: function() {
+    doExpandMenu: function(clickEvent) {
         var me = this,
             menu = me.menu;
 
@@ -376,6 +380,9 @@ Ext.define('Ext.menu.Item', {
             menu.ownerCmp = me;
             menu.parentMenu = me.parentMenu;
             menu.constrainTo = document.body;
+
+            // Pointer-invoked menus do not auto focus, key invoked ones do.
+            menu.autoFocus = !clickEvent || !clickEvent.pointerType;
             menu.showBy(me, me.menuAlign);
         }
     },
@@ -448,7 +455,7 @@ Ext.define('Ext.menu.Item', {
             return;
         }
 
-        if (me.hideOnClick && e.browserEvent.type !== 'touchcancel' && !(e.type === 'tap' && me.menu)) {
+        if (me.hideOnClick) {
             // on mobile webkit, when the menu item has an href, a longpress will trigger
             // the touch callout menu to show.  If this is the case, the tap event object's
             // browser event type will be 'touchcancel', and we do not want to hide the menu.
@@ -708,8 +715,7 @@ Ext.define('Ext.menu.Item', {
 
         if (me.rendered) {
             el.setHtml(text || '');
-            // cannot just call layout on the component due to stretchmax
-            me.ownerCt.updateLayout();
+            me.updateLayout();
         }
         me.fireEvent('textchange', me, oldText, text);
     },

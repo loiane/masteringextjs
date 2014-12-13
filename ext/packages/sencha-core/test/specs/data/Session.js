@@ -21,7 +21,18 @@ describe("Ext.data.Session", function() {
     var adminUsers, peonUsers;
     var userRufus, userBill, userTed;
 
+    function getAndComplete(type, id, theSession, data) {
+        theSession = theSession || session;
+        data = data || {};
+        var rec = theSession.getRecord(type, id);
+        data.id = data.id || id;
+        completeRequest(data);
+        return rec;
+    }
+
     beforeEach(function() {
+        MockAjaxManager.addMethods();
+
         adminGroup = {
             id: 42,
             name: 'Admins'
@@ -49,19 +60,6 @@ describe("Ext.data.Session", function() {
 
         adminUsers = [ userRufus ];
         peonUsers = [ userBill, userTed, userRufus ];
-    });
-
-    function getAndComplete(type, id, theSession, data) {
-        theSession = theSession || session;
-        data = data || {};
-        var rec = theSession.getRecord(type, id);
-        data.id = data.id || id;
-        completeRequest(data);
-        return rec;
-    }
-
-    beforeEach(function() {
-        MockAjaxManager.addMethods();
     });
 
     afterEach(function() {
@@ -3083,6 +3081,100 @@ describe("Ext.data.Session", function() {
                     });
                 });
             });
+        });
+    });
+
+    describe("drop/erase records", function() {
+        beforeEach(function() {
+            Ext.data.Model.schema.setNamespace('spec');
+            Ext.define('spec.User', {
+                extend: 'Ext.data.Model',
+                fields: ['name']
+            });
+            session = new Ext.data.Session();
+        });
+
+        afterEach(function() {
+            Ext.undefine('spec.User');
+            Ext.data.Model.schema.clear(true);
+        });
+
+        it("should evict a phantom when it is dropped", function() {
+            var user = new spec.User({}, session),
+                id = user.id;
+
+            user.drop();
+            expect(session.peekRecord('User', id)).toBeNull();
+        });
+
+        it("should not evict a non-phantom when it is dropped", function() {
+            var user = new spec.User({id: 1}, session);
+            user.drop();
+            expect(session.peekRecord('User', 1)).toBe(user);
+        });
+
+        it("should evict a non-phantom when it is erased", function() {
+            var user = new spec.User({id: 1}, session);
+            user.erase();
+            expect(session.peekRecord('User', 1)).toBe(user);
+            completeRequest({});
+            expect(session.peekRecord('User', 1)).toBeNull();
+        });
+    });
+
+    describe("commit", function() {
+        beforeEach(function() {
+            Ext.data.Model.schema.setNamespace('spec');
+            Ext.define('spec.User', {
+                extend: 'Ext.data.Model',
+                fields: ['name']
+            });
+            session = new Ext.data.Session();
+        });
+
+        afterEach(function() {
+            Ext.undefine('spec.User');
+            Ext.data.Model.schema.clear(true);
+        });
+
+        it("should call commit on created records", function() {
+            var user = new spec.User({}, session);
+            expect(session.getChanges()).toEqual({
+                User: {
+                    C: [{
+                        id: user.getId()
+                    }]
+                }
+            });
+            session.commit();
+            expect(session.getChanges()).toBeNull();
+        });
+
+        it("should call commit on updated records", function() {
+            var user = new spec.User({id: 1, name: 'Foo'}, session);
+            user.set('name', 'Bar');
+            expect(session.getChanges()).toEqual({
+                User: {
+                    U: [{
+                        id: 1,
+                        name: 'Bar'
+                    }]
+                }
+            });
+            session.commit();
+            expect(session.getChanges()).toBeNull();
+        });
+
+        it("should call commit on dropped records", function() {
+            var user = new spec.User({id: 1}, session);
+            user.drop();
+            expect(session.getChanges()).toEqual({
+                User: {
+                    D: [1]
+                }
+            });
+            session.commit();
+            expect(session.getChanges()).toBeNull();
         });
     });
 

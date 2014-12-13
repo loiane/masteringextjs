@@ -350,7 +350,9 @@ Ext.define('Ext.LoadMask', {
      */
     sizeMask: function() {
         var me = this,
-            target = me.target,
+            // Need to use the closest floating component (if it exists) as the basis
+            // for our z-index positioning
+            target = me.activeOwner || me.target,
             boxTarget = me.external ? me.getOwner().el : me.getMaskTarget();
 
         if (me.rendered && me.isVisible()) {
@@ -564,7 +566,7 @@ Ext.define('Ext.LoadMask', {
         saveFocus: function() {
             var me = this,
                 ownerEl = me.ownerCt.el,
-                activeDom = document.activeElement;
+                activeDom = Ext.Element.getActiveElement();
             
             if (ownerEl.contains(activeDom)) {
                 me.previouslyFocused = activeDom;

@@ -121,7 +121,7 @@ Ext.define('Ext.panel.Table', {
      * An xtype of selection model to use. This is used to create selection model if just
      * a config object or nothing at all given in {@link #selModel} config.
      *
-     * @deprecated 5.0.2 Use the {@link #selModel}'s `type` property. Or, if no other
+     * @deprecated 5.1.0 Use the {@link #selModel}'s `type` property. Or, if no other
      * configs are required, use the string form of selModel.
      */
 
@@ -153,7 +153,7 @@ Ext.define('Ext.panel.Table', {
      * @cfg {String/Boolean} scroll
      * Scrollers configuration. Valid values are 'both', 'horizontal' or 'vertical'.
      * True implies 'both'. False implies 'none'.
-     * @deprecated 5.0.2 Use {@link #scrollable} instead
+     * @deprecated 5.1.0 Use {@link #scrollable} instead
      */
 
     /**
@@ -940,12 +940,29 @@ Ext.define('Ext.panel.Table', {
         me.callParent(arguments);
     },
 
-    // TablePanel is not focusable, but allow a call to delegate into the view
     focus: function() {
+        // TablePanel is not focusable, but allow a call to delegate into the view
         this.getView().focus();
     },
     
-    // Private. Determine if there are any columns with a locked configuration option
+    /**
+     * Disables interaction with, and masks this grid's column headers.
+     */
+    disableColumnHeaders: function() {
+        this.headerCt.disable();
+    },
+
+    /**
+     * Enables interaction with, and unmasks this grid's column headers after a call to {#disableColumnHeaders}.
+     */
+    enableColumnHeaders: function() {
+        this.headerCt.enable();
+    },
+
+    /*
+     * @private
+     * Determine if there are any columns with a locked configuration option.
+     */
     hasLockedColumns: function(columns) {
         var i,
             len,

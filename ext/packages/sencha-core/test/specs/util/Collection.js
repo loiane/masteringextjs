@@ -2070,6 +2070,31 @@ describe("Ext.util.Collection", function() {
                     collection.updateKey(item2, 2);
                     expect(collection.getGroups().get('B').indexOf(item2)).toBe(0);
                 });
+
+                it("should not exist in the group during a remove if the record is changing position", function() {
+                    var removeA, removeB, addA, addB, groups;
+
+                    groupBy();
+                    groups = collection.getGroups();
+                    item9.group = 'B';
+                    // The change in group doesn't change the position of item2, it can remain where it
+                    // is because we are not sorted.
+                    collection.on('remove', function() {
+                        removeA = groups.get('A').contains(item9);
+                        removeB = groups.get('B').contains(item9);
+                    });
+
+                    collection.on('add', function() {
+                        addA = groups.get('A').contains(item9);
+                        addB = groups.get('B').contains(item9);
+                    });
+
+                    collection.itemChanged(item9);
+                    expect(removeA).toBe(false);
+                    expect(removeB).toBe(false);
+                    expect(addA).toBe(false);
+                    expect(addB).toBe(true);
+                });
             });
         });
         

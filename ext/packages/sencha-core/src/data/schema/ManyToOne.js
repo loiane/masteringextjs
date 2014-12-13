@@ -100,8 +100,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
                         leftRecords = session.getEntityList(me.cls, items[id]);
                         store = me.getAssociatedItem(rightRecord);
                         if (store) {
-                            leftRecords = me.validateAssociationRecords(session, rightRecord, leftRecords);
-                            store.loadRecords(leftRecords);
+                            store.loadData(leftRecords);
                             store.complete = true;
                         } else {
                             // We don't have a store. Create it and add the records.
@@ -114,33 +113,46 @@ Ext.define('Ext.data.schema.ManyToOne', {
             }
         },
 
-        validateAssociationRecords: function(session, associatedEntity, leftRecords) {
-            var refs = session.getRefs(associatedEntity, this, true),
-                ret = [],
-                seen, leftRecord, id, i, len;
+        findRecords: function(session, rightRecord, leftRecords) {
+            var ret = leftRecords,
+                refs = session.getRefs(rightRecord, this, true),
+                leftRecord, id, i, len, seen;
 
-            if (refs) {
-                if (leftRecords) {
-                    seen = {};
-                    // Loop over the records returned by the server and
-                    // check they all still belong
-                    for (i = 0, len = leftRecords.length; i < len; ++i) {
-                        leftRecord = leftRecords[i];
-                        id = leftRecord.id;
-                        if (refs[id]) {
-                            ret.push(leftRecord);
+            if (!rightRecord.phantom) {
+                ret = [];
+                if (refs) {
+                    if (leftRecords) {
+                        seen = {};
+                        // Loop over the records returned by the server and
+                        // check they all still belong
+                        for (i = 0, len = leftRecords.length; i < len; ++i) {
+                            leftRecord = leftRecords[i];
+                            id = leftRecord.id;
+                            if (refs[id]) {
+                                ret.push(leftRecord);
+                            }
+                            seen[id] = true;
                         }
-                        seen[id] = true;
                     }
-                }
 
-                // Loop over the expected set and include any missing records.
-                for (id in refs) {
-                    if (!seen || !seen[id]) {
-                        ret.push(refs[id]);
+                    // Loop over the expected set and include any missing records.
+                    for (id in refs) {
+                        if (!seen || !seen[id]) {
+                            ret.push(refs[id]);
+                        }
                     }
                 }
             }
+            return ret;
+        },
+
+        processLoad: function(store, rightRecord, leftRecords, session) {
+            var ret = leftRecords;
+
+            if (session) {
+                ret = this.findRecords(session, rightRecord, leftRecords);
+            }
+            this.onLoadMany(rightRecord, ret, session);
             return ret;
         },
 
@@ -164,8 +176,8 @@ Ext.define('Ext.data.schema.ManyToOne', {
                     hadRecords = !!leftRecords;
 
                 if (session) {
-                    leftRecords = me.validateAssociationRecords(session, this, leftRecords);
-                    if (!hadRecords && !leftRecords.length) {
+                    leftRecords = me.findRecords(session, this, leftRecords);
+                    if (!hadRecords && (!leftRecords || !leftRecords.length)) {
                         leftRecords = null;
                     }
                 }
@@ -176,25 +188,25 @@ Ext.define('Ext.data.schema.ManyToOne', {
         createSetter: null, // no setter for an isMany side
 
         onAddToMany: function (store, leftRecords) {
-            this.syncFK(leftRecords, store.associatedEntity, false);
+            this.syncFK(leftRecords, store.getAssociatedEntity(), false);
         },
 
-        onLoadMany: function(store, leftRecords, successful) {
+        onLoadMany: function(rightRecord, leftRecords, session) {
             var instanceName = this.inverse.getInstanceName(),
-                associated = store.associatedEntity,
-                id = associated.getId(),
+                id = rightRecord.getId(),
                 field = this.association.field,
-                session = store.getSession(),
-                i, len, leftRecord, oldId;
+                i, len, leftRecord, oldId, data, name;
 
-            if (successful) {
+            if (field) {
                 for (i = 0, len = leftRecords.length; i < len; ++i) {
                     leftRecord = leftRecords[i];
-                    leftRecord[instanceName] = associated;
+                    leftRecord[instanceName] = rightRecord;
                     if (field) {
-                        oldId = leftRecord.data[field.name];
+                        name = field.name;
+                        data = leftRecord.data;
+                        oldId = data[name];
                         if (oldId !== id) {
-                            leftRecord.data[field.name] = id;
+                            data[name] = id;
                             if (session) {
                                 session.updateReference(leftRecord, field, id, oldId);
                             }
@@ -205,7 +217,7 @@ Ext.define('Ext.data.schema.ManyToOne', {
         },
 
         onRemoveFromMany: function (store, leftRecords) {
-            this.syncFK(leftRecords, store.associatedEntity, true);
+            this.syncFK(leftRecords, store.getAssociatedEntity(), true);
         },
 
         read: function(rightRecord, node, fromReader, readOptions) {

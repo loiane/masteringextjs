@@ -101,7 +101,8 @@ Ext.define('Ext.grid.filters.filter.String', {
         me.filter.setValue(value);
 
         if (value && me.active) {
-            me.updateStoreFilter(me.filter);
+            me.value = value;
+            me.updateStoreFilter();
         } else {
             me.setActive(!!value);
         }

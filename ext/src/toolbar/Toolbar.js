@@ -488,13 +488,15 @@ Ext.define('Ext.toolbar.Toolbar', {
 
         // @private
         trackMenu: function (item, remove) {
-            if (this.trackMenus && item.menu) {
-                var method = remove ? 'mun' : 'mon',
-                    me = this;
+            var me = this;
 
-                me[method](item, 'mouseover', me.onButtonOver, me);
-                me[method](item, 'menushow', me.onButtonMenuShow, me);
-                me[method](item, 'menuhide', me.onButtonMenuHide, me);
+            if (me.trackMenus && item.menu) {
+                item[remove ? 'un' : 'on']({
+                    mouseover: me.onButtonOver,
+                    menushow: me.onButtonMenuShow,
+                    menuhide: me.onButtonMenuHide,
+                    scope: me
+                });
             }
         },
 
@@ -503,10 +505,11 @@ Ext.define('Ext.toolbar.Toolbar', {
         },
 
         // @private
-        onButtonOver: function (btn) {
+        onButtonOver: function (btn, e) {
             if (this.activeMenuBtn && this.activeMenuBtn !== btn) {
                 this.activeMenuBtn.hideMenu();
-                btn.showMenu();
+                btn.focus();
+                btn.showMenu(e);
                 this.activeMenuBtn = btn;
             }
         },
@@ -518,7 +521,7 @@ Ext.define('Ext.toolbar.Toolbar', {
 
         // @private
         onButtonMenuHide: function (btn) {
-            delete this.activeMenuBtn;
+            this.activeMenuBtn = null;
         }
     }
 });

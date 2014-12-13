@@ -34,21 +34,29 @@ Ext.define('Ext.view.NavigationModel', {
     },
 
     bindComponent: function(view) {
-        this.view = view;
-        this.bindView(view);
+        if (this.view !== view) {
+            this.view = view;
+            this.bindView(view);
+        }
     },
 
     bindView: function(view) {
         var me = this,
+            dataSource = view.dataSource,
             listeners;
 
+
         me.initKeyNav(view);
-        listeners = me.getStoreListeners();
-        listeners.destroyable = true;
-        me.dataSourceListeners = view.dataSource.on(listeners);
+        if (me.dataSource !== dataSource) {
+            me.dataSource = dataSource;
+            listeners = me.getStoreListeners();
+            listeners.destroyable = true;
+            me.dataSourceListeners = view.dataSource.on(listeners);
+        }
         listeners = me.getViewListeners();
         listeners.destroyable = true;
-        me.viewListeners = view.on(listeners);
+        me.viewListeners = me.viewListeners || [];
+        me.viewListeners.push(view.on(listeners));
     },
 
     getStoreListeners: function() {
@@ -149,6 +157,29 @@ Ext.define('Ext.view.NavigationModel', {
         }
     },
 
+    /**
+     * @template
+     * @protected
+     * Called by {@link Ext.view.AbstractView#refresh} before refresh to allow the current focus position to be cached.
+     * @returns {undefined}
+     */
+    beforeViewRefresh: function() {
+        this.focusRestorePosition = this.view.dataSource.isBufferedStore ? this.recordIndex : this.record;
+    },
+
+    /**
+     * @template
+     * @protected
+     * Called by {@link Ext.view.AbstractView#refresh} after refresh to allow cached focus position to be restored.
+     * @returns {undefined}
+     */
+    onViewRefresh: function() {
+        if (this.focusRestorePosition != null) {
+            this.setPosition(this.focusRestorePosition);
+            this.focusRestorePosition = null;
+        }
+    },
+
     // Store clearing removes focus
     onStoreClear: function() {
         this.setPosition();
@@ -177,21 +208,13 @@ Ext.define('Ext.view.NavigationModel', {
             }
             // row is a Record
             else if (recordIndex.isEntity) {
-                newRecord = recordIndex;
-                newRecordIndex = dataSource.indexOf(recordIndex);
+                newRecord = dataSource.getById(recordIndex.id);
+                newRecordIndex = dataSource.indexOf(newRecord);
 
                 // Previous record is no longer present; revert to first.
                 if (newRecordIndex === -1) {
-                    newRecordIndex = dataSource.indexOfId(newRecord.id);
-                    if (newRecordIndex === -1) {
-                        // Change recordIndex so that the "No movement" test is bypassed if the record is not found
-                        me.recordIndex = -1;
-                        newRecord = dataSource.getAt(0);
-                        newRecordIndex = 0;
-                    }
-                    else {
-                        newRecord = dataSource.getAt(newRecordIndex);
-                    }
+                    newRecord = dataSource.getAt(0);
+                    newRecordIndex = 0;
                 }
             }
             // row is a grid row
@@ -206,7 +229,9 @@ Ext.define('Ext.view.NavigationModel', {
 
         // No movement; just ensure the correct item is focused and return early.
         // Do not push current position into previous position, do not fire events.
-        if (newRecordIndex === me.recordIndex) {
+        // We must check record instances, not indices because of store reloads (combobox remote filtering).
+        // If there's a new record, focus it.
+        if (newRecord === me.record) {
             return me.focusPosition(me.recordIndex);
         }
 
@@ -225,7 +250,7 @@ Ext.define('Ext.view.NavigationModel', {
         me.record      = newRecord;
 
         // Prevent navigation if focus has not moved
-        preventNavigation = preventNavigation || me.record !== me.lastFocused;
+        preventNavigation = preventNavigation || me.record === me.lastFocused;
 
         // Maintain lastFocused, so that on non-specific focus of the View, we can focus the correct descendant.
         if (newRecord) {
@@ -259,6 +284,7 @@ Ext.define('Ext.view.NavigationModel', {
             me.item = me.view.all.item(recordIndex);
             if (me.item) {
                 me.lastFocused = me.record;
+                me.lastFocusedIndex = me.recordIndex;
                 me.focusItem(me.item);
             } else {
                 me.record = null;
@@ -404,9 +430,9 @@ Ext.define('Ext.view.NavigationModel', {
     },
 
     destroy: function() {
-        if (!this.isDestroyed) {
-            Ext.destroy(this.dataSourceListeners, this.viewListeners, this.keyNav);
-            this.isDestroyed = true;
-        }
+        var me = this;
+        Ext.destroy(me.dataSourceListeners, me.viewListeners, me.keyNav);
+        me.keyNav = me.dataSourceListeners = me.viewListeners = me.dataSource = null;
+        me.callParent();
     }
 });

@@ -223,23 +223,6 @@ Ext.define('Ext.Widget', {
         Ext.ComponentManager.unregister(me);
     },
 
-    //@private
-    doAddListener: function(name, fn, scope, options, order, caller, manager) {
-        if (options && 'element' in options) {
-            //<debug error>
-            if (this.referenceList.indexOf(options.element) === -1) {
-                Ext.Logger.error("Adding event listener with an invalid element reference of '" + options.element +
-                    "' for this component. Available values are: '" + this.referenceList.join("', '") + "'", this);
-            }
-            //</debug>
-
-            // The default scope is this component
-            this[options.element].doAddListener(name, fn, scope || this, options, order);
-        }
-
-        this.callParent([name, fn, scope, options, order, caller, manager]);
-    },
-
     /**
      * @param width
      * @protected
@@ -308,7 +291,6 @@ Ext.define('Ext.Widget', {
     },
 
     /**
-     * @private
      * Initializes the Element for this Widget instance.  If this is the first time a
      * Widget of this type has been instantiated the {@link element} config will be
      * processed to create an Element.  This Element is then cached on the prototype (see
@@ -546,6 +528,23 @@ Ext.define('Ext.Widget', {
             }
 
             return referenceEl;
+        },
+
+        //@private
+        doAddListener: function(name, fn, scope, options, order, caller, manager) {
+            if (options && 'element' in options) {
+                //<debug>
+                if (this.referenceList.indexOf(options.element) === -1) {
+                    Ext.Logger.error("Adding event listener with an invalid element reference of '" + options.element +
+                        "' for this component. Available values are: '" + this.referenceList.join("', '") + "'", this);
+                }
+                //</debug>
+
+                // The default scope is this component
+                this[options.element].doAddListener(name, fn, scope || this, options, order);
+            }
+
+            this.callParent([name, fn, scope, options, order, caller, manager]);
         },
 
         filterLengthValue: function(value) {

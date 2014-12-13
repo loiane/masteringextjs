@@ -220,10 +220,7 @@ Ext.define('Ext.grid.RowEditor', {
         });
 
         // Ensure that the editor width always matches the total header width
-        me.mon(grid, {
-            resize: me.onGridResize,
-            scope: me
-        });
+        me.mon(grid, 'resize', me.onGridResize, me);
 
         if (me.lockable) {
             grid.lockedGrid.view.on('resize', 'onGridResize', me);
@@ -478,10 +475,8 @@ Ext.define('Ext.grid.RowEditor', {
         }
     },
 
-    // Because we implement getRefOwner to return the grid, this makes this a descendant of the grid and the layout system
-    // does not queue an independent layout for this while it's a descendant of a component which itself is pending a layout.
-    // This is floating and not a descendant of anything.
-    isDescendantOf: function() {
+    isLayoutChild: function(ownerCandidate) {
+        // RowEditor is not a floating component, but won't be laid out by the grid
         return false;
     },
 
@@ -827,9 +822,11 @@ Ext.define('Ext.grid.RowEditor', {
             me.onViewScroll();
         }
         
-        // Select the record before showing the editor, since
-        // selecting will steal focus
-        context.grid.getSelectionModel().select(record);
+        // Select at the clicked position.
+        context.grid.getSelectionModel().selectByPosition({
+            row: record,
+            column: columnHeader
+        });
 
         // Make sure the container el is correctly sized.
         me.onGridResize();

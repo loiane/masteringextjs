@@ -317,98 +317,124 @@ describe("Ext.data.schema.ManyToOne", function() {
     });
 
     describe("nested loading", function() {
-        beforeEach(function() {
-            definePost();
-        });
-
-        it("should infer the key from the parent", function() {
-            var thread = Thread.load(1);
-            complete({
-                id: 1,
-                posts: [{
-                    id: 101
-                }, {
-                    id: 102
-                }]
-            });
-            var posts = thread.posts();
-            expect(posts.getAt(0).get('threadId')).toBe(1);
-            expect(posts.getAt(0).dirty).toBe(false);
-            expect(posts.getAt(1).get('threadId')).toBe(1);
-            expect(posts.getAt(1).dirty).toBe(false);
-        });
-
-        it("should delete the many from the data collection", function() {
-            var thread = Thread.load(1);
-            complete({
-                id: 1,
-                posts: [{
-                    id: 101
-                }, {
-                    id: 102
-                }]
-            });
-            expect(thread.get('posts')).toBeUndefined();
-            expect(thread.posts().getCount()).toBe(2);
-        });
-
-        it("should delete the one from the data collection", function() {
-            var post = Post.load(101);
-            complete({
-                id: 101,
-                thread: {
-                    id: 1
-                }
-            });
-            expect(post.get('thread')).toBeUndefined();
-            expect(post.getThread().getId()).toBe(1);
-        });
-
-        it("should not pollute the reader when reading nested data of the same type", function() {
-            function getData() {
-                return {
-                    records: [{
-                        id: 1,
-                        parentId: null,
-                        children: [{
-                            id: 101,
-                            parentId: 1
-                        }, {
-                            id: 102,
-                            parentId: 1
-                        }]
+        describe("without session", function() {
+            it("should infer the key from the parent", function() {
+                definePost();
+                var thread = Thread.load(1);
+                complete({
+                    id: 1,
+                    posts: [{
+                        id: 101
+                    }, {
+                        id: 102
                     }]
-                };
-            }
-            Ext.define('spec.Node', {
-                extend: 'Ext.data.Model',
-                fields: [{
-                    name: 'parentId',
-                    reference: {
-                        type: 'Node',
-                        inverse: 'children'
-                    }
-                }],
-                proxy: {
-                    type: 'ajax',
-                    reader: {
-                        type: 'json',
-                        rootProperty: 'records'
-                    }
-                }
+                });
+                var posts = thread.posts();
+                expect(posts.getAt(0).get('threadId')).toBe(1);
+                expect(posts.getAt(0).dirty).toBe(false);
+                expect(posts.getAt(1).get('threadId')).toBe(1);
+                expect(posts.getAt(1).dirty).toBe(false);
             });
 
-            var store = new Ext.data.Store({
-                model: 'Node'
+            it("should infer the key when using remoteFilter: false", function() {
+                definePost({
+                    inverse: {
+                        storeConfig: {
+                            remoteFilter: false
+                        }
+                    }
+                });
+                var thread = Thread.load(1);
+                complete({
+                    id: 1,
+                    posts: [{
+                        id: 101
+                    }, {
+                        id: 102
+                    }]
+                });
+                var posts = thread.posts();
+                expect(posts.getAt(0).get('threadId')).toBe(1);
+                expect(posts.getAt(0).dirty).toBe(false);
+                expect(posts.getAt(1).get('threadId')).toBe(1);
+                expect(posts.getAt(1).dirty).toBe(false);
+                expect(posts.getRemoteFilter()).toBe(false);
             });
-            store.load();
-            complete(getData());
-            expect(store.first().children().getCount()).toBe(2);
-            store.load();
-            complete(getData());
-            expect(store.first().children().getCount()).toBe(2);
-            store.destroy();
-            Ext.undefine('spec.Node');
+
+            it("should delete the many from the data collection", function() {
+                definePost();
+                var thread = Thread.load(1);
+                complete({
+                    id: 1,
+                    posts: [{
+                        id: 101
+                    }, {
+                        id: 102
+                    }]
+                });
+                expect(thread.get('posts')).toBeUndefined();
+                expect(thread.posts().getCount()).toBe(2);
+            });
+
+            it("should delete the one from the data collection", function() {
+                definePost();
+                var post = Post.load(101);
+                complete({
+                    id: 101,
+                    thread: {
+                        id: 1
+                    }
+                });
+                expect(post.get('thread')).toBeUndefined();
+                expect(post.getThread().getId()).toBe(1);
+            });
+
+            it("should not pollute the reader when reading nested data of the same type", function() {
+                function getData() {
+                    return {
+                        records: [{
+                            id: 1,
+                            parentId: null,
+                            children: [{
+                                id: 101,
+                                parentId: 1
+                            }, {
+                                id: 102,
+                                parentId: 1
+                            }]
+                        }]
+                    };
+                }
+                Ext.define('spec.Node', {
+                    extend: 'Ext.data.Model',
+                    fields: [{
+                        name: 'parentId',
+                        reference: {
+                            type: 'Node',
+                            inverse: 'children'
+                        }
+                    }],
+                    proxy: {
+                        type: 'ajax',
+                        reader: {
+                            type: 'json',
+                            rootProperty: 'records'
+                        }
+                    }
+                });
+
+                var store = new Ext.data.Store({
+                    model: 'Node'
+                });
+                store.load();
+                complete(getData());
+                expect(store.first().children().getCount()).toBe(2);
+                store.load();
+                complete(getData());
+                expect(store.first().children().getCount()).toBe(2);
+                store.destroy();
+                Ext.undefine('spec.Node');
+            });
         });
     });
     

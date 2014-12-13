@@ -353,6 +353,7 @@ Ext.define('Ext.view.NodeCache', {
      * @param {Number} direction `-1' = scroll up, `0` = scroll down.
      * @param {Number} removeCount The number of records to remove from the end. if scrolling
      * down, rows are removed from the top and the new rows are added at the bottom.
+     * @return {HtmlElement[]} The view item nodes added either at the top or the bottom of the view.
      */
     scroll: function(newRecords, direction, removeCount) {
         var me = this,
@@ -363,7 +364,6 @@ Ext.define('Ext.view.NodeCache', {
             i, el, removeEnd,
             newNodes,
             nodeContainer = view.getNodeContainer(),
-            frag = document.createDocumentFragment(),
             fireItemRemove = view.hasListeners.itemremove,
             fireItemAdd = view.hasListeners.itemadd,
             range = me.statics().range;
@@ -455,6 +455,8 @@ Ext.define('Ext.view.NodeCache', {
         }
         // Keep count consistent.
         me.count = me.endIndex - me.startIndex + 1;
+        
+        return newNodes.childrenArray;
     },
 
     sumHeights: function() {

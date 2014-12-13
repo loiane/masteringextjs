@@ -334,7 +334,8 @@ Ext.define('Ext.layout.container.Card', {
             owner = me.owner,
             oldCard = me.activeItem,
             rendered = owner.rendered,
-            newIndex;
+            newIndex,
+            focusNewCard;
 
         newCard = me.parseActiveItem(newCard);
         newIndex = owner.items.indexOf(newCard);
@@ -349,7 +350,7 @@ Ext.define('Ext.layout.container.Card', {
         }
 
         // Is this a valid, different card?
-        if (newCard && oldCard != newCard) {
+        if (newCard && oldCard !== newCard) {
             // Fire the beforeactivate and beforedeactivate events on the cards
             if (newCard.fireEvent('beforeactivate', newCard, oldCard) === false) {
                 return false;
@@ -368,19 +369,40 @@ Ext.define('Ext.layout.container.Card', {
 
                 if (oldCard) {
                     if (me.hideInactive) {
+                        focusNewCard = oldCard.el.contains(Ext.Element.getActiveElement());
                         oldCard.hide();
-                        oldCard.hiddenByLayout = true;
+                        if (oldCard.hidden) {
+                            oldCard.hiddenByLayout = true;
+                            oldCard.fireEvent('deactivate', oldCard, newCard);
+                        }
+                        // Hide was vetoed, we cannot change cards.
+                        else {
+                            return false;
+                        }
                     }
-                    oldCard.fireEvent('deactivate', oldCard, newCard);
                 }
                 // Make sure the new card is shown
                 if (newCard.hidden) {
                     newCard.show();
                 }
 
-                // Layout needs activeItem to be correct, so set it if the show has not been vetoed
-                if (!newCard.hidden) {
+                // Layout needs activeItem to be correct, so clear it if the show has been vetoed,
+                // set it if the show has *not* been vetoed.
+                if (newCard.hidden) {
+                    me.activeItem = newCard = null;
+                } else {
                     me.activeItem = newCard;
+
+                    // If the card being hidden contained focus, attempt to focus the new card
+                    // So as not to leave focus undefined.
+                    // The focus() call will focus the defaultFocus if it is a container
+                    // so ensure there is a defaultFocus.
+                    if (focusNewCard) {
+                        if (!newCard.defaultFocus) {
+                            newCard.defaultFocus = ':focusable';
+                        }
+                        newCard.focus();
+                    }
                 }
                 Ext.resumeLayouts(true);
             } else {

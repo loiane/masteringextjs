@@ -219,7 +219,7 @@ Ext.define('Ext.grid.header.Container', {
         // use Container layout with a no-op calculate method.
         if (me.isColumn && !me.isGroupHeader) {
             if (!me.items || me.items.length === 0) {
-                me.isContainer = false;
+                me.isContainer = me.isFocusableContainer = false;
                 me.focusable = true;
                 me.layout = {
                     type: 'container',
@@ -359,6 +359,13 @@ Ext.define('Ext.grid.header.Container', {
 
     initEvents: function() {
         var me = this,
+            onHeaderCtEvent,
+            listeners;
+
+        me.callParent();
+
+        // If this is top level, listen for events to delegate to descendant headers.
+        if (!me.isColumn && !me.isGroupHeader) {
             onHeaderCtEvent = me.onHeaderCtEvent,
             listeners = {
                 click: onHeaderCtEvent,
@@ -369,14 +376,9 @@ Ext.define('Ext.grid.header.Container', {
                 scope: me
             };
 
-        if (Ext.supports.Touch) {
-            listeners.longpress = me.onHeaderCtLongPress;
-        }
-
-        me.callParent();
-
-        // If this is top level, listen for events to delegate to descendant headers.
-        if (!me.isColumn && !me.isGroupHeader) {
+            if (Ext.supports.Touch) {
+                listeners.longpress = me.onHeaderCtLongPress;
+            }
             me.mon(me.el, listeners);
         }
     },
@@ -401,7 +403,7 @@ Ext.define('Ext.grid.header.Container', {
                 targetEl = header[header.clickTargetName];
                 // If there's no possibility that the mouseEvent was on child header items,
                 // or it was definitely in our titleEl, then process it
-                if (!header.isGroupHeader || e.within(targetEl)) {
+                if ((!header.isGroupHeader && !header.isContainer) || e.within(targetEl)) {
                     if (e.type === 'click' || e.type === 'tap') {
                         // The header decides which header to activate on click
                         // on Touch, anywhere in the splitter zone activates
@@ -475,7 +477,7 @@ Ext.define('Ext.grid.header.Container', {
 
         if (!header.menuDisabled) {
             me.longPressFired = true;
-            me.showMenuBy(headerEl, header);
+            me.showMenuBy(e, headerEl, header);
         }
     },
 
@@ -703,7 +705,7 @@ Ext.define('Ext.grid.header.Container', {
 
         me.callParent(arguments);
 
-        //<debug warn>
+        //<debug>
         if (!me._usedIDs) {
             me._usedIDs = {};
         }
@@ -971,10 +973,21 @@ Ext.define('Ext.grid.header.Container', {
     },
 
     onHeaderTriggerClick: function(header, e, t) {
-        // generate and cache menu, provide ability to cancel/etc
         var me = this;
         if (header.fireEvent('headertriggerclick', me, header, e, t) !== false && me.fireEvent('headertriggerclick', me, header, e, t) !== false) {
-            me.showMenuBy(t, header);
+
+            // If menu is already active...
+            if (header.activeMenu) {
+                // Click/tap toggles the menu visibility.
+                if (e.pointerType) {
+                    header.activeMenu.hide();
+                } else {
+                    header.activeMenu.focus();
+                }
+            }
+            else { 
+                me.showMenuBy(e, t, header);
+            }
         }
     },
 
@@ -984,10 +997,12 @@ Ext.define('Ext.grid.header.Container', {
      * Shows the column menu under the target element passed. This method is used when the trigger element on the column
      * header is clicked on and rarely should be used otherwise.
      *
+     * @param {Ext.event.Event} [event] The event which triggered the current handler. If omitted
+     * or a key event, the menu autofocuses its first item.
      * @param {HTMLElement/Ext.dom.Element} t The target to show the menu by
      * @param {Ext.grid.header.Container} header The header container that the trigger was clicked on.
      */
-    showMenuBy: function(t, header) {
+    showMenuBy: function(clickEvent, t, header) {
         var menu = this.getMenu(),
             ascItem  = menu.down('#ascItem'),
             descItem = menu.down('#descItem'),
@@ -996,7 +1011,7 @@ Ext.define('Ext.grid.header.Container', {
         // Use ownerCmp as the upward link. Menus *must have no ownerCt* - they are global floaters.
         // Upward navigation is done using the up() method.
         menu.activeHeader = menu.ownerCmp = header;
-        header.setMenuActive(true);
+        header.setMenuActive(menu);
 
         // enable or disable asc & desc menu items based on header being sortable
         sortableMth = header.sortable ? 'enable' : 'disable';
@@ -1006,6 +1021,9 @@ Ext.define('Ext.grid.header.Container', {
         if (descItem) {
             descItem[sortableMth]();
         }
+
+        // Pointer-invoked menus do not auto focus, key invoked ones do.
+        menu.autoFocus = !clickEvent || !clickEvent.pointerType;
         menu.showBy(t, 'tl-bl?');
     },
 
@@ -1546,8 +1564,8 @@ Ext.define('Ext.grid.header.Container', {
                 left: me.onFocusableContainerLeftKey,
                 right: me.onFocusableContainerRightKey,
 
-                space: me.toggleColumnSort,
-                enter: me.toggleColumnSort
+                space: me.onHeaderActivate,
+                enter: me.onHeaderActivate
             });
         },
 
@@ -1559,11 +1577,16 @@ Ext.define('Ext.grid.header.Container', {
             }
         },
 
-        toggleColumnSort: function(e) {
+        onHeaderActivate: function(e) {
             var column = this.getFocusableFromEvent(e);
 
-            if (column && column.sortable) {
-                column.toggleSortState();
+            if (column) {
+                // Sort the column is configured that way.
+                // sortOnClick may be set to false by SpreadsheelSelectionModel to allow click to select a column. 
+                if (column.sortable && this.sortOnClick) {
+                    column.toggleSortState();
+                }
+                // onHeaderClick is a necessary part of accessibility processing, sortable or not.
                 this.onHeaderClick(column, e, column.el);
             }
         },

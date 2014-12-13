@@ -528,7 +528,7 @@ Ext.feature = {
         }
     },{
         /**
-         * @property Transitions True if the device supports CSS3 Transitions.
+         * @property Transitions `true` if the device supports CSS3 Transitions.
          *
          * This property is available at application boot time, before document ready.
          * @type {Boolean}
@@ -834,7 +834,7 @@ Ext.feature = {
     },
 
     /**
-     * @property MouseEnterLeave True if the browser supports mouseenter and mouseleave events
+     * @property MouseEnterLeave `true` if the browser supports mouseenter and mouseleave events
      * @type {Boolean}
      *
      * This property is available at application boot time, before document ready.
@@ -847,7 +847,7 @@ Ext.feature = {
     },
 
     /**
-     * @property MouseWheel True if the browser supports the mousewheel event
+     * @property MouseWheel `true` if the browser supports the mousewheel event
      * @type {Boolean}
      *
      * This property is available at application boot time, before document ready.
@@ -860,7 +860,7 @@ Ext.feature = {
     },
 
     /**
-     * @property Opacity True if the browser supports normal css opacity
+     * @property Opacity `true` if the browser supports normal css opacity
      * @type {Boolean}
      *
      * This property is available at application boot time, before document ready.
@@ -878,7 +878,7 @@ Ext.feature = {
     },
 
     /**
-     * @property Placeholder True if the browser supports the HTML5 placeholder attribute on inputs
+     * @property Placeholder `true` if the browser supports the HTML5 placeholder attribute on inputs
      * @type {Boolean}
      *
      * This property is available at application boot time, before document ready.
@@ -891,7 +891,7 @@ Ext.feature = {
     },
 
     /**
-     * @property Direct2DBug True if when asking for an element's dimension via offsetWidth or offsetHeight,
+     * @property Direct2DBug `true` if when asking for an element's dimension via offsetWidth or offsetHeight,
      * getBoundingClientRect, etc. the browser returns the subpixel width rounded to the nearest pixel.
      *
      * This property is available at application boot time, before document ready.
@@ -905,7 +905,7 @@ Ext.feature = {
     },
 
     /**
-     * @property BoundingClientRect True if the browser supports the getBoundingClientRect method on elements
+     * @property BoundingClientRect `true` if the browser supports the getBoundingClientRect method on elements
      * @type {Boolean}
      *
      * This property is available at application boot time, before document ready.
@@ -918,7 +918,7 @@ Ext.feature = {
     },
 
     /**
-     * @property RotatedBoundingClientRect True if the BoundingClientRect is
+     * @property RotatedBoundingClientRect `true` if the BoundingClientRect is
      * rotated when the element is rotated using a CSS transform.
      * @type {Boolean}
      *
@@ -947,6 +947,27 @@ Ext.feature = {
             return supports;
         }
     },
+    /**
+     * @property ChildContentClearedWhenSettingInnerHTML `true` if created child elements
+     * lose their innerHTML when modifying the innerHTML of the parent element.
+     * @type {Boolean}
+     *
+     * This property is *NOT* available at application boot time. Only after the document ready event.
+     */
+    {
+        name: 'ChildContentClearedWhenSettingInnerHTML',
+        ready: true,
+        fn: function() {
+            var el = this.getTestElement(),
+                child;
+
+            el.innerHTML = '<div>a</div>';
+            child = el.firstChild;
+            el.innerHTML = '<div>b</div>';
+            return child.innerHTML !== 'a';
+
+        }
+    },
     {
         name: 'IncludePaddingInWidthCalculation',
         ready: true,
@@ -963,7 +984,7 @@ Ext.feature = {
     },
 
     /**
-     * @property TextAreaMaxLength True if the browser supports maxlength on textareas.
+     * @property TextAreaMaxLength `true` if the browser supports maxlength on textareas.
      * @type {Boolean}
      *
      * This property is available at application boot time, before document ready.
@@ -975,7 +996,7 @@ Ext.feature = {
         }
     },
     /**
-     * @property GetPositionPercentage True if the browser will return the left/top/right/bottom
+     * @property GetPositionPercentage `true` if the browser will return the left/top/right/bottom
      * position as a percentage when explicitly set as a percentage value.
      *
      * This property is *NOT* available at application boot time. Only after the document ready event.

@@ -106,6 +106,7 @@ Ext.define('Ext.grid.filters.filter.Date', {
                 scope: me,
                 checkchange: me.onCheckChange
             },
+            menuItems = me.menuItems,
             fields, itemDefaults, pickerCfg, i, len,
             key, item, cfg, field;
 
@@ -126,8 +127,8 @@ Ext.define('Ext.grid.filters.filter.Date', {
 
         me.fields = {};
 
-        for (i = 0, len = me.menuItems.length; i < len; i++) {
-            key = me.menuItems[i];
+        for (i = 0, len = menuItems.length; i < len; i++) {
+            key = menuItems[i];
             if (key !== '-') {
                 cfg = {
                     menu: {
@@ -154,6 +155,8 @@ Ext.define('Ext.grid.filters.filter.Date', {
                 field.filterKey = key;
 
                 item.on(listeners);
+            } else {
+                me.menu.add(key);
             }
         }
     },
@@ -197,12 +200,22 @@ Ext.define('Ext.grid.filters.filter.Date', {
 
     onStateRestore: function(filter) {
         filter.setSerializer(this.getSerializer());
+        filter.setConvert(this.convertDateOnly);
     },
 
     getFilterConfig: function(config, key) {
         config = this.callParent([config, key]);
         config.serializer = this.getSerializer();
+        config.convert = this.convertDateOnly;
         return config;
+    },
+
+    convertDateOnly: function(v) {
+        var result = null;
+        if (v) {
+            result = Ext.Date.clearTime(v, true).getTime();
+        }
+        return result;
     },
 
     getSerializer: function() {

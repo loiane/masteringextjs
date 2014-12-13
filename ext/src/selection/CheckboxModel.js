@@ -283,6 +283,17 @@ Ext.define('Ext.selection.CheckboxModel', {
         return '<div class="' + Ext.baseCSSPrefix + 'grid-row-checker" role="presentation">&#160;</div>';
     },
    
+    selectByPosition: function (position, keepExisting) {
+        if (!position.isCellContext) {
+            position = new Ext.grid.CellContext(this.view).setPosition(position.row, position.column);
+        }
+
+        // Do not select if checkOnly, and the requested position is not the check column
+        if (!this.checkOnly || position.column !== this.column) {
+            this.callParent([position, keepExisting]);
+        }
+    },
+
     /**
      * Synchronize header checker value as selection changes.
      * @private

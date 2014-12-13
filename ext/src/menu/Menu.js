@@ -162,6 +162,9 @@ Ext.define('Ext.menu.Menu', {
      */
     
     focusOnToFront: false,
+    bringParentToFront: false,
+
+    defaultFocus: ':focusable',
 
     // private
     baseCls: Ext.baseCSSPrefix + 'menu',
@@ -245,10 +248,6 @@ Ext.define('Ext.menu.Menu', {
     // See EXTJS-13596.
     initFloatConstrain: Ext.emptyFn,
 
-    // Menus do not have owning containers on which they depend for visibility. They stand outside
-    // any container hierarchy.
-    initHierarchyEvents: Ext.emptyFn,
-
     // As menus are never contained, a Menu's visibility only ever depends upon its own hidden state.
     // Ignore hiddenness from the ancestor hierarchy, override it with local hidden state.
     getInherited: function() {
@@ -309,7 +308,7 @@ Ext.define('Ext.menu.Menu', {
 
         // Modern IE browsers have click events translated to PointerEvents, and b/c of this the
         // event isn't being canceled like it needs to be. So, we need to add an extra listener.
-        if (Ext.supports.PointerEvents) {
+        if (Ext.supports.MSPointerEvents || Ext.supports.PointerEvents) {
             me.mon(me.el, {
                 scope: me,
                 click: me.preventClick,
@@ -323,6 +322,7 @@ Ext.define('Ext.menu.Menu', {
     onFocusLeave: function(e) {
         var me = this;
 
+        me.callParent([e]);
         me.mixins.focusablecontainer.onFocusLeave.call(me, e);
         me.hide();
     },
@@ -479,7 +479,7 @@ Ext.define('Ext.menu.Menu', {
 
             // SPACE and ENTER invokes the menu
             if (item.menu && clickResult !== false && iskeyEvent) {
-                item.expandMenu(0);
+                item.expandMenu(e, 0);
             }
         }
         // Click event may be fired without an item, so we need a second check
@@ -526,10 +526,12 @@ Ext.define('Ext.menu.Menu', {
         }
 
         // Do not activate the item if the mouseover was within the item, and it's already active
-        if (item && !item.containsFocus) {
-            item.focus();
+        if (item) {
+            if (!item.containsFocus) {
+                item.focus();
+            }
             if (item.expandMenu) {
-                item.expandMenu();
+                item.expandMenu(e);
             }
         }
         if (mouseEnter) {
@@ -558,8 +560,8 @@ Ext.define('Ext.menu.Menu', {
             items = this.query('>[text]'),
             len = items.length,
             item = this.lastFocusedChild,
-            i,
-            focusIndex = i = Ext.Array.indexOf(items, item);
+            focusIndex = Ext.Array.indexOf(items, item),
+            i = focusIndex;
 
         // Loop through all items which have a text property starting at the one after the current focus.
         for (;;) {
@@ -605,12 +607,12 @@ Ext.define('Ext.menu.Menu', {
         }
     },
 
-    onFocusableContainerRightKey: function() {
+    onFocusableContainerRightKey: function(e) {
         var me = this,
             focusItem = me.lastFocusedChild;
 
         if (focusItem && focusItem.expandMenu) {
-            focusItem.expandMenu(0);
+            focusItem.expandMenu(e, 0);
         }
     },
 
@@ -633,25 +635,40 @@ Ext.define('Ext.menu.Menu', {
         }
 
         me.callParent(arguments);
+
+        // Add a touch start listener to check for taps outside the menu.
+        // iOS in particular does not trigger blur on document tap, so
+        // we have to check for taps outside this menu.
+        if (Ext.supports.Touch) {
+            me.tapListener = Ext.getBody().on({
+                touchstart: me.onBodyTap,
+                scope: me,
+                destroyable: true
+            });
+        }
+    },
+
+    onBodyTap: function(e) {
+        // Tap outside of this menu tree - hide.
+        if (!this.owns(e)) {
+            this.tapListener.destroy();
+            this.hide();
+        }
     },
 
     afterShow: function() {
-        var me = this,
-            focusTarget;
+        var me = this;
 
         me.callParent(arguments);
 
         // Restore configured maxHeight
-        if (me.floating) {
+        if (me.floating && me.autoFocus) {
             me.maxHeight = me.savedMaxHeight;
-            focusTarget = me.down(':focusable');
-
-            // If there is a focusable child, focus it, else focus this Menu
-            (focusTarget || me).focus();
+            me.focus();
         }
     },
 
-    onHide: function() {
+    onHide: function(animateTarget, cb, scope) {
         var me = this,
             focusTarget;
 
@@ -659,13 +676,13 @@ Ext.define('Ext.menu.Menu', {
         if (me.el.contains(Ext.Element.getActiveElement())) {
             // focusAnchor was the active element before this menu was shown.
             focusTarget = me.focusAnchor || me.ownerCmp || me.up(':focusable');
+
+            // Component hide processing will focus the "previousFocus" element.
             if (focusTarget) {
-                focusTarget.focus();
+                me.previousFocus = focusTarget;
             }
         }
-
-        // Maintainer: onHide takes arguments
-        this.callParent(arguments);
+        this.callParent([animateTarget, cb, scope]);
     },
 
     preventClick: function (e) {

@@ -193,7 +193,7 @@ Ext.define('Ext.view.AbstractView', {
         /**
          * @cfg {Object/Ext.selection.DataViewModel} selectionModel
          * The {@link Ext.selection.Model selection model} [dataviewmodel] config or alias to use.
-         * @since 5.0.2
+         * @since 5.1.0
          */
         selectionModel: {
             type: 'dataviewmodel'
@@ -772,6 +772,8 @@ Ext.define('Ext.view.AbstractView', {
             records,
             hasFirstRefresh,
             selModel = me.getSelectionModel(),
+            navModel = me.getNavigationModel(),
+            lastFocusPosition = navModel.getPosition(),
 
             // If there are items in the view, and there isn't a scroll range stretcher (bufferedRenderer), then honour preserveScrollOnRefresh
             preserveScroll = refreshCounter && rows.getCount() && me.preserveScrollOnRefresh && !me.bufferedRenderer,
@@ -785,6 +787,9 @@ Ext.define('Ext.view.AbstractView', {
 
             // So that listeners to itemremove events know that its because of a refresh
             me.refreshing = true;
+
+            // Allow the NavigationModel to cache the focus position.
+            navModel.beforeViewRefresh();
 
             targetEl = me.getTargetEl();
             records = me.getViewRange();
@@ -820,6 +825,9 @@ Ext.define('Ext.view.AbstractView', {
                 me.collectNodes(targetEl.dom);
                 me.updateIndexes(0);
             }
+
+            // Allow the NavigationModel to restore lost focus into the view
+            navModel.onViewRefresh();
 
             // Some subclasses do not need to do this. TableView does not need to do this - it renders selected class using its tenmplate.
             if (me.refreshSelmodelOnRefresh !== false) {

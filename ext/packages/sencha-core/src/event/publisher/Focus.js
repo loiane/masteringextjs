@@ -42,13 +42,7 @@ Ext.define('Ext.event.publisher.Focus', {
 
         // Gather targets for focusleave event from the fromElement to the parentNode (not inclusive)
         for (node = fromElement; node && node !== commonAncestor; node = node.parentNode) {
-            id = node.id;
-            if (id) {
-                el = Ext.cache[id];
-                if (el) {
-                    targets.push(el);
-                }
-            }
+            targets.push(node);
         }
 
         // Publish the focusleave event for the bubble hierarchy
@@ -63,13 +57,7 @@ Ext.define('Ext.event.publisher.Focus', {
 
         // Gather targets for focusenter event from the focus targetElement to the parentNode (not inclusive)
         for (node = toElement; node !== commonAncestor; node = node.parentNode) {
-            id = node.id;
-            if (id) {
-                el = Ext.cache[id];
-                if (el) {
-                    targets.push(el);
-                }
-            }
+            targets.push(node);
         }
 
         // Publish the focusleave event for the bubble hierarchy

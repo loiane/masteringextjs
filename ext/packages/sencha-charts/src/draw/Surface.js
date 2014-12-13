@@ -89,11 +89,11 @@ Ext.define('Ext.draw.Surface', {
     devicePixelRatio: window.devicePixelRatio || 1,
 
     deprecated: {
-        '5.0.2': {
+        '5.1.0': {
             statics: {
                 methods: {
                     /**
-                     * @deprecated 5.0.2
+                     * @deprecated 5.1.0
                      * Stably sort the list of sprites by their zIndex.
                      * Deprecated, use the {@link Ext.Array#sort} method instead.
                      * @param {Array} list

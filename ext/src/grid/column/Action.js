@@ -353,9 +353,10 @@ Ext.define('Ext.grid.column.Action', {
         }
     },
 
-    destroy: function() {
-        delete this.items;
-        delete this.renderer;
+    beforeDestroy: function() {
+        // Don't delete the items, if we're subclassed with items then we'll be
+        // left with an items array.
+        this.renderer = this.items = null;
         return this.callParent(arguments);
     },
 
@@ -414,5 +415,13 @@ Ext.define('Ext.grid.column.Action', {
     // Private override because this cannot function as a Container, and it has an items property which is an Array, NOT a MixedCollection.
     getRefItems: function() {
         return [];
+    },
+
+    privates: {
+        getFocusables: function() {
+            // Override is here to prevent the default behaviour which tries to access
+            // this.items.items, which will be null.
+            return [];
+        }
     }
 });

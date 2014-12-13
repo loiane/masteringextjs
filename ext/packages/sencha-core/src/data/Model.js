@@ -1189,11 +1189,16 @@ Ext.define('Ext.data.Model', {
      */
     commit: function (silent, modifiedFieldNames) {
         var me = this,
+            versionProperty = me.versionProperty,
+            data = me.data,
             erased;
 
         me.clearState();
 
         if (!me.rejecting) {
+            if (versionProperty && !me.phantom && !isNaN(data[versionProperty])) {
+                ++data[versionProperty];
+            }
             me.phantom = false;
         }
 
@@ -2548,7 +2553,8 @@ Ext.define('Ext.data.Model', {
                     superFields = proto.fields,
                     versionProperty = data.versionProperty || proto.versionProperty,
                     idProperty = cls.idProperty,
-                    idField, field, i, length, name, ordinal, reference, superIdField;
+                    idField, field, i, length, name, ordinal, 
+                    reference, superIdField, idDeclared;
 
                 // Process any inherited fields to produce a fields [] and ordinals {} for
                 // this class:
@@ -2602,15 +2608,16 @@ Ext.define('Ext.data.Model', {
                         fields[ordinal] = field;
                         field.definedBy = field.owner = cls;
                         field.ordinal = ordinal;
-                        if (name === versionProperty) {
-                            field.critical = true;
+                        if (name === idProperty) {
+                            idDeclared = true;
                         }
                     }
                 }
 
                 // Lookup the idProperty in the ordinals map and create a synthetic field if
                 // we don't have one.
-                if (!(idField = fieldsMap[idProperty])) {
+                idField = fieldsMap[idProperty];
+                if (!idField) {
                     if (superIdField && superIdField.generated) {
                         ordinal = superIdField.ordinal;
                     } else {
@@ -2623,12 +2630,44 @@ Ext.define('Ext.data.Model', {
                     idField.definedBy = cls;
                     idField.ordinal = ordinal;
                     idField.generated = true;
+                } else if (idDeclared && superIdField && superIdField.generated) {
+                    // If we're declaring the id as a field in our fields array and it's different to
+                    // the super id field that has been generated, pull it out and fix up the ordinals. This
+                    // likely won't happen often, to do it earlier we would need to know the contents of the fields
+                    // which would mean iterating over them twice.
+                    Ext.Array.remove(fields, superIdField);
+                    delete fieldsMap[superIdField.name];
+                    delete fieldOrdinals[superIdField.name];
+                    for (i = 0, length = fields.length; i < length; ++i) {
+                        field = fields[i];
+                        fields.ordinal = i;
+                        fieldOrdinals[field.name] = i;
+                    }
                 }
 
                 idField.allowNull = idField.critical = idField.identifier = true;
                 idField.defaultValue = null;
 
                 cls.idField = proto.idField = idField;
+
+                if (versionProperty) {
+                    field = fieldsMap[versionProperty];
+                    if (!field) {
+                        ordinal = fields.length;
+                        field = new Field({
+                            name: versionProperty,
+                            type: 'int'
+                        });
+                        fields[ordinal] = field;
+                        fieldOrdinals[versionProperty] = ordinal;
+                        fieldsMap[versionProperty] = field;
+                        field.definedBy = cls;
+                        field.ordinal = ordinal;
+                        field.generated = true;
+                    }
+                    field.defaultValue = 1;
+                    field.critical = true;
+                }
 
                 // NOTE: Be aware that the one fellow that manipulates these after this
                 // point is Ext.data.NodeInterface.

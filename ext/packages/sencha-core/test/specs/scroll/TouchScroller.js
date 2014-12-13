@@ -43,6 +43,19 @@ describe('Ext.scroll.TouchScroller', function() {
             expect(Ext.fly('bar').parent()).toBe(innerElement);
         });
 
+        it("should wrap the content in a scroller element when the first child is a text node", function() {
+            // https://sencha.jira.com/browse/EXTJS-16075
+            // When using a container with a layout that does not provide a innerElement
+            // for the scroller (such as fit layout) we need to wrap the content in an
+            // innerElement (even if that content is just a text node)
+            el.setHtml('foo');
+
+            makeScroller();
+
+            innerElement = scroller.getInnerElement();
+            expect(innerElement.dom.innerHTML).toBe('foo');
+        });
+
         it("should use the first child of the element as the innerElement if it has the scrollerCls", function() {
             innerElement = el.appendChild({
                 cls: 'x-scroll-scroller'

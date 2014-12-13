@@ -360,9 +360,6 @@ Ext.define('Ext.grid.locking.Lockable', {
             if (me.split) {
                 lockedGrid.split = true;
             }
-            if (!normalGrid.title) {
-                lockedGrid.header = false;
-            }
             if (!lockedGrid.region) {
                 lockedGrid.region = 'west';
             }
@@ -686,7 +683,7 @@ Ext.define('Ext.grid.locking.Lockable', {
         this.lock();
     },
 
-    showMenuBy: function(t, header) {
+    showMenuBy: function(clickEvent, t, header) {
         var menu = this.getMenu(),
             unlockItem  = menu.down('#unlockItem'),
             lockItem = menu.down('#lockItem'),

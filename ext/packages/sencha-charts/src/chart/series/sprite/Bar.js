@@ -209,7 +209,8 @@ Ext.define('Ext.chart.series.sprite.Bar', {
 
             me.drawBar(ctx, surface, clip, left, top - halfLineWidth, right, bottom - halfLineWidth, i);
 
-            if (drawMarkers && dataText[i]) {
+            // We want 0 values to be passed to the renderer
+            if (drawMarkers && dataText[i] != null) {
                 me.drawLabel(dataText[i], center, bottom, top, i);
             }
             me.putMarker('markers', {

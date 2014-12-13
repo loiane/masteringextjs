@@ -43,9 +43,8 @@ Ext.define('Ext.draw.sprite.AttributeDefinition', {
         processors: {},
 
         /**
-         * @deprecated Use the {@link #triggers} config instead.
-         * @since 5.0.2
          * @cfg {Object} dirtyTriggers
+         * @deprecated Use the {@link #triggers} config instead.
          */
         dirtyTriggers: {},
 
@@ -66,6 +65,7 @@ Ext.define('Ext.draw.sprite.AttributeDefinition', {
          * The updater functions themselves are defined in the {@link #updaters} config,
          * aside from the 'canvas' updater, which doesn't have to be defined and acts as a flag,
          * indicating that this attribute should be applied to a Canvas context (or whatever emulates it).
+         * @since 5.1.0
          */
         triggers: {},
 

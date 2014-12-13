@@ -43,8 +43,12 @@
                          deployment_workspace/**/*,
                          docs/**/*,
                          release-notes-*,         
-						 all-licenses/**/*
-						 build/temp/**/*"/>
+						 all-licenses/**/*,
+						 build/temp/**/*,
+						 ext-all*.js,
+						 ext-debug.js,
+						 ext.js,
+						 bootstrap*.js"/>
 
         <condition property="repo.dev.mode" value="true">
             <available file="${basedir}/../packages/sencha-core" type="dir"/>
@@ -530,7 +534,7 @@ var Ext = Ext || {};
                 </for>
             </sequential>
         </for>
-
+        
         <copy file="${basedir}/ext-bootstrap.js"
               tofile="${build.dir}/bootstrap.js">
             <filterchain>

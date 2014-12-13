@@ -69,6 +69,16 @@ Ext.define('Ext.form.trigger.Trigger', {
      */
 
     /**
+     * @cfg {Boolean} [preventMouseDown=true]
+     * @private
+     * If true, preventDefault() will be called on the mousedown event.  This prevents
+     * a click on the trigger from blurring the field, which is desirable in most cases.
+     * File field sets this to false, because preventing the default behavior of touchstart
+     * prevents the browser's file dialog from opening.
+     */
+    preventMouseDown: true,
+
+    /**
      * @property {String}
      * @private
      * The base CSS class that is always added to the trigger element.
@@ -288,8 +298,10 @@ Ext.define('Ext.form.trigger.Trigger', {
             this.field.inputEl.focus();
         }
 
-        // Stop the mousedown from blurring our field
-        e.preventDefault();
+        if (this.preventMouseDown) {
+            // Stop the mousedown from blurring our field
+            e.preventDefault();
+        }
     },
 
     onClickRepeaterMouseDown: function(clickRepeater, e) {

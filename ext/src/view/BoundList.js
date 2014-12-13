@@ -238,13 +238,27 @@ Ext.define('Ext.view.BoundList', {
     onHide: function() {
         var inputEl = this.pickerField.inputEl.dom;
 
-        // If we're hiding a focused picker, focus must move to the input field.
-        if (Ext.Element.getActiveElement() !== inputEl) {
+        // If we're hiding a focused picker, focus must move to the input field unless the instigating
+        // browser event is a touch. In that case, the input only focuses when they touch it -
+        // we want to avoid an appearing keyboard.
+        if (Ext.Element.getActiveElement() !== inputEl && Ext.EventObject.pointerType !== 'touch') {
             inputEl.focus();
         }
         // Call parent (hide the element) *after* focus has been moved out.
         // Maintainer: Component#onHide takes parameters. 
         this.callParent(arguments);
+    },
+
+    afterComponentLayout: function(width, height, oldWidth, oldHeight) {
+        var picker = this.pickerField;
+
+        this.callParent(arguments);
+
+        // Bound list may change size, so realign on layout
+        // **if the field is an Ext.form.field.Picker which has alignPicker!**
+        if (picker && picker.alignPicker) {
+            picker.alignPicker();
+        }
     },
 
     // Clicking on an already selected item collapses the picker

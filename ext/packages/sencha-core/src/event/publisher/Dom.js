@@ -265,18 +265,10 @@ Ext.define('Ext.event.publisher.Dom', {
     getPropagatingTargets: function(target) {
         var currentNode = target,
             targets = [],
-            parentNode, el, id;
+            parentNode;
 
         while (currentNode) {
-            id = currentNode.id;
-
-            if (id) {
-                el = Ext.cache[id];
-                if (el) {
-                    targets.push(el);
-                }
-            }
-
+            targets.push(currentNode);
             parentNode = currentNode.parentNode;
 
             if (!parentNode) {
@@ -310,12 +302,23 @@ Ext.define('Ext.event.publisher.Dom', {
 
         ln = targets.length;
 
+        // We will now proceed to fire events in both capture and bubble phases.  You
+        // may notice that we are looping all potential targets both times, and only
+        // firing on the target if there is an Ext.Element wrapper in the cache.  This is
+        // done (vs. eliminating non-cached targets from the array up front) because
+        // event handlers can add listeners to other elements during propagation.  Looping
+        // all the potential targets ensures that these dynamically added listeners
+        // are fired.  See https://sencha.jira.com/browse/EXTJS-15953
+
         // capture phase (top-down event propagation).
         if (me.captureSubscribers[eventName]) {
             for (i = ln; i--;) {
-                me.fire(targets[i], eventName, e, false, true);
-                if (e.isStopped) {
-                    break;
+                el = Ext.cache[targets[i].id];
+                if (el) {
+                    me.fire(el, eventName, e, false, true);
+                    if (e.isStopped) {
+                        break;
+                    }
                 }
             }
         }
@@ -324,10 +327,12 @@ Ext.define('Ext.event.publisher.Dom', {
         // stopPropagation during capture phase cancels entire bubble phase
         if (!e.isStopped && me.bubbleSubscribers[eventName]) {
             for (i = 0; i < ln; i++) {
-                el = targets[i];
-                me.fire(targets[i], eventName, e, false, false);
-                if (e.isStopped) {
-                    break;
+                el = Ext.cache[targets[i].id];
+                if (el) {
+                    me.fire(el, eventName, e, false, false);
+                    if (e.isStopped) {
+                        break;
+                    }
                 }
             }
         }

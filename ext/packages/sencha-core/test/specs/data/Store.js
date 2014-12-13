@@ -1166,6 +1166,372 @@ describe("Ext.data.Store", function() {
                 });
             });
         });
+
+        describe("moving records", function() {
+            var spy;
+
+            beforeEach(function() {
+                createStore();
+                addStoreData();
+                spy = jasmine.createSpy();
+            });
+
+            afterEach(function() {
+                spy = null;
+            });
+
+            function mapify(map, records) {
+                Ext.Array.forEach(records, function(record) {
+                    if (store.isMoving(record)) {
+                        map[record.id] = true;
+                    }
+                });
+            }
+
+            describe("via add", function() {
+                describe("a single record", function() {
+                    it("should move the record to the end of the collection", function() {
+                        store.add(edRec);
+                        expect(store.indexOf(edRec)).toBe(3);
+                    });
+
+                    it("should be moving during the add & remove event", function() {
+                        var removeMap = {},
+                            addMap = {};
+
+                        store.on('remove', function(store, records) {
+                            mapify(removeMap, records);
+                        });
+
+                        store.on('add', function(store, records) {
+                            mapify(addMap, records);
+                        });
+                        store.add(edRec);
+                        var expected = {
+                            'ed@sencha.com': true
+                        };
+                        expect(removeMap).toEqual(expected);
+                        expect(addMap).toEqual(expected);
+                    });
+                });
+
+                describe("multiple records", function() {
+                    describe("existing records only", function() {
+                        describe("in a contiguous range", function() {
+                            it("should move the records to the end of the collection", function() {
+                                store.add([edRec, abeRec]);
+                                expect(store.indexOf(edRec)).toBe(2);
+                                expect(store.indexOf(abeRec)).toBe(3);
+                            });
+
+                            it("should be moving during the add & remove event", function() {
+                                var removeMap = {}, 
+                                    addMap = {};
+
+                                store.on('remove', function(store, records) {
+                                    mapify(removeMap, records);
+                                });
+                                store.on('add', function(store, records) {
+                                    mapify(addMap, records);
+                                });
+
+                                store.add([edRec, abeRec]);
+                                var expected = {
+                                    'ed@sencha.com': true,
+                                    'abe@sencha.com': true
+                                };
+
+                                expect(removeMap).toEqual(expected);
+                                expect(addMap).toEqual(expected);
+                            });
+                        });
+
+                        describe("in a discontiguous range", function() {
+                            var fooRec, barRec, bazRec;
+
+                            beforeEach(function() {
+                                fooRec = makeUser('foo@sencha.com');
+                                barRec = makeUser('bar@sencha.com');
+                                bazRec = makeUser('baz@sencha.com');
+                                store.add([fooRec, barRec, bazRec]);
+                            });
+
+                            afterEach(function() {
+                                fooRec = barRec = bazRec = null;
+                            });
+
+                            it("should move the records to the end of the collection", function() {
+                                store.add([abeRec, tommyRec, barRec]);
+                                expect(store.indexOf(abeRec)).toBe(4);
+                                expect(store.indexOf(tommyRec)).toBe(5);
+                                expect(store.indexOf(barRec)).toBe(6);
+                            });
+
+                            it("should be moving during the add & remove event", function() {
+                                var removeMap = {}, 
+                                    addMap = {};
+
+                                store.on('remove', function(store, records) {
+                                    mapify(removeMap, records);
+                                });
+                                store.on('add', function(store, records) {
+                                    mapify(addMap, records);
+                                });
+
+                                store.add([abeRec, tommyRec, barRec]);
+                                var expected = {
+                                    'abe@sencha.com': true,
+                                    'tommy@sencha.com': true,
+                                    'bar@sencha.com': true
+                                };
+
+                                expect(removeMap).toEqual(expected);
+                                expect(addMap).toEqual(expected);
+                            });
+                        });
+                    });
+
+                    describe("mixture of new/existing records", function() {
+                        var fooRec, barRec, bazRec;
+
+                        beforeEach(function() {
+                            fooRec = makeUser('foo@sencha.com');
+                            barRec = makeUser('bar@sencha.com');
+                            bazRec = makeUser('baz@sencha.com');
+                        });
+
+                        afterEach(function() {
+                            fooRec = barRec = bazRec = null;
+                        });
+
+                        it("should add the records to the end", function() {
+                            store.add([fooRec, edRec]);
+                            expect(store.indexOf(fooRec)).toBe(3);
+                            expect(store.indexOf(edRec)).toBe(4);
+                        });
+
+                        it("should only mark existing records as moving", function() {
+                            var removeMap = {}, 
+                                addMap = {};
+
+                            store.on('remove', function(store, records) {
+                                mapify(removeMap, records);
+                            });
+                            store.on('add', function(store, records) {
+                                mapify(addMap, records);
+                            });
+
+                            store.add([fooRec, edRec]);
+                            var expected = {
+                                'ed@sencha.com': true
+                            };
+                            expect(removeMap).toEqual(expected);
+                            expect(addMap).toEqual(expected);
+                        });
+                    });
+                });
+            });
+
+            describe("via insert", function() {
+                describe("a single record", function() {
+                    it("should move the record to the specified position", function() {
+                        store.insert(0, tommyRec);
+                        expect(store.indexOf(tommyRec)).toBe(0);
+                    });
+
+                    it("should be moving during the add & remove event", function() {
+                        var removeMap = {},
+                            addMap = {};
+
+                        store.on('remove', function(store, records) {
+                            mapify(removeMap, records);
+                        });
+
+                        store.on('add', function(store, records) {
+                            mapify(addMap, records);
+                        });
+                        store.insert(0, tommyRec);
+                        var expected = {
+                            'tommy@sencha.com': true
+                        };
+                        expect(removeMap).toEqual(expected);
+                        expect(addMap).toEqual(expected);
+                    });
+                });
+
+                describe("multiple records", function() {
+                    describe("existing records only", function() {
+                        describe("in a contiguous range", function() {
+                            it("should move the records to the specified position", function() {
+                                store.insert(0, [aaronRec, tommyRec]);
+                                expect(store.indexOf(aaronRec)).toBe(0);
+                                expect(store.indexOf(tommyRec)).toBe(1);
+                            });
+
+                            it("should be moving during the add & remove event", function() {
+                                var removeMap = {}, 
+                                    addMap = {};
+
+                                store.on('remove', function(store, records) {
+                                    mapify(removeMap, records);
+                                });
+                                store.on('add', function(store, records) {
+                                    mapify(addMap, records);
+                                });
+
+                                store.insert(0, [aaronRec, tommyRec]);
+                                var expected = {
+                                    'aaron@sencha.com': true,
+                                    'tommy@sencha.com': true
+                                };
+
+                                expect(removeMap).toEqual(expected);
+                                expect(addMap).toEqual(expected);
+                            });
+                        });
+
+                        describe("in a discontiguous range", function() {
+                            var fooRec, barRec, bazRec;
+
+                            beforeEach(function() {
+                                fooRec = makeUser('foo@sencha.com');
+                                barRec = makeUser('bar@sencha.com');
+                                bazRec = makeUser('baz@sencha.com');
+                                store.add([fooRec, barRec, bazRec]);
+                            });
+
+                            afterEach(function() {
+                                fooRec = barRec = bazRec = null;
+                            });
+
+                            it("should move the records to the specified position", function() {
+                                store.insert(0, [abeRec, tommyRec, barRec]);
+                                expect(store.indexOf(abeRec)).toBe(0);
+                                expect(store.indexOf(tommyRec)).toBe(1);
+                                expect(store.indexOf(barRec)).toBe(2);
+                            });
+
+                            it("should be moving during the add & remove event", function() {
+                                var removeMap = {}, 
+                                    addMap = {};
+
+                                store.on('remove', function(store, records) {
+                                    mapify(removeMap, records);
+                                });
+                                store.on('add', function(store, records) {
+                                    mapify(addMap, records);
+                                });
+
+                                store.insert(0, [abeRec, tommyRec, barRec]);
+                                var expected = {
+                                    'abe@sencha.com': true,
+                                    'tommy@sencha.com': true,
+                                    'bar@sencha.com': true
+                                };
+
+                                expect(removeMap).toEqual(expected);
+                                expect(addMap).toEqual(expected);
+                            });
+                        });
+                    });
+
+                    describe("mixture of new/existing records", function() {
+                        var fooRec, barRec, bazRec;
+
+                        beforeEach(function() {
+                            fooRec = makeUser('foo@sencha.com');
+                            barRec = makeUser('bar@sencha.com');
+                            bazRec = makeUser('baz@sencha.com');
+                        });
+
+                        afterEach(function() {
+                            fooRec = barRec = bazRec = null;
+                        });
+
+                        it("should move the records to the specified position", function() {
+                            store.insert(2, [fooRec, edRec]);
+                            expect(store.indexOf(fooRec)).toBe(1);
+                            expect(store.indexOf(edRec)).toBe(2);
+                        });
+
+                        it("should only mark existing records as moving", function() {
+                            var removeMap = {}, 
+                                addMap = {};
+
+                            store.on('remove', function(store, records) {
+                                mapify(removeMap, records);
+                            });
+                            store.on('add', function(store, records) {
+                                mapify(addMap, records);
+                            });
+
+                            store.insert(2, [fooRec, edRec]);
+                            var expected = {
+                                'ed@sencha.com': true
+                            };
+                            expect(removeMap).toEqual(expected);
+                            expect(addMap).toEqual(expected);
+                        });
+                    });
+                });
+            });
+
+            describe("isMoving", function() {
+                describe("no records", function() {
+                    it("should return 0 when no records are moving", function() {
+                        expect(store.isMoving()).toBe(0);
+                    });
+
+                    it("should return 1 when a single record is moving", function() {
+                        var moving;
+                        store.on('add', function() {
+                            moving = store.isMoving();
+                        });
+                        store.add(edRec);
+                        expect(moving).toBe(1);
+                    });
+
+                    it("should return the amount of moving records", function() {
+                        var moving;
+                        store.on('add', function() {
+                            moving = store.isMoving();
+                        });
+                        store.add([edRec, abeRec]);
+                        expect(moving).toBe(2);
+                    });
+                });
+
+                describe("single record", function() {
+                    it("should return 0 when the record is not moving", function() {
+                        expect(store.isMoving(edRec)).toBe(0);
+                    });
+
+                    it("should return 1 when the record is moving", function() {
+                        var moving;
+                        store.on('add', function() {
+                            moving = store.isMoving(edRec);
+                        });
+                        store.add(edRec);
+                        expect(moving).toBe(1);
+                    });
+                });
+
+                describe("multiple records", function() {
+                    it("should return 0 for an empty array", function() {
+                        expect(store.isMoving([])).toBe(0);
+                    });
+
+                    it("should return the number of moving records", function() {
+                        var moving;
+                        store.on('add', function() {
+                            moving = store.isMoving([edRec, abeRec, aaronRec, tommyRec]);
+                        });
+                        store.add([edRec, abeRec]);
+                        expect(moving).toBe(2);
+                    });
+                });
+            });
+        });
     });
     
     describe("removing", function() {
@@ -3789,8 +4155,10 @@ describe("Ext.data.Store", function() {
                 });
 
                 describe("updating", function() {
-                    it("should move the item if the group changes", function() {
+                    it("should move the item if the group changes but the record does not change position", function() {
                         groupBy();
+
+                        var index = store.indexOf(aaronRec);
                         aaronRec.set('group', 'code');
 
                         var admins = store.getGroups().get('admin'),
@@ -3800,6 +4168,22 @@ describe("Ext.data.Store", function() {
                         expect(admins.contains(aaronRec)).toBe(false);
                         expect(coders.getCount()).toBe(3);
                         expect(coders.contains(aaronRec)).toBe(true);
+                        expect(store.indexOf(aaronRec)).toBe(index);
+                    });
+
+                    it("should move the item if the group changes and the record changes position", function() {
+                        groupBy();
+                        var index = store.indexOf(abeRec);
+                        abeRec.set('group', 'code');
+
+                        var admins = store.getGroups().get('admin'),
+                            coders = store.getGroups().get('code');
+
+                        expect(admins.getCount()).toBe(1);
+                        expect(admins.contains(abeRec)).toBe(false);
+                        expect(coders.getCount()).toBe(3);
+                        expect(coders.contains(abeRec)).toBe(true);
+                        expect(store.indexOf(abeRec)).not.toBe(index);
                     });
                 });
             });
@@ -4901,6 +5285,37 @@ describe("Ext.data.Store", function() {
         });
         
         describe("remote", function() {
+            describe("errors", function() {
+                beforeEach(function() {
+                    createStore({
+                        remoteFilter: true
+                    });
+                    addStoreData();
+                });
+
+                it("should raise an exception when calling filterBy", function() {
+                    expect(function() {
+                        store.filterBy(function() {});
+                    }).toThrow();
+                });
+
+                it("should raise an exception when calling addFilter with a filterFn", function() {
+                    expect(function() {
+                        store.addFilter({
+                            filterFn: function() {}
+                        });
+                    }).toThrow();
+                });
+
+                it("should raise an exception when adding a filter with a filterFn", function() {
+                    expect(function() {
+                        store.getFilters().add({
+                            filterFn: function() {}
+                        });
+                    }).toThrow();
+                });
+            });
+
             describe("during construction", function() {
                 it("should not trigger a load when applying initial filters", function() {
                     var spy = spyOn(Ext.data.Store.prototype, 'load');
@@ -5414,7 +5829,7 @@ describe("Ext.data.Store", function() {
                     var datachangedSpy = spyOnEvent(store, 'datachanged');
 
                     store.on('update', spy);
-                    store.first().set('name', 'Ned Spencer');
+                    edRec.set('name', 'Ned Spencer');
                     expect(spy.callCount).toBe(1);
 
                     // datachanged is only for record additions/removals
@@ -5489,6 +5904,30 @@ describe("Ext.data.Store", function() {
                     store.sort('email');
                     tommyRec.set('email', 'aaa@sencha.com');
                     expect(store.indexOf(tommyRec)).toBe(0);
+                });
+
+                it("should not be moving if the position is changed", function() {
+                    store.on('add', spy);
+                    store.on('remove', spy);
+                    store.sort('email');
+                    tommyRec.set('name', 'Foo');
+                    expect(spy).not.toHaveBeenCalled();
+                });
+
+                it("should be moving in the add/remove event if changing position", function() {
+                    var add, remove;
+
+                    store.on('remove', function() {
+                        remove = store.isMoving(tommyRec);
+                    });
+
+                    store.on('add', function() {
+                        add = store.isMoving(tommyRec);
+                    })
+                    store.sort('email');
+                    tommyRec.set('email', 'aaa@sencha.com');
+                    expect(remove).toBe(1);
+                    expect(add).toBe(1);
                 });
             });
             
@@ -6330,6 +6769,56 @@ describe("Ext.data.Store", function() {
             });
         });
     });
+
+    describe("extraKeys", function() {
+        describe("setting after initialization", function() {
+            beforeEach(function() {
+                createStore();
+                addStoreData();
+                store.setExtraKeys({
+                    byAge: {
+                        property: 'age',
+                        rootProperty: 'data'
+                    }
+                });
+            });
+
+            it("should have the extraKeys updated when add fires", function() {
+                var rec = makeUser('foo@sencha.com', {
+                    age: 100
+                });
+
+                store.on('add', function() {
+                    expect(store.byAge.get(100)).toBe(rec);
+                });
+                store.add(rec);
+            });
+
+            it("should have the extraKeys updated when remove fires", function() {
+                store.on('remove', function() {
+                    expect(store.byAge.get(25)).toBeNull();
+                });
+                store.remove(edRec);
+            });
+
+            it("should have the extraKeys updated when update fires", function() {
+                store.on('update', function() {
+                    expect(store.byAge.get(1)).toBe(edRec);
+                });
+                edRec.set('age', 1);
+            });
+
+            it("should have the extraKeys updated when clear fires", function() {
+                store.on('clear', function() {
+                    expect(store.byAge.get(20)).toBeNull();
+                    expect(store.byAge.get(25)).toBeNull();
+                    expect(store.byAge.get(26)).toBeNull();
+                    expect(store.byAge.get(70)).toBeNull();
+                });
+                store.removeAll();
+            });
+        });
+    })
 
     /*
      * edRaw    = {name: 'Ed Spencer',   email: 'ed@sencha.com',    evilness: 100, group: 'code',  old: false, age: 25, valid: 'yes'};

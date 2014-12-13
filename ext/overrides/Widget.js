@@ -152,6 +152,18 @@ Ext.define('Ext.overrides.Widget', {
 
     up: function() {
         return Ext.Component.prototype.up.apply(this, arguments);
+    },
+    
+    isAncestor: function() {
+        return Ext.Component.prototype.isAncestor.apply(this, arguments);
+    },
+    
+    onFocusEnter: function() {
+        return Ext.Component.prototype.onFocusEnter.apply(this, arguments);
+    },
+    
+    onFocusLeave: function() {
+        return Ext.Component.prototype.onFocusLeave.apply(this, arguments);
     }
 
 }, function() {

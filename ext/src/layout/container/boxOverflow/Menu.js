@@ -97,7 +97,6 @@ Ext.define('Ext.layout.container.boxOverflow.Menu', {
             showEmptyMenu: true,
             getSplitCls: function() { return '';}
         });
-        delete me.menu.ownerCmp;
 
         return me.menuTrigger.getRenderTree();
     },

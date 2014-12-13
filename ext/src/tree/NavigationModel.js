@@ -13,9 +13,11 @@ Ext.define('Ext.tree.NavigationModel', {
     alias: 'view.navigation.tree',
     
     initKeyNav: function(view) {
-        var me = this;
+        var me = this,
+            columns = me.view.ownerGrid.columns;
 
-        me.isTreeGrid = me.view.grid.getVisibleColumnManager().getColumns().length > 1;
+        // Must go up to any possible locking assembly to find total number of columns
+        me.isTreeGrid = columns && columns.length > 1;
         me.callParent([view]);
         me.keyNav.map.addBinding([{
             key: '8',
@@ -34,12 +36,13 @@ Ext.define('Ext.tree.NavigationModel', {
     },
 
     onColumnsChanged: function() {
-        this.isTreeGrid = this.view.getVisibleColumnManager().getColumns().length > 1;
+        // Must go up to any possible locking assembly to find total number of columns
+        this.isTreeGrid = this.view.ownerGrid.getVisibleColumnManager().getColumns().length > 1;
     },
 
     onKeyLeft: function(keyEvent) {
         var me = this,
-            view = me.view,
+            view = keyEvent.view,
             record = me.record;
 
         // Left when a TreeGrid navigates between columns
@@ -48,7 +51,7 @@ Ext.define('Ext.tree.NavigationModel', {
         }
 
         // Left arrow key on an expanded node closes the node.
-        if (!record.isLeaf() && record.isExpanded()) {
+        if (keyEvent.position.column.isTreeColumn && record.isExpanded()) {
             view.collapse(record);
         }
         // Left arrow key on a closed or end node moves focus to the node's parent (don't attempt to focus hidden root).
@@ -71,9 +74,9 @@ Ext.define('Ext.tree.NavigationModel', {
 
         // Right arrow key expands a closed node, moves to the first child of an open node, or does nothing on an end node.
         if (!record.isLeaf()) {
-            if (!record.isExpanded()) {
-                me.view.expand(record);
-            } else {
+            if (keyEvent.position.column.isTreeColumn && !record.isExpanded()) {
+                keyEvent.view.expand(record);
+            } else if (record.isExpanded()) {
                 record = record.childNodes[0];
                 if (record) {
                     me.setPosition(record);

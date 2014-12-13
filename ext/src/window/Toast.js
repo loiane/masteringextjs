@@ -144,7 +144,7 @@ Ext.define('Ext.window.Toast', {
 
         // Mousedown outside of this, when visible, hides it immediately
         if (me.closeOnMouseDown) {
-            me.mon(Ext, 'mousedown', me.onDocumentMousedown, me);
+            Ext.getDoc().on('mousedown', me.onDocumentMousedown, me);
         }
     },
 

@@ -486,15 +486,20 @@ Ext.define('Ext.tab.Bar', {
         var me = this;
 
         if (!tab.disabled && tab !== me.activeTab) {
+            // Deactivate the previous tab, and ensure this FocusableContainer knows about it
             if (me.activeTab) {
                 if (me.activeTab.isDestroyed) {
                     me.previousTab = null;
                 } else {
                     me.previousTab = me.activeTab;
                     me.activeTab.deactivate();
+                    me.deactivateFocusable(me.activeTab);
                 }
             }
+
+            // Activate the new tab, and ensure this FocusableContainer knows about it
             tab.activate();
+            me.activateFocusable(tab);
 
             me.activeTab = tab;
             me.needsScroll = true;

@@ -1329,6 +1329,15 @@ describe("Ext.mixin.Observable", function() {
             boss.fireEvent('fired');
             expect(bossFiredFn.callCount).toBe(2);
         });
+
+        it("should complain if the named method does not exist on the scope object", function() {
+            var foo = new Ext.mixin.Observable(),
+                scope = {};
+
+            expect(function() {
+                foo.addListener('bar', 'onBar', scope);
+            }).toThrow("No method named 'onBar' found on scope object");
+        });
     });
 
     describe("clearListeners", function() {
@@ -2139,6 +2148,21 @@ describe("Ext.mixin.Observable", function() {
             o.fireEvent('foo');
 
             expect(actionFn.callCount).toBe(1);
+        });
+    });
+
+    describe("setListeners", function() {
+        it("should be an alias for addListener", function() {
+            var o = new Ext.mixin.Observable(),
+                listeners = {
+                    foo: 'onFoo'
+                };
+
+            spyOn(o, 'addListener');
+
+            o.setListeners(listeners);
+
+            expect(o.addListener).toHaveBeenCalledWith(listeners);
         });
     });
 

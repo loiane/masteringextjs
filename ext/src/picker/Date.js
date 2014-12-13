@@ -811,14 +811,11 @@ Ext.define('Ext.picker.Date', {
      * @param {Boolean} isHide True if it's a hide operation
      */
     runAnimation: function(isHide){
-        var me = this,
-            picker = this.monthPicker,
+        var picker = this.monthPicker,
             options = {
                 duration: 200,
                 callback: function() {
                     picker.setVisible(!isHide);
-                    // See showMonthPicker
-                    picker.ownerCmp = isHide ? null : me;
                 }
             };
 
@@ -845,8 +842,6 @@ Ext.define('Ext.picker.Date', {
                 me.runAnimation(true);
             } else {
                 picker.hide();
-                // See showMonthPicker
-                picker.ownerCmp = null;
             }
         }
         return me;
@@ -881,16 +876,14 @@ Ext.define('Ext.picker.Date', {
             if (!picker.isVisible()) {
                 picker.setValue(me.getActive());
                 picker.setSize(el.getSize());
+
+                // Null out floatParent so that the [-1, -1] position is not made relative to this
+                picker.floatParent = null;
                 picker.setPosition(-el.getBorderWidth('l'), -el.getBorderWidth('t'));
                 if (me.shouldAnimate(animate)) {
                     me.runAnimation(false);
                 } else {
                     picker.show();
-                    // We need to set the ownerCmp so that owns() can correctly
-                    // match up the component hierarchy, however when positioning the picker
-                    // we don't want it to position like a normal floater because we render it to 
-                    // month picker element itself.
-                    picker.ownerCmp = me;
                 }
             }
         }
@@ -919,6 +912,10 @@ Ext.define('Ext.picker.Date', {
         if (!picker) {
             me.monthPicker = picker = new Ext.picker.Month({
                 renderTo: me.el,
+                // We need to set the ownerCmp so that owns() can correctly
+                // match up the component hierarchy so that focus does not leave
+                // an owning picker field if/when this gets focus.
+                ownerCmp: me,
                 floating: true,
                 padding: me.padding,
                 shadow: false,

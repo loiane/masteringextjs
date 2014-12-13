@@ -817,13 +817,13 @@ Ext.define('Ext.container.Container', {
     add: function() {
         var me = this,
             args = Ext.Array.slice(arguments),
-            index = (typeof args[0] == 'number') ? args.shift() : -1,
+            index = (typeof args[0] === 'number') ? args.shift() : -1,
             layout = me.getLayout(),
             needsLayout = false,
             addingArray, items, i, length, item, pos, ret, instanced;
 
 
-        if (args.length == 1 && Ext.isArray(args[0])) {
+        if (args.length === 1 && Ext.isArray(args[0])) {
             items = args[0];
             addingArray = true;
         } else {
@@ -837,7 +837,7 @@ Ext.define('Ext.container.Container', {
         ret = items = me.prepareItems(items, true);
         length = items.length;
 
-        if (!addingArray && length == 1) { // an array of 1 should still return an array...
+        if (!addingArray && length === 1) { // an array of 1 should still return an array...
             ret = items[0];
         }
 
@@ -1076,15 +1076,19 @@ Ext.define('Ext.container.Container', {
     disable: function() {
         this.callParent(arguments);
 
-        var itemsToDisable = this.getChildItemsToDisable(),
+        var thisIsMasking = this.maskOnDisable,
+            itemsToDisable = this.getChildItemsToDisable(),
             length         = itemsToDisable.length,
-            item, i;
+            item, i, modSetting;
 
         for (i = 0; i < length; i++) {
             item = itemsToDisable[i];
 
             if (item.resetDisable !== false && !item.disabled) {
+                modSetting = item.maskOnDisable;
+                item.maskOnDisable = !thisIsMasking;
                 item.disable();
+                item.maskOnDisable = modSetting;
                 item.resetDisable = true;
             }
         }
@@ -1174,7 +1178,7 @@ Ext.define('Ext.container.Container', {
         var c = this.items.get(comp);
 
         // Only allow finding by index on the main items container
-        if (!c && typeof comp != 'number') {
+        if (!c && typeof comp !== 'number') {
             c = this.floatingItems.get(comp);
         }
 
@@ -1988,7 +1992,7 @@ Ext.define('Ext.container.Container', {
          * @return {Ext.Component[]} Items to be enabled/disabled
          */
         getChildItemsToDisable: function(){
-            return this.query('[isFormField],button');
+            return this.query('[isFormField],[isFocusableContainer],button');
         },
 
         // @private - used as the key lookup function for the items collection

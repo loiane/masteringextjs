@@ -136,10 +136,24 @@ Ext.define('Ext.grid.NavigationModel', {
         }
     },
 
+    beforeViewRefresh: function() {
+    // Override at TableView level because NavigationModel is shared between two sides of a lockable
+    // So we have to check that the focus position applies to us before cacheing
+        var position = this.getPosition();
+
+        if (position && position.view === this) {
+            this.focusRestorePosition = position;
+        } else {
+            this.focusRestorePosition = null;
+        }
+    },
+
     // On record remove, it might have bumped the selection upwards.
     // Pass the "preventSelection" flag.
     onStoreRemove: function() {
-        this.setPosition(this.getRecord(), null, null, null, true);
+        if (this.position) {
+            this.setPosition(this.getPosition(), null, null, null, true);
+        }
     },
 
     deferSetPosition: function(delay, recordIndex, columnIndex, keyEvent, suppressEvent, preventNavigation) {

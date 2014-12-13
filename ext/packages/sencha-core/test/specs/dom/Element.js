@@ -3062,6 +3062,26 @@ describe("Ext.dom.Element", function() {
                             expect(handler).not.toHaveBeenCalled();
                             expect(handler2).not.toHaveBeenCalled();
                         });
+
+                        it("should propagate to elements that were not in the cache when propagation began", function() {
+                            // https://sencha.jira.com/browse/EXTJS-15953
+                            var parent = Ext.getBody().createChild({ cn: [{}] }, null, true),
+                                child = parent.firstChild,
+                                parentFired = false;
+
+                            Ext.get(child).on('click', function() {
+                                // Calling Ext.get() will add the parent element to the cache for the first time.
+                                Ext.get(parent).on('click', function() {
+                                    parentFired = true;
+                                });
+                            });
+
+                            jasmine.fireMouseEvent(child, 'click');
+
+                            expect(parentFired).toBe(true);
+
+                            Ext.get(parent).destroy();
+                        })
                     });
                 });
 

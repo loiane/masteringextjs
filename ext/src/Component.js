@@ -462,7 +462,7 @@ Ext.define('Ext.Component', {
      * `false` to clip any overflowing content.
      *
      * This should not be combined with {@link #overflowX} or  {@link #overflowY}.
-     * @deprecated 5.0.2 Use {@link #scrollable} instead
+     * @deprecated 5.1.0 Use {@link #scrollable} instead
      */
 
     /**
@@ -872,7 +872,7 @@ Ext.define('Ext.Component', {
      *  - `'scroll'` to always enable horizontal scrollbar (Style overflow-x: 'scroll').
      *
      * The default is overflow-x: 'hidden'. This should not be combined with {@link #autoScroll}.
-     * @deprecated 5.0.2 Use {@link #scrollable} instead
+     * @deprecated 5.1.0 Use {@link #scrollable} instead
      */
 
     /**
@@ -883,7 +883,7 @@ Ext.define('Ext.Component', {
      *  - `'scroll'` to always enable vertical scrollbar (Style overflow-y: 'scroll').
      *
      * The default is overflow-y: 'hidden'. This should not be combined with {@link #autoScroll}.
-     * @deprecated 5.0.2 Use {@link #scrollable} instead
+     * @deprecated 5.1.0 Use {@link #scrollable} instead
      */
 
     /**
@@ -2815,47 +2815,6 @@ Ext.define('Ext.Component', {
         return me;
     },
 
-    doAddListener: function(ename, fn, scope, options, order, caller, manager) {
-        var me = this,
-            listeners, option, eventOptions, elementName, element;
-
-        if (Ext.isObject(fn) || (options && options.element)) {
-            if (options.element) {
-                elementName = options.element;
-                listeners = {};
-                listeners[ename] = fn;
-                if (scope) {
-                    listeners.scope = scope;
-                }
-
-                eventOptions = me.$elementEventOptions;
-                for (option in options) {
-                    if (eventOptions[option]) {
-                        listeners[option] = options[option];
-                    }
-                }
-            } else {
-                listeners = fn;
-                elementName = ename;
-            }
-
-            element = me[elementName];
-
-            if (element && element.isObservable) { // can be any kind of observable, not just element
-                me.mon(element, listeners);
-            } else {
-                me.afterRenderEvents = me.afterRenderEvents || {};
-                if (!me.afterRenderEvents[elementName]) {
-                    me.afterRenderEvents[elementName] = [];
-                }
-                me.afterRenderEvents[elementName].push(listeners);
-            }
-            return;
-        }
-
-        me.mixins.observable.doAddListener.call(me, ename, fn, scope, options, order, caller, manager);
-    },
-
     /**
      * Enable the component
      * @param {Boolean} [silent=false] Passing `true` will suppress the `enable` event from being fired.
@@ -3647,6 +3606,20 @@ Ext.define('Ext.Component', {
     },
 
     /**
+     * Checks if this component will be contained by the passed component as part of its
+     * layout run. If `true`, then the layout on `this` can be skipped because it will be
+     * encompassed when the layout for `comp` runs. Typical cases where this may be be `false`
+     * is when asking about floaters nested in containers.
+     * @param {Ext.Component} comp The potentional owner.
+     * @return {Boolean} `true` if this component is a layout child of `comp`.
+     *
+     * @private
+     */
+    isLayoutChild: function(ownerCandidate) {
+        return !this.floating && !!this.up(ownerCandidate);
+    },
+
+    /**
      * Determines whether this Component is the root of a layout. This returns `true` if
      * this component can run its layout without assistance from or impact on its owner.
      * If this component cannot run its layout given these restrictions, `false` is returned
@@ -4141,36 +4114,6 @@ Ext.define('Ext.Component', {
     },
 
     /**
-     * @template
-     * @protected
-     * Called when focus enters this Component's hierarchy
-     * @param {type} e
-     * @return {undefined}
-     */
-    onFocusEnter: function(e) {
-        var me = this;
-
-        me.previousFocus = e.relatedTarget;
-        me.containsFocus = true;
-        me.fireEvent('focusenter', me, e);
-    },
-
-    /**
-     * @template
-     * @protected
-     * Called when focus exits from this Component's hierarchy
-     * @param {type} e
-     * @return {undefined}
-     */
-    onFocusLeave: function(e) {
-        var me = this;
-
-        me.previousFocus = null;
-        me.containsFocus = false;
-        me.fireEvent('focusleave', me, e);
-    },
-
-    /**
      * Allows addition of behavior to the hide operation. After
      * calling the superclass's onHide, the Component will be hidden.
      *
@@ -4188,23 +4131,21 @@ Ext.define('Ext.Component', {
             ghostPanel,
             fromSize,
             toBox,
-            activeEl = Ext.Element.getActiveElement();
+            focusTarget = me.previousFocus;
 
-        // Flag to any post-hide processing lastFocus is the element within this component that was focused
-        if (activeEl && !me.el.contains(activeEl)) {
-            activeEl = null;
-        }
+        me.previousFocus = null;
 
         // IF this floating component contains focus...
         //  Before hiding, restore focus to what was focused when we were shown.
         //  IE8 will throw an exception is the target is not focusable
         //  Blur the focused element before hiding to force focusLeave
-        if (me.floating && me.previousFocus && activeEl) {
-            if (Ext.isIE8 || Ext.fly(me.previousFocus).isFocusable()) {
-                me.previousFocus.focus();
-                me.previousFocus = null;
-            } else {
-                activeEl.blur();
+        if (me.floating && focusTarget && me.containsFocus) {
+            // Allow the previousFocus target to be an htmlEement or Component
+            if (!focusTarget.isComponent) {
+                focusTarget = Ext.fly(focusTarget);
+            }
+            if (Ext.isIE8 || focusTarget.isFocusable()) {
+                focusTarget.focus();
             }
         }
 
@@ -5643,6 +5584,47 @@ Ext.define('Ext.Component', {
             return result;
         },
 
+        doAddListener: function(ename, fn, scope, options, order, caller, manager) {
+            var me = this,
+                listeners, option, eventOptions, elementName, element;
+
+            if (Ext.isObject(fn) || (options && options.element)) {
+                if (options.element) {
+                    elementName = options.element;
+                    listeners = {};
+                    listeners[ename] = fn;
+                    if (scope) {
+                        listeners.scope = scope;
+                    }
+
+                    eventOptions = me.$elementEventOptions;
+                    for (option in options) {
+                        if (eventOptions[option]) {
+                            listeners[option] = options[option];
+                        }
+                    }
+                } else {
+                    listeners = fn;
+                    elementName = ename;
+                }
+
+                element = me[elementName];
+
+                if (element && element.isObservable) { // can be any kind of observable, not just element
+                    me.mon(element, listeners);
+                } else {
+                    me.afterRenderEvents = me.afterRenderEvents || {};
+                    if (!me.afterRenderEvents[elementName]) {
+                        me.afterRenderEvents[elementName] = [];
+                    }
+                    me.afterRenderEvents[elementName].push(listeners);
+                }
+                return;
+            }
+
+            me.mixins.observable.doAddListener.call(me, ename, fn, scope, options, order, caller, manager);
+        },
+
         /**
          * This method fires an event on `Ext.GlobalEvents` allowing interested parties to know
          * of certain critical events for this component. This is done globally because the
@@ -6103,9 +6085,11 @@ Ext.define('Ext.Component', {
         },
 
         setHiddenState: function (hidden) {
-            var inheritedState = this.getInherited();
+            var me = this,
+                inheritedState = me.getInherited(),
+                zIndexManager = me.zIndexManager;
 
-            this.hidden = hidden;
+            me.hidden = hidden;
 
             if (hidden) {
                 inheritedState.hidden = true;
@@ -6114,7 +6098,9 @@ Ext.define('Ext.Component', {
             }
 
             // Ensutre any ZIndexManager knowns about visibility state change to keep its filtering correct
-            this.zIndexManager && this.zIndexManager.onComponentShowHide(this);
+            if (zIndexManager) {
+                zIndexManager.onComponentShowHide(me);
+            }
         },
 
         setupProtoEl: function() {

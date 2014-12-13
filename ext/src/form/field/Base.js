@@ -641,17 +641,14 @@ Ext.define('Ext.form.field.Base', {
             inputEl = me.inputEl,
             onFieldMutation = me.onFieldMutation,
             events = me.checkChangeEvents,
-            eLen = events.length,
-            e, event;
+            len = events.length,
+            i, event;
 
         if (inputEl) {
             me.mon(inputEl, Ext.supports.SpecialKeyDownRepeat ? 'keydown' : 'keypress', me.fireKey,  me);
 
-            // listen for immediate value changes
-            me.checkChangeTask = new Ext.util.DelayedTask(me.checkChange, me);
-
-            for (e = 0; e < eLen; e++) {
-                event = events[e];
+            for (i = 0; i < len; ++i) {
+                event = events[i];
                 if (event === 'propertychange') {
                     me.usesPropertychange = true;
                 }
@@ -672,8 +669,38 @@ Ext.define('Ext.form.field.Base', {
     onFieldMutation: function(e) {
         // When using propertychange, we want to skip out on various values, since they won't cause
         // the underlying value to change.
-        if (!(e.type == 'propertychange' && this.ignoreChangeRe.test(e.browserEvent.propertyName))) {
-            this.checkChangeTask.delay(this.checkChangeBuffer);
+        var me = this,
+            task = me.checkChangeTask;
+
+        if (!(e.type == 'propertychange' && me.ignoreChangeRe.test(e.browserEvent.propertyName))) {
+            if (!task) {
+                me.checkChangeTask = task = new Ext.util.DelayedTask(me.doCheckChangeTask, me);
+            }
+            if (!me.bindNotifyListener) {
+                // We continually create/destroy the listener as needed (see doCheckChangeTask) because we're listening
+                // to a global event, so we don't want the event to be triggered unless absolutely necessary. In this case,
+                // we only need to fix the value when we have a pending change to check.
+                me.bindNotifyListener = Ext.on('beforebindnotify', me.onBeforeNotify, me, {destroyable: true});
+            }
+            task.delay(me.checkChangeBuffer);
+        }
+    },
+
+    doCheckChangeTask: function() {
+        var bindNotifyListener = this.bindNotifyListener;
+
+        if (bindNotifyListener) {
+            bindNotifyListener.destroy();
+            this.bindNotifyListener = null;
+        }
+        this.checkChange();
+    },
+
+    publishValue: function () {
+        var me = this;
+
+        if (me.rendered && !me.getErrors().length) {
+            me.publishState('value', me.getValue());
         }
     },
 
@@ -824,15 +851,29 @@ Ext.define('Ext.form.field.Base', {
         me.mixins.labelable.renderActiveError.call(me);
     },
 
+    beforeDestroy: function() {
+        var me = this,
+            task = me.checkChangeTask;
+
+        if (task) {
+            task.cancel();
+        }
+        me.checkChangeTask = me.bindNotifyListener = Ext.destroy(me.bindNotifyListener);
+        me.callParent();
+    },
+
     privates: {
         applyBind: function (bind, currentBindings) {
             var me = this,
                 valueBinding = currentBindings && currentBindings.value,
-                bindings;
+                bindings, newValueBind;
 
             bindings = me.callParent([ bind, currentBindings ]);
 
-            if (bindings.value !== valueBinding && me.getInherited().modelValidation) {
+            newValueBind = bindings.value;
+            me.hasBindingValue = !!newValueBind;
+
+            if (newValueBind !== valueBinding && me.getInherited().modelValidation) {
                 me.updateValueBinding(bindings);
             }
 
@@ -865,6 +906,16 @@ Ext.define('Ext.form.field.Base', {
                 me.renderTpl = me.getTpl('labelableRenderTpl');
             }
             return me.callParent();
+        },
+
+        onBeforeNotify: function() {
+            // This event is fired before the scheduler fires off any bindings.
+            // If we happen to be in the state where we are pending a state change check,
+            // force it to flush here so that we have the correct state in the viewmodel before
+            // the bindings trigger, otherwise we may get an old value pushed into the field before
+            // it runs the check.
+            this.checkChangeTask.cancel();
+            this.checkChange();
         },
 
         updateValueBinding: function (bindings) {

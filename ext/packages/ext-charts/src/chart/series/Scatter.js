@@ -215,7 +215,7 @@ Ext.define('Ext.chart.series.Scatter', {
             //skip undefined or null values
             if (typeof yValue == 'undefined' || (typeof yValue == 'string' && !yValue)
                 || xValue == null || yValue == null) {
-                //<debug warn>
+                //<debug>
                 if (Ext.isDefined(Ext.global.console)) {
                     Ext.global.console.warn("[Ext.chart.series.Scatter]  Skipping a store element with a value which is either undefined or null  at ", record, xValue, yValue);
                 }

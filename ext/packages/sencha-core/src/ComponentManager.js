@@ -268,7 +268,7 @@ Ext.define('Ext.ComponentManager', {
                 });
             }
         }
-        if (toComponent) {
+        if (toComponent && !toComponent.isDestroyed) {
             // Call the Focused Component's focus event handler directly with a synthesized focus event.
             if (toComponent.focusable && toElement === toComponent.getFocusEl().dom) {
                 event = new Ext.event.Event(e.event);
@@ -278,7 +278,7 @@ Ext.define('Ext.ComponentManager', {
                 toComponent.onFocus(event);
             }
 
-            // Call onFocusEnter on the component axis from which focus is exiting
+            // Call onFocusEnter on the component axis to which focus is entering
             for (targetComponent = toComponent; targetComponent && targetComponent !== commonAncestor; targetComponent = targetComponent.getRefOwner()) {
                 targetComponent.onFocusEnter({
                     event: e.event,

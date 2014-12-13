@@ -397,9 +397,14 @@ Ext.define('Ext.app.Application', {
         var me = this,
             History = Ext.util.History,
             defaultToken = me.getDefaultToken(),
+            currentProfile = me.getCurrentProfile(),
             controllers, c, cLen, controller, token;
 
         me.initMainView();
+
+        if (currentProfile) {
+            currentProfile.launch();
+        }
 
         me.launch.call(me.scope || me);
         me.launched = true;

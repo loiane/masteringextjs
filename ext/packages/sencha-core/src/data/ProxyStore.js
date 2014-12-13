@@ -347,7 +347,7 @@ Ext.define('Ext.data.ProxyStore', {
             };
 
         if (!me.disableMetaChangeEvent) {
-            listeners.metachange = me.onMetaChange
+            listeners.metachange = me.onMetaChange;
         }
 
         if (oldProxy) {
@@ -670,7 +670,7 @@ Ext.define('Ext.data.ProxyStore', {
                 complete: me.onBatchComplete
             };
 
-        if (me.batchUpdateMode == 'operation') {
+        if (me.batchUpdateMode === 'operation') {
             listeners.operationcomplete = me.onBatchOperationComplete;
         }
 

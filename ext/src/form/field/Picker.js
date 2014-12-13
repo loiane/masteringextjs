@@ -172,6 +172,10 @@ Ext.define('Ext.form.field.Picker', {
             doc = Ext.getDoc();
             collapseIf = me.collapseIf;
             picker.setMaxHeight(picker.initialConfig.maxHeight);
+            
+            if (me.matchFieldWidth) {
+                picker.width = me.bodyEl.getWidth();
+            }
 
             // Show the picker and set isExpanded flag. alignPicker only works if isExpanded.
             picker.show();
@@ -202,15 +206,9 @@ Ext.define('Ext.form.field.Picker', {
      */
     alignPicker: function() {
         var me = this,
-            bodyElWidth,
             picker = me.getPicker();
 
-        if (me.isExpanded) {
-            if (me.matchFieldWidth) {
-                bodyElWidth = me.bodyEl.getWidth();
-                // Auto the height (it will be constrained by min and max width) unless there are no records to display.
-                picker.setWidth(bodyElWidth);
-            }
+        if (picker.isVisible()) {
             if (picker.isFloating()) {
                 me.doAlign();
             }
@@ -273,8 +271,10 @@ Ext.define('Ext.form.field.Picker', {
      */
     collapseIf: function(e) {
         var me = this;
-        
-        if (!me.isDestroyed && !e.within(me.bodyEl, false, true) && !me.owns(e.target)) {
+
+        // If what was mousedowned on is outside of this Field, and is not focusable, then collapse.
+        // If it is focusable, this Field will blur and collapse anyway.
+        if (!me.isDestroyed && !e.within(me.bodyEl, false, true) && !me.owns(e.target) && !Ext.fly(e.target).isFocusable()) {
             me.collapse();
         }
     },

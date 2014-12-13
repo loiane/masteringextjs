@@ -671,6 +671,13 @@ Ext.define('Ext.grid.column.Column', {
         }
     },
 
+    onFocusLeave: function(e) {
+        this.callParent([e]);
+        if (this.activeMenu) {
+            this.activeMenu.hide();
+        }
+    },
+
     initItems: function() {
         var me = this;
 
@@ -1347,8 +1354,9 @@ Ext.define('Ext.grid.column.Column', {
 
     // Called when the column menu is activated/deactivated.
     // Change the UI to indicate active/inactive menu
-    setMenuActive: function(isMenuOpen) {
-        this.titleEl[isMenuOpen ? 'addCls' : 'removeCls'](this.headerOpenCls);
+    setMenuActive: function(menu) {
+        this.activeMenu = menu;
+        this.titleEl[menu ? 'addCls' : 'removeCls'](this.headerOpenCls);
     },
 
     deprecated: {

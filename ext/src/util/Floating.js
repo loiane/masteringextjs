@@ -53,6 +53,13 @@ Ext.define('Ext.util.Floating', {
      */
 
     /**
+     * @property {Boolean}
+     * The value `true` indicates that this Component is floating.
+     * @private
+     * @readonly
+     */
+
+    /**
      * @property {Ext.ZIndexManager} zIndexManager
      * Only present for {@link Ext.Component#floating floating} Components after they have been rendered.
      *

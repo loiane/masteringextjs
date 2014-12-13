@@ -3,7 +3,7 @@ Ext.define('Packt.controller.Test', {
 
     init: function(application) {
         this.control({
-            "login": {
+            "login-dialog": {
                 show: this.automaticLogin
             }
         });

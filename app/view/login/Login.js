@@ -1,7 +1,7 @@
 Ext.define('Packt.view.login.Login', {
     extend: 'Ext.window.Window',
 
-    xtype: 'login',
+    xtype: 'login-dialog',
 
     requires: [
         'Packt.view.login.LoginController',

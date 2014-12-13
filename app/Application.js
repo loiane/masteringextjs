@@ -103,7 +103,7 @@ Ext.define('Packt.Application', {
                 listeners: {
                     afteranimate: function(el, startTime, eOpts ){
                         //console.log('launch');
-                        Ext.widget('login');
+                        Ext.widget('login-dialog');
                     }
                 }
             });

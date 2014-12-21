@@ -20,8 +20,8 @@
     /**
      * The name of the theme for this application.
      */
-    "theme": "masteringextjs-theme",
-    //"theme": "ext-theme-neptune",
+    //"theme": "masteringextjs-theme",
+    "theme": "ext-theme-neptune",
 
     /**
      * The list of required packages (with optional versions; default is "latest").

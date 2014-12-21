@@ -178,9 +178,8 @@ Ext.define('Ext.ux.LiveSearchGridPanel', {
              
              
              me.store.each(function(record, idx) {
-                 var td1 = Ext.fly(view.getNode(idx)),
-                     cell, matches, cellHTML, td;
-                 td = td1 ? td1.down(cellSelector) : null;
+                 var td = Ext.fly(view.getNode(idx)).down(cellSelector),
+                     cell, matches, cellHTML;
                  while (td) {
                      cell = td.down(innerSelector);
                      matches = cell.dom.innerHTML.match(me.tagsRe);

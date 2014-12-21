@@ -2,11 +2,6 @@ Ext.define('Packt.view.reports.SalesFilmCategoryColumn', {
     extend: 'Ext.chart.CartesianChart',
     alias: 'widget.salesfilmcategorycol',
 
-    requires: [
-        'Packt.view.charts.touch.ColumnSprite3D',
-        'Packt.view.charts.touch.ColumnSeries3D'
-    ],
-
     bind: '{salesFilmCategory}',
 
     insetPadding: {
@@ -42,7 +37,7 @@ Ext.define('Packt.view.reports.SalesFilmCategoryColumn', {
         }
     }],
     series: [{
-        type: 'column3d',
+        type: 'bar3d',
         //axis: 'left',
         highlight: true,
         style: {
@@ -55,6 +50,13 @@ Ext.define('Packt.view.reports.SalesFilmCategoryColumn', {
             renderer: Ext.util.Format.numberRenderer('0'),
             orientation: 'vertical',
             color: '#333'
+        },
+        tooltip: {
+            trackMouse: true,
+            style: 'background: #fff',
+            renderer: function(storeItem, item, attr) {
+                this.setTitle(storeItem.get('category') + ': ' + storeItem.get('total_sales') + ' $');
+            }
         },
         xField: 'category',
         yField: 'total_sales'

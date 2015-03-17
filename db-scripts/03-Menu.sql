@@ -6,7 +6,7 @@ USE `sakila` ;
 CREATE  TABLE IF NOT EXISTS `sakila`.`menu` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `text` VARCHAR(45) NOT NULL ,
-  `iconCls` VARCHAR(15) NULL ,
+  `iconCls` VARCHAR(30) NULL ,
   `className` VARCHAR(45) NULL ,
   `menu_id` INT NULL ,
   PRIMARY KEY (`id`) ,

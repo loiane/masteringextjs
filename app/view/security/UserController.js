@@ -35,10 +35,7 @@ Ext.define('Packt.view.security.UserController', {
                     title: record ? 'Edit: ' + record.get('name') : 'Add User'
                 },
                 links: {
-                    currentUser: record || {
-                        type: 'User',
-                        create: true
-                    }
+                    currentUser: record || Ext.create('Packt.model.security.User')
                 }
             }
         });

@@ -8,7 +8,11 @@
 http://youtu.be/Vm6meIDTHdw
 
 # Ext JS 4.x
-Please refer to the branch extjs 4.x of this repository
+- Please refer to the branch extjs 4.x of this repository
 
-#Book link - Ext JS 5.x
+# Ext JS 6.x
+- Please refer to the branch extjs 6.x of this repository
+- Work in progress
+
+# Book link - Ext JS 5.x
 https://www.packtpub.com/web-development/mastering-extjs-second-edition

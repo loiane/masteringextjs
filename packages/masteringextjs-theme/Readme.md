@@ -1,2 +1,0 @@
-# masteringextjs-theme - Read Me
-

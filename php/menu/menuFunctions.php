@@ -4,7 +4,7 @@ function retrievePermissions($userName){
 
     require('../db/db.php');
 
-    $sqlQuery = "SELECT p.menu_id menuId FROM User u ";
+    $sqlQuery = "SELECT p.menu_id menuId FROM user u ";
     $sqlQuery .= "INNER JOIN permissions p ON u.groups_id = p.groups_id ";
     $sqlQuery .= "INNER JOIN menu m ON p.menu_id = m.id ";
     $sqlQuery .= "WHERE u.username = '$userName' ";
@@ -17,7 +17,6 @@ function retrievePermissions($userName){
         }
     }
 
-    $resultDb->free();
     $mysqli->close();
 
     return $permissions;
@@ -40,7 +39,7 @@ function retrieveModules($permissions){
         }
     }
 
-    $resultDb->free();
+
     $mysqli->close();
 
     return $modules;
@@ -78,7 +77,6 @@ function retrieveMenuOptions($modules, $permissions){
         }
     }
 
-    $resultDb->close();
     $mysqli->close();
 
     return $result;

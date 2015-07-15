@@ -1,6 +1,3 @@
-/**
- * Created by loiane on 7/15/15.
- */
 Ext.define('MasteringExtJS.view.locale.LocaleModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.locale',

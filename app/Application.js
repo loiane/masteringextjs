@@ -9,7 +9,7 @@ Ext.define('MasteringExtJS.Application', {
     name: 'MasteringExtJS',
 
     stores: [
-        // TODO: add global / shared stores here
+        'MenuList'
     ],
     
     launch: function () {

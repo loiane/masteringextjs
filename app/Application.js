@@ -9,7 +9,8 @@ Ext.define('MasteringExtJS.Application', {
     name: 'MasteringExtJS',
 
     stores: [
-        'MenuList'
+        'MenuList',
+        'Locales'
     ],
     
     launch: function () {

@@ -1,11 +1,7 @@
-/**
- * Created by loiane on 7/15/15.
- */
 Ext.define('MasteringExtJS.view.locale.Locale', {
     extend: 'Ext.button.Split',
 
     requires: [
-        'MasteringExtJS.view.locale.LocaleModel',
 		'MasteringExtJS.view.locale.LocaleController',
 
         'Ext.menu.Menu',
@@ -13,10 +9,6 @@ Ext.define('MasteringExtJS.view.locale.Locale', {
     ],
 
     xtype: 'locale',
-
-    viewModel: {
-        type: 'locale'
-    },
 
     controller: 'locale',
 

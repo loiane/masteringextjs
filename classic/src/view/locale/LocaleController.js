@@ -15,6 +15,7 @@ Ext.define('MasteringExtJS.view.locale.LocaleController', {
         } else {
             button.setText('Português');
         }
+
     },
 
     onMenuItemClick: function(item, e, options){

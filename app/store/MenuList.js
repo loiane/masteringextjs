@@ -13,12 +13,29 @@ Ext.define('MasteringExtJS.store.MenuList', {
                 routeId: 'dashboard'
             },
             {
-                text:   'Email',
-                view:   'email.Email',
-                iconCls: 'right-icon hot-icon x-fa fa-send ',
-                leaf:   true,
-                routeId: 'email'
+                text: 'Security',
+                expanded: false,
+                selectable: false,
+                iconCls: 'x-fa fa-group',
+                routeId : 'pages-parent',
+                id:       'pages-parent',
+                children: [
+                    {
+                        text: 'Groups',
+                        view: 'user.groups',
+                        leaf: true,
+                        iconCls: 'x-fa fa-file-o',
+                        routeId:'pages.blank'
+                    },
 
+                    {
+                        text: 'Users',
+                        view: 'user.user',
+                        leaf: true,
+                        iconCls: 'x-fa fa-exclamation-triangle',
+                        routeId:'pages.404'
+                    }
+                ]
             },
             {
                 text:   'Profile',

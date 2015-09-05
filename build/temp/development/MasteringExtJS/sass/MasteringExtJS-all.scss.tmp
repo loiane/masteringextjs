@@ -888,6 +888,7 @@ $include-masteringextjs-view-main-maincontroller: dynamic(true);;
 $include-masteringextjs-view-main-mainmodel: dynamic(true);;
 $include-masteringextjs-view-menu-menulist: dynamic(true);;
 $include-masteringextjs-view-menu-menulistcontroller: dynamic(true);;
+$include-masteringextjs-view-menu-menulistmodel: dynamic(true);;
 
 
 /* ======================== ETC ======================== */

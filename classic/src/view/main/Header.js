@@ -23,13 +23,13 @@ Ext.define('MasteringExtJS.view.main.Header', {
                 html: '<div class="main-logo">'+_('appName')+'</div>',
                 width: 250
             },
-            {
+            /*{
                 margin: '0 0 0 8',
                 cls: 'delete-focus-bg',
                 iconCls:'x-fa fa-navicon',
                 id: 'main-navigation-btn',
                 handler: 'onToggleNavigationSize'
-            },
+            },*/
             {
                 xtype: 'tbspacer',
                 flex: 1

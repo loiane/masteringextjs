@@ -13,7 +13,8 @@ Ext.define('MasteringExtJS.store.MenuList', {
 
     proxy: {
         type: 'ajax',
-        url: 'data/menu.json',
+        //url: 'data/menu.json',
+        url: 'http://localhost:8080/masteringextjs-java/menu/',
         reader: {
             type: 'json',
             transform: {

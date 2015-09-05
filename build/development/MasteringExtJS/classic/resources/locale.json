@@ -1,0 +1,17 @@
+{
+  "success": "true",
+  "data": [
+    {
+      "id": "appName",
+      "en": "DVD Rental Store",
+      "es": "DVD Rental Store",
+      "pt_BR": "DVD Rental Store"
+    },
+    {
+      "id": "logout",
+      "en": "Logout",
+      "es": "Salir",
+      "pt_BR": "Sair"
+    }
+  ]
+}

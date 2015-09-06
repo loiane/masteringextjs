@@ -1,17 +1,17 @@
-Ext.define('MasteringExtJS.view.menu.MenuList', {
+Ext.define('MasteringExtJS.view.main.MenuList', {
     extend: 'Ext.list.Tree',
 
     requires: [
-        'MasteringExtJS.view.menu.MenuListController',
+        //'MasteringExtJS.view.menu.MenuListController',
         'MasteringExtJS.store.MenuList'
     ],
 
     xtype: 'mainmenu',
 
-    controller: 'mainmenu',
+    /*controller: 'mainmenu',
     viewModel: {
         type: 'mainmenu'
-    },
+    },*/
 
     reference: 'mainMenu',
     itemId: 'mainMenu',
@@ -24,6 +24,6 @@ Ext.define('MasteringExtJS.view.menu.MenuList', {
     expanderFirst: false,
     expanderOnly: false,
     listeners: {
-        //selectionchange: 'onNavigationTreeSelectionChange'
+        selectionchange: 'onNavigationTreeSelectionChange'
     }
 });

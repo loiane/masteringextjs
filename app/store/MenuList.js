@@ -38,7 +38,8 @@ Ext.define('MasteringExtJS.store.MenuList', {
                                 id: data.data[i].children[j].id,
                                 text: _(data.data[i].children[j].text),
                                 iconCls: data.data[i].children[j].iconCls,
-                                className: data.data[i].children[j].className
+                                className: data.data[i].children[j].className,
+                                routeId: data.data[i].children[j].routeId
                             });
 
                         }

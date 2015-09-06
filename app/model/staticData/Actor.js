@@ -1,4 +1,4 @@
-Ext.define('MasteringExtJS.model.staticData.Base', {
+Ext.define('MasteringExtJS.model.staticData.Actor', {
     extend: 'MasteringExtJS.model.Base',
 
     entityName: 'Actor',

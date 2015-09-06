@@ -6,7 +6,8 @@ Ext.define('MasteringExtJS.view.main.Main', {
         'MasteringExtJS.view.main.MainController',
         'MasteringExtJS.view.main.MainModel',
         'MasteringExtJS.view.main.Header',
-        'MasteringExtJS.view.menu.MenuList',
+        'MasteringExtJS.view.main.MenuList',
+        'MasteringExtJS.view.main.MainTabPanel',
 
         'Ext.layout.container.Border',
         'Ext.Container'
@@ -21,12 +22,14 @@ Ext.define('MasteringExtJS.view.main.Main', {
 
     items: [{
         region: 'center',
-        xtype: 'container'
+        xtype: 'mainpanel',
+        reference: 'mainPanel'
     },{
         xtype: 'app-header',
         region: 'north'
     },{
         xtype: 'mainmenu',
-        region: 'west'
+        region: 'west',
+        reference: 'mainMenu'
     }]
 });

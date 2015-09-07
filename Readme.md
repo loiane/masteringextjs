@@ -3,7 +3,7 @@
 | Ext JS 4      | Ext JS 5      | 
 | ------------- |:-------------:| 
 | ![Ext JS 4](https://www.packtpub.com/sites/default/files/4005OScov.jpg)      | ![Ext JS 5](https://www.packtpub.com/sites/default/files/0457OT_B03756_Mastering%20Ext%20JS%20second%20edition_Frontcov.jpg) | 
-| [Book Link Ext JS 4](https://www.packtpub.com/web-development/mastering-extjs)| [Book Link Ext JS 5](https://www.packtpub.com/web-development/mastering-extjs-second-edition)|
+| [Book Link Ext JS 4](http://amzn.to/1Qk62EG)| [Book Link Ext JS 5](http://amzn.to/1NllPEQ)|
 
 # Ext JS 4.x
 - Book Link: https://www.packtpub.com/web-development/mastering-extjs

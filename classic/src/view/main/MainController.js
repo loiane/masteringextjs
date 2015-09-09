@@ -43,7 +43,7 @@ Ext.define('MasteringExtJS.view.main.MainController', {
             newView = Ext.create('MasteringExtJS.view.' + (view || 'pages.Error404Window'), {
                 hideMode: 'offsets',
                 routeId: hashTag,
-                iconCls: node.get('glyph') + '@FontAwesome',
+                iconCls: node.get('iconCls'),
                 title: node.get('text'),
                 closable: true
             });

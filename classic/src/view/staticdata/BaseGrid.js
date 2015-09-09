@@ -54,7 +54,10 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                         xtype: 'button',
                         itemId: 'add',
                         text: 'Add',
-                        iconCls: 'fa fa-plus'
+                        iconCls: 'fa fa-plus',
+                        listeners: {
+                            click: 'onButtonClickAdd'
+                        }
                     },
                     {
                         xtype: 'tbseparator'
@@ -63,13 +66,19 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                         xtype: 'button',
                         itemId: 'save',
                         text: 'Save Changes',
-                        iconCls: 'fa fa-floppy-o'
+                        iconCls: 'fa fa-floppy-o',
+                        listeners: {
+                            click: 'onButtonClickSave'
+                        }
                     },
                     {
                         xtype: 'button',
                         itemId: 'cancel',
                         text: 'Cancel Changes',
-                        iconCls: 'fa fa-ban'
+                        iconCls: 'fa fa-ban',
+                        listeners: {
+                            click: 'onButtonClickCancel'
+                        }
                     },
                     {
                         xtype: 'tbseparator'
@@ -78,7 +87,10 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                         xtype: 'button',
                         itemId: 'clearFilter',
                         text: 'Clear Filters',
-                        iconCls: 'fa fa-filter'
+                        iconCls: 'fa fa-filter',
+                        listeners: {
+                            click: 'onButtonClickClearFilter'
+                        }
                     }
                 ]
             }
@@ -105,8 +117,8 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                         iconCls: 'fa fa-trash-o',
                         tooltip: 'Delete',
                         scope: me,
-                        handler: function (btn) {
-                            me.fireEvent('widgetclick', me, btn);
+                        listeners: {
+                            click: 'onWidgetClick'
                         }
                     }
                 }
@@ -187,5 +199,9 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
         };
 
         me.callParent(arguments);
+    },
+
+    listeners: {
+        edit: 'onEdit'
     }
 });

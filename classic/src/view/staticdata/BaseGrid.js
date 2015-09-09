@@ -1,6 +1,5 @@
 Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
     extend: 'Ext.ux.LiveSearchGridPanel',
-    //extend: 'Ext.grid.Panel',
 
     requires: [
         'MasteringExtJS.view.staticdata.BaseGridModel',
@@ -54,8 +53,8 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                     {
                         xtype: 'button',
                         itemId: 'add',
-                        text: 'Add'//,
-                        //glyph: Packt.util.Glyphs.getGlyph('add')
+                        text: 'Add',
+                        iconCls: 'fa fa-plus'
                     },
                     {
                         xtype: 'tbseparator'
@@ -63,14 +62,14 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                     {
                         xtype: 'button',
                         itemId: 'save',
-                        text: 'Save Changes'//,
-                        //glyph: Packt.util.Glyphs.getGlyph('saveAll')
+                        text: 'Save Changes',
+                        iconCls: 'fa fa-floppy-o'
                     },
                     {
                         xtype: 'button',
                         itemId: 'cancel',
-                        text: 'Cancel Changes'//,
-                        //glyph: Packt.util.Glyphs.getGlyph('cancel')
+                        text: 'Cancel Changes',
+                        iconCls: 'fa fa-ban'
                     },
                     {
                         xtype: 'tbseparator'
@@ -78,8 +77,8 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                     {
                         xtype: 'button',
                         itemId: 'clearFilter',
-                        text: 'Clear Filters'//,
-                       // glyph: Packt.util.Glyphs.getGlyph('clearFilter')
+                        text: 'Clear Filters',
+                        iconCls: 'fa fa-filter'
                     }
                 ]
             }
@@ -103,7 +102,7 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
                     menuDisabled: true,
                     widget: {
                         xtype: 'button',
-                        //glyph: Packt.util.Glyphs.getGlyph('destroy'),
+                        iconCls: 'fa fa-trash-o',
                         tooltip: 'Delete',
                         scope: me,
                         handler: function (btn) {

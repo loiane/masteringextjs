@@ -3,10 +3,10 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGridModel', {
     alias: 'viewmodel.basegrid',
 
     stores: {
-        users: {
+        /*users: {
             model: 'BaseGrid',
             autoLoad: true
-        }
+        }*/
     },
 
     data: {

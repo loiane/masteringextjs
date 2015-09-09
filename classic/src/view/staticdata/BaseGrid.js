@@ -1,5 +1,6 @@
 Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
     extend: 'Ext.ux.LiveSearchGridPanel',
+    //extend: 'Ext.grid.Panel',
 
     requires: [
         'MasteringExtJS.view.staticdata.BaseGridModel',
@@ -26,7 +27,7 @@ Ext.define('MasteringExtJS.view.staticdata.BaseGrid', {
         stripeRows: true
     },
 
-    nitComponent: function() {
+    initComponent: function() {
         var me = this;
 
         me.selModel = {

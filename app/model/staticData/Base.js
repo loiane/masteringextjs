@@ -3,7 +3,7 @@ Ext.define('MasteringExtJS.model.staticData.Base', {
 
     fields: [
         {
-            name: 'last_update',
+            name: 'lastUpdate',
             type: 'date',
             dateFormat: 'Y-m-j H:i:s'
         }

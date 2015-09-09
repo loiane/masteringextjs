@@ -6,9 +6,9 @@ Ext.define('MasteringExtJS.model.staticData.Actor', {
     idProperty: 'actor_id',
 
     fields: [
-        { name: 'actor_id' },
-        { name: 'first_name'},//, defaultValue: 'First Name*'},
-        { name: 'last_name'}// , defaultValue: 'Last Name*'}
+        { name: 'id', type: 'int' },
+        { name: 'firstName'},//, defaultValue: 'First Name*'},
+        { name: 'lastName'}// , defaultValue: 'Last Name*'}
     ],
 
     validators: {

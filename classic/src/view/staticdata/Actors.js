@@ -16,7 +16,7 @@ Ext.define('MasteringExtJS.view.staticdata.Actors', {
             {
                 text: 'Actor Id',
                 width: 100,
-                dataIndex: 'actor_id',
+                dataIndex: 'id',
                 filter: {
                     type: 'numeric'
                 }
@@ -24,7 +24,7 @@ Ext.define('MasteringExtJS.view.staticdata.Actors', {
             {
                 text: 'First Name',
                 flex: 1,
-                dataIndex: 'first_name',
+                dataIndex: 'firstName',
                 editor: {
                     allowBlank: false,
                     maxLength: 45
@@ -36,7 +36,7 @@ Ext.define('MasteringExtJS.view.staticdata.Actors', {
             {
                 text: 'Last Name',
                 width: 200,
-                dataIndex: 'last_name',
+                dataIndex: 'lastName',
                 editor: {
                     allowBlank: false,
                     maxLength: 45

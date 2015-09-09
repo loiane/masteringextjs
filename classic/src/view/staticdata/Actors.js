@@ -1,6 +1,10 @@
 Ext.define('MasteringExtJS.view.staticdata.Actors', {
     extend: 'MasteringExtJS.view.staticdata.BaseGrid',
 
+    requires: [
+        'MasteringExtJS.store.staticData.Actors'
+    ],
+
     xtype: 'actors',
 
     store: 'staticData.Actors',

@@ -43,10 +43,11 @@ Ext.define('MasteringExtJS.view.main.MainController', {
             newView = Ext.create('MasteringExtJS.view.' + (view || 'pages.Error404Window'), {
                 hideMode: 'offsets',
                 routeId: hashTag,
-                glyph: node.get('glyph') + '@FontAwesome',
+                iconCls: node.get('glyph') + '@FontAwesome',
                 title: node.get('text'),
                 closable: true
             });
+            mainPanel.add(newView);
         }
 
         mainPanel.setActiveTab(newView);

@@ -18,14 +18,16 @@ Ext.define('Packt.view.locale.TranslationController', {
     },
 
     onMenuItemClick: function(item, e, options){
-
-        var menu = this.getView();
-
-        menu.setIconCls(item.iconCls);
-        menu.setText(item.text);
-
-        localStorage.setItem("user-lang", item.iconCls);
-
-        window.location.reload();
+        var button = this.getView();
+        
+        if (button.iconCls !== item.iconCls)
+        {
+            button.setIconCls(item.iconCls);
+            button.setText(item.text);
+    
+            localStorage.setItem("user-lang", item.iconCls);
+    
+            window.location.reload();
+        }
     }
 });

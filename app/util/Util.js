@@ -41,7 +41,7 @@ Ext.define('Packt.util.Util', {
                     me.showErrorMsg('Form fields may not be submitted with invalid values');
                     break;
                 case Ext.form.action.Action.CONNECT_FAILURE:
-                    me.showErrorMsg(action.response.responseText);
+                    me.showErrorMsg(result.msg);
                     break;
                 case Ext.form.action.Action.SERVER_INVALID:
                     me.showErrorMsg(result.msg);

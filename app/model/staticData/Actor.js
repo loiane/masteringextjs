@@ -3,8 +3,6 @@ Ext.define('MasteringExtJS.model.staticData.Actor', {
 
     entityName: 'Actor',
 
-    idProperty: 'actor_id',
-
     fields: [
         { name: 'id', type: 'int' },
         { name: 'firstName'},//, defaultValue: 'First Name*'},

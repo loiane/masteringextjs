@@ -3,5 +3,9 @@ Ext.define('MasteringExtJS.store.staticData.Categories', {
 
     alias: 'store.categories',
 
-    model: 'MasteringExtJS.model.staticData.Category'
+    model: 'MasteringExtJS.model.staticData.Category',
+
+    storeId: 'staticData.Categories',
+
+    autoLoad: true
 });

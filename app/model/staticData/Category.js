@@ -6,7 +6,7 @@ Ext.define('MasteringExtJS.model.staticData.Category', {
     entityName: 'Category',
 
     fields: [
-        { name: 'category_id' },
+        { name: 'id', type: 'int' },
         { name: 'name', defaultValue: 'New Category*'}
     ],
 
